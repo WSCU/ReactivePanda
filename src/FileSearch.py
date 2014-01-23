@@ -3,7 +3,7 @@ File searching tools
 
 Non-reactive
 """
-from types import *
+from Types import *
 from panda3d.core import Filename
 
 

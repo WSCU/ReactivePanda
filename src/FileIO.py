@@ -8,7 +8,7 @@ Non-Reactive
 #import g
 import csv
 #from panda3d.core import Filename
-from types import *
+from Types import *
 #from StaticNumerics import *
 
 
@@ -52,7 +52,7 @@ def writecsv(file, arr):
     return
 
 
-def tocsv(file, dict, type = {}):
+def tocsv(file, dict, types = {}):
     """
     Writes a csv file from the given dictionary
     """
