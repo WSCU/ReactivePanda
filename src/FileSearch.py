@@ -1,26 +1,24 @@
-# To change this license header, choose License Headers in Project Properties.
-# To change this template file, choose Tools | Templates
-# and open the template in the editor.
+"""
+File searching tools
+
+Non-reactive
+"""
 from types import *
 from panda3d.core import Filename
 
-file = "C:\\School\\Visual Programming\\test.csv"
+"""
+Searches for given file in path
+"""
 def fileSearch(file, libDir = None, exts = []):
-
     f1 = Filename.expandFrom(file)
-    if f1.exists():
- #       print "Local file"
-        print(f1)
+    if f1.exists():        
         return f1
-
     for e in exts:
         f1.setExtension(e)
         if f1.exists():
- #           print "Extension: " + e
             return f1
     if libDir is not None:
         f2 = Filename.expandFrom(g.pandaPath + "/" + libDir + "/" + file)
- #       print "Searching library"
         if f2.exists():
             return f2
         for e in exts:
@@ -29,4 +27,17 @@ def fileSearch(file, libDir = None, exts = []):
                 return f2
     return None
 
-fileSearch(file)
+"""
+Finds given texture file in path
+"""
+def findTexture(fileName):
+    tFile = fileSearch(fileName, "textures", ["jpg", "png", "jpeg"])
+    if tFile is None:
+        tFile = fileSearch(g.pandaPath + "/textures/default.jpg")
+    return loader.loadTexture(tFile)
+
+"""
+Finds given sound file in path
+"""
+def findSound(fileName):
+    return fileSearch(fileName, "sounds", ["wav", "mp3"])
