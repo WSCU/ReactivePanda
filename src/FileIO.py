@@ -63,7 +63,7 @@ def tocsv(file, dict, types = {}):
         else:
             print "No type for " + k
         lines.append([k, v])
-    saveCSV(file, lines)   
+    writecsv(file, lines)   
 
 
     
