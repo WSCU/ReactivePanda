@@ -12,7 +12,7 @@ from Types import *
 #from StaticNumerics import *
 
 
-def readcsv(file):    
+def loadCSV(file):    
     """
     Reads the contents of a csv file and returns an array of each row.
     """
@@ -22,8 +22,17 @@ def readcsv(file):
         arr.append(row)        
     return arr
 
+def saveCSV(file, arr):    
+    """
+    Writes an array to the given csv file
+    """
+    fileWriter = csv.writer(open(file, "w"), dialect = 'excel')
+    for l in arr:
+        fileWriter.writerow(l)
+    return
 
-def fromcsv(file, types={}, defaults = {}):
+
+def loadDict(file, types={}, defaults = {}):
     """
     Creates a dictionary from a given csv file
     """
@@ -41,18 +50,7 @@ def fromcsv(file, types={}, defaults = {}):
             res[k] = v
     return res
 
-
-def writecsv(file, arr):    
-    """
-    Writes an array to the given csv file
-    """
-    fileWriter = csv.writer(open(file, "w"), dialect = 'excel')
-    for l in arr:
-        fileWriter.writerow(l)
-    return
-
-
-def tocsv(file, dict, types = {}):
+def saveDict(file, dict, types = {}):
     """
     Writes a csv file from the given dictionary
     """
@@ -63,7 +61,7 @@ def tocsv(file, dict, types = {}):
         else:
             print "No type for " + k
         lines.append([k, v])
-    writecsv(file, lines)   
+    saveCSV(file, lines)   
 
 
     
