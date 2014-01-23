@@ -15,7 +15,7 @@ from types import *
 Reads the contents of a csv file and returns an array of each row.
 """
 def readcsv(file):    
-    fileReader = csv.reader(open(file),dialect = 'excel', )
+    fileReader = csv.reader(open(file, "r"),dialect = 'excel', )
     arr = []
     for row in fileReader:
         arr.append(row)        
