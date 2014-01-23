@@ -11,20 +11,22 @@ import csv
 from types import *
 #from StaticNumerics import *
 
-"""
-Reads the contents of a csv file and returns an array of each row.
-"""
+
 def readcsv(file):    
+    """
+    Reads the contents of a csv file and returns an array of each row.
+    """
     fileReader = csv.reader(open(file, "r"),dialect = 'excel', )
     arr = []
     for row in fileReader:
         arr.append(row)        
     return arr
 
-"""
-Creates a dictionary from a given csv file
-"""
+
 def fromcsv(file, types={}, defaults = {}):
+    """
+    Creates a dictionary from a given csv file
+    """
     arr = loadCSV(file)
     res = {}
     for l in arr:
@@ -39,19 +41,21 @@ def fromcsv(file, types={}, defaults = {}):
             res[k] = v
     return res
 
-"""
-Writes an array to the given csv file
-"""
+
 def writecsv(file, arr):    
+    """
+    Writes an array to the given csv file
+    """
     fileWriter = csv.writer(open(file, "w"), dialect = 'excel')
     for l in arr:
         fileWriter.writerow(l)
     return
 
-"""
-Writes a csv file from the given dictionary
-"""
+
 def tocsv(file, dict, type = {}):
+    """
+    Writes a csv file from the given dictionary
+    """
     lines = []
     for k,v in dict.iteritems():
         if k in types:

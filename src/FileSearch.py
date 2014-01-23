@@ -6,10 +6,11 @@ Non-reactive
 from types import *
 from panda3d.core import Filename
 
-"""
-Searches for given file in path
-"""
+
 def fileSearch(file, libDir = None, exts = []):
+    """
+    Searches for given file in path
+    """
     f1 = Filename.expandFrom(file)
     if f1.exists():        
         return f1
@@ -27,17 +28,19 @@ def fileSearch(file, libDir = None, exts = []):
                 return f2
     return None
 
-"""
-Finds given texture file in path
-"""
+
 def findTexture(fileName):
+    """
+    Finds given texture file in path
+    """
     tFile = fileSearch(fileName, "textures", ["jpg", "png", "jpeg"])
     if tFile is None:
         tFile = fileSearch(g.pandaPath + "/textures/default.jpg")
     return loader.loadTexture(tFile)
 
-"""
-Finds given sound file in path
-"""
+
 def findSound(fileName):
+    """
+    Finds given sound file in path
+    """
     return fileSearch(fileName, "sounds", ["wav", "mp3"])
