@@ -5,8 +5,8 @@ r, g, b, and a values are in (0,1)
 
 Many predefined colors (stolen from Clastic)
 """
-from pandac.PandaModules import *   # Not sure about this!
-from Types import *
+from pandac.PandaModules import VBase4   
+from Types import numType, ColorType
 from StaticNumerics import staticLerp
 
 class Color:
@@ -14,6 +14,9 @@ class Color:
     Color describes a color
     """
     def __init__(self, r, g, b, a = 1):
+        """
+        Color constructor(r,g,b values are beween 0 and 255)
+        """
         self.r = r
         self.g = g
         self.b = b
@@ -37,7 +40,7 @@ class Color:
 
     def interp(self, t, c2):
         """
-        Interpolate between two colors
+        Returns a Color based on a time t between two colors
         """
         return Color(staticLerp(t, self.r, c2.r),
                      staticLerp(t, self.g, c2.g),
@@ -46,14 +49,14 @@ class Color:
 
     def __str__(self):
       """
-      Gives a String representation of the Color
+      Returns a String representation of the Color
       """
       return "Color(r = %4.2f, g = %4.2f, b = %4.2f, a = %4.2f )" % (self.r, self.g, self.b, self.a)
 
 # Avoid integer division!!!  Not sure why this worked with the .0
 def color24(r, g, b, a = 1):
     """
-    A Color factory
+    A Color factory(r,g,b values are between 0 and 255)
     """
     return Color(r/255.0, g/255.0, b/255.0, a)
 
@@ -101,9 +104,15 @@ salmon = color24(250, 128, 114)
 lavender = color24(186, 85, 211)
 
 def grayShade(n):
+    """
+    Returns a Color shade of gray between black(0) and white(1)
+    """
     return Color(n,n,n)
 
 def inverse(c):
-        return (color24(255-(255*c.r), 255-(255*c.g), 255-(255*c.b)))
+    """
+    return a Color that is the inverse of a Color c
+    """
+    return (color24(255-(255*c.r), 255-(255*c.g), 255-(255*c.b)))
 
 noColor = color24(0,0,0,0)  # Special: used to indicate no added texturing
