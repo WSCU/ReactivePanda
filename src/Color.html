@@ -34,11 +34,15 @@ Many&nbsp;predefined&nbsp;colors&nbsp;(stolen&nbsp;from&nbsp;Clastic)</tt></p>
 <td colspan=2><tt><a href="#Color">Color</a>&nbsp;describes&nbsp;a&nbsp;color<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
-<dl><dt><a name="Color-__init__"><strong>__init__</strong></a>(self, r, g, b, a<font color="#909090">=1</font>)</dt><dd><tt><a href="#Color">Color</a>&nbsp;constructor(r,g,b&nbsp;values&nbsp;are&nbsp;beween&nbsp;0&nbsp;and&nbsp;255)</tt></dd></dl>
+<dl><dt><a name="Color-__init__"><strong>__init__</strong></a>(self, r, g, b, a<font color="#909090">=1</font>, type<font color="#909090">=&lt;Types.ptype instance&gt;</font>)</dt><dd><tt><a href="#Color">Color</a>&nbsp;constructor(r,g,b&nbsp;values&nbsp;are&nbsp;beween&nbsp;0&nbsp;and&nbsp;1)(or&nbsp;HSL&nbsp;values)</tt></dd></dl>
 
 <dl><dt><a name="Color-__str__"><strong>__str__</strong></a>(self)</dt><dd><tt>Returns&nbsp;a&nbsp;String&nbsp;representation&nbsp;of&nbsp;the&nbsp;<a href="#Color">Color</a></tt></dd></dl>
 
+<dl><dt><a name="Color-hsl_to_rgb"><strong>hsl_to_rgb</strong></a>(self)</dt></dl>
+
 <dl><dt><a name="Color-interp"><strong>interp</strong></a>(self, t, c2)</dt><dd><tt>Returns&nbsp;a&nbsp;<a href="#Color">Color</a>&nbsp;based&nbsp;on&nbsp;a&nbsp;time&nbsp;t&nbsp;between&nbsp;two&nbsp;colors</tt></dd></dl>
+
+<dl><dt><a name="Color-rgb_to_hsl"><strong>rgb_to_hsl</strong></a>(self)</dt><dd><tt>transitions&nbsp;to&nbsp;hsl&nbsp;color</tt></dd></dl>
 
 <dl><dt><a name="Color-show"><strong>show</strong></a>(self)</dt><dd><tt>This&nbsp;is&nbsp;used&nbsp;to&nbsp;get&nbsp;color&nbsp;values&nbsp;into&nbsp;the&nbsp;representation&nbsp;used&nbsp;within<br>
 the&nbsp;Panda&nbsp;library</tt></dd></dl>
@@ -53,6 +57,7 @@ the&nbsp;Panda&nbsp;library</tt></dd></dl>
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl><dt><a name="-color24"><strong>color24</strong></a>(r, g, b, a<font color="#909090">=1</font>)</dt><dd><tt>A&nbsp;<a href="#Color">Color</a>&nbsp;factory(r,g,b&nbsp;values&nbsp;are&nbsp;between&nbsp;0&nbsp;and&nbsp;255)</tt></dd></dl>
+ <dl><dt><a name="-colorHSL"><strong>colorHSL</strong></a>(h, s, l)</dt><dd><tt>A&nbsp;<a href="#Color">Color</a>&nbsp;factory&nbsp;to&nbsp;build&nbsp;a&nbsp;HSL&nbsp;color</tt></dd></dl>
  <dl><dt><a name="-grayShade"><strong>grayShade</strong></a>(n)</dt><dd><tt>Returns&nbsp;a&nbsp;<a href="#Color">Color</a>&nbsp;shade&nbsp;of&nbsp;gray&nbsp;between&nbsp;black(0)&nbsp;and&nbsp;white(1)</tt></dd></dl>
  <dl><dt><a name="-inverse"><strong>inverse</strong></a>(c)</dt><dd><tt>return&nbsp;a&nbsp;<a href="#Color">Color</a>&nbsp;that&nbsp;is&nbsp;the&nbsp;inverse&nbsp;of&nbsp;a&nbsp;<a href="#Color">Color</a>&nbsp;c</tt></dd></dl>
 </td></tr></table><p>
@@ -62,7 +67,8 @@ the&nbsp;Panda&nbsp;library</tt></dd></dl>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>ColorType</strong> = &lt;Types.ptype instance&gt;<br>
+<td width="100%"><strong>ColorHSLType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>ColorType</strong> = &lt;Types.ptype instance&gt;<br>
 <strong>aquamarine</strong> = &lt;Color.Color instance&gt;<br>
 <strong>black</strong> = &lt;Color.Color instance&gt;<br>
 <strong>bloodOrange</strong> = &lt;Color.Color instance&gt;<br>

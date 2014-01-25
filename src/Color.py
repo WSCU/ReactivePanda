@@ -6,21 +6,44 @@ r, g, b, and a values are in (0,1)
 Many predefined colors (stolen from Clastic)
 """
 from pandac.PandaModules import VBase4   
-from Types import numType, ColorType
+from Types import numType, ColorType, ColorHSLType
 from StaticNumerics import staticLerp
+from colorsys import rgb_to_hls, hls_to_rgb
 
 class Color:
     """
     Color describes a color
     """
-    def __init__(self, r, g, b, a = 1):
+    def __init__(self, r, g, b, a = 1, type = ColorType):
         """
-        Color constructor(r,g,b values are beween 0 and 255)
+        Color constructor(r,g,b values are beween 0 and 1)(or HSL values)
         """
-        self.r = r
-        self.g = g
-        self.b = b
+        if(type == ColorHSLType):
+            self.h = r
+            self.s = g
+            self.l = b
+        else:
+            self.r = r
+            self.g = g
+            self.b = b
         self.a = a
+        self.type = type
+
+    def rgb_to_hsl(self):
+        """
+        transitions to hsl color
+        """
+        hls = rgb_to_hls(self.r, self.g, self.b)
+        self.h = hls[0]
+        self.l = hls[1]
+        self.s = hls[2]
+        self.type = ColorHSLType
+
+    def hsl_to_rgb(self):
+        rgb = hls_to_rgb(self.h, self.l, self.s)
+        self.r = rgb[0]
+        self.g = rgb[1]
+        self.b = rgb[2]
         self.type = ColorType
 
     def show(self):
@@ -28,12 +51,18 @@ class Color:
         This is used to get color values into the representation used within
         the Panda library
         """
-        return "[" + str(self.r) + ", " + str(self.g) + ", " + str(self.b) + "]"
+        if(self.type == ColorType):
+            return "[" + str(self.r) + ", " + str(self.g) + ", " + str(self.b) + "]"
+        else:
+            return "[" + str(self.h) + ", " + str(self.s) + ", " + str(self.l) + "]"
     
     def toVBase4(self):
         """
         Changes the representation to be used by Panda
         """
+        if(self.type == ColorHSLType):
+            hsl_to_rgb()
+        self.type = ColorHSLType
         return VBase4(self.r, self.g, self.b, self.a)
 
     
@@ -42,6 +71,9 @@ class Color:
         """
         Returns a Color based on a time t between two colors
         """
+        if(self.type == ColorHSLType):
+            hsl_to_rgb()
+        self.type = ColorHSLType
         return Color(staticLerp(t, self.r, c2.r),
                      staticLerp(t, self.g, c2.g),
                      staticLerp(t, self.b, c2.b),
@@ -59,6 +91,12 @@ def color24(r, g, b, a = 1):
     A Color factory(r,g,b values are between 0 and 255)
     """
     return Color(r/255.0, g/255.0, b/255.0, a)
+
+def colorHSL(h, s, l):
+    """
+    A Color factory to build a HSL color
+    """
+    return Color(h, s, l, type = ColorHSLType)
 
 #Predefined Colors
 black = color24(0,0,0)
