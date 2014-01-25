@@ -31,20 +31,30 @@ class Color:
 
     def rgb_to_hsl(self):
         """
-        transitions to hsl color
+        transitions from rgb to hsl color
         """
-        hls = rgb_to_hls(self.r, self.g, self.b)
-        self.h = hls[0]
-        self.l = hls[1]
-        self.s = hls[2]
-        self.type = ColorHSLType
+        if(self.type == ColorType):
+            hls = rgb_to_hls(self.r, self.g, self.b)
+            self.h = hls[0]
+            self.l = hls[1]
+            self.s = hls[2]
+            self.type = ColorHSLType
+        else:
+            print "Error: Color already ColorHSL"
 
     def hsl_to_rgb(self):
-        rgb = hls_to_rgb(self.h, self.l, self.s)
-        self.r = rgb[0]
-        self.g = rgb[1]
-        self.b = rgb[2]
-        self.type = ColorType
+        """
+        transitions from hsl to rgb color
+        """
+        if(self.type == ColorHSLType):
+            rgb = hls_to_rgb(self.h, self.l, self.s)
+            self.r = rgb[0]
+            self.g = rgb[1]
+            self.b = rgb[2]
+            self.type = ColorType
+        else:
+            print "Error: Color already ColorRGB"
+
 
     def show(self):
         """
