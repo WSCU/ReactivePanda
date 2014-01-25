@@ -1,0 +1,354 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//wrote Interp.html
+itional//EN">
+<html><head><title>Python: module Interp</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>Interp</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/outcast/School/CIS/412/Reactive-Engine/src/Interp.py">/home/outcast/School/CIS/412/Reactive-Engine/src/Interp.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="direct.gui.DirectGuiGlobals.html">direct.gui.DirectGuiGlobals</a><br>
+<a href="direct.task.Task.html">direct.task.Task</a><br>
+</td><td width="25%" valign=top><a href="direct.html">direct</a><br>
+<a href="g.html">g</a><br>
+</td><td width="25%" valign=top><a href="math.html">math</a><br>
+<a href="random.html">random</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="Interp.html#Interp">Interp</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="Interp.html#InterpAt">InterpAt</a>
+</font></dt><dt><font face="helvetica, arial"><a href="Interp.html#InterpCycle">InterpCycle</a>
+</font></dt><dt><font face="helvetica, arial"><a href="Interp.html#InterpMove">InterpMove</a>
+</font></dt><dt><font face="helvetica, arial"><a href="Interp.html#InterpNext">InterpNext</a>
+</font></dt><dt><font face="helvetica, arial"><a href="Interp.html#InterpRev">InterpRev</a>
+</font></dt><dt><font face="helvetica, arial"><a href="Interp.html#InterpTo">InterpTo</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="Interp.html#RInterpAt">RInterpAt</a>
+</font></dt><dt><font face="helvetica, arial"><a href="Interp.html#RInterpCycle">RInterpCycle</a>
+</font></dt><dt><font face="helvetica, arial"><a href="Interp.html#RInterpNext">RInterpNext</a>
+</font></dt><dt><font face="helvetica, arial"><a href="Interp.html#RInterpRev">RInterpRev</a>
+</font></dt><dt><font face="helvetica, arial"><a href="Interp.html#RInterpTo">RInterpTo</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Interp">class <strong>Interp</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;Interpolation&nbsp;Class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Interp-__add__"><strong>__add__</strong></a>(self, x)</dt></dl>
+
+<dl><dt><a name="Interp-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="InterpAt">class <strong>InterpAt</strong></a>(<a href="Interp.html#Interp">Interp</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Start&nbsp;point&nbsp;for&nbsp;a&nbsp;<a href="#Interp">Interp</a>&nbsp;path<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="InterpAt-__init__"><strong>__init__</strong></a>(self, p)</dt><dd><tt>Constructor</tt></dd></dl>
+
+<dl><dt><a name="InterpAt-getInterpolant"><strong>getInterpolant</strong></a>(self, prev)</dt><dd><tt>gets&nbsp;the&nbsp;running&nbsp;interpolant</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="Interp.html#Interp">Interp</a>:<br>
+<dl><dt><a name="InterpAt-__add__"><strong>__add__</strong></a>(self, x)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="InterpCycle">class <strong>InterpCycle</strong></a>(<a href="Interp.html#Interp">Interp</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>don't&nbsp;know&nbsp;yet<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="InterpCycle-__init__"><strong>__init__</strong></a>(self, n, i)</dt></dl>
+
+<dl><dt><a name="InterpCycle-getInterpolant"><strong>getInterpolant</strong></a>(self, prev)</dt></dl>
+
+<hr>
+Methods inherited from <a href="Interp.html#Interp">Interp</a>:<br>
+<dl><dt><a name="InterpCycle-__add__"><strong>__add__</strong></a>(self, x)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="InterpMove">class <strong>InterpMove</strong></a>(<a href="Interp.html#Interp">Interp</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Decribes&nbsp;an&nbsp;<a href="#Interp">Interp</a>&nbsp;with&nbsp;an&nbsp;absolute&nbsp;path<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="InterpMove-__init__"><strong>__init__</strong></a>(self, dur, p)</dt><dd><tt>constructor</tt></dd></dl>
+
+<dl><dt><a name="InterpMove-getInterpolant"><strong>getInterpolant</strong></a>(self, prev)</dt><dd><tt>returns&nbsp;running&nbsp;interpolant</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="Interp.html#Interp">Interp</a>:<br>
+<dl><dt><a name="InterpMove-__add__"><strong>__add__</strong></a>(self, x)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="InterpNext">class <strong>InterpNext</strong></a>(<a href="Interp.html#Interp">Interp</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Adds&nbsp;two&nbsp;<a href="#Interp">Interp</a>&nbsp;together&nbsp;to&nbsp;construct&nbsp;a&nbsp;path&nbsp;tree<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="InterpNext-__init__"><strong>__init__</strong></a>(self, i1, i2)</dt><dd><tt>constructor</tt></dd></dl>
+
+<dl><dt><a name="InterpNext-getInterpolant"><strong>getInterpolant</strong></a>(self, prev)</dt><dd><tt>returns&nbsp;running&nbsp;interpolant</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="Interp.html#Interp">Interp</a>:<br>
+<dl><dt><a name="InterpNext-__add__"><strong>__add__</strong></a>(self, x)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="InterpRev">class <strong>InterpRev</strong></a>(<a href="Interp.html#Interp">Interp</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>An&nbsp;<a href="#Interp">Interp</a>&nbsp;that&nbsp;goes&nbsp;backwards&nbsp;along&nbsp;path<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="InterpRev-__init__"><strong>__init__</strong></a>(self, i)</dt></dl>
+
+<dl><dt><a name="InterpRev-getInterpolant"><strong>getInterpolant</strong></a>(self, prev)</dt></dl>
+
+<hr>
+Methods inherited from <a href="Interp.html#Interp">Interp</a>:<br>
+<dl><dt><a name="InterpRev-__add__"><strong>__add__</strong></a>(self, x)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="InterpTo">class <strong>InterpTo</strong></a>(<a href="Interp.html#Interp">Interp</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Describes&nbsp;a&nbsp;point&nbsp;along&nbsp;the&nbsp;interpolation&nbsp;path&nbsp;and&nbsp;a&nbsp;duration&nbsp;to&nbsp;that&nbsp;point.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="InterpTo-__init__"><strong>__init__</strong></a>(self, dur, p)</dt><dd><tt>Constructor</tt></dd></dl>
+
+<dl><dt><a name="InterpTo-getInterpolant"><strong>getInterpolant</strong></a>(self, prev)</dt><dd><tt>returns&nbsp;the&nbsp;running&nbsp;interpolant</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="Interp.html#Interp">Interp</a>:<br>
+<dl><dt><a name="InterpTo-__add__"><strong>__add__</strong></a>(self, x)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RInterpAt">class <strong>RInterpAt</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Running&nbsp;version&nbsp;of&nbsp;<a href="#InterpAt">InterpAt</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="RInterpAt-__init__"><strong>__init__</strong></a>(self, prev, p)</dt></dl>
+
+<dl><dt><a name="RInterpAt-interp"><strong>interp</strong></a>(self, t)</dt><dd><tt>returns&nbsp;the&nbsp;point&nbsp;of&nbsp;the&nbsp;interpolant</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RInterpCycle">class <strong>RInterpCycle</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;running&nbsp;version&nbsp;of&nbsp;we&nbsp;don't&nbsp;know<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="RInterpCycle-__init__"><strong>__init__</strong></a>(self, prev, n, i)</dt></dl>
+
+<dl><dt><a name="RInterpCycle-interp"><strong>interp</strong></a>(self, t)</dt><dd><tt>has&nbsp;something&nbsp;to&nbsp;do&nbsp;with&nbsp;delta</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RInterpNext">class <strong>RInterpNext</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Running&nbsp;version&nbsp;of&nbsp;the&nbsp;<a href="#InterpNext">InterpNext</a>.&nbsp;this&nbsp;actually&nbsp;follows&nbsp;the&nbsp;path<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="RInterpNext-__init__"><strong>__init__</strong></a>(self, prev, i1, i2)</dt></dl>
+
+<dl><dt><a name="RInterpNext-interp"><strong>interp</strong></a>(self, t)</dt><dd><tt>Return&nbsp;the&nbsp;current&nbsp;interp&nbsp;point&nbsp;recursively&nbsp;of&nbsp;whichever&nbsp;path&nbsp;we&nbsp;are&nbsp;currently&nbsp;on</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RInterpRev">class <strong>RInterpRev</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Running&nbsp;version&nbsp;of&nbsp;a&nbsp;reverse&nbsp;path&nbsp;<a href="#Interp">Interp</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="RInterpRev-__init__"><strong>__init__</strong></a>(self, prev, i)</dt></dl>
+
+<dl><dt><a name="RInterpRev-interp"><strong>interp</strong></a>(self, t)</dt><dd><tt>Returns&nbsp;current&nbsp;path&nbsp;location&nbsp;along&nbsp;reverse&nbsp;<a href="#Interp">Interp</a>&nbsp;recursive</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RInterpTo">class <strong>RInterpTo</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Running&nbsp;&nbsp;version&nbsp;of&nbsp;<a href="#InterpTo">InterpTo</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="RInterpTo-__init__"><strong>__init__</strong></a>(self, prev, dur, p, relative)</dt></dl>
+
+<dl><dt><a name="RInterpTo-interp"><strong>interp</strong></a>(self, t)</dt><dd><tt>Retutns&nbsp;the&nbsp;path&nbsp;location&nbsp;between&nbsp;two&nbsp;<a href="#Interp">Interp</a>&nbsp;s&nbsp;based&nbsp;on&nbsp;time</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-atS"><strong>atS</strong></a>(p)</dt><dd><tt>Front&nbsp;End&nbsp;version&nbsp;of&nbsp;a&nbsp;<a href="#InterpAt">InterpAt</a>&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-getInterpolant"><strong>getInterpolant</strong></a>(i)</dt><dd><tt>returns&nbsp;the&nbsp;interpolant&nbsp;of&nbsp;i</tt></dd></dl>
+ <dl><dt><a name="-interpolateStatic"><strong>interpolateStatic</strong></a>(t, i)</dt><dd><tt>Returns&nbsp;the&nbsp;current&nbsp;point&nbsp;along&nbsp;the&nbsp;<a href="#Interp">Interp</a>&nbsp;i</tt></dd></dl>
+ <dl><dt><a name="-lerpStatic"><strong>lerpStatic</strong></a>(t, v1, v2)</dt><dd><tt>Return&nbsp;the&nbsp;actual&nbsp;location&nbsp;along&nbsp;the&nbsp;current&nbsp;path&nbsp;(used&nbsp;as&nbsp;base&nbsp;case&nbsp;in&nbsp;<a href="#RInterpTo">RInterpTo</a>)</tt></dd></dl>
+ <dl><dt><a name="-moveS"><strong>moveS</strong></a>(d, p)</dt><dd><tt>Front&nbsp;End&nbsp;version&nbsp;of&nbsp;a&nbsp;<a href="#InterpMove">InterpMove</a>&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-repeatS"><strong>repeatS</strong></a>(n, i)</dt><dd><tt>Front&nbsp;End&nbsp;version&nbsp;of&nbsp;a&nbsp;<a href="#InterpCycle">InterpCycle</a>&nbsp;object<br>
+(not&nbsp;sure&nbsp;what&nbsp;this&nbsp;does)</tt></dd></dl>
+ <dl><dt><a name="-reverseS"><strong>reverseS</strong></a>(i)</dt><dd><tt>Front&nbsp;End&nbsp;version&nbsp;of&nbsp;a&nbsp;<a href="#InterpRev">InterpRev</a>&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-sCeiling"><strong>sCeiling</strong></a> = ceil(...)</dt><dd><tt>ceil(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;ceiling&nbsp;of&nbsp;x&nbsp;as&nbsp;a&nbsp;float.<br>
+This&nbsp;is&nbsp;the&nbsp;smallest&nbsp;integral&nbsp;value&nbsp;&gt;=&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-sFloor"><strong>sFloor</strong></a> = floor(...)</dt><dd><tt>floor(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;floor&nbsp;of&nbsp;x&nbsp;as&nbsp;a&nbsp;float.<br>
+This&nbsp;is&nbsp;the&nbsp;largest&nbsp;integral&nbsp;value&nbsp;&lt;=&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-toS"><strong>toS</strong></a>(d, p)</dt><dd><tt>Front&nbsp;End&nbsp;version&nbsp;of&nbsp;a&nbsp;<a href="#InterpTo">InterpTo</a>&nbsp;object</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>BlackOnWhite</strong> = 5<br>
+<strong>ColorType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>EventAnyType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>EventBoolType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>EventNumType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>HPRType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>NameConfirm</strong> = 4<br>
+<strong>Never</strong> = &lt;Signal.Never1 instance&gt;<br>
+<strong>NeverType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>P2Type</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>P3Type</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>Plain</strong> = 1<br>
+<strong>ScreenPrompt</strong> = 3<br>
+<strong>ScreenTitle</strong> = 2<br>
+<strong>SoundEventType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>SoundType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>StaticType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>StringListType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>TupleType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>addableType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>anyType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>aquamarine</strong> = &lt;Color.Color instance&gt;<br>
+<strong>black</strong> = &lt;Color.Color instance&gt;<br>
+<strong>bloodOrange</strong> = &lt;Color.Color instance&gt;<br>
+<strong>blue</strong> = &lt;Color.Color instance&gt;<br>
+<strong>boolType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>brown</strong> = &lt;Color.Color instance&gt;<br>
+<strong>controlType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>coral</strong> = &lt;Color.Color instance&gt;<br>
+<strong>cyan</strong> = &lt;Color.Color instance&gt;<br>
+<strong>darkBlue</strong> = &lt;Color.Color instance&gt;<br>
+<strong>darkGray</strong> = &lt;Color.Color instance&gt;<br>
+<strong>darkGreen</strong> = &lt;Color.Color instance&gt;<br>
+<strong>darkRed</strong> = &lt;Color.Color instance&gt;<br>
+<strong>deepPurple</strong> = &lt;Color.Color instance&gt;<br>
+<strong>fnType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>fuchsia</strong> = &lt;Color.Color instance&gt;<br>
+<strong>gold</strong> = &lt;Color.Color instance&gt;<br>
+<strong>gray</strong> = &lt;Color.Color instance&gt;<br>
+<strong>green</strong> = &lt;Color.Color instance&gt;<br>
+<strong>hasXYType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>hotpink</strong> = &lt;Color.Color instance&gt;<br>
+<strong>infiniteDur</strong> = 1000000<br>
+<strong>lavender</strong> = &lt;Color.Color instance&gt;<br>
+<strong>lightBlue</strong> = &lt;Color.Color instance&gt;<br>
+<strong>lightGray</strong> = &lt;Color.Color instance&gt;<br>
+<strong>lightTan</strong> = &lt;Color.Color instance&gt;<br>
+<strong>limeGreen</strong> = &lt;Color.Color instance&gt;<br>
+<strong>localTime</strong> = &lt;Signal.LocalTime instance&gt;<br>
+<strong>navyBlue</strong> = &lt;Color.Color instance&gt;<br>
+<strong>noColor</strong> = &lt;Color.Color instance&gt;<br>
+<strong>noneEType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>noneType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>numType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>numType1</strong> = [&lt;Types.ptype instance&gt;]<br>
+<strong>numType2</strong> = [&lt;Types.ptype instance&gt;, &lt;Types.ptype instance&gt;]<br>
+<strong>numType3</strong> = [&lt;Types.ptype instance&gt;, &lt;Types.ptype instance&gt;, &lt;Types.ptype instance&gt;]<br>
+<strong>olive</strong> = &lt;Color.Color instance&gt;<br>
+<strong>orange</strong> = &lt;Color.Color instance&gt;<br>
+<strong>pi</strong> = 3.141592653589793<br>
+<strong>purple</strong> = &lt;Color.Color instance&gt;<br>
+<strong>purpleBlue</strong> = &lt;Color.Color instance&gt;<br>
+<strong>red</strong> = &lt;Color.Color instance&gt;<br>
+<strong>salmon</strong> = &lt;Color.Color instance&gt;<br>
+<strong>scalableType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>silver</strong> = &lt;Color.Color instance&gt;<br>
+<strong>slateGray</strong> = &lt;Color.Color instance&gt;<br>
+<strong>springGreen</strong> = &lt;Color.Color instance&gt;<br>
+<strong>stringType</strong> = &lt;Types.ptype instance&gt;<br>
+<strong>tan</strong> = &lt;Color.Color instance&gt;<br>
+<strong>teal</strong> = &lt;Color.Color instance&gt;<br>
+<strong>time</strong> = &lt;Signal.GlobalTime instance&gt;<br>
+<strong>twopi</strong> = 6.283185307179586<br>
+<strong>violet</strong> = &lt;Color.Color instance&gt;<br>
+<strong>white</strong> = &lt;Color.Color instance&gt;<br>
+<strong>yellow</strong> = &lt;Color.Color instance&gt;<br>
+<strong>zero</strong> = &lt;Zero.Zero instance&gt;<br>
+<strong>zeroType</strong> = &lt;Types.ptype instance&gt;</td></tr></table>
+</body></html>
