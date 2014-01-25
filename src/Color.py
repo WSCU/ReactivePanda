@@ -90,10 +90,14 @@ class Color:
                      staticLerp(t, self.a, c2.a))
 
     def __str__(self):
-      """
-      Returns a String representation of the Color
-      """
-      return "Color(r = %4.2f, g = %4.2f, b = %4.2f, a = %4.2f )" % (self.r, self.g, self.b, self.a)
+        """
+        Returns a String representation of the Color
+        """
+        if(self.type == ColorType):
+            return "(" + str(self.r) + ", " + str(self.g) + ", " + str(self.b) + ")"
+        else:
+            return "(" + str(self.h) + ", " + str(self.s) + ", " + str(self.l) + ")"
+
 
 # Avoid integer division!!!  Not sure why this worked with the .0
 def color24(r, g, b, a = 1):
