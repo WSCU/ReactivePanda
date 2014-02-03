@@ -1,10 +1,10 @@
 """
 A non-reactive color type.
 This has the type field but doesn't check args
-r, g, b, and a values are in (0,1)
 
 Many predefined colors (stolen from Clastic)
 """
+
 from pandac.PandaModules import VBase4   
 from Types import numType, ColorType, ColorHSLType
 from StaticNumerics import staticLerp
@@ -12,11 +12,17 @@ from colorsys import rgb_to_hls, hls_to_rgb
 
 class Color:
     """
-    Color describes a color
+    Color describes a color in RGB(0,1) or HSV(Hue, Saturation, Lightness)
     """
     def __init__(self, r, g, b, a = 1, type = ColorType):
         """
         Color constructor(r,g,b values are beween 0 and 1)(or HSL values)
+        parameters:
+        r: red, or Hue
+        g: green, or Saturation
+        b: blue, or Lightness
+        a: color alpha value(default = 1)
+        type: ColorType(default: ColorType, ColorHSLType)
         """
         if(type == ColorHSLType):
             self.h = r
@@ -80,6 +86,9 @@ class Color:
     def interp(self, t, c2):
         """
         Returns a Color based on a time t between two colors
+        parameters:
+        t: current time
+        c2: transition color
         """
         if(self.type == ColorHSLType):
             hsl_to_rgb()
@@ -99,16 +108,23 @@ class Color:
             return "(" + str(self.h) + ", " + str(self.s) + ", " + str(self.l) + ")"
 
 
-# Avoid integer division!!!  Not sure why this worked with the .0
 def color24(r, g, b, a = 1):
     """
-    A Color factory(r,g,b values are between 0 and 255)
+    A RGB Color factory
+    Parameters:
+    r: red value(0, 255)
+    g: green value(0, 255)
+    b: blue value(0, 255)
+    a: alpha value(0, 1) - (default = 1)
     """
     return Color(r/255.0, g/255.0, b/255.0, a)
 
 def colorHSL(h, s, l):
     """
-    A Color factory to build a HSL color
+    A HSL Color factory
+    h: Hue value(0, 360)
+    s: Saturation(0, 100)
+    l: lightness(0, 100)
     """
     return Color(h, s, l, type = ColorHSLType)
 
@@ -157,13 +173,15 @@ lavender = color24(186, 85, 211)
 
 def grayShade(n):
     """
-    Returns a Color shade of gray between black(0) and white(1)
+    Returns a Color shade of gray
+    Parameter n: gray value(0, 1)
     """
     return Color(n,n,n)
 
 def inverse(c):
     """
-    return a Color that is the inverse of a Color c
+    return a Color that is the inverse.
+    Parameter c: color to inverse(Color)
     """
     return (color24(255-(255*c.r), 255-(255*c.g), 255-(255*c.b)))
 
