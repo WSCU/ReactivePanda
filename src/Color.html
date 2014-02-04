@@ -11,7 +11,6 @@ UBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/outcast/School/CIS/412/Reactive-Engine/src/Color.py">/home/outcast/School/CIS/412/Reactive-Engine/src/Color.py</a></font></td></tr></table>
     <p><tt>A&nbsp;non-reactive&nbsp;color&nbsp;type.<br>
 This&nbsp;has&nbsp;the&nbsp;type&nbsp;field&nbsp;but&nbsp;doesn't&nbsp;check&nbsp;args<br>
-r,&nbsp;g,&nbsp;b,&nbsp;and&nbsp;a&nbsp;values&nbsp;are&nbsp;in&nbsp;(0,1)<br>
 &nbsp;<br>
 Many&nbsp;predefined&nbsp;colors&nbsp;(stolen&nbsp;from&nbsp;Clastic)</tt></p>
 <p>
@@ -31,16 +30,25 @@ Many&nbsp;predefined&nbsp;colors&nbsp;(stolen&nbsp;from&nbsp;Clastic)</tt></p>
 <font color="#000000" face="helvetica, arial"><a name="Color">class <strong>Color</strong></a></font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt><a href="#Color">Color</a>&nbsp;describes&nbsp;a&nbsp;color<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt><a href="#Color">Color</a>&nbsp;describes&nbsp;a&nbsp;color&nbsp;in&nbsp;RGB(0,1)&nbsp;or&nbsp;HSV(Hue,&nbsp;Saturation,&nbsp;Lightness)<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
-<dl><dt><a name="Color-__init__"><strong>__init__</strong></a>(self, r, g, b, a<font color="#909090">=1</font>, type<font color="#909090">=&lt;Types.ptype instance&gt;</font>)</dt><dd><tt><a href="#Color">Color</a>&nbsp;constructor(r,g,b&nbsp;values&nbsp;are&nbsp;beween&nbsp;0&nbsp;and&nbsp;1)(or&nbsp;HSL&nbsp;values)</tt></dd></dl>
+<dl><dt><a name="Color-__init__"><strong>__init__</strong></a>(self, r, g, b, a<font color="#909090">=1</font>, type<font color="#909090">=&lt;Types.ptype instance&gt;</font>)</dt><dd><tt><a href="#Color">Color</a>&nbsp;constructor(r,g,b&nbsp;values&nbsp;are&nbsp;beween&nbsp;0&nbsp;and&nbsp;1)(or&nbsp;HSL&nbsp;values)<br>
+parameters:<br>
+r:&nbsp;red,&nbsp;or&nbsp;Hue<br>
+g:&nbsp;green,&nbsp;or&nbsp;Saturation<br>
+b:&nbsp;blue,&nbsp;or&nbsp;Lightness<br>
+a:&nbsp;color&nbsp;alpha&nbsp;value(default&nbsp;=&nbsp;1)<br>
+type:&nbsp;ColorType(default:&nbsp;ColorType,&nbsp;ColorHSLType)</tt></dd></dl>
 
 <dl><dt><a name="Color-__str__"><strong>__str__</strong></a>(self)</dt><dd><tt>Returns&nbsp;a&nbsp;String&nbsp;representation&nbsp;of&nbsp;the&nbsp;<a href="#Color">Color</a></tt></dd></dl>
 
 <dl><dt><a name="Color-hsl_to_rgb"><strong>hsl_to_rgb</strong></a>(self)</dt><dd><tt>transitions&nbsp;from&nbsp;hsl&nbsp;to&nbsp;rgb&nbsp;color</tt></dd></dl>
 
-<dl><dt><a name="Color-interp"><strong>interp</strong></a>(self, t, c2)</dt><dd><tt>Returns&nbsp;a&nbsp;<a href="#Color">Color</a>&nbsp;based&nbsp;on&nbsp;a&nbsp;time&nbsp;t&nbsp;between&nbsp;two&nbsp;colors</tt></dd></dl>
+<dl><dt><a name="Color-interp"><strong>interp</strong></a>(self, t, c2)</dt><dd><tt>Returns&nbsp;a&nbsp;<a href="#Color">Color</a>&nbsp;based&nbsp;on&nbsp;a&nbsp;time&nbsp;t&nbsp;between&nbsp;two&nbsp;colors<br>
+parameters:<br>
+t:&nbsp;current&nbsp;time<br>
+c2:&nbsp;transition&nbsp;color</tt></dd></dl>
 
 <dl><dt><a name="Color-rgb_to_hsl"><strong>rgb_to_hsl</strong></a>(self)</dt><dd><tt>transitions&nbsp;from&nbsp;rgb&nbsp;to&nbsp;hsl&nbsp;color</tt></dd></dl>
 
@@ -56,10 +64,20 @@ the&nbsp;Panda&nbsp;library</tt></dd></dl>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-color24"><strong>color24</strong></a>(r, g, b, a<font color="#909090">=1</font>)</dt><dd><tt>A&nbsp;<a href="#Color">Color</a>&nbsp;factory(r,g,b&nbsp;values&nbsp;are&nbsp;between&nbsp;0&nbsp;and&nbsp;255)</tt></dd></dl>
- <dl><dt><a name="-colorHSL"><strong>colorHSL</strong></a>(h, s, l)</dt><dd><tt>A&nbsp;<a href="#Color">Color</a>&nbsp;factory&nbsp;to&nbsp;build&nbsp;a&nbsp;HSL&nbsp;color</tt></dd></dl>
- <dl><dt><a name="-grayShade"><strong>grayShade</strong></a>(n)</dt><dd><tt>Returns&nbsp;a&nbsp;<a href="#Color">Color</a>&nbsp;shade&nbsp;of&nbsp;gray&nbsp;between&nbsp;black(0)&nbsp;and&nbsp;white(1)</tt></dd></dl>
- <dl><dt><a name="-inverse"><strong>inverse</strong></a>(c)</dt><dd><tt>return&nbsp;a&nbsp;<a href="#Color">Color</a>&nbsp;that&nbsp;is&nbsp;the&nbsp;inverse&nbsp;of&nbsp;a&nbsp;<a href="#Color">Color</a>&nbsp;c</tt></dd></dl>
+<td width="100%"><dl><dt><a name="-color24"><strong>color24</strong></a>(r, g, b, a<font color="#909090">=1</font>)</dt><dd><tt>A&nbsp;RGB&nbsp;<a href="#Color">Color</a>&nbsp;factory<br>
+Parameters:<br>
+r:&nbsp;red&nbsp;value(0,&nbsp;255)<br>
+g:&nbsp;green&nbsp;value(0,&nbsp;255)<br>
+b:&nbsp;blue&nbsp;value(0,&nbsp;255)<br>
+a:&nbsp;alpha&nbsp;value(0,&nbsp;1)&nbsp;-&nbsp;(default&nbsp;=&nbsp;1)</tt></dd></dl>
+ <dl><dt><a name="-colorHSL"><strong>colorHSL</strong></a>(h, s, l)</dt><dd><tt>A&nbsp;HSL&nbsp;<a href="#Color">Color</a>&nbsp;factory<br>
+h:&nbsp;Hue&nbsp;value(0,&nbsp;360)<br>
+s:&nbsp;Saturation(0,&nbsp;100)<br>
+l:&nbsp;lightness(0,&nbsp;100)</tt></dd></dl>
+ <dl><dt><a name="-grayShade"><strong>grayShade</strong></a>(n)</dt><dd><tt>Returns&nbsp;a&nbsp;<a href="#Color">Color</a>&nbsp;shade&nbsp;of&nbsp;gray<br>
+Parameter&nbsp;n:&nbsp;gray&nbsp;value(0,&nbsp;1)</tt></dd></dl>
+ <dl><dt><a name="-inverse"><strong>inverse</strong></a>(c)</dt><dd><tt>return&nbsp;a&nbsp;<a href="#Color">Color</a>&nbsp;that&nbsp;is&nbsp;the&nbsp;inverse.<br>
+Parameter&nbsp;c:&nbsp;color&nbsp;to&nbsp;<a href="#-inverse">inverse</a>(<a href="#Color">Color</a>)</tt></dd></dl>
 </td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
