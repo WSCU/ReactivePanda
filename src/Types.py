@@ -7,6 +7,11 @@ This parses those numbers.
 from Zero import zero
 
 def parseNumbers(str):
+    """
+    retruns float type from a string
+    Parameters:
+    str: string
+    """
     nums = str.split(",")
     return [float(x.strip()) for x in nums]
 
@@ -14,6 +19,10 @@ def parseNumbers(str):
 # User defined types have a type attribute.  This enables initialization time typechecking
 
 def decodeStringList(str):
+    """
+    Parameters:
+    str: string
+    """
     strs = str.split(",")
     res = []
     while strs != []:
@@ -22,6 +31,10 @@ def decodeStringList(str):
     return res
 
 def encodeStringList(strs):
+    """
+    Parameters:
+    strs: List of strings
+    """
     res = ""
     for s1, s2 in strs:
         res = res + "," + s1 + "," + s2
