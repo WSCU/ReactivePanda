@@ -3,12 +3,11 @@ class FsSignal:
         self.x = x
         self.startTime = Engine.globalTime
     def now(self):
-        self.currentTime = Engine.globalTime - self.startTime
-        return state(self, currentTime)   
+        pass
     def state(self, time):
-        return time/1000 * time/2000
+        pass
     def start(self):
-        return
+        pass
 
 class Lift0:
     def __init__(self, v):
