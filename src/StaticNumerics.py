@@ -29,6 +29,41 @@ def staticLerp(t, x, y):
 
 
 # Note that the destination is never changed.
+class Zero:
+  def __init__(self):
+      self.zero = self
+  def __str__(self):
+      return "0"
+  def __add__(self, y):
+          return  y
+  def __radd__(self, y):
+          return y
+  def __sub__(self, y):
+      t = getPType(y)
+      if t == P2Type:
+          return SP2(-y.x,-y.y)
+      if t == P3Type:
+          return SP3(-y.x,-y.y,-y.z)
+  def __rsub__(self, y):
+          return y
+  def __mul__(self, y):
+      t = getPType(y)
+      if t == P2Type:
+          return SP2(0,0)
+      if t == P3Type:
+          return SP3(0,0,0)
+  def __rmul__(self, y):
+      t = getPType(y)
+      if t == P2Type:
+          return SP2(0,0)
+      if t == P3Type:
+          return SP3(0,0,0)
+  def __abs__(self):
+          return self
+  def __neg__(self):
+          return self
+
+
 
 def staticLerpA(t, x, y):
     x1 = x/twopi
@@ -270,39 +305,6 @@ def sP3toHPR(p):
 #P3Type.zero = SP3(0,0,0)
 #HPRType.zero = SHPR(0,0,0)
 
-class Zero:
-  def __init__(self):
-      self.zero = self
-  def __str__(self):
-      return "0"
-  def __add__(self, y):
-          return  y
-  def __radd__(self, y):
-          return y
-  def __sub__(self, y):
-      t = getPType(y)
-      if t == P2Type:
-          return SP2(-y.x,-y.y)
-      if t == P3Type:
-          return SP3(-y.x,-y.y,-y.z)
-  def __rsub__(self, y):
-          return y
-  def __mul__(self, y):
-      t = getPType(y)
-      if t == P2Type:
-          return SP2(0,0)
-      if t == P3Type:
-          return SP3(0,0,0)
-  def __rmul__(self, y):
-      t = getPType(y)
-      if t == P2Type:
-          return SP2(0,0)
-      if t == P3Type:
-          return SP3(0,0,0)
-  def __abs__(self):
-          return self
-  def __neg__(self):
-          return self
 
 
 # Random number stuff - static only!
@@ -365,8 +367,8 @@ def Point2MultiplyZero():
     p2 = SP2(2,2)
     p2 = p2 * zero
     if p2 != zero:
-        return false
-    reutn true;
+        return false;
+    return true;
 
 
  # Here's our "unit tests".
