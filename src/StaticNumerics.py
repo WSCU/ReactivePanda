@@ -349,7 +349,8 @@ random.seed()
 ################################################################
 
 # Here's our "unit".
-def aT():
+
+def Point2AddZero():
      zero = Zero
      p2 = SP2(2,2)
      p2 = p2 + zero
@@ -358,8 +359,22 @@ def aT():
      if p2.y != 2:
          return false
      return true
+
+def Point2MultiplyZero():
+    zero = Zero
+    p2 = SP2(2,2)
+    p2 = p2 * zero
+    if p2 != zero:
+        return false
+    reutn true;
+
+
  # Here's our "unit tests".
-class AddTests(unittest.TestCase):
-   def testOne(self):
-       self.failUnless(aT)
-  
+class TestsStaticNumerics(unittest.TestCase):
+
+   def test_P2AddZero(self):
+       self.failUnless(Point2AddZero())
+
+   def test_P2MultiplyZero(self):
+       s.failUnless(Point2MultiplyZero())
+
