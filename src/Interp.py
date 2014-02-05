@@ -12,6 +12,14 @@ to p i c = \p0 t -> if t < i then t/i * p0 + (1-t/i) * p else c p (t-i)
 hold = \p0 t -> p0
 Need something to tag interpolants so that we can interpolate
 more than one thing at a time - this is probably needed elsewhere
+
+Need to describe
+uses/description
+return type
+example
+parameters
+describe generic space
+figure out pydoc vs developer notes/comments
 """
 
 infiniteDur = 1000000
@@ -19,19 +27,32 @@ infiniteDur = 1000000
 class Interp:
     """
     Base Interpolation Class
+    Defines a path between two points in an arbitrary space(color, location, etc.)
+    
     """
     def __init__(self):
         self.interpolant = None
     def __add__(self, x):
+    	"""
+    	Infix (+) operator
+    	Concat two interps together using an InterpNext object
+    	x = InterpAt(p1)
+    	y = InterpTo(5, p2)
+    	z = x + y
+    	returns an InterpNext()
+    	"""
         return InterpNext(self, x)
 
 class InterpNext(Interp):
     """
-    Adds two Interp together to construct a path tree 
+    represents a path between two interpolants
     """
     def __init__(self, i1, i2):
         """
         constructor
+        i1: Interp
+        i2: Interp
+        connects the two interpolants where i1 is the start position and i2 is the end
         """
         Interp.__init__(self)
         self.i1 = i1
