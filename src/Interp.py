@@ -76,7 +76,8 @@ class InterpAt(Interp):
     def __init__(self, p):
         """
         Constructor
-        obtins the point location and sets the interp type
+        p: this point
+        ty: interpolant type
         """
         Interp.__init__(self)
         self.p = p
