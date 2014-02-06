@@ -76,6 +76,7 @@ class InterpAt(Interp):
     def __init__(self, p):
         """
         Constructor
+        obtins the point location and sets the interp type
         """
         Interp.__init__(self)
         self.p = p
@@ -92,10 +93,14 @@ class InterpAt(Interp):
 class InterpTo(Interp):
     """
     Describes a point along the interpolation path and a duration to that point.
+    The point is described as an absolute location in the path
     """
     def __init__(self, dur, p):
         """
         Constructor
+        dur: float
+        p: interp
+        duration defines the time to point p
         """
         Interp.__init__(self)
         self.dur = float(dur)
@@ -112,11 +117,15 @@ class InterpTo(Interp):
 
 class InterpMove(Interp):
     """
-    Decribes an Interp with an absolute path
+    Decribes an Interp with an relative path
     """
     def __init__(self, dur, p):
         """
         constructor
+        dur: float
+        p: interp
+        ty: interpolant type
+        duration defines time to point p
         """
         Interp.__init__(self)
         self.dur = float(dur)
@@ -133,9 +142,15 @@ class InterpMove(Interp):
 
 class InterpCycle(Interp):
     """
-    don't know yet
+    Follow a path repeatedly starting at the first point
     """
     def __init__(self, n, i):
+    	"""
+    	constructor
+    	n: a point in the interpolation path
+    	i: a point in the interpolation path
+    	ty: interpolant type
+    	"""
         Interp.__init__(self)
         self.n = n
         self.i = i
@@ -150,6 +165,9 @@ class InterpRev(Interp):
     An Interp that goes backwards along path
     """
     def __init__(self, i):
+    	"""
+    	constructor
+    	"""
         Interp.__init__(self)
         self.i = i
         ty = getPType(i)
