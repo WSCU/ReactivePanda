@@ -26,14 +26,3 @@ i1 = integral(1)
 i2 = integral(i1)
 #engine(i1)
 engine(i2)
-"""
-Notes:
-init is state
-get rid of alive
-maybe make signal abstract
-
-change the refresh
-   state transition function
-    input signal in the constructor
-    
-"""

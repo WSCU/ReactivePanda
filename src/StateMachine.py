@@ -23,7 +23,3 @@ class StateMachineF:
         self.initV = initV
     def start(self):
         return StateMachine(self.state, self.f, self.s.start(), self.initV)
-
-'''
-
-'''
