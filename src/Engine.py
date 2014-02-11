@@ -23,6 +23,6 @@ def maybeLift(x):
         return Lift0(x)
     return x
 i1 = integral(1)
-i2 = integral(i1)
-#engine(i1)
-engine(i2)
+#i2 = integral(i1)
+engine(i1)
+#engine(i2)
