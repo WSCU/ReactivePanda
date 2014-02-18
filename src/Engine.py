@@ -64,7 +64,7 @@ class LiftF(SFact):
 
 def lift(f):
 	def fn(*args):
-		return SFact(f,args)
+		return LiftF(f,args)
 	return fn	
 
 class StateMachineF:
