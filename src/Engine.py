@@ -4,7 +4,8 @@ from StateMachine import *
 from Signal import *
 
 def integral(x):
-    def integralFN(i, s, dt):
+    def integralFN(i, s, dt): #Euler method for integration
+    # state s is the previous value of the integral
         c = s + i * dt
         print str(i) + " " + str(s)
         return c, c
