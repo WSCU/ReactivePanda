@@ -43,27 +43,27 @@ class Lift:
     	ea = map (lambda a: a.now() , self.args)
     	return self.f(*ea)
     
-    
-
-    
-    
-    
-class Factory:
-	def __init__(self,f, args):
+# Signal Factory Class
+# Base Signal Factory class
+# extends to StateMachineF, LiftF, and Lift0F
+class SFact:
+	def __init__(self):
 		self.type = "factory"
-		self.f=f 
-		self.args = args
 	def __add__(self,x,y):
 		y=maybeLift(y)
-		return Factory(lambda x,y:x+y, [x,y])
+		return LiftF(lambda x,y:x+y, [x,y])
+	
+class LiftF(SFact):
+	def __init__(self,f, args):	
+		SFact.__init__(self)
+		self.f=f 
+		self.args = args
 	def start(self):
 		return Lift(f,map(lambda x: x.start(), args))
-	
-	
 
 def lift(f):
 	def fn(*args):
-		return Factory(f,args)
+		return SFact(f,args)
 	return fn	
 	
 
