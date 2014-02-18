@@ -8,8 +8,8 @@ def integral(x):
         c = s + i * dt
         print str(i) + " " + str(s)
         return c, c
-    
     return StateMachineF(0, integralFN, maybeLift(x), 0)
+    
 def engine(s):
     s = maybeLift(s)
     rs = s.start()
