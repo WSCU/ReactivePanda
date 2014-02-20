@@ -2,6 +2,8 @@ import unittest
 import sched, time
 from StateMachine import *
 from Signal import *
+from Functions import *
+from Globals import *
 
 def integral(x):
     def integralFN(i, s, dt): #Euler method for integration
@@ -31,90 +33,6 @@ i1 = integral(1)
 i2 = integral(i1)
 #engine(i1)
 engine(i2)
-
-
-
-
-class Lift(Signal):
-    def __init__(self,name, f, args):
-    	Signal.__init__(self)
-        self.f = f
-        self.name = name
-        self.args=args
-    def now(self):
-    	ea = map (lambda a: a.now() , self.args)
-    	return self.f(*ea)
-    
-# Signal Factory Class
-# Base Signal Factory class
-# extends to StateMachineF, LiftF, and Lift0F
-class SFact:
-	def __init__(self):
-		self.type = "factory"
-	def __add__(self,x,y):
-		y=maybeLift(y)
-		return LiftF("add",lambda x,y:x+y, [x,y])
-	def __radd__(self,x,y):
-		x=maybeLift(x)
-		return LiftF("add",lambda x,y:x+y, [x,y])
-	def __sub__(self,x,y):
-		y=maybeLift(y)
-		return LiftF("subtract",lambda x,y:x-y, [x,y])
-	def __rsub__(self,x,y):
-		x=maybeLift(x)
-		return LiftF("subtract",lambda x,y:x-y, [x,y])
-	def __mul__(self,x,y):
-		y=maybeLift(y)
-		return LiftF("multiply",lambda x,y:x*y, [x,y])
-	def __rmul__(self,x,y):
-		x=maybeLift(x)
-		return LiftF("multiply",lambda x,y:x*y, [x,y])
-	
-class LiftF(SFact):
-	def __init__(self,name,f, args):	
-		SFact.__init__(self)
-		self.f=f 
-		self.name=name
-		self.args = args
-	def start(self):
-		return Lift(name,f,map(lambda x: x.start(), args))
-
-def lift(f):
-	def fn(*args):
-		return LiftF(" ",f,args)
-	return fn	
-
-class StateMachineF:
-    def __init__ (self, initState, f, s, initV):
-        self.state = initState
-        self.f = f
-        self.s = s
-        self.initV = initV
-    def start(self):
-        return StateMachine(self.state, self.f, self.s.start(), self.initV)
-
-
-#Base signal class
-class Signal:
-	def __init__(self):
-		self.type = "Signal"
-		
-class StateMachine(Signal):
-    def __init__ (self, initState, f, s, initV):
-        Signal.__init__(self)
-        self.state = initState
-        self.f = f
-        self.s = s
-        print repr(s)
-        self.now = initV
-    def now(self):
-        n = self.s.now()
-        s, output = self.f(self.s.now, self.state, dt) 
-        self.state = s
-        self.now = output
-        #print "refresh state machine"
-	
-
 
 
 ####################  Testing ################################
