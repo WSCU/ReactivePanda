@@ -5,6 +5,7 @@ from Signal import *
 from Functions import *
 from Globals import *
 
+clock = Clock()
 def integral(x):
     def integralFN(i, s, dt): #Euler method for integration
     # state s is the previous value of the integral
@@ -13,12 +14,13 @@ def integral(x):
         return c, c
     return StateMachineF(0, integralFN, maybeLift(x), 0)
     
-def engine(s):
-    s = maybeLift(s)
-    rs = s.start()
-    for t in range(5):
-        print "Time is: " + str(t) + " Value is " + str(rs.now)
-        rs.refresh(1)
+def engine():
+    while Globals.currentTime < 1000:
+        for s in signalList:
+            s.now()
+        clock.now() 
+        print(str(Globals.currentTime))
+    
     
 def maybeLift(x):
     t = type(x)
@@ -32,7 +34,8 @@ def maybeLift(x):
 i1 = integral(1)
 i2 = integral(i1)
 #engine(i1)
-engine(i2)
+engine()
+
 
 
 ####################  Testing ################################
