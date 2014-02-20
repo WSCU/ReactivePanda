@@ -52,11 +52,6 @@ world = None
 
 collections = {}
 
-def changeTime(time):
-    currentTime = time
-    
-
-
 __author__="Admin"
 __date__ ="$Feb 20, 2014 9:42:39 AM$"
 

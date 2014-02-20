@@ -11,7 +11,8 @@ def engine():
     while Globals.currentTime < 1000:
         for s in signalList:
             s.now()
-        clock.now() 
+        clock.now()
+        #Globals.currentTime = Globals.currentTime + 1
         print(str(Globals.currentTime))
     
     

@@ -44,7 +44,7 @@ class Clock(Signal):
     def __init__(self):
         Signal.__init__(self)
     def now(self):
-        Globals.changeTime(Globals.currentTime + Globals.dt)
+        Globals.currentTime = Globals.currentTime + Globals.dt
         return Globals.currentTime
         
         
