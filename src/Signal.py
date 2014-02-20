@@ -33,12 +33,12 @@ class StateMachine(Signal):
         self.f = f
         self.s = s
         print repr(s)
-        self.now = initV
+        self.current = initV
     def now(self):
-        n = self.s.now() #n is current value 
-        s, output = self.f(self.s.now, self.state, dt) 
+        #n = self.s.now() #n is current value 
+        s, output = self.f(self.s.current, self.state) 
         self.state = s
-        self.now = output
+        self.current = output
         
 class Clock(Signal):
     def __init__(self):

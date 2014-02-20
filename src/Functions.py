@@ -5,11 +5,12 @@ import unittest
 import sched, time
 from Signal import *
 from Factory import *
+import Globals 
 
 def integral(x):
-    def integralFN(i, s, dt): #Euler method for integration
+    def integralFN(i, s): #Euler method for integration
     # state s is the previous value of the integral
-        c = s + i * dt
+        c = s + i * Globals.dt
         print str(i) + " " + str(s)
         return c, c
     return StateMachineF(0, integralFN, maybeLift(x), 0)
