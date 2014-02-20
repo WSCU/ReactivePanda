@@ -6,14 +6,7 @@ from Functions import *
 from Globals import *
 
 clock = Clock()
-def integral(x):
-    def integralFN(i, s, dt): #Euler method for integration
-    # state s is the previous value of the integral
-        c = s + i * dt
-        print str(i) + " " + str(s)
-        return c, c
-    return StateMachineF(0, integralFN, maybeLift(x), 0)
-    
+   
 def engine():
     while Globals.currentTime < 1000:
         for s in signalList:
