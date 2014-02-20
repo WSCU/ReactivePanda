@@ -1,6 +1,6 @@
 import unittest
 import sched, time
-from StateMachine import *
+#from StateMachine import *
 from Signal import *
 from Functions import *
 from Globals import *
@@ -9,11 +9,13 @@ clock = Clock()
    
 def engine():
     while Globals.currentTime < 1000:
-        for s in signalList:
+        for s in sl:
+            print(repr(s))            
             s.now()
         clock.now()
         #Globals.currentTime = Globals.currentTime + 1
         print(str(Globals.currentTime))
+        print(str(s.now()))
     
     
 def maybeLift(x):
@@ -28,6 +30,7 @@ def maybeLift(x):
 i1 = integral(1)
 i2 = integral(i1)
 #engine(i1)
+sl.append(i2.start())
 engine()
 
 

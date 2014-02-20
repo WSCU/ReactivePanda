@@ -3,8 +3,8 @@
 # and open the template in the editor.
 import unittest
 import sched, time
-from StateMachine import *
 from Signal import *
+from Factory import *
 
 def integral(x):
     def integralFN(i, s, dt): #Euler method for integration

@@ -21,8 +21,10 @@ tccontext = None
 initMousePos = None  # True on the first tick when there is no prior location
 mousePos = None      # Last location of the mouse
 nextModelId = 0
+observers = {} #dictionary of observers 
 dt = 1 #global delta time 
-signalList = [] #list of global signals 
+#world = dict() #dictionary of global signals 
+sl = []
 
 # Global GUI signals
 

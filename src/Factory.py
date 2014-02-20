@@ -5,6 +5,9 @@
 # Signal Factory Class
 # Base Signal Factory class
 # extends to StateMachineF, LiftF, and Lift0F
+
+from Signal import * 
+
 class SFact:
 	def __init__(self):
 		self.type = "factory"
@@ -36,7 +39,7 @@ class LiftF(SFact):
 	def start(self):
 		return Lift(name,f,map(lambda x: x.start(), args))
 #Creates a State Machine Factory
-class StateMachineF:
+class StateMachineF(SFact):
     def __init__ (self, initState, f, s, initV):
         self.state = initState
         self.f = f
