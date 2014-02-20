@@ -36,9 +36,10 @@ engine(i2)
 
 
 class Lift(Signal):
-    def __init__(self, f, args):
+    def __init__(self, f,name, args):
     	Signal.__init__(self)
         self.f = f
+        self.name = name
         self.args=args
     def now(self):
     	ea = map (lambda a: a.now() , self.args)
@@ -55,16 +56,17 @@ class SFact:
 		return LiftF(lambda x,y:x+y, [x,y])
 	
 class LiftF(SFact):
-	def __init__(self,f, args):	
+	def __init__(self,f,name, args):	
 		SFact.__init__(self)
 		self.f=f 
+		self.name=name
 		self.args = args
 	def start(self):
-		return Lift(f,map(lambda x: x.start(), args))
+		return Lift(f,name,map(lambda x: x.start(), args))
 
 def lift(f):
 	def fn(*args):
-		return LiftF(f,args)
+		return LiftF(f,"",args)
 	return fn	
 
 class StateMachineF:
