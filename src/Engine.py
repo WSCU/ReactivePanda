@@ -36,7 +36,7 @@ engine(i2)
 
 
 class Lift(Signal):
-    def __init__(self, f,name, args):
+    def __init__(self,name, f, args):
     	Signal.__init__(self)
         self.f = f
         self.name = name
@@ -53,20 +53,35 @@ class SFact:
 		self.type = "factory"
 	def __add__(self,x,y):
 		y=maybeLift(y)
-		return LiftF(lambda x,y:x+y, [x,y])
+		return LiftF("add",lambda x,y:x+y, [x,y])
+	def __radd__(self,x,y):
+		x=maybeLift(x)
+		return LiftF("add",lambda x,y:x+y, [x,y])
+	def __sub__(self,x,y):
+		y=maybeLift(y)
+		return LiftF("subtract",lambda x,y:x-y, [x,y])
+	def __rsub__(self,x,y):
+		x=maybeLift(x)
+		return LiftF("subtract",lambda x,y:x-y, [x,y])
+	def __mul__(self,x,y):
+		y=maybeLift(y)
+		return LiftF("multiply",lambda x,y:x*y, [x,y])
+	def __rmul__(self,x,y):
+		x=maybeLift(x)
+		return LiftF("multiply",lambda x,y:x*y, [x,y])
 	
 class LiftF(SFact):
-	def __init__(self,f,name, args):	
+	def __init__(self,name,f, args):	
 		SFact.__init__(self)
 		self.f=f 
 		self.name=name
 		self.args = args
 	def start(self):
-		return Lift(f,name,map(lambda x: x.start(), args))
+		return Lift(name,f,map(lambda x: x.start(), args))
 
 def lift(f):
 	def fn(*args):
-		return LiftF(f,"",args)
+		return LiftF(" ",f,args)
 	return fn	
 
 class StateMachineF:
