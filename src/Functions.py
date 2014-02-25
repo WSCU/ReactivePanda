@@ -62,3 +62,7 @@ def maybeLift(x):
     if t is type(1.0):
         return Lift0(x)
     return x
+
+def external(x):
+   #Globals.Mouse = hold("""get the mouse position""")
+    pass
