@@ -37,7 +37,8 @@ class LiftF(SFact):
 		self.name=name
 		self.args = args
 	def start(self):
-		return Lift(name,f,map(lambda x: x.start(), args))
+		ea = map(lambda x: x.start(), self.args)
+		return Lift(name,f, ea)
 
 #Creates a State Machine Factory
 class StateMachineF(SFact):
