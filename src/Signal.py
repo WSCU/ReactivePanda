@@ -2,11 +2,11 @@ import Globals
 
 class Lift0:
     def __init__(self, v):
-        self.now = v
+        self.v = v
     def start(self):
         return self
-    def now(self, dt):
-        return self.now
+    def now(self):
+        return self.v
      
 class Signal:
 	def __init__(self):

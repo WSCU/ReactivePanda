@@ -47,7 +47,7 @@ class StateMachineF(SFact):
         self.i = i
         self.f = f
     def start(self):
-        return StateMachine(self.state, self.i, self.f)
+        return StateMachine(self.state, self.i.start(), self.f)
 
 #Creates a Observer Factory
 class ObserverF(SFact):
