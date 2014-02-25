@@ -38,15 +38,24 @@ class LiftF(SFact):
 		self.args = args
 	def start(self):
 		return Lift(name,f,map(lambda x: x.start(), args))
+
 #Creates a State Machine Factory
 class StateMachineF(SFact):
-    def __init__ (self, initState, f, s, initV):
-        self.state = initState
+    def __init__(self, s0, i, f):
+        SFact.__init__(self)
+        self.state = s0
+        self.i = i
         self.f = f
-        self.s = s
-        self.initV = initV
-    def start(self):
-        return StateMachine(self.state, self.f, self.s.start(), self.initV)
+    def start(self)
+        return StateMachine(self.s0, self.i, self.f)
+
+#Creates a Observer Factory
+class ObserverF(SFact):
+    def __init__(self, f):
+        SFact.__init__(self)
+        self.f = f
+    def start(self)
+        return Observer(self.f)
 
 #Creates a Lift0 Factory which turns a constant into a running signal	
 class Lift0F(SFact):

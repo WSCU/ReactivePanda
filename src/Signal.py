@@ -25,21 +25,27 @@ def lift(f):
 	def fn(*args):
 		return LiftF(" ",f,args)
 	return fn
-    
+
+# A State Machine signal
 class StateMachine(Signal):
-    def __init__ (self, initState, f, s, initV):
+    def __init__(self, s0, i, f):
         Signal.__init__(self)
-        self.state = initState
+        self.state = s0
+        self.i = i
         self.f = f
-        self.s = s
-        print repr(s)
-        self.current = initV
     def now(self):
-        #n = self.s.now() #n is current value 
-        s, output = self.f(self.s.current, self.state) 
-        self.state = s
-        self.current = output
-        
+        Globals.add(lambda: f(self)) # adds a deferred computation for the function f
+        return self.state
+
+# A state machine like observer signal
+class Observer(Signal):
+    def __init__(self, f):
+        Signal.__init__(self)
+        self.f = f
+    def now(self):
+        return self.f()
+
+
 class Clock(Signal):
     def __init__(self):
         Signal.__init__(self)

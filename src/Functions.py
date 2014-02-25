@@ -7,13 +7,13 @@ from Signal import *
 from Factory import *
 import Globals 
 
+
 def integral(x):
-    def integralFN(i, s): #Euler method for integration
-    # state s is the previous value of the integral
-        c = s + i * Globals.dt
-        print str(i) + " " + str(s)
-        return c, c
-    return StateMachineF(0, integralFN, maybeLift(x), 0)
+    def integralf(sm): # Euler method for integration
+        # state is the previous value of the integral
+        i = sm.i.now()
+        sm.state = sm.state + i * Globals.dt
+    return StateMachineF(0, maybeLift(x), integralf)
 
 """
 class TagSignal(Event):
