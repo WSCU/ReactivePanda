@@ -21,9 +21,9 @@ class Lift(Signal):
     	ea = map (lambda a: a.now() , self.args)
     	return self.f(*ea)
     
-def lift(f):
+def lift(name,f):
 	def fn(*args):
-		return LiftF(" ",f,args)
+		return LiftF(name,f,args)
 	return fn
 
 # A State Machine signal
