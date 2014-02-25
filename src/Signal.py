@@ -5,8 +5,8 @@ class Lift0:
         self.now = v
     def start(self):
         return self
-    def refresh(self, dt):
-        pass
+    def now(self, dt):
+        return self.now
      
 class Signal:
 	def __init__(self):
@@ -34,7 +34,7 @@ class StateMachine(Signal):
         self.i = i
         self.f = f
     def now(self):
-        Globals.add(lambda: f(self)) # adds a deferred computation for the function f
+        Globals.thunks.append(lambda: self.f(self)) # adds a deferred computation for the function f
         return self.state
 
 # A state machine like observer signal

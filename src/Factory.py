@@ -46,15 +46,15 @@ class StateMachineF(SFact):
         self.state = s0
         self.i = i
         self.f = f
-    def start(self)
-        return StateMachine(self.s0, self.i, self.f)
+    def start(self):
+        return StateMachine(self.state, self.i, self.f)
 
 #Creates a Observer Factory
 class ObserverF(SFact):
     def __init__(self, f):
         SFact.__init__(self)
         self.f = f
-    def start(self)
+    def start(self):
         return Observer(self.f)
 
 #Creates a Lift0 Factory which turns a constant into a running signal	

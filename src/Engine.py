@@ -12,6 +12,8 @@ def engine():
         for s in sl:
             print(repr(s))            
             s.now()
+        for f in thunks:
+            f()
         clock.now()
         #Globals.currentTime = Globals.currentTime + 1
         print(str(Globals.currentTime))
