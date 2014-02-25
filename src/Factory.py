@@ -25,24 +25,24 @@ def lift(name,f):
 class SFact:
 	def __init__(self):
 		self.type = "factory"
-	def __add__(self,x,y):
+	def __add__(self,y):
 		y=maybeLift(y)
-		return LiftF("add",lambda x,y:x+y, [x,y])
-	def __radd__(self,x,y):
+		return LiftF("add",lambda x,y:x+y, [self,y])
+	def __radd__(self,y):
 		x=maybeLift(x)
-		return LiftF("add",lambda x,y:x+y, [x,y])
-	def __sub__(self,x,y):
+		return LiftF("add",lambda x,y:x+y, [self,y])
+	def __sub__(self,y):
 		y=maybeLift(y)
-		return LiftF("subtract",lambda x,y:x-y, [x,y])
-	def __rsub__(self,x,y):
+		return LiftF("subtract",lambda x,y:x-y, [self,y])
+	def __rsub__(self,y):
 		x=maybeLift(x)
-		return LiftF("subtract",lambda x,y:x-y, [x,y])
-	def __mul__(self,x,y):
+		return LiftF("subtract",lambda x,y:y-x, [self,y])
+	def __mul__(self,y):
 		y=maybeLift(y)
-		return LiftF("multiply",lambda x,y:x*y, [x,y])
-	def __rmul__(self,x,y):
+		return LiftF("multiply",lambda x,y:x*y, [self,y])
+	def __rmul__(self,y):
 		x=maybeLift(x)
-		return LiftF("multiply",lambda x,y:x*y, [x,y])
+		return LiftF("multiply",lambda x,y:x*y, [self,y])
 #Creates a Lift Factory	
 class LiftF(SFact):
 	def __init__(self,name,f, args):	
