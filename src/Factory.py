@@ -8,6 +8,20 @@
 
 from Signal import * 
 
+def maybeLift(x):
+    t = type(x)
+    if t is type(1):
+        return Lift0(x)
+    if t is type(1.0):
+        return Lift0(x)
+    return x
+    
+def lift(name,f):
+	def fn(*args):
+		return LiftF(name,f,args)
+	return fn
+	
+
 class SFact:
 	def __init__(self):
 		self.type = "factory"
@@ -37,8 +51,8 @@ class LiftF(SFact):
 		self.name=name
 		self.args = args
 	def start(self):
-		ea = map(lambda x: x.start(), self.args)
-		return Lift(name,f, ea)
+		ea = map(lambda x: maybeLift(x).start(), self.args)
+		return Lift(self.name,self.f, ea)
 
 #Creates a State Machine Factory
 class StateMachineF(SFact):
@@ -67,3 +81,7 @@ class Lift0F(SFact):
 		self.args = args
 	def start(self):
 		return Lift0(name,f,map(lambda x: x.start(), args))
+		
+	
+		
+		
