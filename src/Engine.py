@@ -7,17 +7,27 @@ from Globals import *
 
 clock = Clock()
    
-def engine():
-    while Globals.currentTime < 1000:
-        for s in sl:
-            print(repr(s))            
-            s.now()
+def engine(signals, events, steps=10):
+    #Initialize all signals (signalF.start)
+    #set the time to 0
+    #get events and clear thunks
+    runningSignals = {}
+    for k,v in signals.iteritems():
+        runningSignals[k] = v.start()
+    Globals.currentTime = 0
+    Globals.dt = 1
+    while Globals.currentTime < steps:
+        #Globals.thunks = []
+        for k,v in runningSignals.iteritems(): #k = key, v = value in the dictionary
+            x = v.now()
+            print(str(k)+ " = "+str(x))
+         
         for f in thunks:
             f()
-        clock.now()
-        #Globals.currentTime = Globals.currentTime + 1
-        print(str(Globals.currentTime))
-        print(str(s.now()))
+            
+        Globals.thunks = [] 
+        print("reactive engine time = "+ str(Globals.currentTime))    
+        Globals.currentTime = Globals.currentTime+ Globals.dt
     
     
 def maybeLift(x):
@@ -32,8 +42,8 @@ def maybeLift(x):
 i1 = integral(1)
 i2 = integral(i1)
 #engine(i1)
-sl.append(i2.start())
-engine()
+sl["i2"]=i2
+engine(sl, None)
 
 
 
