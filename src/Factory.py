@@ -54,6 +54,14 @@ class LiftF(SFact):
 		ea = map(lambda x: maybeLift(x).start(), self.args)
 		return Lift(self.name,self.f, ea)
 
+#Creates a CachedValue factory
+class CachedValueF(SFact):
+    def __init__(self, i):
+        SFact.__init__(self)
+        self.i = i
+    def start(self):
+        return CachedValue(self.i)
+
 #Creates a State Machine Factory
 class StateMachineF(SFact):
     def __init__(self, s0, i, f):
