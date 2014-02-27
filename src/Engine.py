@@ -20,7 +20,7 @@ def engine(signals, events, steps=10):
         #Globals.thunks = []
         print("reactive engine time = "+ str(Globals.currentTime))    
         if (events and Globals.currentTime >= events[0][0]):
-            print("An event was popped " + events[0][1])
+            print("An event was popped " + str(events[0][1]))
             Globals.events = events.pop(0)
         for k,v in runningSignals.iteritems(): #k = key, v = value in the dictionary
             x = v.now()
@@ -43,7 +43,7 @@ i1 = integral(1)
 i2 = integral(i1)
 #engine(i1)
 sl["i2"]=i2
-engine(sl, [(5, {"key_up": 2})])
+engine(sl, [(5, {"key_up": "key_Num2"})])
 
 
 
