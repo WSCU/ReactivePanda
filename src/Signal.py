@@ -1,16 +1,23 @@
 import Globals
 
-class Lift0:
+
+
+
+     
+class Signal:
+	def __init__(self):
+		self.type = "Signal"
+		
+class Lift0(Signal):
     def __init__(self, v):
         self.v = v
     def start(self):
         return self
     def now(self):
         return self.v
-     
-class Signal:
-	def __init__(self):
-		self.type = "Signal"
+        
+
+		
 class Lift(Signal):
     def __init__(self,name, f, args):
     	Signal.__init__(self)
@@ -21,10 +28,7 @@ class Lift(Signal):
     	ea = map (lambda a: a.now() , self.args)
     	return self.f(*ea)
     
-def lift(name,f):
-	def fn(*args):
-		return LiftF(name,f,args)
-	return fn
+
 
 # A State Machine signal
 class StateMachine(Signal):

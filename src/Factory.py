@@ -8,27 +8,41 @@
 
 from Signal import * 
 
+def maybeLift(x):
+    t = type(x)
+    if t is type(1):
+        return Lift0(x)
+    if t is type(1.0):
+        return Lift0(x)
+    return x
+    
+def lift(name,f):
+	def fn(*args):
+		return LiftF(name,f,args)
+	return fn
+	
+
 class SFact:
 	def __init__(self):
 		self.type = "factory"
-	def __add__(self,x,y):
+	def __add__(self,y):
 		y=maybeLift(y)
-		return LiftF("add",lambda x,y:x+y, [x,y])
-	def __radd__(self,x,y):
+		return LiftF("add",lambda x,y:x+y, [self,y])
+	def __radd__(self,y):
 		x=maybeLift(x)
-		return LiftF("add",lambda x,y:x+y, [x,y])
-	def __sub__(self,x,y):
+		return LiftF("add",lambda x,y:x+y, [self,y])
+	def __sub__(self,y):
 		y=maybeLift(y)
-		return LiftF("subtract",lambda x,y:x-y, [x,y])
-	def __rsub__(self,x,y):
+		return LiftF("subtract",lambda x,y:x-y, [self,y])
+	def __rsub__(self,y):
 		x=maybeLift(x)
-		return LiftF("subtract",lambda x,y:x-y, [x,y])
-	def __mul__(self,x,y):
+		return LiftF("subtract",lambda x,y:y-x, [self,y])
+	def __mul__(self,y):
 		y=maybeLift(y)
-		return LiftF("multiply",lambda x,y:x*y, [x,y])
-	def __rmul__(self,x,y):
+		return LiftF("multiply",lambda x,y:x*y, [self,y])
+	def __rmul__(self,y):
 		x=maybeLift(x)
-		return LiftF("multiply",lambda x,y:x*y, [x,y])
+		return LiftF("multiply",lambda x,y:x*y, [self,y])
 #Creates a Lift Factory	
 class LiftF(SFact):
 	def __init__(self,name,f, args):	
@@ -37,8 +51,8 @@ class LiftF(SFact):
 		self.name=name
 		self.args = args
 	def start(self):
-		ea = map(lambda x: x.start(), self.args)
-		return Lift(name,f, ea)
+		ea = map(lambda x: maybeLift(x).start(), self.args)
+		return Lift(self.name,self.f, ea)
 
 #Creates a State Machine Factory
 class StateMachineF(SFact):
@@ -67,3 +81,7 @@ class Lift0F(SFact):
 		self.args = args
 	def start(self):
 		return Lift0(name,f,map(lambda x: x.start(), args))
+		
+	
+		
+		
