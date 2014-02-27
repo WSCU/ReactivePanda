@@ -12,17 +12,16 @@ def engine(signals, events, steps=10):
     #get events and clear thunks
     runningSignals = {}
     for k,v in signals.iteritems():
-        runningSignals[k] = v.start()
+        runningSignals[k] = maybeLift(v).start()
     Globals.currentTime = 0
     Globals.dt = 1
     while Globals.currentTime < steps:
         #Globals.thunks = []
         if (events and Globals.currentTime >= events[0][0]):
-            print "An event was popped"
+            print ("An event was popped " + str(event[0][1]))
             Globals.events.append(events.pop(0))
         for k,v in runningSignals.iteritems(): #k = key, v = value in the dictionary
-            x = v.now()
-            print(str(k)+ " = "+str(x))
+            print(str(k)+ " = "+str(v.now()))
         for f in thunks:
             f()
             
