@@ -18,19 +18,17 @@ def engine(signals, events, steps=10):
     Globals.dt = 1
     while Globals.currentTime < steps:
         #Globals.thunks = []
+        print("reactive engine time = "+ str(Globals.currentTime))    
         if (events and Globals.currentTime >= events[0][0]):
-            print "An event was popped"
-            Globals.events.append(events.pop(0))
+            print("An event was popped " + events[0][1])
+            Globals.events = events.pop(0)
         for k,v in runningSignals.iteritems(): #k = key, v = value in the dictionary
             x = v.now()
             print(str(k)+ " = "+str(x))
         for f in thunks:
             f()
-            
         Globals.thunks = [] 
-        print("reactive engine time = "+ str(Globals.currentTime))    
         Globals.currentTime = Globals.currentTime+ Globals.dt
-    
     
 def maybeLift(x):
     t = type(x)
