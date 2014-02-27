@@ -18,7 +18,7 @@ def engine(signals, events, steps=10):
     while Globals.currentTime < steps:
         #Globals.thunks = []
         if (events and Globals.currentTime >= events[0][0]):
-            print ("An event was popped " + str(event[0][1]))
+            print ("An event was popped " + str(events[0][1]))
             Globals.events.append(events.pop(0))
         for k,v in runningSignals.iteritems(): #k = key, v = value in the dictionary
             print(str(k)+ " = "+str(v.now()))
