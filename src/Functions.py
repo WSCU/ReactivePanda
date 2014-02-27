@@ -13,17 +13,16 @@ def integral(x):
         # state is the previous value of the integral
         i = sm.i.now()
         sm.state = sm.state + i * Globals.dt
-        print("i'm inside of the integral!!!")
     return StateMachineF(0, maybeLift(x), integralf)
 
 # this is a function that uses the Observer class to get a value from the signal list
 def ref(key):
-    def reffunc(ob):
+    def reffunc():
         return Globals.sl[key]
     return ObserverF(reffunc)
 
-
-
+def simkey(key, v):
+    return {key : v}
 """
 class TagSignal(Event):
     def __init__(self, fn, s):
@@ -47,13 +46,20 @@ class TagSignal(Event):
             self.context = context
         return self.active
 """
-def hold(x): #Holds the last value of a signal
-    def holdFN(i, s):
-        if s!= None:
-            i = s.now;
-            return i;
-        
-    return StateMachineF(0, mayblift(x),holdFN)
+def hold(x, iv): #Holds the last value of a signal
+    def holdFN(sm):
+        i = sm.i.now();
+        if i != None:
+            sm.state = i
+    return StateMachineF(iv, maybeLift(x),holdFN)
+
+def key(k, v):
+    def keyfunc():
+        if Globals.events:
+            if k in Globals.events[0][1].keys():
+                return v        
+        return None
+    return ObserverF(keyfunc)
 
 def accum(x): #accumulates the value of a signal over time
     def accumFN(i,s):

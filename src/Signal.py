@@ -11,8 +11,6 @@ class Signal:
 class Lift0(Signal):
     def __init__(self, v):
         self.v = v
-    def start(self):
-        return self
     def now(self):
         return self.v
         
@@ -36,7 +34,7 @@ class CachedSignal(Signal):
     def __init__(self, i):
         Signal.__init__(self)
         self.i = i
-        self.caschedValue = self.i.now()
+        self.cachedValue = self.i.now()
         self.time = -1
     def now(self):
         if self.time is not g.currentTime:
@@ -56,6 +54,7 @@ class StateMachine(Signal):
     def now(self):
         if self.time is not Globals.currentTime:
             Globals.thunks.append(lambda: self.f(self)) # adds a deferred computation for the function f
+            self.time = Globals.currentTime
         return self.state
 
 # A state machine like observer signal
@@ -65,24 +64,3 @@ class Observer(Signal):
         self.f = f
     def now(self):
         return self.f()
-
-
-class Clock(Signal):
-    def __init__(self):
-        Signal.__init__(self)
-    def now(self):
-        Globals.currentTime = Globals.currentTime + Globals.dt
-        return Globals.currentTime
-        
-        
-    
-    """def typecheck(self, etype):
-        return EventNumType"""
-    def siginit(self, context):
-        if needInit(self, context):
-            self.active = Clock(self.start, self.step, self.end, self.useLocal)
-            self.active.done = False
-            self.context = context
-            self.active.initialTime = context
-            self.active.nextEvent = self.start
-        return self.active

@@ -60,7 +60,7 @@ class CachedValueF(SFact):
         SFact.__init__(self)
         self.i = i
     def start(self):
-        return CachedValue(self.i)
+        return CachedValue(maybeLift(self.i))
 
 #Creates a State Machine Factory
 class StateMachineF(SFact):
