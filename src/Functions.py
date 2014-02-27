@@ -13,6 +13,7 @@ def integral(x):
         # state is the previous value of the integral
         i = sm.i.now()
         sm.state = sm.state + i * Globals.dt
+        print("i'm inside of the integral!!!")
     return StateMachineF(0, maybeLift(x), integralf)
 
 """
