@@ -47,22 +47,21 @@ class TagSignal(Event):
             self.context = context
         return self.active
 """
-def hold(x):
-    def holdFN(i, s, dt):
+def hold(x): #Holds the last value of a signal
+    def holdFN(i, s):
         if s!= None:
             i = s.now;
-            return i,i;
+            return i;
         
-    return StateMachineF(0, holdFN,x, 0)
+    return StateMachineF(0, mayblift(x),holdFN)
 
-def accum(x):
-    def accumFN(i,s,dt):
-        v = self.s.now()
-        if v is None:
-            return self.i
-        self.i = v(self.i)
-        return self.i
-    return StateMachineF(0, accumFN, x, 0)
+def accum(x): #accumulates the value of a signal over time
+    def accumFN(i,s):
+        if s!= None:
+            i = i + s.now()
+            return i
+
+    return StateMachineF(0, maybelift(x), accumFN)
         
 def maybeLift(x):
     t = type(x)
@@ -72,6 +71,4 @@ def maybeLift(x):
         return Lift0(x)
     return x
 
-def external(x):
-   #Globals.Mouse = hold("""get the mouse position""")
-    pass
+
