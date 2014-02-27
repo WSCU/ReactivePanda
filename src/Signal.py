@@ -30,6 +30,21 @@ class Lift(Signal):
     
 
 
+# Cached Signal that inherits Signal
+# Baisically is just a time stamp
+class CachedSignal(Signal):
+    def __init__(self, i):
+        Signal.__init__(self)
+        self.i = i
+        self.caschedValue = self.i.now()
+        self.time = -1
+    def now(self):
+        if self.time is not g.currentTime:
+            self.cachedValue = self.i.now()
+            self.time = g.currentTime
+        return self.cachedValue
+
+
 # A State Machine signal
 class StateMachine(Signal):
     def __init__(self, s0, i, f):
@@ -37,8 +52,10 @@ class StateMachine(Signal):
         self.state = s0
         self.i = i
         self.f = f
+        self.time = -1
     def now(self):
-        Globals.thunks.append(lambda: self.f(self)) # adds a deferred computation for the function f
+        if self.time is not Globals.currentTime:
+            Globals.thunks.append(lambda: self.f(self)) # adds a deferred computation for the function f
         return self.state
 
 # A state machine like observer signal
