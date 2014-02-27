@@ -13,7 +13,7 @@ def engine(signals, events, steps=10):
     #get events and clear thunks
     runningSignals = {}
     for k,v in signals.iteritems():
-        runningSignals[k] = v.start()
+        runningSignals[k] = maybeLift(v).start()
     Globals.currentTime = 0
     Globals.dt = 1
     while Globals.currentTime < steps:
@@ -29,15 +29,6 @@ def engine(signals, events, steps=10):
             f()
         Globals.thunks = [] 
         Globals.currentTime = Globals.currentTime+ Globals.dt
-    
-def maybeLift(x):
-    t = type(x)
-    if t is type(1):
-        return Lift0(x)
-    if t is type(1.0):
-        return Lift0(x)
-    return x
-    
     
 i1 = integral(1)
 i2 = integral(i1)
