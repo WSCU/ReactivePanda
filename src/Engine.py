@@ -23,8 +23,7 @@ def engine(signals, events, steps=10):
             print("An event was popped " + str(events[0][1]))
             Globals.events = events.pop(0)
         for k,v in runningSignals.iteritems(): #k = key, v = value in the dictionary
-            x = v.now()
-            print(str(k)+ " = "+str(x))
+            print(str(k)+ " = "+str(v.now()))
         for f in thunks:
             f()
         Globals.thunks = [] 
