@@ -16,6 +16,14 @@ def integral(x):
         print("i'm inside of the integral!!!")
     return StateMachineF(0, maybeLift(x), integralf)
 
+# this is a function that uses the Observer class to get a value from the signal list
+def ref(key):
+    def reffunc(ob):
+        return Globals.sl[key]
+    return ObserverF(reffunc)
+
+
+
 """
 class TagSignal(Event):
     def __init__(self, fn, s):
