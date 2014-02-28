@@ -53,9 +53,8 @@ class StateMachine(Signal):
         self.time = -1
     def now(self):
         if self.time is not Globals.currentTime:
-            Globals.thunks.append(lambda: self.f(self)) # adds a deferred computation for the function f
             self.time = Globals.currentTime
-        return self.state
+        return self.f(self)
 
 # A state machine like observer signal
 class Observer(Signal):

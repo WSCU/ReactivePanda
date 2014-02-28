@@ -29,26 +29,18 @@ def engine(signals, events, steps=10):
         print("reactive engine time = "+ str(Globals.currentTime))    
         Globals.currentTime = Globals.currentTime+ Globals.dt
     
-    
-def maybeLift(x):
-    t = type(x)
-    if t is type(1):
-        return Lift0(x)
-    if t is type(1.0):
-        return Lift0(x)
-    return x
-    
 
 e = [(5, simkey("x", 7))]
 
-h = {"sk" : hold(key("x", 2), 0)}
+#h = {"sk" : hold(key("x", 2), 0)}
 
 i1 = integral(1)
 i2 = integral(i1)
 #engine(i1)
-sl["i2"]=i2
-#engine(sl, [(5, {"key_up": 2})])
-engine(h, e)
+signals = {}
+signals["i2"]=i2
+signals["sk"] = hold(key("x", 2), 0)
+engine(signals, e)
 
 
 ####################  Testing ################################

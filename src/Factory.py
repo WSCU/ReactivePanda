@@ -11,9 +11,9 @@ from Signal import *
 def maybeLift(x):
     t = type(x)
     if t is type(1):
-        return Lift0(x)
+        return Lift0F(x)
     if t is type(1.0):
-        return Lift0(x)
+        return Lift0F(x)
     return x
     
 def lift(name,f):
@@ -54,6 +54,13 @@ class LiftF(SFact):
 		ea = map(lambda x: maybeLift(x).start(), self.args)
 		return Lift(self.name,self.f, ea)
 
+class Lift0F(SFact):
+      def __init__(self, v):
+          SFact.__init__(self)
+          self.v = v
+      def start(self):
+          return Lift0(self.v)
+
 #Creates a CachedValue factory
 class CachedValueF(SFact):
     def __init__(self, i):
@@ -80,7 +87,8 @@ class ObserverF(SFact):
     def start(self):
         return Observer(self.f)
 
-#Creates a Lift0 Factory which turns a constant into a running signal	
+#Creates a Lift0 Factory which turns a constant into a running signal
+"""
 class Lift0F(SFact):
 	def __init__(self,name,f, args):	
 		SFact.__init__(self)
@@ -89,7 +97,7 @@ class Lift0F(SFact):
 		self.args = args
 	def start(self):
 		return Lift0(name,f,map(lambda x: x.start(), args))
-		
+"""		
 	
 		
 		

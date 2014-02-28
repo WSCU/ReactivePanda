@@ -11,8 +11,11 @@ import Globals
 def integral(x):
     def integralf(sm): # Euler method for integration
         # state is the previous value of the integral
+        Globals.thunks.append(lambda: thunk(sm))
+        return sm.state
+    def thunk(sm):
         i = sm.i.now()
-        sm.state = sm.state + i * Globals.dt
+        sm.state =sm.state +i * Globals.dt
     return StateMachineF(0, maybeLift(x), integralf)
 
 # this is a function that uses the Observer class to get a value from the signal list
@@ -50,7 +53,8 @@ def hold(x, iv): #Holds the last value of a signal
     def holdFN(sm):
         i = sm.i.now();
         if i != None:
-            sm.state = i
+            return i;
+        return iv
     return StateMachineF(iv, maybeLift(x),holdFN)
 
 def key(k, v):
@@ -62,19 +66,12 @@ def key(k, v):
     return ObserverF(keyfunc)
 
 def accum(x): #accumulates the value of a signal over time
-    def accumFN(i,s):
+    def accumFN(sm):
+        s = sm.i.now();
         if s!= None:
-            i = i + s.now()
-            return i
+            self.state += s
+            return s
+        else:
+            return self.state
 
     return StateMachineF(0, maybelift(x), accumFN)
-        
-def maybeLift(x):
-    t = type(x)
-    if t is type(1):
-        return Lift0(x)
-    if t is type(1.0):
-        return Lift0(x)
-    return x
-
-
