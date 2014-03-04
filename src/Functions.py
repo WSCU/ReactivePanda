@@ -75,3 +75,24 @@ def accum(x): #accumulates the value of a signal over time
             return self.state
 
     return StateMachineF(0, maybelift(x), accumFN)
+
+	
+def gTimeObs(x): #Global time Observer
+#Not sure about what variables will be passed into the gTOFN
+    def gTOFN(): #will track the global time
+        if s!= None:
+            i = s.now()
+            return i
+
+    return ObserverF(0, maybelift(x), gTOFN)
+    
+#Local time Observer
+def lTimeObs(x): #Local time Observer
+    def lTOFN(i,s): #tracks how long ago some signal was started
+        if s!= None:
+            i = i + s.now()
+            return i
+
+    return ObserverF(0, maybelift(x), lTOFN)
+
+#make a clock signal too. Clock will control the heartbeat: make the heartbeat every second
