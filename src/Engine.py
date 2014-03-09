@@ -12,15 +12,16 @@ def engine(signals, events, steps=10):
     #get events and clear thunks
     runningSignals = {}
     for k,v in signals.iteritems():
-        runningSignals[k] = maybeLift(v).start()
+        Globals.sl[k] = maybeLift(v).start()
     Globals.currentTime = 0
     Globals.dt = 1
+    print sl.viewkeys()
     while Globals.currentTime < steps:
         #Globals.thunks = []
         if (events and Globals.currentTime >= events[0][0]):
             print ("An event was popped " + str(events[0][1]))
             Globals.events.append(events.pop(0))
-        for k,v in runningSignals.iteritems(): #k = key, v = value in the dictionary
+        for k,v in sl.iteritems(): #k = key, v = value in the dictionary
             print(str(k)+ " = "+str(v.now()))
         for f in thunks:
             f()
@@ -33,12 +34,12 @@ def engine(signals, events, steps=10):
 e = [(5, simkey("x", 7))]
 
 #h = {"sk" : hold(key("x", 2), 0)}
-
-i1 = integral(1)
-i2 = integral(i1)
-#engine(i1)
 signals = {}
-signals["i2"]=i2
+
+#signals["v"] = integral(ref("f"))
+#signals["f"] = integral(ref("v"))
+signals["i"] = integral(10)
+#engine(i1)
 signals["sk"] = hold(key("x", 2), 0)
 engine(signals, e)
 
