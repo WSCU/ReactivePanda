@@ -14,8 +14,8 @@ def integral(x):
         Globals.thunks.append(lambda: thunk(sm))
         return sm.state
     def thunk(sm):
-        i = sm.i.now()
-        sm.state =sm.state +i * Globals.dt
+        s = sm.i.now()
+        sm.state += s * Globals.dt
     return StateMachineF(0, maybeLift(x), integralf)
 
 # this is a function that uses the Observer class to get a value from the signal list
