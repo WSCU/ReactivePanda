@@ -95,4 +95,15 @@ def lTimeObs(x): #Local time Observer
 
     return ObserverF(0, maybelift(x), lTOFN)
 
+def clock(x):
+    def clockFN(sm): # tracks and updates engine time
+        # state is the previous value of the clock
+        if sm.state >= Globals.currentTime + Globals.dt:
+            Globals.currentTime = sm.state
+            sm.state += sm.i.now() + Globals.dt
+        # add the current clock signal to the list of fast updating signals (which doesn't exist yet)
+        
+        return sm.state
+    
+    return StateMachineF(0, maybeLift(x), clockFN)
 #make a clock signal too. Clock will control the heartbeat: make the heartbeat every second
