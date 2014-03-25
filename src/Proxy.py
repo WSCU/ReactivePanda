@@ -16,25 +16,20 @@ class Proxy:
 		if name[0] == '_':#if name starts with ._ hand it over to the __dict__
 				self.__dict__[name] = value
 		else:#if name starts wiht .somethign then put it in signals
-				self._signals[name] = value #add check to see if it has already been updated
+				self._updateSignals[name] = value #add check to see if it has already been updated
 		
 	def react(self):
 		if alive:
 			pass
-		else:
-			pass
-
+		
 	def update(self):
 		if alive:
 			for k,v in self._updateSignals:
 				 self._signals[k] = v
-			for k,v in self._updateDict:
-				self.__dict__[k] = v
+			
 		        self._updateSignals = {} # reset the synchronization barrier and memoization
-			self._updateDict = {}
-			self.alreadyUpdated = []
+			
 			for k,v in _signals:
 				v.now()for k,v in _signals:
 				v.now()
-		else:
-			pass
+		
