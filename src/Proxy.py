@@ -20,14 +20,14 @@ class Proxy:
 		
 	def react(self):
 		if alive:
-			pass
+			pass# add to the list
 		
 	def update(self):
 		if alive:
 			for k,v in self._updateSignals:
 				 self._signals[k] = v
 			
-		        self._updateSignals = {} # reset the synchronization barrier and memoization
+		         self._updateSignals = {} # reset the synchronization barrier and memoization
 			
 			for k,v in _signals:
 				v.now()for k,v in _signals:
