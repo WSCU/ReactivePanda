@@ -4,9 +4,11 @@
 
 import unittest
 import sched, time
+import piface.pfio as piface
 from Signal import *
 from Functions import *
 from Globals import *
+
 
 def engine(signals, events, clock):
     #Initialize all signals (signalF.start)

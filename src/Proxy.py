@@ -6,43 +6,42 @@ class Proxy:
 		self._signals = {} #users reactive signals
 		self._1Reactions = [] # one time reactions
 		self._gReactions = [] # global reactions
-		self._updateDict = {} # synchronization barrier
 		self._updateSignals = {} #synchronization barrier
-		self._alreadyUpdated = [] # form memoization of setattr
+		
 		Globals.world.add(self)
 		
 	def __setattr__(self,name, value):
 		
-		if name[1] == '_':#if name starts with ._ hand it over to the __dict__
-				self.updateDict[name] = value
+		if name[0] == '_':#if name starts with ._ hand it over to the __dict__
+				self.__dict__[name] = value
 		else:#if name starts wiht .somethign then put it in signals
-				self._signals[name] = value
-		
-			
-		if name in alreadyUpdated:#catch multiple updates on one name in a single heart beat
-			print(name+" has already been updated")
-		
+				self._updateSignals[name] = value #add check to see if it has already been updated
+	def __getattr__(self,name):
+		if name[0] == '_':
+			return self.__dict__[name]# check for undifined attributes
 		else:
-			alreadyUpdated.append(name)
+			return None# This is where we need to creat observer signals
 		
-		
-	def react(self):
+	def react(self,when,what):#when the reaction should happen and what it should do
 		if alive:
-			pass
-		else:
-			pass
-
+			self._gReactions.append((what,when))# add to the list
+	def react1(self,when,what):#when the reaction should happen and what it should do
+		if alive:
+			self._1Reactions.append((what,when))# add to the list
+		
 	def update(self):
 		if alive:
-			for k,v in self._updateSignals:
-				 self._signals[k] = v
-			for k,v in self._updateDict:
-				self.__dict__[k] = v
-		        self._updateSignals = {} # reset the synchronization barrier and memoization
-			self._updateDict = {}
-			self.alreadyUpdated = []
+			
 			for k,v in _signals:
 				v.now()for k,v in _signals:
 				v.now()
-		else:
-			pass
+				
+		        for a in 1Reactions:
+		        	#if it happens remove it from the list
+			for a in gReactions:
+				#leave them in
+			for k,v in self._updateSignals:
+				 self._signals[k] = v
+			
+		         self._updateSignals = {} # reset the synchronization barrier and memoization
+		
