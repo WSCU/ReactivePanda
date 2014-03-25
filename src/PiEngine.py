@@ -13,24 +13,29 @@ def engine(signals, events, clock):
     #set the time to 0
     #get events and clear thunks
     runningSignals = {}
-    for k,v in signals.iteritems():
+    for k,v in signals.iteritems(): #should be a list of proxy objects
         Globals.sl[k] = maybeLift(v).start()
     Globals.currentTime = 0
     Globals.dt = 1
-    
-    print sl.viewkeys()
-    while Globals.currentTime < clock.now():
-        #Globals.thunks = []
-        if (events and Globals.currentTime >= events[0][0]):
-            print ("An event was popped " + str(events[0][1]))
-            Globals.events.append(events.pop(0))
-        for k,v in sl.iteritems(): #k = key, v = value in the dictionary
-            print(str(k)+ " = "+str(v.now()))
+    #Make a heartbeat method
+    def heartBeat(ct, events):
+        Globals.dt = ct - Globals.currentTime
+        Globals.currentTime = ct
+        Globals.newModels = []
+        Globals.events = events
+        Globals.thunks = []
+        for worldObjects in Globals.worldObjects:
+            Globals.thunks.append(worldObjects.update())
         for f in thunks:
             f()
-            
-        Globals.thunks = [] 
-        print("reactive engine time = "+ str(Globals.currentTime))    
-        Globals.currentTime = Globals.currentTime+ Globals.dt
-        clock.now()
+        for objects in Globals.newModels:
+            Globals.worldObjects.append(objects).initialize(ct) #will need to check the proxy module to find the right name for this initialize method
+        
+    #make an initialize method that clears out all the variables and resets the clock
+    def initialize(ct):
+        Globals.thunks = []
+        Globals.currentTime = 0 #Not sure if this should be 0 or CT
+        Globals.newModels = []
+        Globals.worldObjects = {}
+        Globals.events = []
     
