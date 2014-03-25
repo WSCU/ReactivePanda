@@ -6,25 +6,17 @@ class Proxy:
 		self._signals = {} #users reactive signals
 		self._1Reactions = [] # one time reactions
 		self._gReactions = [] # global reactions
-		self._updateDict = {} # synchronization barrier
+		
 		self._updateSignals = {} #synchronization barrier
-		self._alreadyUpdated = [] # form memoization of setattr
+		
 		Globals.world.add(self)
 		
 	def __setattr__(self,name, value):
 		
-		if name[1] == '_':#if name starts with ._ hand it over to the __dict__
-				self.updateDict[name] = value
+		if name[0] == '_':#if name starts with ._ hand it over to the __dict__
+				self.__dict__[name] = value
 		else:#if name starts wiht .somethign then put it in signals
-				self._signals[name] = value
-		
-			
-		if name in alreadyUpdated:#catch multiple updates on one name in a single heart beat
-			print(name+" has already been updated")
-		
-		else:
-			alreadyUpdated.append(name)
-		
+				self._signals[name] = value #add check to see if it has already been updated
 		
 	def react(self):
 		if alive:
