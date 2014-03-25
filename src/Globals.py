@@ -13,6 +13,7 @@ events = []        # This is a dictionary of all events posted in the previous t
 reactEvents = []     # Reactions that are not part of an object
 eventSignals = None  # This is a dictionary of event values received since the last tick
 newModels = []       # The new list of active models assembled at every tick
+worldObjects = {}    #dictionary with all of the active world objects
 thunks = []
 tracking = False
 nextNE2dY = .95      # Positioning for 2-D controls
