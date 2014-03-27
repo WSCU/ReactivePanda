@@ -34,7 +34,7 @@ def initialize(ct):
     Globals.worldObjects = {}
     Globals.events = []
 
-def engine(ct, *args):
+def engine(ct):
     #Initialize all signals (signalF.start)
     #set the time to 0
     #get events and clear thunks
