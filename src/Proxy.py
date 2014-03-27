@@ -52,7 +52,7 @@ class Proxy:
 		        		thunks.add(lambda : a[1](self, temp))
 		        if(len(thunks) >= 2):
 		        	print("Multiple 1 time reactions in a heartbeat")
-			for a in gReactions:
+			for a in self._gReactions:
 				#leave them in
 			for k,v in self._updateSignals.items():
 				 self._signals[k] = v
