@@ -25,7 +25,7 @@ class Proxy:
 		#atribute when called it goes in and samples the value
 		
 	def initialize(self):
-		for k,v in self._updateSignals.iteritems():
+		for k,v in self._updateSignals.items():
 			self._signals[k] = v.start()
 		
 	def updater(self):
@@ -33,17 +33,16 @@ class Proxy:
 		
 	def react(self,when,what):#when the reaction should happen and what it should do
 		if alive:
-			maybeLift(when)
+			when = maybeLift(when)
 			self._gReactions.append((when.start(),what))# add to the list
 	def react1(self,when,what):#when the reaction should happen and what it should do
 		if alive:
-			maybeLift(when)
+			when = maybeLift(when)
 			self._1Reactions.append((when.start(),what))# add to the list
 		
 	def update(self):
 		if alive:
-			for k,v in self._signals.iteritems():
-				v.now()for k,v in _signals:
+			for k,v in self._signals.items():
 				v.now()
 			thunks = []	
 		        for a in 1Reactions:
@@ -55,7 +54,7 @@ class Proxy:
 		        	print("Multiple 1 time reactions in a heartbeat")
 			for a in gReactions:
 				#leave them in
-			for k,v in self._updateSignals:
+			for k,v in self._updateSignals.items():
 				 self._signals[k] = v
 		       	self._updateSignals = {} # reset the synchronization barrier and memoization
 		
