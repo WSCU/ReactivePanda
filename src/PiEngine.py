@@ -10,15 +10,11 @@ from Functions import *
 from Globals import *
 
 
-def engine(signals, events, clock):
+def engine(ct, *args):
     #Initialize all signals (signalF.start)
     #set the time to 0
     #get events and clear thunks
-    runningSignals = {}
-    for k,v in signals.iteritems(): #should be a list of proxy objects
-        Globals.sl[k] = maybeLift(v).start()
-    Globals.currentTime = 0
-    Globals.dt = 1
+    Globals.currentTime = ct
     #Make a heartbeat method
     def heartBeat(ct, events):
         Globals.dt = ct - Globals.currentTime
@@ -32,7 +28,8 @@ def engine(signals, events, clock):
             f()
         for objects in Globals.newModels:
             Globals.worldObjects.append(objects).initialize(ct) #will need to check the proxy module to find the right name for this initialize method
-        
+        for obj in Globals.Objects:
+            obj.init()
     #make an initialize method that clears out all the variables and resets the clock
     def initialize(ct):
         Globals.thunks = []
