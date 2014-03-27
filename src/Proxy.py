@@ -6,7 +6,7 @@ class Proxy:
 		self._signals = {} #users reactive signals
 		self._1Reactions = [] # one time reactions
 		self._gReactions = [] # global reactions
-		self._updateSignals = {} #synchronization barrier
+	    self._updateSignals = {} #synchronization barrier
 		self._updater = updater # function pushes attributes to panda
 		Globals.worldObjects.add(self)
 		
