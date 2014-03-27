@@ -45,7 +45,7 @@ class Proxy:
 			for k,v in self._signals.items():
 				v.now()
 			thunks = []	
-		        for a in 1Reactions:
+		        for a in self._1Reactions:
 		        	temp = a[0].now()
 		        	if temp != None:#if it happens remove it from the list
 		        		#add thunks
