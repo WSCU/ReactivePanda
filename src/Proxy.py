@@ -53,8 +53,8 @@ class Proxy:
 		        if(len(thunks) >= 2):
 		        	print("Multiple 1 time reactions in a heartbeat")
 			for a in self._gReactions:
-				#leave them in
-			for k,v in self._updateSignals.items():
-				 self._signals[k] = v
+				temp = a[0].now()
+		        	if temp != None:#if it happens remove it from the list
+		        		#add thunks
+		        		thunks.add(lambda : a[1](self, temp))
 		       	self._updateSignals = {} # reset the synchronization barrier and memoization
-		
