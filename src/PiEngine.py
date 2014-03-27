@@ -5,10 +5,11 @@
 import unittest
 import sched, time
 import piface.pfio as piface
+import Globals
 from PiObjects import *
 from Signal import *
 from Functions import *
-from Globals import *
+
 
 def heartBeat(ct, events):
     Globals.dt = ct - Globals.currentTime
@@ -18,7 +19,7 @@ def heartBeat(ct, events):
     Globals.thunks = []
     for worldObject in Globals.worldObjects:
         Globals.thunks.append(worldObject.update())
-    for f in thunks:
+    for f in Globals.thunks:
         f()
     for obj in Globals.newModels:
         Globals.worldObjects.append(obj)
