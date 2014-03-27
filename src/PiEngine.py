@@ -5,6 +5,7 @@
 import unittest
 import sched, time
 import piface.pfio as piface
+from PiObjects import *
 from Signal import *
 from Functions import *
 from Globals import *
@@ -37,4 +38,11 @@ def engine(ct, *args):
         Globals.newModels = []
         Globals.worldObjects = {}
         Globals.events = []
-    
+    while True:
+        ctime = time.time()
+        if (ctime >= (Globals.currentTime + Globals.dt)):
+            heartBeat(ctime, Globals.newEvents)
+def light(*p, **k):
+    return Output(*p, **k)
+p = light(pin = 0, on = 0)
+engine(time.time())

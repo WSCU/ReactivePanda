@@ -8,7 +8,7 @@ class Proxy:
 		self._gReactions = [] # global reactions
 		self._updateSignals = {} #synchronization barrier
 		self._updater = updater # function pushes attributes to panda
-		Globals.world.add(self)
+		Globals.worldObjects.add(self)
 		
 	def __setattr__(self,name, value):
 		
