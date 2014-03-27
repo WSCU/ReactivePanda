@@ -25,7 +25,7 @@ class Proxy:
 		#atribute when called it goes in and samples the value
 		
 	def initialize(self):
-		for k,v in _updateSignals:
+		for k,v in self._updateSignals.iteritems():
 			self._signals[k] = v.start()
 		
 	def updater(self):
@@ -42,8 +42,7 @@ class Proxy:
 		
 	def update(self):
 		if alive:
-			
-			for k,v in _signals:
+			for k,v in self._signals.iteritems():
 				v.now()for k,v in _signals:
 				v.now()
 			thunks = []	
@@ -52,13 +51,11 @@ class Proxy:
 		        	if temp != None:#if it happens remove it from the list
 		        		#add thunks
 		        		thunks.add(lambda : a[1](self, temp))
-		        
 		        if(len(thunks) >= 2):
 		        	print("Multiple 1 time reactions in a heartbeat")
 			for a in gReactions:
 				#leave them in
 			for k,v in self._updateSignals:
 				 self._signals[k] = v
-			
-		         self._updateSignals = {} # reset the synchronization barrier and memoization
+		       	self._updateSignals = {} # reset the synchronization barrier and memoization
 		
