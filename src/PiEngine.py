@@ -16,14 +16,13 @@ def heartBeat(ct, events):
     Globals.newModels = []
     Globals.events = events
     Globals.thunks = []
-    for worldObjects in Globals.worldObjects:
+    for worldObject in Globals.worldObjects:
         Globals.thunks.append(worldObjects.update())
     for f in thunks:
         f()
-    for objects in Globals.newModels:
-        Globals.worldObjects.append(objects).initialize(ct) #will need to check the proxy module to find the right name for this initialize method
-    for obj in Globals.Objects:
-        obj.init()
+    for object in Globals.newModels:
+        Globals.worldObjects.append(objects).initialize(ct)
+#will need to check the proxy module to find the right name for this initialize method
 #make an initialize method that clears out all the variables and resets the clock
 def initialize(ct):
     Globals.thunks = []
