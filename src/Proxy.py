@@ -13,9 +13,9 @@ class Proxy:
 	def __setattr__(self,name, value):
 		
 		if name[0] == '_':#if name starts with ._ hand it over to the __dict__
-				self.__dict__[name] = value
+			self.__dict__[name] = value
 		else:#if name starts wiht .somethign then put it in signals
-				self._updateSignals[name] = value #add check to see if it has already been updated
+			self._updateSignals[name] = value #add check to see if it has already been updated
 	def __getattr__(self,name):
 		if name[0] == '_':
 			return self.__dict__[name]# check for undifined attributes
