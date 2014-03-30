@@ -7,7 +7,7 @@ class Proxy:
         self._gReactions = []
         self._updateSignals = {}
         self._updater = updater
-        Globals.worldObjects[name] = self
+        Globals.worldObjects.append(self)
         #print str(Globals.worldObjects)
         print repr(self)
 
