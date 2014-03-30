@@ -18,7 +18,7 @@ def heartBeat(ct, events):
     Globals.newModels = []
     Globals.events = events
     Globals.thunks = []
-    for worldObject in Globals.worldObjects.items():
+    for worldObject in Globals.worldObjects:
         print("Updating object: " + repr(worldObject))
         print repr(worldObject)
         Globals.thunks.extend(worldObject.update())
@@ -27,7 +27,7 @@ def heartBeat(ct, events):
     for obj in Globals.newModels:
         print("Adding object: " + repr(obj))
         worldObjects[str(obj)] = obj
-    for obj in Globals.worldObjects.items():
+    for obj in Globals.worldObjects:
         print("Initializing object: " + repr(obj))
         obj.initialize()
 #will need to check the proxy module to find the right name for this initialize method
