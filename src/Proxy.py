@@ -6,10 +6,11 @@ class Proxy:
         self._1Reactions = []
         self._gReactions = []
         self._updateSignals = {}
+        self._name = name
         self._updater = updater
         Globals.worldObjects.append(self)
         #print str(Globals.worldObjects)
-        print repr(self)
+        #print repr(name)        
 
     def __setattr__(self, name, value):
         if name[0] == '_':
@@ -56,10 +57,11 @@ class Proxy:
                     print("    " + str(temp) + " is being added to thunks")
                     thunks.add(lambda : a[1](self, temp))
                 self._updateSignals = {}
+            self.updater()
             return thunks
 
     def __str__(self):
-        return self.name
+        return self._name
 
     def __repr__(self):
-        return str(self.name)
+        return str(self._name)
