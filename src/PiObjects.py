@@ -28,11 +28,9 @@ class Output(Proxy):
 def output(*p, **k):
     return Output(*p,**k)
 
-class Input(Signal):
+class Input(Observer):
     def __init__(self, pin):
-        self._pin = pin + 1
-    def now(self):
-        return piface.digital_read(self.pin)
+        Observer.__init__(self, piface.digital_write(pin+1)
         
 def input1(*p, **k):
     return Input(*p, **k)
