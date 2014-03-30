@@ -3,10 +3,14 @@ import piface.pfio as piface
 from Proxy import *
 from Factory import *
 
+
+def slapBendix(): #This is to make everything happy, and bendix is a douche.
+    pass
+
 class Output(Proxy):
     def __init__(self, pin, on, name = 'Light'):
-        Proxy.__init__(self, name)
-        self.__dict__['on'] = Lift(self, 'on', boolType)# Not using Types, change to lifted int(0, 1)
+        Proxy.__init__(self, name, slapBendix)
+        #self.__dict__['on'] = Lift(self, 'on', boolType)# Not using Types, change to lifted int(0, 1)
         self._pin = pin + 1
         if not isinstance(on, Signal):#???
             on = maybeLift(on)
@@ -30,5 +34,5 @@ class Input(Signal):
     def now(self):
         return piface.digital_read(self.pin)
         
-def input(*p, **k):
+def input1(*p, **k):
     return Input(*p, **k)

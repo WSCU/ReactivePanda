@@ -19,6 +19,7 @@ def heartBeat(ct, events):
     Globals.thunks = []
     for worldObject in Globals.worldObjects:
         print("Updating object: " + str(worldObject))
+        print repr(worldObject)
         Globals.thunks.extend(worldObject.update())
     for f in Globals.thunks:
         f()
@@ -46,6 +47,3 @@ def engine(ct):
         ctime = time.time()
         if (ctime >= (Globals.currentTime + Globals.dt)):
             heartBeat(ctime, Globals.newEvents)
-def light(*p, **k):
-    return Output(*p, **k)
-p = light(pin = 0, on = 0)
