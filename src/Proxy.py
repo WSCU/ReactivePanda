@@ -43,18 +43,24 @@ class Proxy:
 	def update(self):
 		if alive:
 			for k,v in self._signals.items():
+                print("Object: " + str(self) + " is updating: " + k)
 				v.now()
 			thunks = []	
-		        for a in self._1Reactions:
-		        	temp = a[0].now()
-		        	if temp != None:#if it happens remove it from the list
-		        		#add thunks
-		        		thunks.add(lambda : a[1](self, temp))
+		    for a in self._1Reactions:
+                print("Object: " + str(self) + " is updating: " + str(a[0]))
+		     	temp = a[0].now()
+		       	if temp != None:#if it happens remove it from the list
+                    print ("    " + str(temp) + "is being added to thunks")
+		       		#add thunks
+		       		thunks.add(lambda : a[1](self, temp))
 		        if(len(thunks) >= 2):
-		        	print("Multiple 1 time reactions in a heartbeat")
+		            print("Multiple 1 time reactions in a heartbeat")
 			for a in self._gReactions:
 				temp = a[0].now()
-		        	if temp != None:#if it happens remove it from the list
-		        		#add thunks
-		        		thunks.add(lambda : a[1](self, temp))
+                print("Object: " + str(self) + " is updating: " + str(a[0])
+		        if temp != None:#if it happens remove it from the list
+                    print("    " + str(temp) + " is being added to thunks"
+		        	#add thunks
+		        	thunks.add(lambda : a[1](self, temp))
 		       	self._updateSignals = {} # reset the synchronization barrier and memoization
+            return thunks
