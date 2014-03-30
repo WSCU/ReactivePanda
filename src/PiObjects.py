@@ -30,7 +30,7 @@ def output(*p, **k):
 
 class Input(Observer):
     def __init__(self, pin):
-        Observer.__init__(self, piface.digital_write(pin+1)
+        Observer.__init__(self, piface.digital_write(pin+1))
         
 def input1(*p, **k):
     return Input(*p, **k)
