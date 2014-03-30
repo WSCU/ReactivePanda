@@ -29,3 +29,6 @@ class Input(Signal):
         self._pin = pin + 1
     def now(self):
         return piface.digital_read(self.pin)
+        
+def input(*p, **k):
+    return Input(*p, **k)
