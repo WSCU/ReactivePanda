@@ -7,9 +7,11 @@ class Proxy:
         self._gReactions = []
         self._updateSignals = {}
         self._updater = updater
-        Globals.worldObejcts.add(self)
-    
-    def __setattr_(self, name, value):
+        Globals.worldObjects[name] = self
+        #print str(Globals.worldObjects)
+        print repr(self)
+
+    def __setattr__(self, name, value):
         if name[0] == '_':
             self.__dict__[name] = value
         else:
@@ -22,13 +24,13 @@ class Proxy:
     def initialize(self):
         for k, v in self._updateSignals.items():
             self._signals[k] = v.start()
-    def updater(self)
+    def updater(self):
         self._updater(self)
     def react(self, when, what):
         if alive:
             when = maybeLift(when)
             self._gReactions.append((when.start(), what))
-    def react1(self, when what):
+    def react1(self, when, what):
         if alive:
             when = maybeLift(when)
             self._1Reactions.append((when.start(), what))
@@ -39,19 +41,25 @@ class Proxy:
                 v.now()
             thunks = []
             for a in self._1Reactions:
-                print("Object: " + str(self) + " is updating: " + str(a[0])
+                print("Object: " + str(self) + " is updating: " + str(a[0]))
                 temp = a[0].now()
-                if temp != None
+                if temp != None:
                     print("    " + str(temp) + " is being added to thunks")
                     thunks.add(lambda : a[1](self, temp))
                 if (len(thunks) >= 2):
                     print("Multiple one time reactions in a heartbeat")
             for a in self._gReactions:
                 temp = a[0].now()
-                print("Object: " + str(self) + " is updating: " + str(a[0])
+                print("Object: " + str(self) + " is updating: " + str(a[0]))
                 temp = a[0].now()
-                if temp != None
+                if temp != None:
                     print("    " + str(temp) + " is being added to thunks")
                     thunks.add(lambda : a[1](self, temp))
                 self._updateSignals = {}
             return thunks
+
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return str(self.name)

@@ -7,6 +7,8 @@ ti = t.time()
 print ti
 
 ir = input1(1)
-g.worldObjects['lights1'] = output(1,ir,name = 'lights1')
+output(1,ir,name = 'lights1')
+
+print str(g.worldObjects)
 
 PiEngine.engine(ti)
