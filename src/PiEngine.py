@@ -24,7 +24,7 @@ def heartBeat(ct, events):
         f()
     for obj in Globals.newModels:
         print("Adding object: " + str(obj)
-        Globals.worldObjects.append(obj)
+        worldObjects[str(obj)] = obj
     for obj in Globals.worldObjects:
         print("Initializing object: " + str(obj)
         obj.initialize()
@@ -49,4 +49,3 @@ def engine(ct):
 def light(*p, **k):
     return Output(*p, **k)
 p = light(pin = 0, on = 0)
-engine(time.time())
