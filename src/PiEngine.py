@@ -10,6 +10,7 @@ from PiObjects import *
 from Signal import *
 from Functions import *
 
+piface.init()
 
 def heartBeat(ct, events):
     Globals.dt = ct - Globals.currentTime
