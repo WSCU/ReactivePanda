@@ -1,9 +1,4 @@
 import Globals
-
-
-
-
-     
 class Signal:
 	def __init__(self):
 		self.type = "Signal"
@@ -55,8 +50,51 @@ class StateMachine(Signal):
         if self.time is not Globals.currentTime:
             self.time = Globals.currentTime
         return self.f(self)
-
-# A state machine like observer signal
+    def __add__(self, y):
+        y=maybeLift(y)
+        return LiftF("add", lambda x,y:x+y, [self.state, y])
+    def __radd__(self, y):
+        y=maybeLift(y)
+        return LiftF("add", lambda x,y:y+x, [self.state, y])
+    def __sub__(self, y):
+        y = maybeLift(y)
+        return LiftF("sub", lambda x,y: x-y, [self.state, y])
+    def __rsub__(self, y):
+        y = maybeLift(y)
+        return LiftF("sub", lambda x,y: y-x, [self.state, y])
+    def __mul__(self, y):
+        y = maybeLift(y)
+        return LiftF("mul", lambda x,y: x*y, [self.state, y])
+    def __rmul__(self, y):
+        y = maybeLift(y)
+        return LiftF("mul", lambda x,y: y*x, [self.state, y])
+    def __div__(self, y):
+        y = maybeLift(y)
+        return LiftF("div", lambda x,y: x/y, [self.state, y])
+    def __rdiv__(self, y):
+        y = maybeLift(y)
+        return LiftF("div", lambda x,y: y/x, [self.state, y])
+    def __lt__(self, y):
+        y = maybeLift(y)
+        return LiftF("less than", lambda x,y: x < y, [self.state, y])
+    def __le__(self, y):
+        y = maybeLift(y)
+        return LiftF("less than or equal to", lambda x,y: x <= y, [self.state, y])
+    def __eq__(self, y):
+        y = maybeLift(y)
+        return LiftF("equal", lambda x,y: x == y, [self.state, y])
+    def __ne__(self, y):
+        y = maybeLift(y)
+        return LiftF("not equal", lambda x,y: x != y, [self.state, y])
+    def __gt__(self, y):
+        y = maybeLift(y)
+        return LiftF("greater than", lambda x,y: x > y, s[elf.state, y])
+    def __ge__(self, y):
+        y = maybeLift(y)
+        return LiftF("greater than or equal", lambda x, y: x >= y, [self.state, y])
+    def __mod__(self, y):
+        y = maybeLift(y)
+        return LiftF("mod", lambda x, y: x % y, [self.state, y])
 class Observer(Signal):
     def __init__(self, f):
         Signal.__init__(self)
