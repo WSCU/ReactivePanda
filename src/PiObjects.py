@@ -20,7 +20,7 @@ class Output(Proxy):
         self._pin = pin + 1
         if not isinstance(on, Signal):#???
             on = maybeLift(on)
-        self._on = on #_setBehavior(_on)
+        self.on = on #_setBehavior(_on)
         Proxy.__init__(self, name, lambda x: slapBendix(x))
         #self.__dict__['on'] = Lift(self, 'on', boolType)# Not using Types, change to lifted int(0, 1)
 
