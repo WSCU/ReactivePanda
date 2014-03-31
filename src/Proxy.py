@@ -21,7 +21,7 @@ class Proxy:
         if name[0] == '_':
             return self.__dict__[name]
         else:
-            return None
+            return self._signals[name]
     def initialize(self):
         for k, v in self._updateSignals.items():
             self._signals[k] = v.start()
