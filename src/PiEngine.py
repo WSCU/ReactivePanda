@@ -26,7 +26,7 @@ def heartBeat(ct, events):
         f()
     for obj in Globals.newObjects:
         print("Adding object: " + repr(obj))
-        worldObjects[str(obj)] = obj
+        Globals.worldObjects[str(obj)] = obj
     for obj in Globals.worldObjects:
         print("Initializing object: " + repr(obj))
         obj.initialize()
