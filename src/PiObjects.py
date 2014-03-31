@@ -6,10 +6,10 @@ from Factory import *
 
 def slapBendix(self): #This is to make everything happy, and bendix is a douche 
     o = self.on.now()
-    if o == 0:
+    '''if o == 0:
         o = 1;
     else:
-        o = 0;
+        o = 0;'''
     p = self._pin
     piface.digital_write(p, o)
     

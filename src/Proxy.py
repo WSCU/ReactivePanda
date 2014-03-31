@@ -24,7 +24,8 @@ class Proxy:
             return self._signals[name]
     def initialize(self):
         for k, v in self._updateSignals.items():
-            self._signals[k] = v.start()
+            self._signals[k] = v.start() # This is screwing up Integral
+        #self._updateSignals = {}
     def updater(self):
         self._updater(self)
     def react(self, when, what):

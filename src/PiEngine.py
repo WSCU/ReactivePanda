@@ -20,7 +20,7 @@ def heartBeat(ct, events):
     Globals.thunks = []
     for worldObject in Globals.worldObjects:
         #print("Updating object: " + repr(worldObject))
-        print repr(worldObject)
+        #print repr(worldObject)
         Globals.thunks.extend(worldObject.update())
     for f in Globals.thunks:
         f()

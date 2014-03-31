@@ -47,7 +47,9 @@ class StateMachine(Signal):
     def now(self):
         if self.time is not Globals.currentTime:
             self.time = Globals.currentTime
-        return self.f(self)
+            self.f(self)
+        print self.state
+        return self.state
     def __rmul__(self, y):
         y = maybeLift(y)
         return LiftF("mul", lambda x,y: y*x, [self.state, y])
@@ -57,4 +59,6 @@ class Observer(Signal):
         Signal.__init__(self)
         self.f = f
     def now(self):
-        return self.f()
+        v = self.f()
+        #print v
+        return v

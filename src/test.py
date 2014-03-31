@@ -25,7 +25,7 @@ ir1 = input1(1)
 ir2 = input1(2)
 
 f = lift("lift", lambda b: 1 if b else 0)
-count = 1 + f(ir0) + f(ir1) + f(ir2)
+count = f(ir0) + f(ir1) + f(ir2)
 r = integral(count)
 s = integerize((r / .1) % 6)
 for i in range(6):
