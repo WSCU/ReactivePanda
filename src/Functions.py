@@ -7,7 +7,8 @@ from Signal import *
 from Factory import *
 import Globals 
 
-
+def integerize(r):
+    return LiftF("integerize", lambda x: int(x), [r])
 def integral(x):
     def integralf(sm): # Euler method for integration
         # state is the previous value of the integral
