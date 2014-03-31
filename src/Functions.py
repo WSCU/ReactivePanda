@@ -9,14 +9,22 @@ import Globals
 
 def integerize(r):
     return LiftF("integerize", lambda x: int(x), [r])
+
 def integral(x):
+
     def integralf(sm): # Euler method for integration
         # state is the previous value of the integral
+        if sm.state == 0:
+            sm.state = sm.i.now()
         Globals.thunks.append(lambda: thunk(sm))
+        #sm.state += sm.state * Globals.dt
+        #print sm.state
         return sm.state
+
     def thunk(sm):
-        s = sm.i.now()
-        sm.state += s * Globals.dt
+        print sm.state
+        sm.state = sm.state + sm.state * Globals.dt
+    
     return StateMachineF(0, maybeLift(x), integralf)
 
 # this is a function that uses the Observer class to get a value from the signal list

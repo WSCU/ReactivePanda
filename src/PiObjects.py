@@ -5,15 +5,14 @@ from Factory import *
 
 
 def slapBendix(self): #This is to make everything happy, and bendix is a douche 
-    o = self._on.now()
+    o = self.on.now()
     if o == 0:
         o = 1;
     else:
         o = 0;
     p = self._pin
     piface.digital_write(p, o)
-    print str(o)
-
+    
 class Output(Proxy):
     def __init__(self, pin, on, name = 'Light'):
         Proxy.__init__(self, name, lambda x: slapBendix(x))
@@ -28,7 +27,7 @@ def output(*p, **k):
 
 class Input(Observer):
     def __init__(self, pin):
-        Observer.__init__(self, lambda: piface.digital_read(pin+1))
+        ObserverF.__init__(self, lambda: piface.digital_read(pin+1))
         
-def input1(*p, **k):
-    return Input(*p, **k)
+def input1(pin):
+    return ObserverF(lambda: piface.digital_read(pin+1))

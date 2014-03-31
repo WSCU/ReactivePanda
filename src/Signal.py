@@ -51,6 +51,7 @@ class StateMachine(Signal):
     def __rmul__(self, y):
         y = maybeLift(y)
         return LiftF("mul", lambda x,y: y*x, [self.state, y])
+
 class Observer(Signal):
     def __init__(self, f):
         Signal.__init__(self)
