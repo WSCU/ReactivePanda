@@ -71,7 +71,7 @@ class SFact:
         y = maybeLift(y)
         return LiftF("mod", lambda x, y: x % y, [self, y])
     def __int__(self):
-        return LiftF("integerize", lambda x: x//1, [self])
+        return self // 1
 #Creates a Lift Factory	
 class LiftF(SFact):
 	def __init__(self,name,f, args):	
