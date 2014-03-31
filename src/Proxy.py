@@ -8,7 +8,7 @@ class Proxy:
         self._updateSignals = {}
         self._name = name
         self._updater = updater
-        Globals.worldObjects.append(self)
+        Globals.newObjects.append(self)
         #print str(Globals.worldObjects)
         #print repr(name)        
 
