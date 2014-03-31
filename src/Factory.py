@@ -29,20 +29,47 @@ class SFact:
 		y=maybeLift(y)
 		return LiftF("add",lambda x,y:x+y, [self,y])
 	def __radd__(self,y):
-		x=maybeLift(x)
+		y=maybeLift(y)
 		return LiftF("add",lambda x,y:x+y, [self,y])
 	def __sub__(self,y):
 		y=maybeLift(y)
 		return LiftF("subtract",lambda x,y:x-y, [self,y])
 	def __rsub__(self,y):
-		x=maybeLift(x)
+		y=maybeLift(y)
 		return LiftF("subtract",lambda x,y:y-x, [self,y])
 	def __mul__(self,y):
 		y=maybeLift(y)
 		return LiftF("multiply",lambda x,y:x*y, [self,y])
 	def __rmul__(self,y):
-		x=maybeLift(x)
+		y=maybeLift(y)
 		return LiftF("multiply",lambda x,y:x*y, [self,y])
+    def __div__(self, y):
+        y = maybeLift(y)
+        return LiftF("div", lambda x,y: x/y, [self, y])
+    def __rdiv__(self, y):
+        y = maybeLift(y)
+        return LiftF("div", lambda x,y: y/x, [self, y])
+    def __lt__(self, y):
+        y = maybeLift(y)
+        return LiftF("less than", lambda x,y: x < y, [self, y])
+    def __le__(self, y):
+        y = maybeLift(y)
+        return LiftF("less than or equal to", lambda x,y: x <= y, [self, y])
+    def __eq__(self, y):
+        y = maybeLift(y)
+        return LiftF("equal", lambda x,y: x == y, [self, y])
+    def __ne__(self, y):
+        y = maybeLift(y)
+        return LiftF("not equal", lambda x,y: x != y, [self, y])
+    def __gt__(self, y):
+        y = maybeLift(y)
+        return LiftF("greater than", lambda x,y: x > y, [self, y])
+    def __ge__(self, y):
+        y = maybeLift(y)
+        return LiftF("greater than or equal", lambda x, y: x >= y, [self, y])
+    def __mod__(self, y):
+        y = maybeLift(y)
+        return LiftF("mod", lambda x, y: x % y, [self, y])
 #Creates a Lift Factory	
 class LiftF(SFact):
 	def __init__(self,name,f, args):	
