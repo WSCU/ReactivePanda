@@ -24,7 +24,7 @@ def heartBeat(ct, events):
         Globals.thunks.extend(worldObject.update())
     for f in Globals.thunks:
         f()
-    for obj in Globals.newModels:
+    for obj in Globals.newObjects:
         print("Adding object: " + repr(obj))
         worldObjects[str(obj)] = obj
     for obj in Globals.worldObjects:
