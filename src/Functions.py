@@ -69,10 +69,10 @@ def accum(x): #accumulates the value of a signal over time
     def accumFN(sm):
         s = sm.i.now();
         if s!= None:
-            self.state += s
+            sm.state += s
             return s
         else:
-            return self.state
+            return sm.state
 
     return StateMachineF(0, maybelift(x), accumFN)
 
