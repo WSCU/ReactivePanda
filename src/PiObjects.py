@@ -15,13 +15,12 @@ def slapBendix(self): #This is to make everything happy, and bendix is a douche
     print str(o)
 
 class Output(Proxy):
-
     def __init__(self, pin, on, name = 'Light'):
+        Proxy.__init__(self, name, lambda x: slapBendix(x))
         self._pin = pin + 1
         if not isinstance(on, Signal):#???
             on = maybeLift(on)
         self.on = on #_setBehavior(_on)
-        Proxy.__init__(self, name, lambda x: slapBendix(x))
         #self.__dict__['on'] = Lift(self, 'on', boolType)# Not using Types, change to lifted int(0, 1)
 
 def output(*p, **k):
