@@ -29,5 +29,5 @@ count = f(ir0) + f(ir1) + f(ir2)
 r = integral(count)
 s = integerize((r / .1) % 6)
 for i in range(6):
-    output(pin = i, on =( s == i).start(), name = "light " + str(i))
+    output(pin = i, on =(s == i), name = "light " + str(i))
 PiEngine.engine(ti)
