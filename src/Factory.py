@@ -74,14 +74,18 @@ class SFact:
         return self // 1
 #Creates a Lift Factory	
 class LiftF(SFact):
-	def __init__(self,name,f, args):	
-		SFact.__init__(self)
-		self.f=f 
-		self.name=name
-		self.args = args
-	def start(self):
-		ea = map(lambda x: maybeLift(x).start(), self.args)
-		return Lift(self.name,self.f, ea)
+    def __init__(self,name,f, args):
+        SFact.__init__(self)
+        self.f=f
+        self.name=name
+        self.args = args
+
+    def start(self):
+        #print self.name
+        #for arg in self.args:
+            #print " " + repr(arg)
+        ea = map(lambda x: maybeLift(x).start(), self.args)
+        return Lift(self.name,self.f, ea)
 
 class Lift0F(SFact):
       def __init__(self, v):

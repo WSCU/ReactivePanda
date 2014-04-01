@@ -13,22 +13,23 @@ from Functions import *
 piface.init()
 
 def heartBeat(ct, events):
+    #print "objects " + str(len(Globals.worldObjects))
     Globals.dt = ct - Globals.currentTime
     Globals.currentTime = ct
-    Globals.newModels = []
     Globals.events = events
     Globals.thunks = []
     for worldObject in Globals.worldObjects:
-        print("Updating object: " + repr(worldObject))
-        print repr(worldObject)
+        #print("Updating object: " + repr(worldObject))
+        #print repr(worldObject)
         Globals.thunks.extend(worldObject.update())
     for f in Globals.thunks:
         f()
     for obj in Globals.newObjects:
-        print("Adding object: " + repr(obj))
+        #print("Adding object: " + repr(obj))
         Globals.worldObjects.append(obj)
+    Globals.newObjects = []
     for obj in Globals.worldObjects:
-        print("Initializing object: " + repr(obj))
+        #print("Initializing object: " + repr(obj))
         obj.initialize()
 #will need to check the proxy module to find the right name for this initialize method
 #make an initialize method that clears out all the variables and resets the clock
@@ -46,5 +47,6 @@ def engine(ct):
     Globals.currentTime = ct
     while True:
         ctime = time.time()
-        if (ctime >= (Globals.currentTime + Globals.dt)):
-            heartBeat(ctime, Globals.newEvents)
+        #print "heartbeat: " + str(ctime-ct)
+        heartBeat(ctime, Globals.newEvents)
+        time.sleep(.05)

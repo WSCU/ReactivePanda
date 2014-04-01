@@ -22,12 +22,12 @@ output(5,ir2,name = 'lights5')
 #print str(g.worldObjects)
 ir0 = input1(0)
 ir1 = input1(1)
-ir2 = input1(2)
+ir2 = input1(2) #get rid of these 
 
-f = lift("lift", lambda b: 1 if b else 0)
-count = f(ir0) + f(ir1) + f(ir2)
-r = integral(count)
-s = integerize((r / .1) % 6)
+f = lift("lift", lambda b: 0 if b else 1) #turns signal from ir into 0 or 1 whether person is there or not
+count = f(ir0)*.6 + f(ir1)*.6 + f(ir2)*.6 + .3 #the rate at which the lights change, fastest flash would be all numbers added up 
+r = integral(count) #turn the rate at which the lights are moving into a current light position, turns rate into a value
+s = integerize(r % 7) #every time the r goes up by 1 the lights move. Every time we get to 7 we start back over again
 for i in range(6):
-    output(pin = i, on =(s == i), name = "light " + str(i))
+    output(pin = i, on =(s <= i), name = "light " + str(i)) #add +2 when rewire
 PiEngine.engine(ti)
