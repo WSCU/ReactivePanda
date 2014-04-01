@@ -48,7 +48,7 @@ class StateMachine(Signal):
         if self.time is not Globals.currentTime:
             self.time = Globals.currentTime
             self.f(self)
-        print self.state
+            #print "State Machine: " + str( self.state)
         return self.state
     def __rmul__(self, y):
         y = maybeLift(y)

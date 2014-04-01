@@ -12,20 +12,11 @@ def integerize(r):
 
 def integral(x):
 
-    def integralf(sm): # Euler method for integration
-        # state is the previous value of the integral
-        #print "Integral: " + str(sm.state)
-        if sm.state == 0:
-            sm.state = sm.i.now()
-        Globals.thunks.append(lambda: thunk(sm))
-        #sm.state += sm.state * Globals.dt
+    def integralf(sm):
+        i = sm.i.now()
+        #print "integral "+ str(sm.state) + " " + str(i) + " " + str(Globals.dt)
+        sm.state = sm.state + i * Globals.dt
         #print sm.state
-        return sm.state
-
-    def thunk(sm):
-        sm.state = sm.state + sm.state * Globals.dt
-        print "In thunk: " + str(sm.state)
-    
     return StateMachineF(0, maybeLift(x), integralf)
 
 # this is a function that uses the Observer class to get a value from the signal list
