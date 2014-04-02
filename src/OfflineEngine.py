@@ -3,6 +3,7 @@ import time
 import Globals
 from Signal import *
 from Functions import *
+from Proxy import *
 
 def heartBeat(ct, events):
     #print "objects " + str(len(Globals.worldObjects))
@@ -11,17 +12,16 @@ def heartBeat(ct, events):
     Globals.events = events
     Globals.thunks = []
     for worldObject in Globals.worldObjects:
-        #print("Updating object: " + repr(worldObject))
-        #print repr(worldObject)
+        print("Updating object: " + repr(worldObject))
         Globals.thunks.extend(worldObject.update())
     for f in Globals.thunks:
         f()
     for obj in Globals.newObjects:
-        #print("Adding object: " + repr(obj))
+        print("Adding object: " + repr(obj))
         Globals.worldObjects.append(obj)
     Globals.newObjects = []
     for obj in Globals.worldObjects:
-        #print("Initializing object: " + repr(obj))
+        print("Initializing object: " + repr(obj))
         obj.initialize()
 #will need to check the proxy module to find the right name for this initialize method
 #make an initialize method that clears out all the variables and resets the clock
@@ -38,19 +38,25 @@ def engine(tSteps):
     #get events and clear thunks
     Globals.currentTime = 0
     steps = 0
-    while steps < tSteps
-        #print "heartbeat: " + str(ctime-ct)
+    while steps < tSteps:
         heartBeat(steps, Globals.newEvents)
-        steps++
+        steps+=1
 #one reactive objects, reactive attributes, print all the attributes
 #controlled while loop, dont use time.time(), step time by one.
 #Like the really old engine
 
 class ReactiveTestObject(Proxy):
-    def __init__(self, name, updater)
+    def __init__(self, name, updater):
         Proxy.__init__(self, name, updater)
         self.i1 = integral(1)
-        self.i2 = integral(i1)
         
 def update(self):
-    
+    for k, v in self._signals.items():
+        print v.state
+
+def test(name, updater):
+    return ReactiveTestObject(name, updater)
+
+t = test("test", update)
+
+engine(50)
