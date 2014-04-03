@@ -30,7 +30,7 @@ class CachedSignal(Signal):
         self.cachedValue = 0
         self.time = -1
     def now(self):
-        if self.time is not g.currentTime:
+        if self.time is not Globals.currentTime:
             self.cachedValue = self.now1() 
         return self.cachedValue
 
