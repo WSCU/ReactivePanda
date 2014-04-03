@@ -37,10 +37,11 @@ class Proxy:
             when = maybeLift(when)
             self._1Reactions.append((when.start(), what))
     def update(self):
+        tempSigVals = {}
         if self._alive:
             for k, v in self._signals.items():
                 #print("Objects: " + str(self) + " is updating: " + k)
-                v.now()
+                tmepSigVals{k} = v.now()
             thunks = []
             for a in self._1Reactions:
                 #print("Object: " + str(self) + " is updating: " + str(a[0]))
@@ -58,7 +59,7 @@ class Proxy:
                     #print("    " + str(temp) + " is being added to thunks")
                     thunks.add(lambda : a[1](self, temp))
                 self._updateSignals = {}
-            self.updater()
+            self.updater(tempSigVals)
             return thunks
 
     def __str__(self):
