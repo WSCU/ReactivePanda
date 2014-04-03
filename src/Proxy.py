@@ -24,6 +24,7 @@ class Proxy:
             return self._signals[name]
     def initialize(self):
         for k, v in self._updateSignals.items():
+            print("Objects: " + repr(k) + " is initializing: " + str(v))
             self._signals[k] = v.start() # This is screwing up Integral
         self._updateSignals = {}
     def updater(self):
