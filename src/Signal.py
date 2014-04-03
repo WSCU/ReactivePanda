@@ -31,7 +31,7 @@ class CachedSignal(Signal):
         self.time = -1
     def now(self):
         if self.time is not g.currentTime:
-            self.cachedValue = f() 
+            self.cachedValue = self.now1() 
         return self.cachedValue
 
 
@@ -41,6 +41,8 @@ class StateMachine(CachedSignal):
         CachedSignal.__init__(self, f)
         self.i = i
         self.state = s0
+    def now1(self):
+        return self.f(self)
     def __rmul__(self, y):
         y = maybeLift(y)
         return LiftF("mul", lambda x,y: y*x, [self.state, y])
@@ -48,3 +50,5 @@ class StateMachine(CachedSignal):
 class Observer(CachedSignal):
     def __init__(self, f):
         Signal.__init__(self, f)
+    def now1(self):
+        return self.f()
