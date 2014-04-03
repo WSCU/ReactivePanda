@@ -11,12 +11,14 @@ def integerize(r):
     return LiftF("integerize", lambda x: int(x), [r])
 
 def integral(x):
-
-    def integralf(sm):
+    def thunk(sm):
         i = sm.i.now()
         #print "integral "+ str(sm.state) + " " + str(i) + " " + str(Globals.dt)
         sm.state = sm.state + i * Globals.dt
         #print sm.state
+    def integralf(sm):
+        Globals.thunks.append(lambda: thunk(sm))
+        return sm.state
     return StateMachineF(0, maybeLift(x), integralf)
 
 # this is a function that uses the Observer class to get a value from the signal list
