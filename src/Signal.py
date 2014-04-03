@@ -24,41 +24,27 @@ class Lift(Signal):
 # Cached Signal that inherits Signal
 # Baisically is just a time stamp
 class CachedSignal(Signal):
-    def __init__(self, i):
+    def __init__(self, f):
         Signal.__init__(self)
-        self.i = i
-        self.cachedValue = self.i.now()
+        self.f = f
+        self.cachedValue = 0
         self.time = -1
     def now(self):
-        if self.time is not Globals.currentTime:
-            self.cachedValue = self.i.now()
-            self.time = g.currentTime
+        if self.time is not g.currentTime:
+            self.cachedValue = f() 
         return self.cachedValue
 
 
 # A State Machine signal
-class StateMachine(Signal):
+class StateMachine(CachedSignal):
     def __init__(self, s0, i, f):
-        Signal.__init__(self)
-        self.state = s0
+        CachedSignal.__init__(self, f)
         self.i = i
-        self.f = f
-        self.time = -1
-    def now(self):
-        if self.time is not Globals.currentTime:
-            self.time = Globals.currentTime
-            self.f(self)
-            #print "State Machine: " + str( self.state)
-        return self.state
+        self.state = s0
     def __rmul__(self, y):
         y = maybeLift(y)
         return LiftF("mul", lambda x,y: y*x, [self.state, y])
 
-class Observer(Signal):
+class Observer(CachedSignal):
     def __init__(self, f):
-        Signal.__init__(self)
-        self.f = f
-    def now(self):
-        v = self.f()
-        #print v
-        return v
+        Signal.__init__(self, f)

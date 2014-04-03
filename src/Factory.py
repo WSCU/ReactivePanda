@@ -104,7 +104,7 @@ class CachedValueF(SFact):
         return CachedValue(maybeLift(self.i))
 
 #Creates a State Machine Factory
-class StateMachineF(SFact):
+class StateMachineF(CachedValueF):
     def __init__(self, s0, i, f):
         SFact.__init__(self)
         self.state = s0
@@ -114,7 +114,7 @@ class StateMachineF(SFact):
         return StateMachine(self.state, self.i.start(), self.f)
 
 #Creates a Observer Factory
-class ObserverF(SFact):
+class ObserverF(CachedValueF):
     def __init__(self, f):
         SFact.__init__(self)
         self.f = f
