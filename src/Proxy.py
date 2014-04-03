@@ -9,8 +9,6 @@ class Proxy:
         self._name = name
         self._updater = updater
         Globals.newObjects.append(self)
-        #print str(Globals.worldObjects)
-        #print repr(name)        
 
     def __setattr__(self, name, value):
         if name[0] == '_':
@@ -21,7 +19,9 @@ class Proxy:
         if name[0] == '_':
             return self.__dict__[name]
         else:
-            return self._signals[name]
+            return ObserverF(lambda : self.getSignal(name).now())
+    def getSignal(self, name):
+        return self._signals[name]
     def initialize(self):
         for k, v in self._updateSignals.items():
             print("Objects: " + repr(k) + " is initializing: " + str(v))
