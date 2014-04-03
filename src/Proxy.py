@@ -24,7 +24,7 @@ class Proxy:
         try: 
             return self._signals[name].now()
         except KeyError:
-            print( str(name) + " does not exist in this Proxy " + repr(self)
+            print( str(name) + " does not exist in this Proxy " + repr(self))
     def initialize(self):
         for k, v in self._updateSignals.items():
             print("Objects: " + repr(k) + " is initializing: " + str(v))
