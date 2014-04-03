@@ -7,12 +7,15 @@
 #   color     Color   dynamic texture (None = model skin, otherwise = color of object)
 
 from direct.actor import Actor
+import direct.directbase.DirectStart
+from panda3d.core import Filename
 from Engine import *
 from Signal import *
 from Proxy import *
 from Numerics import *
 import Globals
 import FileIO
+import FileSearch
 
 # This fills in all of the defaults
 parameterCache = {}
@@ -51,14 +54,18 @@ class PandaModel(Proxy):
     def __init__(self, fileName, size, hpr, position):
         self._pandaModel = PandaModel
         Proxy.__init__(self, name = Globals.nextModelId, updater = updater)
-        mFile = fileSearch(fileName, "models",["egg"])
+        #mFile = fileSearch(fileName, "models",["egg"])
+        mFile = Filename("/c/Panda3D-1.8.1/models/panda-model.egg.pz")
+        winfile = mFile.toOsSpecific()
+        print "File Path: " + repr(mFile)
+        """
         if mFile is None:
             print "Can't find model" + str(fileName)
             mFile = Filename("panda-model.egg.pz")
             mParams = pandaParameters
         elif fileName in parameterCache:
             mParams = parameterCache[fileName]
-            """
+            
         else:
             mParamFile = Filename(mFile)
             mParamFile.setExtension("model")
@@ -70,15 +77,14 @@ class PandaModel(Proxy):
             parameterCache[fileName] = mParams
             """
             
-        localPosition = mParams["localPosition"]
-        localSize = mParams["localSize"]
-        localOrientation = mParams["localOrientation"]
-        self._pandaModel = loader.loadModel(fileName)
+        
+        self._pandaModel = loader.loadModel(mFile)
+        
         Globals.nextModelId = Globals.nextModelId + 1
         self._signals['size']=maybeLift(size)
         self._signals['hpr']=maybeLift(hpr)
         self._signals['position']=maybeLift(position)
-        self._signals['onScreen']=False
+        self._onScreen=False
         
 def updater(self, sigs):
     self._pandaModel.setSize(sigs.size)
@@ -86,6 +92,6 @@ def updater(self, sigs):
     self._pandaModel.setPos(sigs.position)
     
 def showModel(self):
-    if not self._signals.onScreen:
+    if not self._onScreen:
         self._pandaModel.reparentTo(render)
-        self._signals.onScreen = True
+        self._onScreen = True

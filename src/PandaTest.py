@@ -19,6 +19,6 @@ def f(k):
 
 b = panda(position = f(ti))
 
-camera.position = P3(0,-10,0)
+camera.setPos(0,-10,0)
 
 Engine.engine(ti)

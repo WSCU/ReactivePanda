@@ -54,10 +54,10 @@ texture = None  # Used to communicate with particle effect code from particle pa
 world = None
 
 collections = {}
-osType = platform.system()  # OS That is being used. # NotReturning Correct osType should be Windows Insted of Java.
+#osType = platform.system()  # OS That is being used. # NotReturning Correct osType should be Windows Insted of Java.
 #print osType
 #osType = 'Linux'
-#osType = 'Windows'
+osType = 'Windows'
 if osType == 'Linux':
 #    print "we're on Linux"
     pandaPath = "/usr/lib/panda/lib/"           # Since we are on a Linux system we will now use a linux file path.
