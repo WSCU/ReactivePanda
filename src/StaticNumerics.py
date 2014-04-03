@@ -8,7 +8,6 @@
 #import g
 import math
 import random
-from Types import *
 import unittest
 
 # This is a where we park signal functions.
@@ -92,7 +91,7 @@ class SP2:
       def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.type = P2Type
+        #self.type = P2Type
         self.zero = Zero
       def __str__(self):
           return "P2(%7.2f, %7.2f)" % (self.x, self.y)
@@ -133,13 +132,11 @@ class SP2:
 
 # Used for integration
 
-P2Type.encode = lambda p:str(p.x)+","+str(p.y)
+
 def readP2(str):
     nums = parseNumbers(str)
     return SP2(nums[0],nums[1])
-P2Type.decode = readP2
 
-P2Type.zero = SP2(0,0)
 
 # non-overloaded methods for P2 arithmentic
 
@@ -166,7 +163,7 @@ class SP3:
     self.x = x
     self.y = y
     self.z = z
-    self.type = P3Type
+    #self.type = P3Type
     self.zero = Zero
   def __str__(self):
       return "P3(%7.2f, %7.2f, %7.2f)" % (self.x, self.y, self.z)
@@ -204,11 +201,11 @@ class SP3:
                      staticLerp(t, self.y, p2.y),
                      staticLerp(t, self.z, p2.z))
 
-P3Type.encode = lambda p:str(p.x)+","+str(p.y)+","+str(p.z)
+
 def readP3(str):
     nums = parseNumbers(str)
     return SP3(nums[0],nums[1], nums[2])
-P3Type.decode = readP3
+
 
 def crossProduct(a, b):
     return SP3(a.y * b.z - a.z * b.y,
@@ -242,44 +239,6 @@ def SP3C(r, theta, z):
 
 # Conversions from tuple type.
 
-def toP3(x):
-    t = getPType(x)
-    if t == P3Type:
-        return x
-    if type(x) == TupleType and len(x) == 3:
-        for v in x:
-            if getPType(v) != numType:
-                return None
-        return SP3(x[0], x[1], x[2])
-    return None
-
-def toP2(x):
-    t = getPType(x)
-    if t == P2Type:
-        return x
-    if type(x) == TupleType and len(x) == 2:
-        for v in x:
-            if getPType(v) != numType:
-                return None
-        return SP2(x[0], x[1])
-    return None
-
-def gendot(x,y):
-    t = getPType(x)
-    if t == numType:
-        return x*y
-    if t == P2Type:
-        return dotP2(x,y)
-    return dotP3(x,y)
-
-class Pair:
-      def __init__(self, first, second):
-          self.first = first
-          self.second = second
-          self.type = pairType(getPType(first), getPType(second))
-
-def sPair(x,y):
-    Pair(x, y)
 
 def sFirst(p):
     p.first

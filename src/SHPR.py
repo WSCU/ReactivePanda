@@ -1,14 +1,14 @@
-import g
+import Globals
 import math
-from panda3d.core import Quat, Vbase3
-from Types import *
+from panda3d.core import Quat
+#from Types import *
 
 class SHPR:
   def __init__(self, h, p, r):
     self.h = h
     self.p = p
     self.r = r
-    self.type = HPRType
+    #self.type = HPRType
   def __str__(self):
       return "HPR(%7.2f, %7.2f, %7.2f)" % ( self.h, self.p, self.r)
   def __add__(self, y):
@@ -43,9 +43,9 @@ def getUpHPR(hpr):
     v = q.getUp()
     return SP3(v.x, v.y, v.z)
 
-HPRType.encode = lambda p:str(p.h)+","+str(p.p)+","+str(p.r)
+#HPRType.encode = lambda p:str(p.h)+","+str(p.p)+","+str(p.r)
 def readHPR(str):
     nums = parseNumbers(str)
     return SHPR(nums[0],nums[1], nums[2])
 
-HPRType.decode = readHPR
+#HPRType.decode = readHPR

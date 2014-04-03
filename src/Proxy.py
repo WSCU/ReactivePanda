@@ -41,7 +41,7 @@ class Proxy:
         if self._alive:
             for k, v in self._signals.items():
                 #print("Objects: " + str(self) + " is updating: " + k)
-                tmepSigVals{k} = v.now()
+                tmepSigVals[k] = v.now()
             thunks = []
             for a in self._1Reactions:
                 #print("Object: " + str(self) + " is updating: " + str(a[0]))

@@ -3,7 +3,7 @@ File searching tools
 
 Non-reactive
 """
-from Types import *
+
 from panda3d.core import Filename
 
 
@@ -19,7 +19,7 @@ def fileSearch(file, libDir = None, exts = []):
         if f1.exists():
             return f1
     if libDir is not None:
-        f2 = Filename.expandFrom(g.pandaPath + "/" + libDir + "/" + file)
+        f2 = Filename.expandFrom(Globals.pandaPath + "/" + libDir + "/" + file)
         if f2.exists():
             return f2
         for e in exts:
@@ -35,7 +35,7 @@ def findTexture(fileName):
     """
     tFile = fileSearch(fileName, "textures", ["jpg", "png", "jpeg"])
     if tFile is None:
-        tFile = fileSearch(g.pandaPath + "/textures/default.jpg")
+        tFile = fileSearch(Globals.pandaPath + "/textures/default.jpg")
     return loader.loadTexture(tFile)
 
 
