@@ -34,15 +34,15 @@ class PandaModel(Proxy):
         print "File Path: " + repr(mFile)
         self._pandaModel = loader.loadModel(mFile)
         Globals.nextModelId = Globals.nextModelId + 1
-        self.size=lift("size", size)
-        self.hpr=lift("hpr" ,hpr)
-        self.position=lift("position" ,position)
+        self.size=Lift0F(pandaParameters['localSize'])
+        self.hpr=pandaParameters['localOrientation']
+        self.position=pandaParameters['localPosition']
         self._onScreen=False
         
-def updater(self, sigs):
-    self._pandaModel.setSize(sigs.size)
-    self._pandaModel.setHpr(sigs.hpr)
-    self._pandaModel.setPos(sigs.position)
+def updater(self):
+    self._pandaModel.setSize(self.get("size"))
+    self._pandaModel.setHpr(self.get("hpr"))
+    self._pandaModel.setPos(self.get("position"))
     
 def showModel(self):
     if not self._onScreen:

@@ -110,3 +110,4 @@ def clock(x):
     
     return StateMachineF(0, maybeLift(x), clockFN)
 #make a clock signal too. Clock will control the heartbeat: make the heartbeat every second
+time = ObserverF(lambda: Globals.currentTime)

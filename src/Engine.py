@@ -4,7 +4,7 @@ import sched, time
 from Signal import *
 from Functions import *
 from Globals import *
-
+from direct.task import Task
    
 def heartBeat(ct, events):
     #print "objects " + str(len(Globals.worldObjects))
@@ -41,8 +41,10 @@ def engine(ct):
     #set the time to 0
     #get events and clear thunks
     Globals.currentTime = ct
-    while True:
-        ctime = time.time()
-        #print "heartbeat: " + str(ctime-ct)
-        heartBeat(ctime, Globals.newEvents)
-        time.sleep(.05)
+
+    taskMgr.add(stepTask, 'PandaClock')
+    run()
+def stepTask(task):
+    heartBeat(task.time, Globals.newEvents) # The task contains the elapsed time
+    return Task.cont
+    

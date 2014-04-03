@@ -45,7 +45,7 @@ class Proxy:
         if self._alive:
             for k, v in self._signals.items():
                 #print("Objects: " + str(self) + " is updating: " + k)
-                tmepSigVals[k] = v.now()
+                v.now()
             thunks = []
             for a in self._1Reactions:
                 #print("Object: " + str(self) + " is updating: " + str(a[0]))
@@ -63,7 +63,7 @@ class Proxy:
                     #print("    " + str(temp) + " is being added to thunks")
                     thunks.add(lambda : a[1](self, temp))
                 self._updateSignals = {}
-            self.updater(tempSigVals)
+            self.updater()
             return thunks
 
     def __str__(self):
