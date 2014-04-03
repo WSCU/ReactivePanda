@@ -26,23 +26,23 @@ class SFact:
     def __init__(self):
     	self.type = "factory"
     def __add__(self,y):
-	y=maybeLift(y)
-	return LiftF("add",lambda x,y:x+y, [self,y])
+        y=maybeLift(y)
+        return LiftF("add",lambda x,y:x+y, [self,y])
     def __radd__(self,y):
-	y=maybeLift(y)
-	return LiftF("add",lambda x,y:x+y, [self,y])
+        y=maybeLift(y)
+        return LiftF("add",lambda x,y:x+y, [self,y])
     def __sub__(self,y):
-	y=maybeLift(y)
-	return LiftF("subtract",lambda x,y:x-y, [self,y])
+        y=maybeLift(y)
+        return LiftF("subtract",lambda x,y:x-y, [self,y])
     def __rsub__(self,y):
-	y=maybeLift(y)
-	return LiftF("subtract",lambda x,y:y-x, [self,y])
+        y=maybeLift(y)
+        return LiftF("subtract",lambda x,y:y-x, [self,y])
     def __mul__(self,y):
-	y=maybeLift(y)
-	return LiftF("multiply",lambda x,y:x*y, [self,y])
+        y=maybeLift(y)
+        return LiftF("multiply",lambda x,y:x*y, [self,y])
     def __rmul__(self,y):
-	y=maybeLift(y)
-	return LiftF("multiply",lambda x,y:x*y, [self,y])
+        y=maybeLift(y)
+        return LiftF("multiply",lambda x,y:x*y, [self,y])
     def __div__(self, y):
         y = maybeLift(y)
         return LiftF("div", lambda x,y: x/y, [self, y])
