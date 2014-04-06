@@ -25,24 +25,24 @@ def lift(name,f):
 
 class SFact:
     def __init__(self):
-    	self.type = "factory"
+    	self.type = Ptype("Signal Factory")
     def __add__(self,y):
-        y=maybeLift(y)
+        y = maybeLift(y)
         return LiftF("add",lambda x,y:x+y, [self,y])
     def __radd__(self,y):
-        y=maybeLift(y)
+        y = maybeLift(y)
         return LiftF("add",lambda x,y:x+y, [self,y])
     def __sub__(self,y):
-        y=maybeLift(y)
+        y = maybeLift(y)
         return LiftF("subtract",lambda x,y:x-y, [self,y])
     def __rsub__(self,y):
-        y=maybeLift(y)
+        y = maybeLift(y)
         return LiftF("subtract",lambda x,y:y-x, [self,y])
     def __mul__(self,y):
-        y=maybeLift(y)
+        y = maybeLift(y)
         return LiftF("multiply",lambda x,y:x*y, [self,y])
     def __rmul__(self,y):
-        y=maybeLift(y)
+        y = maybeLift(y)
         return LiftF("multiply",lambda x,y:x*y, [self,y])
     def __div__(self, y):
         y = maybeLift(y)
@@ -77,6 +77,7 @@ class SFact:
 class LiftF(SFact):
     def __init__(self,name,f, args):
         SFact.__init__(self)
+        self.type.subtypes.append("LiftF")
         self.f=f
         self.name=name
         self.args = args
@@ -91,6 +92,7 @@ class LiftF(SFact):
 class Lift0F(SFact):
       def __init__(self, v):
           SFact.__init__(self)
+          self.type.subtypes.append("Lift0F")
           self.v = v
       def start(self):
           return Lift0(self.v)
@@ -99,6 +101,7 @@ class Lift0F(SFact):
 class CachedValueF(SFact):
     def __init__(self, i):
         SFact.__init__(self)
+        self.type.subtypes.append("CachedValueF")
         self.i = i
     def start(self):
         return CachedValue(maybeLift(self.i))
@@ -107,6 +110,7 @@ class CachedValueF(SFact):
 class StateMachineF(CachedValueF):
     def __init__(self, s0, i, f):
         SFact.__init__(self)
+        self.type.subtypes.append("StateMachineF")
         self.state = s0
         self.i = i
         self.f = f
@@ -117,21 +121,7 @@ class StateMachineF(CachedValueF):
 class ObserverF(CachedValueF):
     def __init__(self, f):
         SFact.__init__(self)
+        self.type.subtypes.append("ObserverF")
         self.f = f
     def start(self):
         return Observer(self.f)
-
-#Creates a Lift0 Factory which turns a constant into a running signal
-"""
-class Lift0F(SFact):
-	def __init__(self,name,f, args):	
-		SFact.__init__(self)
-		self.f=f 
-		self.name=name
-		self.args = args
-	def start(self):
-		return Lift0(name,f,map(lambda x: x.start(), args))
-"""		
-	
-		
-		

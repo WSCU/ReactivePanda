@@ -63,7 +63,6 @@ class Zero:
           return self
 
 
-
 def staticLerpA(t, x, y):
     x1 = x/twopi
     y1 = y/twopi

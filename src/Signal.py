@@ -1,10 +1,12 @@
 import Globals
 class Signal:
 	def __init__(self):
-		self.type = "Signal"
+		self.type = Ptype("Signal")
 		
 class Lift0(Signal):
     def __init__(self, v):
+        Signal.__init__(self)
+        self.type.subtypes.append(Ptype("Lift0"))
         self.v = v
     def now(self):
         return self.v
@@ -14,6 +16,7 @@ class Lift0(Signal):
 class Lift(Signal):
     def __init__(self,name, f, args):
     	Signal.__init__(self)
+    	self.type.subtypes.append(Ptype("Lift"))
         self.f = f
         self.name = name
         self.args=args
@@ -26,6 +29,7 @@ class Lift(Signal):
 class CachedSignal(Signal):
     def __init__(self, f):
         Signal.__init__(self)
+        self.type.subtypes.append(Ptype("Cached Signal"))
         self.f = f
         self.cachedValue = 0
         self.time = -1
@@ -39,6 +43,7 @@ class CachedSignal(Signal):
 class StateMachine(CachedSignal):
     def __init__(self, s0, i, f):
         CachedSignal.__init__(self, f)
+        self.type.subtypes.append(Ptype("State Machine"))
         self.i = i
         self.state = s0
     def now1(self):
@@ -49,6 +54,7 @@ class StateMachine(CachedSignal):
 
 class Observer(CachedSignal):
     def __init__(self, f):
-        Signal.__init__(self, f)
+        Signal.__init__(self)
+        self.type.subtypes.append(Ptype("Observer"))
     def now1(self):
         return self.f()
