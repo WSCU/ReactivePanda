@@ -7,6 +7,7 @@
 # extends to StateMachineF, LiftF, and Lift0F
 
 from Signal import * 
+from Types import SignalFactory
 
 def maybeLift(x):
     t = type(x)
@@ -25,7 +26,7 @@ def lift(name,f):
 
 class SFact:
     def __init__(self):
-    	self.type = Ptype("Signal Factory")
+    	self.type = SignalFactory
     def __add__(self,y):
         y = maybeLift(y)
         return LiftF("add",lambda x,y:x+y, [self,y])
@@ -77,7 +78,6 @@ class SFact:
 class LiftF(SFact):
     def __init__(self,name,f, args):
         SFact.__init__(self)
-        self.type.subtypes.append("LiftF")
         self.f=f
         self.name=name
         self.args = args
@@ -92,7 +92,6 @@ class LiftF(SFact):
 class Lift0F(SFact):
       def __init__(self, v):
           SFact.__init__(self)
-          self.type.subtypes.append("Lift0F")
           self.v = v
       def start(self):
           return Lift0(self.v)
@@ -101,7 +100,6 @@ class Lift0F(SFact):
 class CachedValueF(SFact):
     def __init__(self, i):
         SFact.__init__(self)
-        self.type.subtypes.append("CachedValueF")
         self.i = i
     def start(self):
         return CachedValue(maybeLift(self.i))
@@ -110,7 +108,6 @@ class CachedValueF(SFact):
 class StateMachineF(CachedValueF):
     def __init__(self, s0, i, f):
         SFact.__init__(self)
-        self.type.subtypes.append("StateMachineF")
         self.state = s0
         self.i = i
         self.f = f
@@ -121,7 +118,6 @@ class StateMachineF(CachedValueF):
 class ObserverF(CachedValueF):
     def __init__(self, f):
         SFact.__init__(self)
-        self.type.subtypes.append("ObserverF")
         self.f = f
     def start(self):
         return Observer(self.f)

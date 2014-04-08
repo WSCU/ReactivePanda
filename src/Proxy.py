@@ -15,7 +15,7 @@ class Proxy:
         if name[0] == '_':
             self.__dict__[name] = value
         else:
-            if value.equals("Signal"):
+            if value.type == SignalType:
                 self._updateSignals[name] = value
             else:
                 print("Error: Tried to set attribute to non-signal.")

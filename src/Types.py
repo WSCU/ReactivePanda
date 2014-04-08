@@ -15,44 +15,12 @@ class Ptype:
     def __str__(self):
         r = self.tname
         return r
-'''
-    def implies(self, t2):
-        if self is anyType:
-            return True
-        if t2 is anyType:  # Found with forward reference
-            return True
-        if self is EventAnyType:
-            return t2.tname == 'Event'
-        if t2 is EventAnyType:
-            return self.tname == 'Event'
-        if t2 is self:
-            return True
-        return t2 in self.subtypes
-'''
-    def equals(self, s):
-        return self.tname.equals(s)
     
-def eventType(t):
-    return Ptype("Event")
-
-def pairType(t1, t2):
-    return Ptype("Pair")
-
-def anEventType(t):
-    return t.tname == "Event"
-
-
-def anInterpType(t):
-    return t.tname == "Interp"
-
-# Should be in errors but there's a circular import problem
-'''def checkInterpType(t):
-    if not anInterpType(t):
-        print 'Not an interpolation: ' + str(t)
-        exit()'''
 
 
 #  Predefined types used elsewhere
+SignalType = Ptype("Signal")
+SignalFactory = Ptype("SignalFactory")
 '''  Keeping just in case
 numType = ptype("Number")
 fnType = ptype("Function")
