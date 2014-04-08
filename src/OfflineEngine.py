@@ -1,6 +1,7 @@
 import unittest
 import time
 import Globals
+import sys
 from Signal import *
 from Functions import *
 from Proxy import *
@@ -47,19 +48,21 @@ def engine(tSteps, verbose = False):
 #one reactive objects, reactive attributes, print all the attributes
 #controlled while loop, dont use time.time(), step time by one.
 #Like the really old engine
+class Printer(Proxy):
+    def __init__(self, name, args):
+        Proxy.__init__(self, name, printUpdate)
+        for k, v in args.items():
+            self.k = v
+def printer(name, **kwargs):
+    return Printer(name, kwargs)
 
-class ReactiveTestObject(Proxy):
-    def __init__(self, name, updater):
-        Proxy.__init__(self, name, updater)
-        self.i1 = integral(1)
-        
-def update(self):
+def printUpdate(self):
     for k, v in self._signals.items():
         print v.state
 
-def test(name, updater):
-    return ReactiveTestObject(name, updater)
-
-t = test("test", update)
-
-engine(50, verbose = True)
+p = printer(name = "integral", i = integral(1))
+q = printer(name = "integral 2", i = integral(p.i))
+def main():
+       engine(50, verbose = True) 
+if __name__ == "__main__":
+    main()
