@@ -19,32 +19,53 @@ import FileSearch
 
 # This fills in all of the defaults
 parameterCache = {}
-pandaParameters = { "localSize" : 0.5,
-                    "localPosition" : P3( 0, 0.21, 0),
+pandaParameters = { "localSize" : 0.05,
+                    "localPosition" : P3( 0, 200, 0),
                     "localOrientation" : HPR(0, 0, 0)}
 def pandaModel(fileName = None, size = None, hpr = None, position = None):
     res = PandaModel(size, hpr, position, fileName)
     return res
 class PandaModel(Proxy):
     def __init__(self, fileName, size, hpr, position):
-        self._pandaModel = PandaModel
-        Proxy.__init__(self, name = Globals.nextModelId, updater = updater)
+        Proxy.__init__(self, name = "Panda"+str(Globals.nextModelId), updater = updater)
         #mFile = fileSearch(fileName, "models",["egg"])
         mFile = Filename("/c/Panda3D-1.8.1/models/panda-model.egg.pz")
         print "File Path: " + repr(mFile)
         self._pandaModel = loader.loadModel(mFile)
         Globals.nextModelId = Globals.nextModelId + 1
-        self.scale=Lift0F(pandaParameters['localSize'])
-        self.hpr=pandaParameters['localOrientation']
-        self.position=pandaParameters['localPosition']
-        self._onScreen=False
-        
+        self._onScreen = False
+        """
+        self.position = lift('position',P3(0,0,0))
+        self.hpr = lift('hpr' ,HPR(0,0,0))
+        self.size = lift('size', 0.05)
+        """
+        self._size=pandaParameters['localSize']
+        self._hpr=pandaParameters['localOrientation']
+        self._position=pandaParameters['localPosition']
+        self.position = position
+        self.hpr = hpr
+        self.size =size
+        showModel(self)#This call needs to move into the updater method. We don't have it working with the engine yet.
+
 def updater(self):
+    """
     self._pandaModel.setScale(self.get("scale"))
     self._pandaModel.setHpr(self.get("hpr"))
-    self._pandaModel.setPos(self.get("position"))
+    self._pandaModel.setPos(self.get("position"))"""
+
+    p = self.position.now()
+    s = self.size.now()
+    self._pandaModel.setScale(s*self._localSize)
+    self._pandaModel.setPos(p.x + self._localPosition.x*s,
+                            p.y + self._localPosition.y*s,
+                            p.z + self._localPosition.z*s)
+                        
+    """d = self.hpr.now()
+    self._pandaModel.setHpr(degrees(d.h + self._localOrientation.h),
+                            degrees(d.p + self._localOrientation.p),
+                            degrees(d.r + self._localOrientation.r))"""
     
 def showModel(self):
     if not self._onScreen:
-        self._pandaModel.reparentTo(render)
-        self._onScreen = True
+           self._pandaModel.reparentTo(render)
+           self._onScreen = True
