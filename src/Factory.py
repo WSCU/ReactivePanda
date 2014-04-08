@@ -16,7 +16,7 @@ def maybeLift(x):
     if t is type(1.0):
         return Lift0F(x)
     
-    return lift(x)
+    return x
     
 def lift(name,f):
 	def fn(*args):
