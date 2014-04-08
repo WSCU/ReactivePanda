@@ -10,6 +10,8 @@ class Lift0(Signal):
         Signal.__init__(self)
         self.v = v
     def now(self):
+        print ("hello" + repr(self.v))
+
         return self.v
         
 
@@ -52,6 +54,6 @@ class StateMachine(CachedSignal):
 
 class Observer(CachedSignal):
     def __init__(self, f):
-        Signal.__init__(self)
+        CachedSignal.__init__(self, f)
     def now1(self):
         return self.f()

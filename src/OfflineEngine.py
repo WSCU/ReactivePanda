@@ -53,7 +53,7 @@ class Printer(Proxy):
         Proxy.__init__(self, name, printUpdate)
         for k, v in args.items():
             self.k = v
-def printer(name, **kwargs):
+def printer(name = "test object", **kwargs):
     return Printer(name, kwargs)
 
 def printUpdate(self):
