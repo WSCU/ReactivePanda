@@ -19,7 +19,7 @@ import FileSearch
 
 # This fills in all of the defaults
 parameterCache = {}
-pandaParameters = { "localSize" : 0.00178,
+pandaParameters = { "localSize" : 0.5,
                     "localPosition" : P3( 0, 0.21, 0),
                     "localOrientation" : HPR(0, 0, 0)}
 def pandaModel(fileName = None, size = None, hpr = None, position = None):
@@ -34,13 +34,13 @@ class PandaModel(Proxy):
         print "File Path: " + repr(mFile)
         self._pandaModel = loader.loadModel(mFile)
         Globals.nextModelId = Globals.nextModelId + 1
-        self.size=Lift0F(pandaParameters['localSize'])
+        self.scale=Lift0F(pandaParameters['localSize'])
         self.hpr=pandaParameters['localOrientation']
         self.position=pandaParameters['localPosition']
         self._onScreen=False
         
 def updater(self):
-    self._pandaModel.setSize(self.get("size"))
+    self._pandaModel.setScale(self.get("scale"))
     self._pandaModel.setHpr(self.get("hpr"))
     self._pandaModel.setPos(self.get("position"))
     

@@ -200,7 +200,6 @@ class SP3:
                      staticLerp(t, self.y, p2.y),
                      staticLerp(t, self.z, p2.z))
 
-
 def readP3(str):
     nums = parseNumbers(str)
     return SP3(nums[0],nums[1], nums[2])
