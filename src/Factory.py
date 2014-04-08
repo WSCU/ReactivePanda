@@ -7,7 +7,7 @@
 # extends to StateMachineF, LiftF, and Lift0F
 
 from Signal import * 
-from Types import SignalFactory
+from Types import signalFactoryType
 
 def maybeLift(x):
     t = type(x)
@@ -26,7 +26,7 @@ def lift(name,f):
 
 class SFact:
     def __init__(self):
-    	self.type = SignalFactory
+    	self.type = signalFactoryType
     def __add__(self,y):
         y = maybeLift(y)
         return LiftF("add",lambda x,y:x+y, [self,y])

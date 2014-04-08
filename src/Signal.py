@@ -1,9 +1,9 @@
 import Globals
-from Types import SignalType
+from Types import signalType
 
 class Signal:
 	def __init__(self):
-		self.type = SignalType
+		self.type = signalType
 		
 class Lift0(Signal):
     def __init__(self, v):

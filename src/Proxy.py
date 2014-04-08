@@ -1,10 +1,10 @@
 import Globals
-from Types import ProxyType
+from Types import proxyType
 
 class Proxy:
     def __init__(self, name, updater):
         self._alive = True;
-        self.type = ProxyType
+        self.type = proxyType
         self._signals = {}
         self._1Reactions = []
         self._gReactions = []
