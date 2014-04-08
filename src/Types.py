@@ -21,6 +21,7 @@ class Ptype:
 #  Predefined types used elsewhere
 SignalType = Ptype("Signal")
 SignalFactory = Ptype("SignalFactory")
+ProxyType = Ptype("ProxyType")
 '''  Keeping just in case
 numType = ptype("Number")
 fnType = ptype("Function")

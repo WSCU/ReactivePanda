@@ -1,8 +1,10 @@
 import Globals
+from Types import ProxyType
+
 class Proxy:
     def __init__(self, name, updater):
         self._alive = True;
-        self.type = Ptype("Proxy")
+        self.type = ProxyType
         self._signals = {}
         self._1Reactions = []
         self._gReactions = []
@@ -15,10 +17,10 @@ class Proxy:
         if name[0] == '_':
             self.__dict__[name] = value
         else:
-            if value.type == SignalType:
-                self._updateSignals[name] = value
-            else:
-                print("Error: Tried to set attribute to non-signal.")
+            #if value.type == SignalType:
+            self._updateSignals[name] = value
+            #else:
+             #   print("Error: Tried to set attribute to non-signal.")
     def __getattr__(self, name):
         if name[0] == '_':
             return self.__dict__[name]
