@@ -26,7 +26,7 @@ def lift(name,f):
 
 class SFact:
     def __init__(self):
-    	self.type = signalFactoryType
+    	self._type = signalFactoryType
     def __add__(self,y):
         y = maybeLift(y)
         return LiftF("add",lambda x,y:x+y, [self,y])
