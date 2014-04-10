@@ -13,6 +13,7 @@ from Engine import *
 from Signal import *
 from Proxy import *
 from Numerics import *
+from Functions import degrees
 from StaticNumerics import pi
 import Globals
 import FileIO
@@ -75,8 +76,7 @@ def updater(self):
                             degrees(d.p + d2.p),
                             degrees(d.r + d2.r))
   
-def degrees( v):
-    return v*(180/pi)
+
 def showModel(self):
     if not self._onScreen:
            self._pandaModel.reparentTo(render)
