@@ -7,7 +7,7 @@
 # extends to StateMachineF, LiftF, and Lift0F
 
 from Signal import * 
-from Types import signalFactoryType
+from Types import *
 
 def maybeLift(x):
     t = type(x)
@@ -76,32 +76,40 @@ class SFact:
         return self // 1
 #Creates a Lift Factory	
 class LiftF(SFact):
-    def __init__(self,name,f, args):
+    def __init__(self,name,f, args, inType = anyType):
         SFact.__init__(self)
         self.f=f
+        self._type = inType
         self.name=name
         self.args = args
 
-    def start(self):
-        #print self.name
+    def start(self, expectedType):
+        #print self.name 
         #for arg in self.args:
             #print " " + repr(arg)
-        ea = map(lambda x: maybeLift(x).start(), self.args)
-        return Lift(self.name,self.f, ea)
+        if  expectedType.infer(self._type):
+            ea = map(lambda x: maybeLift(x).start(), self.args)
+            return Lift(self.name,self.f, ea)
+        else:
+            print "Expected " + str(expectedType) + " in " + self.name + ", recieved " + str(self._type)
 
 class Lift0F(SFact):
       def __init__(self, v):
           SFact.__init__(self)
+          self._type = type(v)
           self.v = v
-      def start(self):
-          return Lift0(self.v)
+      def start(self, expectedType):
+          if expectedType.infer(self._type):
+              return Lift0(self.v)
+          else:
+              print "Expected " + str(expectedType) + " in " + self.name + ", recieved " + str(self._type)
 
 #Creates a CachedValue factory
 class CachedValueF(SFact):
     def __init__(self, i):
         SFact.__init__(self)
         self.i = i
-    def start(self):
+    def start(self, expectedType):
         return CachedValue(maybeLift(self.i))
 
 #Creates a State Machine Factory
@@ -111,13 +119,13 @@ class StateMachineF(CachedValueF):
         self.state = s0
         self.i = i
         self.f = f
-    def start(self):
-        return StateMachine(self.state, self.i.start(), self.f)
+    def start(self, expectedType):
+        return StateMachine(self.state, self.i.start(anyType), self.f)
 
 #Creates a Observer Factory
 class ObserverF(CachedValueF):
     def __init__(self, f):
         SFact.__init__(self)
         self.f = f
-    def start(self):
+    def start(self, expectedType):
         return Observer(self.f)
