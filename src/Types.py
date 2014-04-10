@@ -5,13 +5,25 @@ Composite types such as P2, P3, and HPR are serialized as numbers separated by c
 This parses those numbers.
 """
 
+from types import *
+
 # Every built-in type has a python-defined type
 # User defined types have a type attribute.  This enables initialization time typechecking
 
 class Ptype:
-    def __init__(self, tname, subtypes = []):
+    def __init__(self, tname, subtypes = [], addable = False):
         self.tname = tname
+        self.addable = addable
         self.subtypes = subtypes # list of Ptypes
+
+    def infer(self, itype):
+        if itype is self or anyType:
+            return True
+        for t in self.subtypes:
+            if itype is t:
+                return True
+        return False
+
     def __str__(self):
         r = self.tname
         return r
@@ -20,8 +32,13 @@ class Ptype:
 
 #  Predefined types used elsewhere
 signalType = Ptype("Signal")
-signalFactoryType = Ptype("SignalFactory")
-proxyType = Ptype("ProxyType")
+signalFactoryType = Ptype("Signal Factory Type")
+proxyType = Ptype("Proxy Type")
+anyType = Ptype("Any Type")
+numType = Ptype("Num Type", subtypes = [IntType, FloatType], addable = True)
+p2Type = Ptype("P2 Type", addable = True)
+p3Type = Ptype("P3 Type", addable = True)
+hprType = Ptype("HPR Type")
 '''  Keeping just in case
 numType = ptype("Number")
 fnType = ptype("Function")
@@ -56,15 +73,3 @@ zeroType = ptype("Zero")
 zero.type = zeroType
 numType.zero = 0
 '''
-
-
-def getPType(x):
-    if hasattr(x,'type'):  # Panda types all have a pType slot
-        return x.type
-    if x is None:
-        return noneType
-    t = type(x)
-    return Ptype("Unknown: " + str(t))
-
-
-

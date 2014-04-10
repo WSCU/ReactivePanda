@@ -4,6 +4,7 @@ from Types import proxyType
 
 class Proxy:
     def __init__(self, name, updater):
+        self._types = {"position": p3Type, "hpr": hprType, "size": numType}
         self._alive = True;
         self._type = proxyType
         self._signals = {}
@@ -26,28 +27,32 @@ class Proxy:
         if name[0] == '_':
             return self.__dict__[name]
         else:
-            #return ObserverF(lambda : self.get(name)).start() #Commented because this is proabably wrong
-            return self._signals[name]
+            return ObserverF(lambda : self.get(name)) #Commented because this is proabably wrong
+            #return self._signals[name]
     def get(self, name):
         try: 
             return self._signals[name].now()
         except KeyError:
-            print( str(name) + " does not exist in this Proxy " + repr(self))
+            print( str(name) + " does not exist or has not been started in this Proxy " + repr(self))
     def initialize(self):
         for k, v in self._updateSignals.items():
             print("Objects: " + repr(k) + " is initializing: " + str(v))
-            self._signals[k] = v.start() # This is screwing up Integral
+            if self._types.has_key(k):
+                ty = self._types[k]
+            else:
+                ty = anyType
+            self._signals[k] = v.start(ty) # This is screwing up Integral
         self._updateSignals = {}
     def updater(self):
         self._updater(self)
     def react(self, when, what):
         if alive:
             when = maybeLift(when)
-            self._gReactions.append((when.start(), what))
+            self._gReactions.append((when.start(anyType), what))
     def react1(self, when, what):
         if alive:
             when = maybeLift(when)
-            self._1Reactions.append((when.start(), what))
+            self._1Reactions.append((when.start(anyType), what))
     def update(self):
         tempSigVals = {}
         if self._alive:
