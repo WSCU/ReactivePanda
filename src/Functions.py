@@ -5,6 +5,7 @@ import unittest
 import sched, time
 from Signal import *
 from Factory import *
+from StaticNumerics import pi
 import Globals 
 
 def integerize(r):
@@ -111,3 +112,5 @@ def clock(x):
     return StateMachineF(0, maybeLift(x), clockFN)
 #make a clock signal too. Clock will control the heartbeat: make the heartbeat every second
 time = ObserverF(lambda: Globals.currentTime)
+def degrees( v):
+    return v*(180/pi)

@@ -3,7 +3,7 @@ from Types import signalType
 
 class Signal:
 	def __init__(self):
-		self.type = signalType
+		self._type = signalType
 		
 class Lift0(Signal):
     def __init__(self, v):
