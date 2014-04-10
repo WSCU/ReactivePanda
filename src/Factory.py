@@ -83,7 +83,7 @@ class LiftF(SFact):
         self.name=name
         self.args = args
 
-    def start(self, expectedType):
+    def start(self, expectedType = anyType):
         #print self.name 
         #for arg in self.args:
             #print " " + repr(arg)
@@ -98,7 +98,7 @@ class Lift0F(SFact):
           SFact.__init__(self)
           self._type = type(v)
           self.v = v
-      def start(self, expectedType):
+      def start(self, expectedType = anyType):
           if expectedType.infer(self._type):
               return Lift0(self.v)
           else:
