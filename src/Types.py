@@ -14,7 +14,7 @@ class Ptype:
     def __init__(self, tname, subtypes = [], addable = False):
         self.tname = tname
         self.addable = addable
-        self.subtypes = subtypes # list of Ptypes
+        self.subtypes = subtypes # list of types
 
     def infer(self, itype):
         if itype is self or anyType:
@@ -38,7 +38,7 @@ anyType = Ptype("Any Type")
 numType = Ptype("Num Type", subtypes = [IntType, FloatType], addable = True)
 p2Type = Ptype("P2 Type", addable = True)
 p3Type = Ptype("P3 Type", addable = True)
-hprType = Ptype("HPR Type")
+hprType = Ptype("HPR Type", addable = True)
 '''  Keeping just in case
 numType = ptype("Number")
 fnType = ptype("Function")
