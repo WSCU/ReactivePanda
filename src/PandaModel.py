@@ -31,7 +31,7 @@ class PandaModel(Proxy):
     def __init__(self, fileName, size, hpr, position):
         Proxy.__init__(self, name = "Panda"+str(Globals.nextModelId), updater = updater)
         #mFile = fileSearch(fileName, "models",["egg"])
-        self._mFile = Filename("/c/Panda3D-1.8.1/models/panda-model.egg.pz")
+        self._mFile = Filename("/c/Panda3D-1.8.1/models/"+fileName)
         #print "File Path: " + repr(mFile)
         self._pandaModel = loader.loadModel(self._mFile)
         Globals.nextModelId = Globals.nextModelId + 1
@@ -46,7 +46,7 @@ class PandaModel(Proxy):
         self._position=pandaParameters['localPosition']
         self.size = Lift0F(1)
         self.position = P3(1,1,1)
-        
+        self.hpr = HPR(0,0,0)
         if position is not None:
             self.position = position
         if hpr is not None:
@@ -56,27 +56,25 @@ class PandaModel(Proxy):
         showModel(self)#This call needs to move into the updater method. We don't have it working with the engine yet.
 
 def updater(self):
-    """
-    self._pandaModel.setScale(self.get("scale"))
-    self._pandaModel.setHpr(self.get("hpr"))
-    self._pandaModel.setPos(self.get("position"))"""
-
+    #These parameters find the static offset which was created during initialization and the current position which is returned by the self.get() method
     p = self.position.now()
-    p2 = self._position.now()
-    s = self.size.now()
+    p2 = self.get( "position")
+    s = self.get( "size")
     h = self.hpr.now()
+    d = self.hpr.now()
+    d2 = self.get( "hpr")
+    
+    #This is the actual updates to position/size/hpr etc.
     self._pandaModel.setScale(s*self._size)
     self._pandaModel.setPos(p.x + p2.x*s,
                             p.y + p2.y*s,
                             p.z + p2.z*s)
                             
-    d = self.hpr.now()
-    d2 = self._hpr.now()
+     
     self._pandaModel.setHpr(degrees(d.h + d2.h),
                             degrees(d.p + d2.p),
                             degrees(d.r + d2.r))
-  
-
+ 
 def showModel(self):
     if not self._onScreen:
            self._pandaModel.reparentTo(render)

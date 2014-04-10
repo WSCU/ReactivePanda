@@ -17,8 +17,9 @@ pandaObject.reparentTo(render)
 #pandaObject.setScale(0.25, 0.25, 0.25)
 """
 #camera.setPos(100,0,0)
-b = panda(position = P3(1,1,integral(2)), hpr = HPR(0,-.75,0))
-
+#b = panda(position = P3(1,1,integral(2)), hpr = HPR(0,-.75,0))
+c = panda(position = P3(1,5+integral(5),1), hpr = HPR(integral(1),integral(.5),integral(1)))
+#d = boy(position = P3(1,1,integral(2)), hpr = HPR(1,0,0))
 #run()
 
 
