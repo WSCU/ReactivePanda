@@ -9,6 +9,7 @@
 import math
 import random
 import unittest
+from Types import *
 
 # This is a where we park signal functions.
 
@@ -62,6 +63,7 @@ class Zero:
   def __neg__(self):
           return self
 
+zero = Zero()
 
 def staticLerpA(t, x, y):
     x1 = x/twopi
@@ -88,10 +90,20 @@ def sNormA(a):
 
 class SP2:
       def __init__(self, x, y):
-        self.x = x
-        self.y = y
-        #self.type = P2Type
-        self.zero = Zero
+        tx = type(x)
+        ty = type(y)
+        if tx is IntType or tx is FloatType:
+            self.x = x
+        else:
+            print "recieved non-numeric type for x"
+            self.x = 0
+        if ty is IntType or ty is FloatType:
+            self.y = y
+        else:
+            print "recieved non-numeric type for y"
+            self.y = y
+        self._type = p2Type
+        self.zero = Zero()
       def __str__(self):
           return "P2(%7.2f, %7.2f)" % (self.x, self.y)
       def __add__(self, y):
@@ -159,11 +171,27 @@ def dotP2(a,b):
 
 class SP3:
   def __init__(self, x, y, z):
-    self.x = x
-    self.y = y
-    self.z = z
-    #self.type = P3Type
-    self.zero = Zero
+    
+      tx = type(x)
+      ty = type(y)
+      tx = type(z)
+      if tx is IntType or tx is FloatType:
+          self.x = x
+      else:
+          print "recieved non-numeric type for x"
+          self.x = 0
+      if ty is IntType or ty is FloatType:
+          self.y = y
+      else:
+          print "recieved non-numeric type for y"
+          self.y = 0
+      if tz is IntType or tz is FloatType:
+          self.z = z
+      else:
+          print "recieved non-numeric type for z"
+          self.y = 0
+      self._type = p3Type
+      self.zero = Zero()
   def __str__(self):
       return "P3(%7.2f, %7.2f, %7.2f)" % (self.x, self.y, self.z)
   
