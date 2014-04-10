@@ -17,11 +17,11 @@ pandaObject.reparentTo(render)
 #pandaObject.setScale(0.25, 0.25, 0.25)
 """
 #camera.setPos(100,0,0)
-b = panda()
+b = panda(position = P3(1,1,integral(2)), hpr = HPR(0,-.75,0))
 
-run()
+#run()
 
 
 #camera.setPos(0,-10,0)
 
-#Engine.engine(time)
+Engine.engine(0)

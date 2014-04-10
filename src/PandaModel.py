@@ -13,6 +13,7 @@ from Engine import *
 from Signal import *
 from Proxy import *
 from Numerics import *
+from StaticNumerics import pi
 import Globals
 import FileIO
 import FileSearch
@@ -20,18 +21,18 @@ import FileSearch
 # This fills in all of the defaults
 parameterCache = {}
 pandaParameters = { "localSize" : 0.05,
-                    "localPosition" : P3( 0, 200, 0),
-                    "localOrientation" : HPR(0, 0, 0)}
+                    "localPosition" : P3( 0, 200, 0).start(),
+                    "localOrientation" : HPR(0, 0, 0).start()}
 def pandaModel(fileName = None, size = None, hpr = None, position = None):
-    res = PandaModel(size, hpr, position, fileName)
+    res = PandaModel(  fileName, size, hpr, position)
     return res
 class PandaModel(Proxy):
     def __init__(self, fileName, size, hpr, position):
         Proxy.__init__(self, name = "Panda"+str(Globals.nextModelId), updater = updater)
         #mFile = fileSearch(fileName, "models",["egg"])
-        mFile = Filename("/c/Panda3D-1.8.1/models/panda-model.egg.pz")
-        print "File Path: " + repr(mFile)
-        self._pandaModel = loader.loadModel(mFile)
+        self._mFile = Filename("/c/Panda3D-1.8.1/models/panda-model.egg.pz")
+        #print "File Path: " + repr(mFile)
+        self._pandaModel = loader.loadModel(self._mFile)
         Globals.nextModelId = Globals.nextModelId + 1
         self._onScreen = False
         """
@@ -42,9 +43,15 @@ class PandaModel(Proxy):
         self._size=pandaParameters['localSize']
         self._hpr=pandaParameters['localOrientation']
         self._position=pandaParameters['localPosition']
-        self.position = position
-        self.hpr = hpr
-        self.size =size
+        self.size = Lift0F(1)
+        self.position = P3(1,1,1)
+        
+        if position is not None:
+            self.position = position
+        if hpr is not None:
+            self.hpr = hpr
+        if size is not None:
+            self.size =size
         showModel(self)#This call needs to move into the updater method. We don't have it working with the engine yet.
 
 def updater(self):
@@ -54,17 +61,22 @@ def updater(self):
     self._pandaModel.setPos(self.get("position"))"""
 
     p = self.position.now()
+    p2 = self._position.now()
     s = self.size.now()
-    self._pandaModel.setScale(s*self._localSize)
-    self._pandaModel.setPos(p.x + self._localPosition.x*s,
-                            p.y + self._localPosition.y*s,
-                            p.z + self._localPosition.z*s)
-                        
-    """d = self.hpr.now()
-    self._pandaModel.setHpr(degrees(d.h + self._localOrientation.h),
-                            degrees(d.p + self._localOrientation.p),
-                            degrees(d.r + self._localOrientation.r))"""
-    
+    h = self.hpr.now()
+    self._pandaModel.setScale(s*self._size)
+    self._pandaModel.setPos(p.x + p2.x*s,
+                            p.y + p2.y*s,
+                            p.z + p2.z*s)
+                            
+    d = self.hpr.now()
+    d2 = self._hpr.now()
+    self._pandaModel.setHpr(degrees(d.h + d2.h),
+                            degrees(d.p + d2.p),
+                            degrees(d.r + d2.r))
+  
+def degrees( v):
+    return v*(180/pi)
 def showModel(self):
     if not self._onScreen:
            self._pandaModel.reparentTo(render)

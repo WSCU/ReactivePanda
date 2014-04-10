@@ -26,7 +26,8 @@ class Proxy:
         if name[0] == '_':
             return self.__dict__[name]
         else:
-            return ObserverF(lambda : self.get(name))
+            #return ObserverF(lambda : self.get(name)).start() #Commented because this is proabably wrong
+            return self._signals[name]
     def get(self, name):
         try: 
             return self._signals[name].now()
@@ -70,7 +71,7 @@ class Proxy:
                     #print("    " + str(temp) + " is being added to thunks")
                     thunks.add(lambda : a[1](self, temp))
                 self._updateSignals = {}
-            self.updater()
+            self._updater(self)
             return thunks
 
     def __str__(self):
