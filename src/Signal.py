@@ -10,8 +10,6 @@ class Lift0(Signal):
         Signal.__init__(self)
         self.v = v
     def now(self):
-        print ("hello" + repr(self.v))
-
         return self.v
         
 

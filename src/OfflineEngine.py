@@ -14,18 +14,21 @@ def heartBeat(ct, events, verbose = False, test = False):
     Globals.thunks = []
     for worldObject in Globals.worldObjects:
         if verbose and not test:
-            print("Updating object: " + repr(worldObject))
+            print("Updating object: " + str(worldObject))
         Globals.thunks.extend(worldObject.update())
+    for e in Globals.events:
+        if verbose and not test:
+            print("Event " + str(e) + " is firing")
     for f in Globals.thunks:
         f()
     for obj in Globals.newObjects:
         if verbose and not test:
-            print("Adding object: " + repr(obj))
+            print("Adding object: " + str(obj))
         Globals.worldObjects.append(obj)
     Globals.newObjects = []
     for obj in Globals.worldObjects:
         if verbose and not test:
-            print("Initializing object: " + repr(obj))
+            print("Initializing object: " + str(obj))
         obj.initialize()
 #will need to check the proxy module to find the right name for this initialize method
 #make an initialize method that clears out all the variables and resets the clock
@@ -36,6 +39,7 @@ def initialize(ct):
     Globals.worldObjects = {}
     Globals.events = []
 
+#simevents is a list of tuples, time and signal
 def engine(tSteps, simevents = [], verbose = False, test = None):
     #Initialize all signals (signalF.start)
     #set the time to 0
@@ -43,9 +47,11 @@ def engine(tSteps, simevents = [], verbose = False, test = None):
     Globals.currentTime = 0
     steps = 0
     while steps < tSteps:
+        if verbose and test == None:
+            print("\nThe time is now: " + str(steps))
         events = []
         for e in simevents:
-            if e[0] <= steps:
+            if e[0] == steps:
                 events.append(e)
         heartBeat(steps, events, verbose=verbose)
         steps+=1
@@ -61,13 +67,15 @@ class Printer(Proxy):
 def printer(name = "test object", **kwargs):
     return Printer(name, kwargs)
 
-def printUpdate(self):
-    for k, v in self._signals.items():
-        print v.state
+def printUpdate(proxy):
+    for k, v in proxy._signals.items():
+        print (k + ": " + str(v.state))
 
 p = printer(name = "integral", i = integral(1))
-q = printer(name = "integral 2", i = integral(p.i))
+#q = printer(name = "integral 2", i = integral(p.i))
+simevents = [(3, p), (32, p)]
+
 def main():
-       engine(50, verbose = True) 
+       engine(50, simevents = simevents, verbose = True) 
 if __name__ == "__main__":
     main()
