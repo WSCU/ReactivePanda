@@ -83,7 +83,7 @@ def printUpdate(proxy):
         print (k + ": " + str(v.state))
 
 def leftMouse(l):
-    Globals.simEvents.extend(["mouseLeft"].extend(l))
+    Globals.simEvents.extend(["mouseLeft"] + l)
     
 def rightMouse(l):
     Globals.simEvents.extend(["mouseRight"].extend(l))
