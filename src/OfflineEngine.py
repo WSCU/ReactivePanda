@@ -86,7 +86,7 @@ def leftMouse(l):
     Globals.simEvents.extend(["mouseLeft"] + l)
     
 def rightMouse(l):
-    Globals.simEvents.extend(["mouseRight"].extend(l))
+    Globals.simEvents.extend(["mouseRight"] + l)
 
 p = printer(name = "integral", i = integral(1))
 #q = printer(name = "integral 2", i = integral(p.i))
