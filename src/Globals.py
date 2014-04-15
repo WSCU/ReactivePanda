@@ -10,6 +10,7 @@ objectNames = None   # Hands out unique name to every panda object
 eventSignals = {}
 newEvents = {}       # Events that are being sensed but not reacted to yet
 events = {}          # This is a dictionary of all events posted in the previous tick interval
+simEvents = []       # Simulated events for use in the test engine.   
 reactEvents = []     # Reactions that are not part of an object
 eventSignals = None  # This is a dictionary of event values received since the last tick
 newObjects = []      # The new list of active models assembled at every tick
