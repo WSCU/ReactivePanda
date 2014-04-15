@@ -41,19 +41,18 @@ def initialize(ct):
     Globals.events = []
 
 #simevents is a list of tuples, time and signal
-def engine(tSteps, simevents = [], verbose = False, test = None):
+def engine(tSteps, verbose = False, test = None):
     #Initialize all signals (signalF.start)
     #set the time to 0
     #get events and clear thunks
     #Split event list into seperate lists
     eventLists = {}
-    for i in simevents:
+    for i in Globals.simEvents:
         if type(i) is str:
             k = i
             eventLists[k] = []
         elif type(i) is not str:
             eventLists[k].append(i)
-    #this may be badness
 
     Globals.currentTime = 0
     steps = 0
@@ -83,12 +82,16 @@ def printUpdate(proxy):
     for k, v in proxy._signals.items():
         print (k + ": " + str(v.state))
 
+def leftMouse(l):
+    Globals.simEvents.extend(["mouseLeft"].extend(l))
+    
+def rightMouse(l):
+    Globals.simEvents.extend(["mouseRight"].extend(l))
+
 p = printer(name = "integral", i = integral(1))
 #q = printer(name = "integral 2", i = integral(p.i))
-leftMouse = ["mouseLeft", (3, True), (32, True)]
-rightMouse = ["mouseRight", (5, True), (23, True)]
-leftMouse.extend(rightMouse)
+leftMouse([(3, True), (32, True)])
 def main():
-       engine(50, simevents = leftMouse, verbose = True) 
+       engine(50, verbose = True) 
 if __name__ == "__main__":
     main()
