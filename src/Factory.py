@@ -109,7 +109,7 @@ class CachedValueF(SFact):
     def __init__(self, i):
         SFact.__init__(self)
         self.i = i
-    def start(self, expectedType):
+    def start(self, expectedType = anyType):
         return CachedValue(maybeLift(self.i))
 
 #Creates a State Machine Factory
@@ -127,5 +127,5 @@ class ObserverF(CachedValueF):
     def __init__(self, f):
         SFact.__init__(self)
         self.f = f
-    def start(self, expectedType):
+    def start(self, expectedType = anyType):
         return Observer(self.f)
