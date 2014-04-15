@@ -1,4 +1,3 @@
-
 # This defines an object that appears on the screen whose representation is obtained from a
 # 3-D model in an egg file from the Panda-3D engine.  These have the following reactive parameters:
 #   position  P3      location in 3-space
@@ -66,9 +65,9 @@ class PandaModel(Proxy):
         self._pandaModel = loader.loadModel(self._mFile)
         Globals.nextModelId = Globals.nextModelId + 1
         self._onScreen = False
-        self._size=pandaParameters['localSize']
-        self._hpr=pandaParameters['localOrientation']
-        self._position=pandaParameters['localPosition']
+        self._size=self._mParams['localSize']
+        self._hpr=self._mParams['localOrientation']
+        self._position=self._mParams['localPosition']
         self.size = Lift0F(1)
         self.position = P3(1,1,1)
         self.hpr = HPR(0,0,0)
