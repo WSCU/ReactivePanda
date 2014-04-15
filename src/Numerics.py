@@ -7,4 +7,3 @@ P3 = lift("SP3", SP3)
 p3 = P3
 HPR = lift("hpr", SHPR)
 hpr = HPR
-scale = lift("scale", SP3)
