@@ -35,4 +35,16 @@ class World(Proxy):
   def kill(self):
        print "World object received a kill signal"
        exit()
+#User level button pushes?
+def lbp(e = True): 
+    return getEventSignal("mouse1", e)
+
+def rbp(e = True):
+    return getEventSignal("mouse3", e)
+
+def lbr(e = True):
+    return getEventSignal("mouse1-up", e)
+
+def rbr(e = True):
+    return getEventSignal("mouse3-up", e)
 

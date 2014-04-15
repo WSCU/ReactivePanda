@@ -129,3 +129,10 @@ class ObserverF(CachedValueF):
         self.f = f
     def start(self, expectedType = anyType):
         return Observer(self.f)
+    
+def eventObserver(eName, eVal = None):
+    def getEvent():
+        if Globals.events.has_key(ename):
+            return events[ename] if eVal is None else eVal
+        return None
+    return ObserverF(lambda: getEvent(eName))
