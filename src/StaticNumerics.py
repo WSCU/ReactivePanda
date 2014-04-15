@@ -64,7 +64,6 @@ class Zero:
   def __neg__(self):
           return self
 
-zero = Zero()
 
 def staticLerpA(t, x, y):
     x1 = x/twopi
@@ -108,28 +107,28 @@ class SP2:
       def __str__(self):
           return "P2(%7.2f, %7.2f)" % (self.x, self.y)
       def __add__(self, y):
-          if y is zero:
+          if y is self.zero:
               return self
           return g.add(self, y)
       def __radd__(self, y):
-          if y is zero:
+          if y is self.zero:
               return self
           return g.add(y, self)
       def __sub__(self, y):
-          if y is zero:
+          if y is self.zero:
               return self
           return g.sub(self, y)
       def __rsub__(self, y):
-          if y is zero:
-              return zero.sub(self, zero)
+          if y is self.zero:
+              return self.zero.sub(self, zero)
           return g.sub(y, self)
       def __mul__(self, y):
-          if y is zero:
-              return zero.mul(self, y)#what's this
+          if y is self.zero:
+              return self.zero.mul(self, y)#what's this
           return g.mul (self, y)
       def __rmul__(self, y):
-          if y is zero:
-              return zero.rmul(self, y)
+          if y is self.zero:
+              return self.zero.rmul(self, y)
           return g.mul (y, self)
       def __abs__(self):
           return g.abs(self)
@@ -197,28 +196,28 @@ class SP3:
       return "P3(%7.2f, %7.2f, %7.2f)" % (self.x, self.y, self.z)
   
   def __add__(self, y):
-    if y is zero:
+    if y is self.zero:
       return self
     return g.add(self, y)
   def __radd__(self, y):
-    if y is zero:
+    if y is self.zero:
       return self
     return g.add(y, self)
   def __sub__(self, y):
-      if y is zero:
+      if y is self.zero:
           return self
       return g.sub(self, y)
   def __rsub__(self, y):
-      if y is zero:
-          return zero.sub(self, zero)
+      if y is self.zero:
+          return self.zero.sub(self, zero)
       return g.sub(y, self)
   def __mul__(self, y):
-      if y is zero:
-          return zero.mul(self, y)#what's this
+      if y is self.zero:
+          return self.zero.mul(self, y)#what's this
       return g.mul (self, y)
   def __rmul__(self, y):
-      if y is zero:
-          return zero.rmul(self, y)
+      if y is self.zero:
+          return self.zero.rmul(self, y)
       return g.mul (y, self)
   def __abs__(self):
           return g.abs(self)
