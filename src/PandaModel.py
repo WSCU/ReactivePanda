@@ -15,12 +15,24 @@ from Proxy import *
 from Numerics import *
 from Functions import degrees
 from StaticNumerics import pi
-import Globals
+from Globals import pandaPath
 import FileIO
 import FileSearch
 
 # This fills in all of the defaults
 parameterCache = {}
+defaultModelParameters = {"localPosition" : P3(0,0,0),
+                          "localSize" : 1,
+                          "localOrientation" : HPR(0,0,0),
+                          "joints" : [],
+                          "animations" : None,
+                          "defaultAnimation" : None,
+                          "frame" : None,
+                          "cRadius" : 1,
+                          "cFloor" : 0,
+                          "cTop" : 1,
+                          "cType" : "cyl"}
+
 pandaParameters = { "localSize" : 0.05,
                     "localPosition" : P3( 0, 200, 0).start(),
                     "localOrientation" : HPR(0, 0, 0).start()}
@@ -30,17 +42,30 @@ def pandaModel(fileName = None, size = None, hpr = None, position = None):
 class PandaModel(Proxy):
     def __init__(self, fileName, size, hpr, position):
         Proxy.__init__(self, name = "Panda"+str(Globals.nextModelId), updater = updater)
-        #mFile = fileSearch(fileName, "models",["egg"])
-        self._mFile = Filename("/c/Panda3D-1.8.1/models/"+fileName)
+        self._mFile = FileSearch.fileSearch(fileName, "models",["egg"])
+        print "File Name: "+str(fileName)
+        print "File Path: "+str(pandaPath)
+        if self._mFile is None:
+            print "Can't find model " + repr(fileName)
+            self._mFile = Filename("/c/Panda3D-1.8.1/models/"+fileName)
+            self._mParams = pandaParameters
+        #self._mFile = Filename("/c/Panda3D-1.8.1/models/"+fileName)
         #print "File Path: " + repr(mFile)
+        elif fileName in parameterCache:
+            self._mParams = parameterCache[fileName]
+        else:
+            mParamFile = Filename(self._mFile)
+            print repr(mParamFile)
+            mParamFile.setExtension("model")
+            if mParamFile.exists():
+                self._mParams = FileIO.loadDict(mParamFile, defaultModelParameters)
+            else:
+                print "No .model for " + str(fileName)
+                self._mParams = defaultModelParameters
+            parameterCache[fileName] = self._mParams
         self._pandaModel = loader.loadModel(self._mFile)
         Globals.nextModelId = Globals.nextModelId + 1
         self._onScreen = False
-        """
-        self.position = lift('position',P3(0,0,0))
-        self.hpr = lift('hpr' ,HPR(0,0,0))
-        self.size = lift('size', 0.05)
-        """
         self._size=pandaParameters['localSize']
         self._hpr=pandaParameters['localOrientation']
         self._position=pandaParameters['localPosition']
@@ -57,12 +82,11 @@ class PandaModel(Proxy):
 
 def updater(self):
     #These parameters find the static offset which was created during initialization and the current position which is returned by the self.get() method
-    p = self.position.now()
-    p2 = self.get( "position")
+    p2 = self._position.now()
+    p = self.get( "position")
     s = self.get( "size")
-    h = self.hpr.now()
-    d = self.hpr.now()
-    d2 = self.get( "hpr")
+    d2 = self._hpr.now()
+    d = self.get( "hpr")
     
     #This is the actual updates to position/size/hpr etc.
     self._pandaModel.setScale(s*self._size)

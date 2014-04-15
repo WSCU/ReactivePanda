@@ -63,4 +63,4 @@ if osType == 'Linux':
     pandaPath = "/usr/lib/panda/lib/"           # Since we are on a Linux system we will now use a linux file path.
 if osType == 'Windows':
   #  print "we're on Windows"                   # Since we are on a Windows system we will use the windows file path.
-    pandaPath = "/c/panda/lib"
+    pandaPath = "/c/Panda3D-1.8.1"

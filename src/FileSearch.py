@@ -5,7 +5,7 @@ Non-reactive
 """
 
 from panda3d.core import Filename
-
+from Globals import pandaPath
 
 def fileSearch(file, libDir = None, exts = []):
     """
@@ -19,7 +19,7 @@ def fileSearch(file, libDir = None, exts = []):
         if f1.exists():
             return f1
     if libDir is not None:
-        f2 = Filename.expandFrom(Globals.pandaPath + "/" + libDir + "/" + file)
+        f2 = Filename.expandFrom(pandaPath + "/" + libDir + "/" + file)
         if f2.exists():
             return f2
         for e in exts:

@@ -16,7 +16,9 @@ def loadCSV(file):
     """
     Reads the contents of a csv file and returns an array of each row.
     """
-    fileReader = csv.reader(open(file, "r"),dialect = 'excel', )
+    print "File name string?" + str(file)
+    fileReader = csv.reader(open(file.toOsSpecific(), "r"),dialect = 'excel', )
+   
     arr = []
     for row in fileReader:
         arr.append(row)        

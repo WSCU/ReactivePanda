@@ -17,7 +17,8 @@ pi       = math.pi
 twopi    = 2*pi
 sCeiling = math.ceil
 sFloor   = math.floor
-
+cos = math.cos
+sin = math.sin
 def sFraction(x):
     return x - sFloor(x)
 
@@ -174,7 +175,7 @@ class SP3:
     
       tx = type(x)
       ty = type(y)
-      tx = type(z)
+      tz = type(z)
       if tx is IntType or tx is FloatType:
           self.x = x
       else:
