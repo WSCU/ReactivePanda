@@ -30,6 +30,7 @@ def heartBeat(ct, events, verbose = False, test = False):
         if verbose and not test:
             print("Initializing object: " + str(obj))
         obj.initialize()
+
 #will need to check the proxy module to find the right name for this initialize method
 #make an initialize method that clears out all the variables and resets the clock
 def initialize(ct):
@@ -44,15 +45,26 @@ def engine(tSteps, simevents = [], verbose = False, test = None):
     #Initialize all signals (signalF.start)
     #set the time to 0
     #get events and clear thunks
+    #Split event list into seperate lists
+    eventLists = {}
+    for i in simevents:
+        if type(i) is str:
+            k = i
+            eventLists[k] = []
+        elif type(i) is not str:
+            eventLists[k].append(i)
+    #this may be badness
+
     Globals.currentTime = 0
     steps = 0
     while steps < tSteps:
-        if verbose and test == None:
+        if verbose and test is None:
             print("\nThe time is now: " + str(steps))
-        events = []
-        for e in simevents:
-            if e[0] == steps:
-                events.append(e)
+        events = {}
+        for k, v in eventLists.items():
+            for i in v:
+                if i[0] == steps:
+                    events[k] = i[1]
         heartBeat(steps, events, verbose=verbose)
         steps+=1
 #one reactive objects, reactive attributes, print all the attributes
@@ -73,9 +85,10 @@ def printUpdate(proxy):
 
 p = printer(name = "integral", i = integral(1))
 #q = printer(name = "integral 2", i = integral(p.i))
-simevents = [(3, p), (32, p)]
-
+leftMouse = ["mouseLeft", (3, True), (32, True)]
+rightMouse = ["mouseRight", (5, True), (23, True)]
+leftMouse.extend(rightMouse)
 def main():
-       engine(50, simevents = simevents, verbose = True) 
+       engine(50, simevents = leftMouse, verbose = True) 
 if __name__ == "__main__":
     main()
