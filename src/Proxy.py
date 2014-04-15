@@ -36,7 +36,7 @@ class Proxy:
             print( str(name) + " does not exist or has not been started in this Proxy " + repr(self))
     def initialize(self):
         for k, v in self._updateSignals.items():
-            print("Objects: " + repr(k) + " is initializing: " + str(v))
+            print("Objects: " + self._name + " is initializing: " + str(v))
             if self._types.has_key(k):
                 ty = self._types[k]
             else:
