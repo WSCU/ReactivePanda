@@ -41,18 +41,18 @@ class Proxy:
                 ty = self._types[k]
             else:
                 ty = anyType
-            self._signals[k] = v.start(expectedType = ty) # This is screwing up Integral
+            self._signals[k] = v.start(expectedType = ty)[0] # This is screwing up Integral
         self._updateSignals = {}
     def updater(self):
         self._updater(self)
     def react(self, when, what):
         if alive:
             when = maybeLift(when)
-            self._gReactions.append((when.start(), what))
+            self._gReactions.append((when.start()[0], what))
     def react1(self, when, what):
         if alive:
             when = maybeLift(when)
-            self._1Reactions.append((when.start(), what))
+            self._1Reactions.append((when.start()[0], what))
     def update(self):
         tempSigVals = {}
         if self._alive:

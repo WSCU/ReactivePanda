@@ -17,7 +17,7 @@ class Ptype:
         self.subtypes = subtypes # list of types
 
     def infer(self, itype):
-        if itype is self or anyType:
+        if itype is self or itype is anyType or self is anyType:
             return True
         for t in self.subtypes:
             if itype is t:
@@ -34,7 +34,7 @@ class Ptype:
 signalType = Ptype("Signal")
 signalFactoryType = Ptype("Signal Factory Type")
 proxyType = Ptype("Proxy Type")
-anyType = Ptype("Any Type")
+anyType = Ptype("Any Type", addable = True)
 numType = Ptype("Num Type", subtypes = [IntType, FloatType], addable = True)
 p2Type = Ptype("P2 Type", addable = True)
 p3Type = Ptype("P3 Type", addable = True)
