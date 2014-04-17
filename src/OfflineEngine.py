@@ -50,7 +50,8 @@ def engine(tSteps, verbose = False, test = None):
     for i in Globals.simEvents:
         if type(i) is str:
             k = i
-            eventLists[k] = []
+            if k not in eventLists:
+                eventLists[k] = []
         elif type(i) is not str:
             eventLists[k].append(i)
 
