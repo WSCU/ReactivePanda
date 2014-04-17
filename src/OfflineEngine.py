@@ -74,7 +74,8 @@ class Printer(Proxy):
     def __init__(self, name, args):
         Proxy.__init__(self, name, printUpdate)
         for k, v in args.items():
-            self.k = v
+            print ("printer constructor init: " + str(k))
+            setattr(self, k, v)
 
 def printer(name = "test object", **kwargs):
     return Printer(name, kwargs)
@@ -96,7 +97,7 @@ def rightMouseEvents(l):
     Globals.simEvents.extend(["RBP"] + e)
 
 p = printer(name = "integral", i = integral(1))
-#q = printer(name = "integral 2", i = integral(p.i))
+q = printer(name = "integral 2", i = integral(p.i))
 leftMouseEvents([1, 2, 3, 7, 19, 32])
 rightMouseEvents([1, 2, 4, 5])
 def main():

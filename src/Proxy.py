@@ -80,6 +80,8 @@ class Proxy:
             return thunks
 
     def __str__(self):
+        #print (self._signals)
+        #print (self._updateSignals)
         return self._name
 
     def __repr__(self):
