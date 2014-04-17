@@ -1,0 +1,1149 @@
+<CoordinateSystem> { Y-Up }
+
+<Comment> {
+  "maya2egg -a chan -cn Sonic Sonic-AnimationSet.mb Sonic-FallingWOBoard.egg"
+}
+<Table> {
+  <Bundle> Sonic {
+    <Table> "<skeleton>" {
+      <Table> SonicCtrls {
+        <Xfm$Anim_S$> xform {
+          <Scalar> fps { 24 }
+          <Char*> order { sphrt }
+        }
+        <Table> Skeleton {
+          <Xfm$Anim_S$> xform {
+            <Scalar> fps { 24 }
+            <Char*> order { sphrt }
+            <S$Anim> p { <V> { 17.6592 } }
+            <S$Anim> x { <V> { 0.35 } }
+            <S$Anim> y { <V> { 16.7373 } }
+            <S$Anim> z { <V> { 0.0221771 } }
+          }
+          <Table> Chest {
+            <Xfm$Anim_S$> xform {
+              <Scalar> fps { 24 }
+              <Char*> order { sphrt }
+              <S$Anim> y { <V> { 3 } }
+            }
+            <Table> Neck {
+              <Xfm$Anim_S$> xform {
+                <Scalar> fps { 24 }
+                <Char*> order { sphrt }
+                <S$Anim> p { <V> { 18.2227 } }
+                <S$Anim> y { <V> { 2.17107 } }
+              }
+              <Table> HeadBone {
+                <Xfm$Anim_S$> xform {
+                  <Scalar> fps { 24 }
+                  <Char*> order { sphrt }
+                  <S$Anim> y { <V> { 3 } }
+                }
+                <Table> LeftEyeBrow {
+                  <Xfm$Anim_S$> xform {
+                    <Scalar> fps { 24 }
+                    <Char*> order { sphrt }
+                    <S$Anim> p { <V> { -180 } }
+                    <S$Anim> x { <V> { 2.209 } }
+                    <S$Anim> y { <V> { 1.276 } }
+                    <S$Anim> z { <V> { 2.847 } }
+                  }
+                }
+                <Table> RightEyeBrow {
+                  <Xfm$Anim_S$> xform {
+                    <Scalar> fps { 24 }
+                    <Char*> order { sphrt }
+                    <S$Anim> x { <V> { -2.209 } }
+                    <S$Anim> y { <V> { 1.276 } }
+                    <S$Anim> z { <V> { 2.847 } }
+                  }
+                }
+                <Table> TopSpike {
+                  <Xfm$Anim_S$> xform {
+                    <Scalar> fps { 24 }
+                    <Char*> order { sphrt }
+                    <S$Anim> h { <V> { 3.77505 } }
+                    <S$Anim> p { <V> { 6.59386 } }
+                    <S$Anim> r { <V> { -5.92148 } }
+                    <S$Anim> x { <V> { -0.0103038 } }
+                    <S$Anim> y {
+                      <V> {
+                        4.48056 4.74114 5.22507 5.48565 4.9831 4.48056
+                        5.09556 5.71057
+                      }
+                    }
+                    <S$Anim> z {
+                      <V> {
+                        -4.94852 -5.13703 -5.4871 -5.6756 -5.31206
+                        -4.94852 -5.39342 -5.83831
+                      }
+                    }
+                  }
+                }
+                <Table> MiddleSpike {
+                  <Xfm$Anim_S$> xform {
+                    <Scalar> fps { 24 }
+                    <Char*> order { sphrt }
+                    <S$Anim> h { <V> { 3.77505 } }
+                    <S$Anim> p { <V> { 6.59386 } }
+                    <S$Anim> r { <V> { -5.92148 } }
+                    <S$Anim> x { <V> { -0.0103038 } }
+                    <S$Anim> y {
+                      <V> {
+                        -1.04597 -0.0408824 -0.543426 -1.04597 -0.430966
+                        0.184037 -0.134853 -0.727078
+                      }
+                    }
+                    <S$Anim> z {
+                      <V> {
+                        -8.19465 -8.92173 -8.55819 -8.19465 -8.63954
+                        -9.08443 -8.85375 -8.42534
+                      }
+                    }
+                  }
+                }
+                <Table> RightMiddleSpike {
+                  <Xfm$Anim_S$> xform {
+                    <Scalar> fps { 24 }
+                    <Char*> order { sphrt }
+                    <S$Anim> h { <V> { 3.77505 } }
+                    <S$Anim> p { <V> { 6.59386 } }
+                    <S$Anim> r { <V> { -5.92148 } }
+                    <S$Anim> x { <V> { -4.23234 } }
+                    <S$Anim> y {
+                      <V> {
+                        -0.870479 -0.609901 -0.125971 0.134607 -0.367936
+                        -0.870479 -0.255477 0.359526
+                      }
+                    }
+                    <S$Anim> z {
+                      <V> {
+                        -7.49857 -7.68707 -8.03714 -8.22564 -7.86211
+                        -7.49857 -7.94346 -8.38835
+                      }
+                    }
+                  }
+                }
+                <Table> LowerSpike {
+                  <Xfm$Anim_S$> xform {
+                    <Scalar> fps { 24 }
+                    <Char*> order { sphrt }
+                    <S$Anim> h { <V> { 3.77505 } }
+                    <S$Anim> p { <V> { 6.59386 } }
+                    <S$Anim> r { <V> { -5.92148 } }
+                    <S$Anim> x { <V> { -0.0103038 } }
+                    <S$Anim> y {
+                      <V> {
+                        -6.05314 -5.5506 -5.04806 -5.5506 -6.05314
+                        -5.43814 -4.82314 -5.43814
+                      }
+                    }
+                    <S$Anim> z {
+                      <V> {
+                        -6.41866 -6.78219 -7.14573 -6.78219 -6.41866
+                        -6.86355 -7.30844 -6.86355
+                      }
+                    }
+                  }
+                }
+                <Table> LowerRightSpike {
+                  <Xfm$Anim_S$> xform {
+                    <Scalar> fps { 24 }
+                    <Char*> order { sphrt }
+                    <S$Anim> h { <V> { 3.77505 } }
+                    <S$Anim> p { <V> { 6.59386 } }
+                    <S$Anim> r { <V> { -5.92148 } }
+                    <S$Anim> x { <V> { -3.26857 } }
+                    <S$Anim> y {
+                      <V> {
+                        -4.86533 -3.86024 -4.36278 -4.86533 -4.25032
+                        -3.63532 -3.95421 -4.54643
+                      }
+                    }
+                    <S$Anim> z {
+                      <V> {
+                        -6.41866 -7.14573 -6.78219 -6.41866 -6.86355
+                        -7.30844 -7.07775 -6.64934
+                      }
+                    }
+                  }
+                }
+                <Table> LeftMiddleSpike {
+                  <Xfm$Anim_S$> xform {
+                    <Scalar> fps { 24 }
+                    <Char*> order { sphrt }
+                    <S$Anim> h { <V> { -3.77505 } }
+                    <S$Anim> p { <V> { -173.406 } }
+                    <S$Anim> r { <V> { 5.92148 } }
+                    <S$Anim> x { <V> { 4.21173 } }
+                    <S$Anim> y {
+                      <V> {
+                        -0.870463 -0.36792 0.134623 -0.36792 -0.870463
+                        -0.25546 0.359543 -0.25546
+                      }
+                    }
+                    <S$Anim> z {
+                      <V> {
+                        -7.49857 -7.86211 -8.22565 -7.86211 -7.49857
+                        -7.94346 -8.38835 -7.94346
+                      }
+                    }
+                  }
+                }
+                <Table> LeftLowerSpike {
+                  <Xfm$Anim_S$> xform {
+                    <Scalar> fps { 24 }
+                    <Char*> order { sphrt }
+                    <S$Anim> h { <V> { -3.77505 } }
+                    <S$Anim> p { <V> { -173.406 } }
+                    <S$Anim> r { <V> { 5.92148 } }
+                    <S$Anim> x { <V> { 3.24797 } }
+                    <S$Anim> y {
+                      <V> {
+                        -4.86536 -4.60478 -4.12085 -3.86028 -4.36282
+                        -4.86536 -4.25036 -3.63536
+                      }
+                    }
+                    <S$Anim> z {
+                      <V> {
+                        -6.41865 -6.60715 -6.95723 -7.14573 -6.78219
+                        -6.41865 -6.86354 -7.30843
+                      }
+                    }
+                  }
+                }
+                <Table> LeftEye {
+                  <Xfm$Anim_S$> xform {
+                    <Scalar> fps { 24 }
+                    <Char*> order { sphrt }
+                    <S$Anim> y { <V> { -20.1711 } }
+                    <S$Anim> z { <V> { -1.81472 } }
+                  }
+                }
+                <Table> RightEye {
+                  <Xfm$Anim_S$> xform {
+                    <Scalar> fps { 24 }
+                    <Char*> order { sphrt }
+                    <S$Anim> y { <V> { -20.1711 } }
+                    <S$Anim> z { <V> { -1.81472 } }
+                  }
+                }
+              }
+              <Table> Jaw {
+                <Xfm$Anim_S$> xform {
+                  <Scalar> fps { 24 }
+                  <Char*> order { sphrt }
+                  <S$Anim> y { <V> { -1.19304 } }
+                  <S$Anim> z { <V> { 2.52403 } }
+                }
+              }
+              <Table> UpperLip {
+                <Xfm$Anim_S$> xform {
+                  <Scalar> fps { 24 }
+                  <Char*> order { sphrt }
+                  <S$Anim> y { <V> { -0.442811 } }
+                  <S$Anim> z { <V> { 3.1798 } }
+                }
+              }
+              <Table> LeftCheek {
+                <Xfm$Anim_S$> xform {
+                  <Scalar> fps { 24 }
+                  <Char*> order { sphrt }
+                  <S$Anim> x { <V> { 1.33455 } }
+                  <S$Anim> y { <V> { -0.785834 } }
+                  <S$Anim> z { <V> { 2.23436 } }
+                }
+              }
+              <Table> RightCheek {
+                <Xfm$Anim_S$> xform {
+                  <Scalar> fps { 24 }
+                  <Char*> order { sphrt }
+                  <S$Anim> p { <V> { -180 } }
+                  <S$Anim> x { <V> { -1.335 } }
+                  <S$Anim> y { <V> { -0.786 } }
+                  <S$Anim> z { <V> { 2.234 } }
+                }
+              }
+            }
+            <Table> LeftShoulder {
+              <Xfm$Anim_S$> xform {
+                <Scalar> fps { 24 }
+                <Char*> order { sphrt }
+                <S$Anim> h {
+                  <V> {
+                    54.1867 52.7347 48.3318 40.4546 36.9912 40.4546
+                    48.3318 52.7347
+                  }
+                }
+                <S$Anim> p {
+                  <V> {
+                    12.3221 11.4742 8.79595 2.26419 7.33061 2.26419
+                    8.79595 11.4742
+                  }
+                }
+                <S$Anim> r {
+                  <V> {
+                    102.92 101.084 94.9159 80.6083 80.99 80.6083 94.9159
+                    101.084
+                  }
+                }
+                <S$Anim> x { <V> { 2 } }
+                <S$Anim> z { <V> { -0.0746328 } }
+              }
+              <Table> LeftElbow {
+                <Xfm$Anim_S$> xform {
+                  <Scalar> fps { 24 }
+                  <Char*> order { sphrt }
+                  <S$Anim> h {
+                    <V> {
+                      -14.55 -13.1347 -9.07423 -0.647771 -0.647771
+                      -0.647771 -9.07423 -13.1347
+                    }
+                  }
+                  <S$Anim> p { <V> { -180 } }
+                  <S$Anim> r {
+                    <V> {
+                      -76.533 -73.088 -63.2039 -42.7362 -42.7362
+                      -42.7362 -63.2039 -73.088
+                    }
+                  }
+                  <S$Anim> x { <V> { 1.93231 } }
+                  <S$Anim> y { <V> { -1.7857 } }
+                  <S$Anim> z { <V> { 0.0291871 } }
+                }
+                <Table> LeftWrist {
+                  <Xfm$Anim_S$> xform {
+                    <Scalar> fps { 24 }
+                    <Char*> order { sphrt }
+                    <S$Anim> r { <V> { 11.7009 } }
+                    <S$Anim> x { <V> { 3.28601 } }
+                  }
+                  <Table> ThumbKnuckle {
+                    <Xfm$Anim_S$> xform {
+                      <Scalar> fps { 24 }
+                      <Char*> order { sphrt }
+                      <S$Anim> p { <V> { -149.57 } }
+                      <S$Anim> r { <V> { -63.6819 } }
+                      <S$Anim> x { <V> { 1.07896 } }
+                      <S$Anim> y { <V> { -0.0354719 } }
+                      <S$Anim> z { <V> { -1.27703 } }
+                    }
+                    <Table> joint17 {
+                      <Xfm$Anim_S$> xform {
+                        <Scalar> fps { 24 }
+                        <Char*> order { sphrt }
+                        <S$Anim> h { <V> { 2.7476 } }
+                        <S$Anim> p { <V> { 3.51928 } }
+                        <S$Anim> r { <V> { 0.0844255 } }
+                        <S$Anim> x { <V> { 0.201788 } }
+                        <S$Anim> y { <V> { -0.44451 } }
+                        <S$Anim> z { <V> { 0.861278 } }
+                      }
+                      <Table> joint18 {
+                        <Xfm$Anim_S$> xform {
+                          <Scalar> fps { 24 }
+                          <Char*> order { sphrt }
+                          <S$Anim> x { <V> { 0.0706433 } }
+                          <S$Anim> y { <V> { -0.364087 } }
+                          <S$Anim> z { <V> { 0.702387 } }
+                        }
+                      }
+                    }
+                  }
+                  <Table> IndexKnuckle {
+                    <Xfm$Anim_S$> xform {
+                      <Scalar> fps { 24 }
+                      <Char*> order { sphrt }
+                      <S$Anim> p { <V> { 180 } }
+                      <S$Anim> r { <V> { -63.6819 } }
+                      <S$Anim> x { <V> { 3.06334 } }
+                      <S$Anim> y { <V> { -0.480498 } }
+                      <S$Anim> z { <V> { -0.946563 } }
+                    }
+                    <Table> joint9 {
+                      <Xfm$Anim_S$> xform {
+                        <Scalar> fps { 24 }
+                        <Char*> order { sphrt }
+                        <S$Anim> h { <V> { 2.7476 } }
+                        <S$Anim> p { <V> { 3.51928 } }
+                        <S$Anim> r { <V> { 0.0844255 } }
+                        <S$Anim> x { <V> { 0.603673 } }
+                        <S$Anim> y { <V> { -1.00174 } }
+                        <S$Anim> z { <V> { 0.175408 } }
+                      }
+                      <Table> joint13 {
+                        <Xfm$Anim_S$> xform {
+                          <Scalar> fps { 24 }
+                          <Char*> order { sphrt }
+                          <S$Anim> x { <V> { 0.132476 } }
+                          <S$Anim> y { <V> { -1.45991 } }
+                          <S$Anim> z { <V> { 0.175359 } }
+                        }
+                      }
+                    }
+                  }
+                  <Table> MiddleKnuckle {
+                    <Xfm$Anim_S$> xform {
+                      <Scalar> fps { 24 }
+                      <Char*> order { sphrt }
+                      <S$Anim> p { <V> { 180 } }
+                      <S$Anim> r { <V> { -63.6819 } }
+                      <S$Anim> x { <V> { 2.99439 } }
+                      <S$Anim> y { <V> { -0.466219 } }
+                      <S$Anim> z { <V> { -0.0446501 } }
+                    }
+                    <Table> joint10 {
+                      <Xfm$Anim_S$> xform {
+                        <Scalar> fps { 24 }
+                        <Char*> order { sphrt }
+                        <S$Anim> h { <V> { 2.7476 } }
+                        <S$Anim> p { <V> { 3.51928 } }
+                        <S$Anim> r { <V> { 0.0844255 } }
+                        <S$Anim> x { <V> { 0.738836 } }
+                        <S$Anim> y { <V> { -1.04718 } }
+                        <S$Anim> z { <V> { -0.0220763 } }
+                      }
+                      <Table> joint14 {
+                        <Xfm$Anim_S$> xform {
+                          <Scalar> fps { 24 }
+                          <Char*> order { sphrt }
+                          <S$Anim> x { <V> { 0.175298 } }
+                          <S$Anim> y { <V> { -1.5626 } }
+                          <S$Anim> z { <V> { -0.00443142 } }
+                        }
+                      }
+                    }
+                  }
+                  <Table> RingKnuckle {
+                    <Xfm$Anim_S$> xform {
+                      <Scalar> fps { 24 }
+                      <Char*> order { sphrt }
+                      <S$Anim> p { <V> { 180 } }
+                      <S$Anim> r { <V> { -63.6819 } }
+                      <S$Anim> x { <V> { 2.80937 } }
+                      <S$Anim> y { <V> { -0.608093 } }
+                      <S$Anim> z { <V> { 0.761463 } }
+                    }
+                    <Table> joint11 {
+                      <Xfm$Anim_S$> xform {
+                        <Scalar> fps { 24 }
+                        <Char*> order { sphrt }
+                        <S$Anim> h { <V> { 2.7476 } }
+                        <S$Anim> p { <V> { 3.51928 } }
+                        <S$Anim> r { <V> { 0.0844255 } }
+                        <S$Anim> x { <V> { 0.619813 } }
+                        <S$Anim> y { <V> { -1.14582 } }
+                        <S$Anim> z { <V> { -0.211407 } }
+                      }
+                      <Table> joint15 {
+                        <Xfm$Anim_S$> xform {
+                          <Scalar> fps { 24 }
+                          <Char*> order { sphrt }
+                          <S$Anim> x { <V> { 0.19719 } }
+                          <S$Anim> y { <V> { -1.06463 } }
+                          <S$Anim> z { <V> { -0.0561094 } }
+                        }
+                      }
+                    }
+                  }
+                  <Table> PinkieKnuckle {
+                    <Xfm$Anim_S$> xform {
+                      <Scalar> fps { 24 }
+                      <Char*> order { sphrt }
+                      <S$Anim> p { <V> { 180 } }
+                      <S$Anim> r { <V> { -63.6819 } }
+                      <S$Anim> x { <V> { 2.60433 } }
+                      <S$Anim> y { <V> { -0.576535 } }
+                      <S$Anim> z { <V> { 1.54473 } }
+                    }
+                    <Table> joint12 {
+                      <Xfm$Anim_S$> xform {
+                        <Scalar> fps { 24 }
+                        <Char*> order { sphrt }
+                        <S$Anim> h { <V> { 2.7476 } }
+                        <S$Anim> p { <V> { 3.51928 } }
+                        <S$Anim> r { <V> { 0.0844255 } }
+                        <S$Anim> x { <V> { 0.532062 } }
+                        <S$Anim> y { <V> { -0.806827 } }
+                        <S$Anim> z { <V> { -0.356372 } }
+                      }
+                      <Table> joint16 {
+                        <Xfm$Anim_S$> xform {
+                          <Scalar> fps { 24 }
+                          <Char*> order { sphrt }
+                          <S$Anim> x { <V> { 0.313244 } }
+                          <S$Anim> y { <V> { -0.792345 } }
+                          <S$Anim> z { <V> { -0.0759468 } }
+                        }
+                      }
+                    }
+                  }
+                }
+                <Table> effector3 {
+                  <Xfm$Anim_S$> xform {
+                    <Scalar> fps { 24 }
+                    <Char*> order { sphrt }
+                    <S$Anim> x { <V> { 3.28601 } }
+                  }
+                }
+              }
+            }
+            <Table> LeftShoulder1 {
+              <Xfm$Anim_S$> xform {
+                <Scalar> fps { 24 }
+                <Char*> order { sphrt }
+                <S$Anim> h {
+                  <V> {
+                    -47.7109 -45.7827 -39.2224 -33.8582 -30.3098
+                    -33.8582 -39.2224 -45.7827
+                  }
+                }
+                <S$Anim> p {
+                  <V> {
+                    -171.546 -172.61 -179.612 -170.772 -165.914 -170.772
+                    -179.612 -172.61
+                  }
+                }
+                <S$Anim> r {
+                  <V> {
+                    -93.8495 -91.0713 -77.5161 -78.4649 -78.1356
+                    -78.4649 -77.5161 -91.0713
+                  }
+                }
+                <S$Anim> x { <V> { -2 } }
+                <S$Anim> z { <V> { -0.0746346 } }
+              }
+              <Table> LeftElbow1 {
+                <Xfm$Anim_S$> xform {
+                  <Scalar> fps { 24 }
+                  <Char*> order { sphrt }
+                  <S$Anim> h {
+                    <V> {
+                      -11.0076 -9.06484 -0.644091 -0.644091 -0.644091
+                      -0.644091 -0.644091 -9.06484
+                    }
+                  }
+                  <S$Anim> p {
+                    <V> {
+                      180 180 -180 -180 -180 -180 -180 180
+                    }
+                  }
+                  <S$Anim> r {
+                    <V> {
+                      -67.9106 -63.1815 -42.7378 -42.7378 -42.7378
+                      -42.7378 -42.7378 -63.1815
+                    }
+                  }
+                  <S$Anim> x { <V> { -1.93231 } }
+                  <S$Anim> y { <V> { 1.7857 } }
+                  <S$Anim> z { <V> { -0.02919 } }
+                }
+                <Table> LeftWrist1 {
+                  <Xfm$Anim_S$> xform {
+                    <Scalar> fps { 24 }
+                    <Char*> order { sphrt }
+                    <S$Anim> r { <V> { 11.7009 } }
+                    <S$Anim> x { <V> { -3.28602 } }
+                  }
+                  <Table> ThumbKnuckle1 {
+                    <Xfm$Anim_S$> xform {
+                      <Scalar> fps { 24 }
+                      <Char*> order { sphrt }
+                      <S$Anim> p { <V> { -149.349 } }
+                      <S$Anim> r { <V> { -63.6819 } }
+                      <S$Anim> x { <V> { -1.07895 } }
+                      <S$Anim> y { <V> { 0.0354751 } }
+                      <S$Anim> z { <V> { 1.27703 } }
+                    }
+                    <Table> joint19 {
+                      <Xfm$Anim_S$> xform {
+                        <Scalar> fps { 24 }
+                        <Char*> order { sphrt }
+                        <S$Anim> h { <V> { 2.7476 } }
+                        <S$Anim> p { <V> { 3.51928 } }
+                        <S$Anim> r { <V> { 0.0844255 } }
+                        <S$Anim> x { <V> { -0.201793 } }
+                        <S$Anim> y { <V> { 0.444512 } }
+                        <S$Anim> z { <V> { -0.861285 } }
+                      }
+                      <Table> joint20 {
+                        <Xfm$Anim_S$> xform {
+                          <Scalar> fps { 24 }
+                          <Char*> order { sphrt }
+                          <S$Anim> x { <V> { -0.07064 } }
+                          <S$Anim> y { <V> { 0.36409 } }
+                          <S$Anim> z { <V> { -0.70238 } }
+                        }
+                      }
+                    }
+                  }
+                  <Table> IndexKnuckle1 {
+                    <Xfm$Anim_S$> xform {
+                      <Scalar> fps { 24 }
+                      <Char*> order { sphrt }
+                      <S$Anim> p { <V> { 180 } }
+                      <S$Anim> r { <V> { -63.6819 } }
+                      <S$Anim> x { <V> { -3.06332 } }
+                      <S$Anim> y { <V> { 0.480499 } }
+                      <S$Anim> z { <V> { 0.946568 } }
+                    }
+                    <Table> joint21 {
+                      <Xfm$Anim_S$> xform {
+                        <Scalar> fps { 24 }
+                        <Char*> order { sphrt }
+                        <S$Anim> h { <V> { 2.7476 } }
+                        <S$Anim> p { <V> { 3.51928 } }
+                        <S$Anim> r { <V> { 0.0844255 } }
+                        <S$Anim> x { <V> { -0.603677 } }
+                        <S$Anim> y { <V> { 1.00174 } }
+                        <S$Anim> z { <V> { -0.175404 } }
+                      }
+                      <Table> joint22 {
+                        <Xfm$Anim_S$> xform {
+                          <Scalar> fps { 24 }
+                          <Char*> order { sphrt }
+                          <S$Anim> x { <V> { -0.13247 } }
+                          <S$Anim> y { <V> { 1.45991 } }
+                          <S$Anim> z { <V> { -0.17536 } }
+                        }
+                      }
+                    }
+                  }
+                  <Table> MiddleKnuckle1 {
+                    <Xfm$Anim_S$> xform {
+                      <Scalar> fps { 24 }
+                      <Char*> order { sphrt }
+                      <S$Anim> p { <V> { 180 } }
+                      <S$Anim> r { <V> { -63.6819 } }
+                      <S$Anim> x { <V> { -2.99438 } }
+                      <S$Anim> y { <V> { 0.46622 } }
+                      <S$Anim> z { <V> { 0.0446518 } }
+                    }
+                    <Table> joint23 {
+                      <Xfm$Anim_S$> xform {
+                        <Scalar> fps { 24 }
+                        <Char*> order { sphrt }
+                        <S$Anim> h { <V> { 2.7476 } }
+                        <S$Anim> p { <V> { 3.51928 } }
+                        <S$Anim> r { <V> { 0.0844255 } }
+                        <S$Anim> x { <V> { -0.738843 } }
+                        <S$Anim> y { <V> { 1.04719 } }
+                        <S$Anim> z { <V> { 0.0220712 } }
+                      }
+                      <Table> joint24 {
+                        <Xfm$Anim_S$> xform {
+                          <Scalar> fps { 24 }
+                          <Char*> order { sphrt }
+                          <S$Anim> x { <V> { -0.17529 } }
+                          <S$Anim> y { <V> { 1.5626 } }
+                          <S$Anim> z { <V> { 0.00443 } }
+                        }
+                      }
+                    }
+                  }
+                  <Table> RingKnuckle1 {
+                    <Xfm$Anim_S$> xform {
+                      <Scalar> fps { 24 }
+                      <Char*> order { sphrt }
+                      <S$Anim> p { <V> { 180 } }
+                      <S$Anim> r { <V> { -63.6819 } }
+                      <S$Anim> x { <V> { -2.80935 } }
+                      <S$Anim> y { <V> { 0.608101 } }
+                      <S$Anim> z { <V> { -0.761462 } }
+                    }
+                    <Table> joint25 {
+                      <Xfm$Anim_S$> xform {
+                        <Scalar> fps { 24 }
+                        <Char*> order { sphrt }
+                        <S$Anim> h { <V> { 2.7476 } }
+                        <S$Anim> p { <V> { 3.51928 } }
+                        <S$Anim> r { <V> { 0.0844255 } }
+                        <S$Anim> x { <V> { -0.619806 } }
+                        <S$Anim> y { <V> { 1.14582 } }
+                        <S$Anim> z { <V> { 0.211407 } }
+                      }
+                      <Table> joint26 {
+                        <Xfm$Anim_S$> xform {
+                          <Scalar> fps { 24 }
+                          <Char*> order { sphrt }
+                          <S$Anim> x { <V> { -0.19719 } }
+                          <S$Anim> y { <V> { 1.06463 } }
+                          <S$Anim> z { <V> { 0.05611 } }
+                        }
+                      }
+                    }
+                  }
+                  <Table> PinkieKnuckle1 {
+                    <Xfm$Anim_S$> xform {
+                      <Scalar> fps { 24 }
+                      <Char*> order { sphrt }
+                      <S$Anim> p { <V> { 180 } }
+                      <S$Anim> r { <V> { -63.6819 } }
+                      <S$Anim> x { <V> { -2.60431 } }
+                      <S$Anim> y { <V> { 0.576544 } }
+                      <S$Anim> z { <V> { -1.54472 } }
+                    }
+                    <Table> joint27 {
+                      <Xfm$Anim_S$> xform {
+                        <Scalar> fps { 24 }
+                        <Char*> order { sphrt }
+                        <S$Anim> h { <V> { 2.7476 } }
+                        <S$Anim> p { <V> { 3.51928 } }
+                        <S$Anim> r { <V> { 0.0844255 } }
+                        <S$Anim> x { <V> { -0.532057 } }
+                        <S$Anim> y { <V> { 0.806831 } }
+                        <S$Anim> z { <V> { 0.356372 } }
+                      }
+                      <Table> joint28 {
+                        <Xfm$Anim_S$> xform {
+                          <Scalar> fps { 24 }
+                          <Char*> order { sphrt }
+                          <S$Anim> x { <V> { -0.31325 } }
+                          <S$Anim> y { <V> { 0.79234 } }
+                          <S$Anim> z { <V> { 0.075947 } }
+                        }
+                      }
+                    }
+                  }
+                }
+                <Table> effector4 {
+                  <Xfm$Anim_S$> xform {
+                    <Scalar> fps { 24 }
+                    <Char*> order { sphrt }
+                    <S$Anim> x { <V> { -3.28602 } }
+                  }
+                }
+              }
+            }
+          }
+          <Table> LeftHip {
+            <Xfm$Anim_S$> xform {
+              <Scalar> fps { 24 }
+              <Char*> order { sphrt }
+              <S$Anim> h {
+                <V> {
+                  45.0739 44.2271 42.2244 39.9692 38.6341 39.1847
+                  41.3994 43.9261
+                }
+              }
+              <S$Anim> p {
+                <V> {
+                  -39.7264 -38.8037 -36.0961 -32.1103 -28.3551 -26.59
+                  -29.8379 -36.2093
+                }
+              }
+              <S$Anim> r {
+                <V> {
+                  20.6217 20.9838 21.7725 22.6195 23.4635 24.3874
+                  24.0524 22.061
+                }
+              }
+              <S$Anim> x { <V> { 1.08311 } }
+              <S$Anim> y { <V> { -1 } }
+              <S$Anim> z { <V> { -0.402796 } }
+            }
+            <Table> LeftKnee {
+              <Xfm$Anim_S$> xform {
+                <Scalar> fps { 24 }
+                <Char*> order { sphrt }
+                <S$Anim> p {
+                  <V> {
+                    87.4429 85.3331 79.9713 73.3029 68.7396 69.5906
+                    76.1482 83.9306
+                  }
+                }
+                <S$Anim> y { <V> { -3 } }
+              }
+              <Table> LeftAnkle {
+                <Xfm$Anim_S$> xform {
+                  <Scalar> fps { 24 }
+                  <Char*> order { sphrt }
+                  <S$Anim> h {
+                    <V> {
+                      -10.5559 -9.69179 -7.56732 -5.11755 -4.00324
+                      -5.71473 -8.50583 -10.1896
+                    }
+                  }
+                  <S$Anim> p {
+                    <V> {
+                      -11.728 -8.6491 -1.97871 4.54 7.3353 4.07126
+                      -2.56913 -8.93515
+                    }
+                  }
+                  <S$Anim> r {
+                    <V> {
+                      -19.8193 -20.8326 -23.0521 -25.3205 -26.763
+                      -26.8132 -24.7536 -21.5303
+                    }
+                  }
+                  <S$Anim> y { <V> { -4 } }
+                }
+                <Table> LeftBall {
+                  <Xfm$Anim_S$> xform {
+                    <Scalar> fps { 24 }
+                    <Char*> order { sphrt }
+                    <S$Anim> y { <V> { -4 } }
+                    <S$Anim> z { <V> { 4 } }
+                  }
+                  <Table> LeftToe {
+                    <Xfm$Anim_S$> xform {
+                      <Scalar> fps { 24 }
+                      <Char*> order { sphrt }
+                      <S$Anim> z { <V> { 4 } }
+                    }
+                  }
+                }
+              }
+              <Table> effector1 {
+                <Xfm$Anim_S$> xform {
+                  <Scalar> fps { 24 }
+                  <Char*> order { sphrt }
+                  <S$Anim> y { <V> { -4 } }
+                }
+              }
+            }
+          }
+          <Table> RightHip {
+            <Xfm$Anim_S$> xform {
+              <Scalar> fps { 24 }
+              <Char*> order { sphrt }
+              <S$Anim> h {
+                <V> {
+                  -8.44401 -8.78578 -9.43915 -9.81063 -9.7294 -9.41099
+                  -8.97554 -8.59949
+                }
+              }
+              <S$Anim> p {
+                <V> {
+                  -43.9436 -48.0877 -49.1457 -46.5971 -43.8838 -43.1059
+                  -43.6503 -43.966
+                }
+              }
+              <S$Anim> r {
+                <V> {
+                  4.01856 3.66304 2.8295 2.2853 2.52804 3.0371 3.54361
+                  3.89128
+                }
+              }
+              <S$Anim> x { <V> { -1.14218 } }
+              <S$Anim> y { <V> { -1 } }
+              <S$Anim> z { <V> { -0.402796 } }
+            }
+            <Table> RightKnee {
+              <Xfm$Anim_S$> xform {
+                <Scalar> fps { 24 }
+                <Char*> order { sphrt }
+                <S$Anim> p {
+                  <V> {
+                    22.8007 35.2377 47.0175 46.6556 37.3387 30.4439
+                    26.5687 23.9463
+                  }
+                }
+                <S$Anim> r {
+                  <V> {
+                    -0.000175164 0 0 0 0 0 0 -8.24945e-005
+                  }
+                }
+                <S$Anim> y { <V> { -3 } }
+              }
+              <Table> RightAnkle {
+                <Xfm$Anim_S$> xform {
+                  <Scalar> fps { 24 }
+                  <Char*> order { sphrt }
+                  <S$Anim> h {
+                    <V> {
+                      0.257545 0.192588 0.100019 0.126038 0.266802
+                      0.352025 0.34282 0.28815
+                    }
+                  }
+                  <S$Anim> p {
+                    <V> {
+                      33.7543 27.6113 21.6591 24.275 33.0571 36.9935
+                      36.6322 34.7985
+                    }
+                  }
+                  <S$Anim> r {
+                    <V> {
+                      -0.768022 -0.876252 -0.885677 -0.790503 -0.828914
+                      -0.881078 -0.874 -0.809979
+                    }
+                  }
+                  <S$Anim> y { <V> { -4 } }
+                }
+                <Table> RightBall {
+                  <Xfm$Anim_S$> xform {
+                    <Scalar> fps { 24 }
+                    <Char*> order { sphrt }
+                    <S$Anim> y { <V> { -4 } }
+                    <S$Anim> z { <V> { 4 } }
+                  }
+                  <Table> RightToe {
+                    <Xfm$Anim_S$> xform {
+                      <Scalar> fps { 24 }
+                      <Char*> order { sphrt }
+                      <S$Anim> z { <V> { 4 } }
+                    }
+                  }
+                }
+              }
+              <Table> effector2 {
+                <Xfm$Anim_S$> xform {
+                  <Scalar> fps { 24 }
+                  <Char*> order { sphrt }
+                  <S$Anim> y { <V> { -4 } }
+                }
+              }
+            }
+          }
+        }
+        <Table> LeftHeelCtrl {
+          <Xfm$Anim_S$> xform {
+            <Scalar> fps { 24 }
+            <Char*> order { sphrt }
+            <S$Anim> h { <V> { 48.4737 } }
+            <S$Anim> p {
+              <V> {
+                36.9042 38.7466 42.7999 46.8531 48.6955 46.8531 42.7999
+                38.7466
+              }
+            }
+            <S$Anim> r { <V> { 8.15785 } }
+            <S$Anim> x { <V> { 1.17699 } }
+            <S$Anim> y { <V> { 8.00314 } }
+            <S$Anim> z {
+              <V> {
+                -4.45649 -4.54234 -4.74706 -4.99141 -5.19613 -5.28198
+                -5.06797 -4.67051
+              }
+            }
+          }
+          <Table> LeftToeCtrl {
+            <Xfm$Anim_S$> xform {
+              <Scalar> fps { 24 }
+              <Char*> order { sphrt }
+              <S$Anim> z { <V> { 8 } }
+            }
+            <Table> LeftBallCtrl {
+              <Xfm$Anim_S$> xform {
+                <Scalar> fps { 24 }
+                <Char*> order { sphrt }
+                <S$Anim> z { <V> { -4 } }
+              }
+              <Table> LeftAnkleCtrl {
+                <Xfm$Anim_S$> xform {
+                  <Scalar> fps { 24 }
+                  <Char*> order { sphrt }
+                  <S$Anim> y { <V> { 4 } }
+                  <S$Anim> z { <V> { -4 } }
+                }
+              }
+            }
+          }
+          <Table> LeftKneeLocator {
+            <Xfm$Anim_S$> xform {
+              <Scalar> fps { 24 }
+              <Char*> order { sphrt }
+              <S$Anim> y { <V> { 7.52226 } }
+              <S$Anim> z { <V> { 12.9493 } }
+            }
+          }
+        }
+        <Table> RightHeelCtrl {
+          <Xfm$Anim_S$> xform {
+            <Scalar> fps { 24 }
+            <Char*> order { sphrt }
+            <S$Anim> h {
+              <V> {
+                -9.0482 -9.20996 -9.51038 -9.67215 -9.60726 -9.45252
+                -9.26783 -9.11309
+              }
+            }
+            <S$Anim> p {
+              <V> {
+                30.5939 32.7777 37.582 42.3863 44.5701 42.3863 37.582
+                32.7777
+              }
+            }
+            <S$Anim> r {
+              <V> {
+                0.457122 -0.0638432 -1.03135 -1.55231 -1.34333 -0.844993
+                -0.2502 0.248141
+              }
+            }
+            <S$Anim> x { <V> { -0.548042 } }
+            <S$Anim> y {
+              <V> {
+                5.77453 5.96403 6.31596 6.50545 6.42944 6.24817 6.03182
+                5.85055
+              }
+            }
+            <S$Anim> z {
+              <V> {
+                -1.14695 -1.65906 -2.61012 -3.12223 -2.9168 -2.42693
+                -1.84225 -1.35238
+              }
+            }
+          }
+          <Table> LeftToeCtrl {
+            <Xfm$Anim_S$> xform {
+              <Scalar> fps { 24 }
+              <Char*> order { sphrt }
+              <S$Anim> z { <V> { 8 } }
+            }
+            <Table> RightBallCtrl {
+              <Xfm$Anim_S$> xform {
+                <Scalar> fps { 24 }
+                <Char*> order { sphrt }
+                <S$Anim> z { <V> { -4 } }
+              }
+              <Table> RightAnkleCtrl {
+                <Xfm$Anim_S$> xform {
+                  <Scalar> fps { 24 }
+                  <Char*> order { sphrt }
+                  <S$Anim> y { <V> { 4 } }
+                  <S$Anim> z { <V> { -4 } }
+                }
+              }
+            }
+          }
+          <Table> RightKneeLocator {
+            <Xfm$Anim_S$> xform {
+              <Scalar> fps { 24 }
+              <Char*> order { sphrt }
+              <S$Anim> y { <V> { 7.52226 } }
+              <S$Anim> z { <V> { 12.9493 } }
+            }
+          }
+        }
+        <Table> LeftKneeIK {
+          <Xfm$Anim_S$> xform {
+            <Scalar> fps { 24 }
+            <Char*> order { sphrt }
+            <S$Anim> x {
+              <V> {
+                2.50312 2.5896 2.77459 2.95159 3.02917 2.95159 2.77459
+                2.5896
+              }
+            }
+            <S$Anim> y {
+              <V> {
+                11.4245 11.3572 11.1971 11.021 10.9359 11.021 11.1971
+                11.3572
+              }
+            }
+            <S$Anim> z {
+              <V> {
+                -2.86411 -2.88261 -2.94529 -3.05661 -3.20403 -3.34718
+                -3.26619 -3.01077
+              }
+            }
+          }
+        }
+        <Table> RightKneeIK {
+          <Xfm$Anim_S$> xform {
+            <Scalar> fps { 24 }
+            <Char*> order { sphrt }
+            <S$Anim> x {
+              <V> {
+                -0.895663 -0.890893 -0.894004 -0.920881 -0.949601
+                -0.947271 -0.927091 -0.905588
+              }
+            }
+            <S$Anim> y {
+              <V> {
+                9.21505 9.32752 9.49262 9.47111 9.28921 9.20884 9.20343
+                9.21214
+              }
+            }
+            <S$Anim> z {
+              <V> {
+                0.863522 0.478551 -0.204065 -0.464057 -0.149046 0.23296
+                0.565494 0.785815
+              }
+            }
+          }
+        }
+        <Table> LeftArmIK {
+          <Xfm$Anim_S$> xform {
+            <Scalar> fps { 24 }
+            <Char*> order { sphrt }
+            <S$Anim> x { <V> { 6.86123 } }
+            <S$Anim> y {
+              <V> {
+                22.6646 22.7153 22.8267 22.9382 22.9889 22.9382 22.8267
+                22.7153
+              }
+            }
+            <S$Anim> z {
+              <V> {
+                -0.570607 -0.673938 -0.901265 -1.12859 -1.23192 -1.12859
+                -0.901265 -0.673938
+              }
+            }
+          }
+        }
+        <Table> RightArmIK {
+          <Xfm$Anim_S$> xform {
+            <Scalar> fps { 24 }
+            <Char*> order { sphrt }
+            <S$Anim> x { <V> { -6.3188 } }
+            <S$Anim> y {
+              <V> {
+                22.6187 22.6693 22.7808 22.8923 22.9429 22.8923 22.7808
+                22.6693
+              }
+            }
+            <S$Anim> z {
+              <V> {
+                -0.662648 -0.765978 -0.993306 -1.22063 -1.32396 -1.22063
+                -0.993306 -0.765978
+              }
+            }
+          }
+        }
+      }
+      <Table> SonicHoverBoard {
+        <Xfm$Anim_S$> xform {
+          <Scalar> fps { 24 }
+          <Char*> order { sphrt }
+          <S$Anim> i { <V> { 0.01 } }
+          <S$Anim> j { <V> { 0.01 } }
+          <S$Anim> k { <V> { 0.01 } }
+          <S$Anim> h {
+            <V> {
+              -54.9308 -53.3452 -49.6938 -45.833 -43.9741 -45.7149
+              -49.5554 -53.2858
+            }
+          }
+          <S$Anim> p {
+            <V> {
+              61.0187 63.5285 68.4161 72.5108 74.0472 72.2454 68.1086
+              63.4004
+            }
+          }
+          <S$Anim> r {
+            <V> {
+              -50.1428 -52.3516 -56.3662 -59.1202 -59.6302 -58.2226
+              -55.3508 -51.9368
+            }
+          }
+          <S$Anim> x { <V> { 0.951958 } }
+          <S$Anim> y {
+            <V> {
+              4.17453 4.36403 4.71596 4.90545 4.82944 4.64817 4.43182
+              4.25055
+            }
+          }
+          <S$Anim> z {
+            <V> {
+              -4.44695 -4.95906 -5.91012 -6.42223 -6.2168 -5.72693
+              -5.14225 -4.65238
+            }
+          }
+        }
+      }
+    }
+    <Table> morph {
+    }
+  }
+}

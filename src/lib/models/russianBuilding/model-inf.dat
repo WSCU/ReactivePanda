@@ -1,0 +1,12 @@
+salespitch=
+textures=ground.png turrent2.png hut.png turret.png 
+solid-models=tetris-building 
+name=Russian Building
+license=CCA 2.0
+other-files=tetris-building.mb 
+id=russianbuilding
+date=2004-12-13
+keywords=Building
+modeler=Jeremy Carson
+painter=Victoria Webb
+animator=

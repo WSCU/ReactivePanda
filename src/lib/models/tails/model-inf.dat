@@ -1,0 +1,13 @@
+salespitch=
+textures=tailseyeleft.jpg tailseye.png tailsgloves.png hoverboardtails.png tailsbody.png sonicmouth.jpg tailseyeright.jpg tailsshoe.png 
+rigged-models=tails 
+name=Tails
+license=CCA 2.0
+other-files=tails-animationset.mb 
+id=tails
+date=2004-12-13
+keywords=Character
+animations=tails-fallingwoboard tails-board tails-fallingwboard tails-win 
+modeler=Shaun Budhram
+painter=Benjamin Rosales
+animator=Shaun Budhram

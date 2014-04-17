@@ -1,0 +1,7 @@
+fileName,sphere/sphere.egg
+name,Sphere
+localSize,0.31
+cRadius,1
+cFloor,-1
+cTop,1
+cType,sphere

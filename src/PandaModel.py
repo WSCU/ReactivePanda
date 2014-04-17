@@ -20,9 +20,9 @@ import FileSearch
 
 # This fills in all of the defaults
 parameterCache = {}
-defaultModelParameters = {"localPosition" : P3(0,0,0),
-                          "localSize" : 1,
-                          "localOrientation" : HPR(0,0,0),
+defaultModelParameters = {"localPosition" : SP3(0,0,0),
+                          "localSize" : .05,
+                          "localOrientation" : SHPR(0,.25,0),
                           "joints" : [],
                           "animations" : None,
                           "defaultAnimation" : None,
@@ -33,15 +33,16 @@ defaultModelParameters = {"localPosition" : P3(0,0,0),
                           "cType" : "cyl"}
 
 pandaParameters = { "localSize" : 0.05,
-                    "localPosition" : P3( 0, 200, 0).start(),
-                    "localOrientation" : HPR(0, 0, 0).start()}
+                    "localPosition" : SP3( 0, 200, 0),
+                    "localOrientation" : SHPR(0, 0, 0)}
 def pandaModel(fileName = None, size = None, hpr = None, position = None):
     res = PandaModel(  fileName, size, hpr, position)
     return res
 class PandaModel(Proxy):
     def __init__(self, fileName, size, hpr, position):
-        Proxy.__init__(self, name = "Panda"+str(Globals.nextModelId), updater = updater)
+        Proxy.__init__(self, name = str(fileName)+"-gID: "+str(Globals.nextModelId), updater = updater)
         self._mFile = FileSearch.fileSearch(fileName, "models",["egg"])
+        print "Object Name: "+ str(fileName)+"-gID: "+str(Globals.nextModelId);
         print "File Name: "+str(fileName)
         print "File Path: "+str(pandaPath)
         if self._mFile is None:
@@ -76,27 +77,27 @@ class PandaModel(Proxy):
         if hpr is not None:
             self.hpr = hpr
         if size is not None:
-            self.size =size
+            self.size = Lift0F(size)
         showModel(self)#This call needs to move into the updater method. We don't have it working with the engine yet.
 
 def updater(self):
     #These parameters find the static offset which was created during initialization and the current position which is returned by the self.get() method
-    p2 = self._position.now()
-    p = self.get( "position")
-    s = self.get( "size")
-    d2 = self._hpr.now()
-    d = self.get( "hpr")
+    positionOffset = self._position
+    positionNow = self.get( "position")
+    sizeScalar = self.get( "size")
+    hprOffset = self._hpr
+    hprNow = self.get( "hpr")
     
     #This is the actual updates to position/size/hpr etc.
-    self._pandaModel.setScale(s*self._size)
-    self._pandaModel.setPos(p.x + p2.x*s,
-                            p.y + p2.y*s,
-                            p.z + p2.z*s)
+    self._pandaModel.setScale(sizeScalar*self._size)
+    self._pandaModel.setPos(positionNow.x + positionOffset.x*sizeScalar,
+                            positionNow.y + positionOffset.y*sizeScalar,
+                            positionNow.z + positionOffset.z*sizeScalar)
                             
      
-    self._pandaModel.setHpr(degrees(d.h + d2.h),
-                            degrees(d.p + d2.p),
-                            degrees(d.r + d2.r))
+    self._pandaModel.setHpr(degrees(hprNow.h + hprOffset.h),
+                            degrees(hprNow.p + hprOffset.p),
+                            degrees(hprNow.r + hprOffset.r))
  
 def showModel(self):
     if not self._onScreen:

@@ -1,0 +1,9 @@
+fileName,jeep.egg
+name,Jeep
+localSize,0.0884279838097
+localPosition,P3","0.02","0.02","0.00
+localOrientation,HPR","0.00","0.00","0.00
+cRadius,0.745614230633
+cFloor,0.0
+cTop,1.0
+cType,cyl

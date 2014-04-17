@@ -133,7 +133,7 @@ class LiftF(SFact):
                         failed = True
                         print "Argument in " + self.name + " expects to be " + str(self.types[i]) + " but is a " + str(self.args[i].outType)
                 if not failed:
-                    ea = map(lambda x: maybeLift(x).start(), self.args)
+                    ea = map(lambda x: maybeLift(x).start()[0], self.args)
                     return Lift(self.name,self.f, ea), self.outType
             else:
                 print "Incorrect number of arguments in " + self.name
@@ -169,8 +169,8 @@ class StateMachineF(CachedValueF):
         self.outType = anyType
         self.i = i
         self.f = f
-    def start(self, expectedType):
-        return StateMachine(self.state, self.i.start(anyType), self.f), self.outType
+    def start(self, expectedType = anyType):
+        return StateMachine(self.state, self.i.start(expectedType = anyType)[0], self.f), self.outType
 
 #Creates a Observer Factory
 class ObserverF(CachedValueF):

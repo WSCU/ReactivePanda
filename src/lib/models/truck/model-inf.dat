@@ -1,0 +1,12 @@
+salespitch=
+textures=carnsx-green.png carnsx-tire.png carnsx.png carnsx-blue.png cartruck-red.png carnsx-yellow.png cartruck-blue.png cartruck-purple.png cartruck-orange.png 
+solid-models=cartruck 
+name=Truck
+license=CCA 2.0
+other-files=cartruck.mb 
+id=truck
+date=2004-12-13
+keywords=Vehicle
+modeler=Fangwei Lee
+painter=Demetrius Jordan
+animator=

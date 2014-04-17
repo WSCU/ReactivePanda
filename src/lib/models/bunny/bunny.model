@@ -1,0 +1,9 @@
+fileName,bunny.egg
+name,Bunny
+localSize,0.241066308596
+localPosition,P3","0.00","0.04","0.00
+localOrientation,HPR","0.00","0.00","0.00
+cRadius,0.333333313465
+cFloor,0.0
+cTop,1.0
+cType,cyl

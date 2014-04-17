@@ -1,0 +1,12 @@
+salespitch=
+textures=ford-parked-tex.png 
+solid-models=ford 
+name=Ford Car
+license=CCA 2.0
+other-files=ford.mb 
+id=fordcar
+date=2004-12-13
+keywords=Vehicle
+modeler=Vamsi Bandaru
+painter=Shao Zhang
+animator=

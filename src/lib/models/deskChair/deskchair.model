@@ -1,0 +1,9 @@
+fileName,deskchair.egg
+name,DeskChair
+localSize,0.0012
+localPosition,P3","0.03","0"," 0.46
+localOrientation,HPR","3.14","0.00","0.00
+cRadius,0.36
+cFloor,0.0
+cTop,1.0
+cType,cyl

@@ -1,0 +1,9 @@
+fileName,trainengine.egg
+name,Trainengine
+localSize,0.1
+localPosition,P3","0.00","0.80","0.00
+localOrientation,HPR","-3.14","0.00","0.00
+cRadius,0.780701935291
+cFloor,0.0
+cTop,1.0
+cType,cyl
