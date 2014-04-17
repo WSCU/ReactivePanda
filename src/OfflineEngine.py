@@ -83,16 +83,24 @@ def printUpdate(proxy):
     for k, v in proxy._signals.items():
         print (k + ": " + str(v.state))
 
-def leftMouse(l):
-    Globals.simEvents.extend(["mouseLeft"] + l)
+def leftMouseEvents(l):
+    e = []
+    for i in l:
+        e.append((i, True))
+    Globals.simEvents.extend(["LBP"] + e)
     
-def rightMouse(l):
-    Globals.simEvents.extend(["mouseRight"] + l)
+def rightMouseEvents(l):
+    e = []
+    for i in l:
+        e.append((i, True))
+    Globals.simEvents.extend(["RBP"] + e)
 
 p = printer(name = "integral", i = integral(1))
 #q = printer(name = "integral 2", i = integral(p.i))
-leftMouse([(3, True), (32, True)])
+leftMouseEvents([1, 2, 3, 7, 19, 32])
+rightMouseEvents([1, 2, 4, 5])
 def main():
        engine(50, verbose = True) 
 if __name__ == "__main__":
     main()
+
