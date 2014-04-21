@@ -105,3 +105,14 @@ def main():
 if __name__ == "__main__":
     main()
 
+#testing stuff after this point
+
+def mIntegrals():
+    p = printer ("integal", i = integral(1))
+    q = ("integral 2", i = integral(p, 1))
+    engine(50, verbose = True)
+    
+def holdTest():
+    p = printer("Hold", i = hold(2))
+    mouseLeft([20, 25, 30,, 35, 40])
+    engine(50, verbose = True)
