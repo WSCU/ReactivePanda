@@ -44,8 +44,12 @@ class StateMachine(CachedSignal):
         CachedSignal.__init__(self, f)
         self.i = i
         self.state = s0
-    def now1(self):
-        return self.f(self)
+        self.time = -1
+    def now(self):
+        if self.time is not Globals.currentTime:
+            self.state = self.f(self)
+            self.time = Globals.currentTime
+        return self.state
     def __rmul__(self, y):
         y = maybeLift(y)
         return LiftF("mul", lambda x,y: y*x, [self.state, y])

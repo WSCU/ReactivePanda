@@ -106,7 +106,7 @@ def mIntegrals():
     engine(50, verbose = True)
 
 def main():
-    accumTest()
+    mIntegrals()
 if __name__ == "__main__":
     main()
 
