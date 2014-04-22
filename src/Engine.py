@@ -1,6 +1,7 @@
 import unittest
 import sched, time
 #from StateMachine import *
+from Externals import initEvents
 from Signal import *
 from Functions import *
 from Globals import *
@@ -12,13 +13,14 @@ def heartBeat(ct, events):
     Globals.currentTime = ct
     Globals.events = events
     Globals.thunks = []
+    #print "time steps: "+repr(ct)
+    #for event in events:
+        #print "Events: "+repr(event)
     for worldObject in Globals.worldObjects:
         #print("Updating object: " + repr(worldObject))
         #print repr(worldObject)
         Globals.thunks.extend(worldObject.update())
-    if Globals.eventSignals is not None: 
-            for signal in Globals.events:
-                print repr(signal)
+    
     for f in Globals.thunks:
         f()
     for obj in Globals.newObjects:
@@ -44,7 +46,7 @@ def engine(ct):
     #set the time to 0
     #get events and clear thunks
     Globals.currentTime = ct
-
+    initEvents()
     taskMgr.add(stepTask, 'PandaClock')
     run()
 def stepTask(task):

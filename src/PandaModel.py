@@ -42,9 +42,7 @@ class PandaModel(Proxy):
     def __init__(self, fileName, size, hpr, position):
         Proxy.__init__(self, name = str(fileName)+"-gID: "+str(Globals.nextModelId), updater = updater)
         self._mFile = FileSearch.fileSearch(fileName, "models",["egg"])
-        print "Object Name: "+ str(fileName)+"-gID: "+str(Globals.nextModelId);
-        print "File Name: "+str(fileName)
-        print "File Path: "+str(pandaPath)
+        #print "Object Name: "+ str(fileName)+"-gID: "+str(Globals.nextModelId);
         if self._mFile is None:
             print "Can't find model " + repr(fileName)
             self._mFile = Filename("/c/Panda3D-1.8.1/models/"+fileName)
@@ -58,7 +56,7 @@ class PandaModel(Proxy):
             print repr(mParamFile)
             mParamFile.setExtension("model")
             if mParamFile.exists():
-                self._mParams = FileIO.loadDict(mParamFile, defaultModelParameters)
+                self._mParams = FileIO.loadDict(mParamFile, defaults = defaultModelParameters)
             else:
                 print "No .model for " + str(fileName)
                 self._mParams = defaultModelParameters
@@ -83,12 +81,15 @@ class PandaModel(Proxy):
 def updater(self):
     #These parameters find the static offset which was created during initialization and the current position which is returned by the self.get() method
     positionOffset = self._position
-    positionNow = self.get( "position")
-    sizeScalar = self.get( "size")
+    positionNow = self.get("position")
+    sizeScalar = self.get("size")
     hprOffset = self._hpr
     hprNow = self.get( "hpr")
     
     #This is the actual updates to position/size/hpr etc.
+    if Globals.eventSignals is not None: 
+            for signal in Globals.events:
+                print repr(signal)
     self._pandaModel.setScale(sizeScalar*self._size)
     self._pandaModel.setPos(positionNow.x + positionOffset.x*sizeScalar,
                             positionNow.y + positionOffset.y*sizeScalar,
