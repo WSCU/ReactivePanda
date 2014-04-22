@@ -1,4 +1,4 @@
-# This creates top level GUI signals and the world and cam objects.
+#This creates top level GUI signals and the world and cam objects.
 import direct.directbase.DirectStart          # start panda
 from direct.showbase import DirectObject      # for event handling
 from direct.actor import Actor                # allow use of actor
@@ -47,4 +47,51 @@ def lbr(e = True):
 
 def rbr(e = True):
     return getEventSignal("mouse3-up", e)
+
+ # These methods handle signals from the GUI
+  # Cache keypress events so there's no duplication of key events - not
+  # sure this is useful but it can't hurt.  Probably not a good idea to
+  # have multiple accepts for the same event.
+
+def getEventSignal(ename, val):
+        if Globals.events.has_key(ename):
+            return Globals.events[ename]
+        e = EventMonitor(ename)
+        Globals.events[ename] = e
+        Globals.directObj.accept(ename, lambda: postEvent(ename))
+        return Globals.events[ename]
+
+# This saves event occurances in g.newEvents
+def postEvent(ename, val = True):
+        Globals.newEvents[ename] = val
+
+lbutton = Globals.lbutton
+rbutton = Globals.rbutton
+rbuttonPull = Globals.rbuttonPull
+lbuttonPull = Globals.lbuttonPull
+
+def key(kname, val = True):
+    kname = checkValidKey(kname)
+    return getEventSignal(kname, val)
+
+def keyUp(kname, val = True):
+    kname = checkValidKey(kname)
+    return getEventSignal(kname + "-up", val)
+
+def leftClick(model, val = True):
+    return getEventSignal(model.d.model.getTag('rpandaid') + "-leftclick", val)
+
+def rightClick(model, val = True):
+    return getEventSignal(model.d.model.getTag('rpandaid') + "-rightclick", val)
+
+allKeyNames = ["escape", "f1","f2","f3","f4","f5","f6","f7","f8","f9","f10","f11","f12",
+               "backspace", "insert", "home", 
+               "tab",  "delete", "end", "enter", "space"]
+
+keyRenamings = {"upArrow": "arrow_up", "downArrow": "arrow_down",
+                "leftArrow": "arrow_left", "rightArrow": "arrow_right",
+                "pageUp": "page_up", "pageDown": "page_down", " ": "space"}
+                
+
+
 

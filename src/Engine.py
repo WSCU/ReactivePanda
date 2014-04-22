@@ -16,6 +16,9 @@ def heartBeat(ct, events):
         #print("Updating object: " + repr(worldObject))
         #print repr(worldObject)
         Globals.thunks.extend(worldObject.update())
+    if Globals.eventSignals is not None: 
+            for signal in Globals.events:
+                print repr(signal)
     for f in Globals.thunks:
         f()
     for obj in Globals.newObjects:
