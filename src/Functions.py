@@ -78,7 +78,7 @@ def accum(x): #accumulates the value of a signal over time
         else:
             return sm.state
 
-    return StateMachineF(0, maybelift(x), accumFN)
+    return StateMachineF(0, maybeLift(x), accumFN)
 
 	
 def gTimeObs(x): #Global time Observer

@@ -96,23 +96,28 @@ def rightMouseEvents(l):
         e.append((i, True))
     Globals.simEvents.extend(["RBP"] + e)
 
-p = printer(name = "integral", i = integral(1))
-q = printer(name = "integral 2", i = integral(p.i))
-leftMouseEvents([1, 2, 3, 7, 19, 32])
-rightMouseEvents([1, 2, 4, 5])
+def holdTest():
+    q = printer("Integral", i = integral(1))
+    p = printer("Hold", i = hold(2, q.i))
+    leftMouseEvents([20, 25, 30, 35, 40])
+    engine(50, verbose = True)
+def accumTest():
+    p = printer("accum", i = accum(integral(1)))
+    engine(50, verbose = True)
+def mIntegrals():
+    p = printer ("integal", i = integral(1))
+    q = printer ("integral 2", i = integral(p.i))
+    engine(50, verbose = True)
+
+#p = printer(name = "integral", i = integral(1))
+#q = printer(name = "integral 2", i = integral(p.i))
+#leftMouseEvents([1, 2, 3, 7, 19, 32])
+#rightMouseEvents([1, 2, 4, 5])
 def main():
-       engine(50, verbose = True) 
+    accumTest()
 if __name__ == "__main__":
     main()
 
 #testing stuff after this point
 
-def mIntegrals():
-    p = printer ("integal", i = integral(1))
-    q = printer ("integral 2", i = integral(p.i))
-    engine(50, verbose = True)
     
-def holdTest():
-    p = printer("Hold", i = hold(2))
-    mouseLeft([20, 25, 30, 35, 40])
-    engine(50, verbose = True)
