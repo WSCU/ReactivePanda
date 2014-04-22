@@ -13,7 +13,7 @@ def integerize(r):
 
 def integral(x):
     def thunk(sm):
-        i = sm.i[0].now()
+        i = sm.i.now()
         #print "integral "+ str(sm.state) + " " + str(i) + " " + str(Globals.dt)
         sm.state = sm.state + i * Globals.dt
         #print sm.state
