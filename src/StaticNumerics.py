@@ -189,7 +189,7 @@ class SP3:
           self.z = z
       else:
           print "recieved non-numeric type for z"
-          self.y = 0
+          self.z = 0
       self._type = p3Type
       self.zero = Zero()
   def __str__(self):
