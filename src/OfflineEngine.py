@@ -31,8 +31,6 @@ def heartBeat(ct, events, verbose = False, test = False):
             print("Initializing object: " + str(obj))
         obj.initialize()
 
-#will need to check the proxy module to find the right name for this initialize method
-#make an initialize method that clears out all the variables and resets the clock
 def initialize(ct):
     Globals.thunks = []
     Globals.currentTime = 0 #Not sure if this should be 0 or CT
@@ -40,7 +38,6 @@ def initialize(ct):
     Globals.worldObjects = {}
     Globals.events = []
 
-#simevents is a list of tuples, time and signal
 def engine(tSteps, verbose = False, test = None):
     #Initialize all signals (signalF.start)
     #set the time to 0
@@ -67,9 +64,7 @@ def engine(tSteps, verbose = False, test = None):
                     events[k] = i[1]
         heartBeat(steps, events, verbose=verbose)
         steps+=1
-#one reactive objects, reactive attributes, print all the attributes
-#controlled while loop, dont use time.time(), step time by one.
-#Like the really old engine
+
 class Printer(Proxy):
     def __init__(self, name, args):
         Proxy.__init__(self, name, printUpdate)
@@ -98,26 +93,20 @@ def rightMouseEvents(l):
 
 def holdTest():
     q = printer("Integral", i = integral(1))
-    p = printer("Hold", i = hold(2, q.i))
-    leftMouseEvents([20, 25, 30, 35, 40])
+    p = printer("Hold", i = hold(q.i, 0))
     engine(50, verbose = True)
+
 def accumTest():
     p = printer("accum", i = accum(integral(1)))
     engine(50, verbose = True)
+
 def mIntegrals():
     p = printer ("integal", i = integral(1))
     q = printer ("integral 2", i = integral(p.i))
     engine(50, verbose = True)
 
-#p = printer(name = "integral", i = integral(1))
-#q = printer(name = "integral 2", i = integral(p.i))
-#leftMouseEvents([1, 2, 3, 7, 19, 32])
-#rightMouseEvents([1, 2, 4, 5])
 def main():
     accumTest()
 if __name__ == "__main__":
     main()
 
-#testing stuff after this point
-
-    
