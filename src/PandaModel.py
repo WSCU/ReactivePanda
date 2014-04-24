@@ -41,6 +41,7 @@ def pandaModel(fileName = None, size = None, hpr = None, position = None):
 class PandaModel(Proxy):
     def __init__(self, fileName, size, hpr, position):
         Proxy.__init__(self, name = str(fileName)+"-gID: "+str(Globals.nextModelId), updater = updater)
+        Globals.nextModelId = Globals.nextModelId + 1
         self._mFile = FileSearch.fileSearch(fileName, "models",["egg"])
         #print "Object Name: "+ str(fileName)+"-gID: "+str(Globals.nextModelId);
         if self._mFile is None:
@@ -62,7 +63,6 @@ class PandaModel(Proxy):
                 self._mParams = defaultModelParameters
             parameterCache[fileName] = self._mParams
         self._pandaModel = loader.loadModel(self._mFile)
-        Globals.nextModelId = Globals.nextModelId + 1
         self._onScreen = False
         self._size=self._mParams['localSize']
         self._hpr=self._mParams['localOrientation']
