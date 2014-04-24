@@ -14,7 +14,9 @@ def maybeLift(x):
     if t is type(1):
         return Lift0F(x)
     if t is type(1.0):
-        return Lift0F(x)    
+        return Lift0F(x)
+    if t is type(""):
+    	return Lift0F(x)
     return x
     
 def lift(name, f, types = [], outType = anyType):
