@@ -11,34 +11,64 @@ from types import *
 # User defined types have a type attribute.  This enables initialization time typechecking
 
 class Ptype:
-    def __init__(self, tname, subtypes = [], addable = False):
+    def __init__(self, tname, parent, addable = False, encoder = None, decoder = None):
         self.tname = tname
         self.addable = addable
-        self.subtypes = subtypes # list of types
+        self.encoder = encoder
+        self.decoder = decoder
+        if parent is None:
+            self.parent = self
+        else:
+            self.parent = parent
 
-    def infer(self, itype):
-        if itype is self or itype is anyType or self is anyType:
+    def includes(self, itype):
+        if itype is self or self is anyType:
             return True
-        for t in self.subtypes:
-            if itype is t:
-                return True
-        return False
+        elif itype.parent is self:
+            return True
+
+    def encode(self, x):
+        if self.encoder is None:
+            print "No encoder for type " + str(self)
+            return None
+        return self.encoder(x)
+
+    def decode(self, x):
+        if self.decoder is None:
+            print "No decoder for type " + str(self)
+            return None
+        return self.decoder(x)
 
     def __str__(self):
         r = self.tname
         return r
-    
 
+def epectedArgCount(args, n):
+    return len(args) is n
+
+def addCheck(self):
+    if self.name is "add" or self.name is "subtract":
+        if self.outType.addable:
+            if expectedArgCount(args, 2) and self.types[0].includes(self.types[1]):
+                return True
+            else:
+                print "Tried to add/subtract incompatible types" 
+        else:
+            print "Non Addable Type: " + str(self.outType)
+        return False
+    return True
 
 #  Predefined types used elsewhere
-signalType = Ptype("Signal")
-signalFactoryType = Ptype("Signal Factory Type")
-proxyType = Ptype("Proxy Type")
-anyType = Ptype("Any Type", addable = True)
-numType = Ptype("Num Type", subtypes = [IntType, FloatType], addable = True)
-p2Type = Ptype("P2 Type", addable = True)
-p3Type = Ptype("P3 Type", addable = True)
-hprType = Ptype("HPR Type", addable = True)
+anyType = Ptype("Any Type", None, addable = True)
+signalType = Ptype("Signal", anyType)
+signalFactoryType = Ptype("Signal Factory Type", anyType)
+proxyType = Ptype("Proxy Type", anyType)
+numType = Ptype("Num Type", anyType, addable = True, encoder = lambda x: str(x), decoder = lambda x: float(x.strip()))
+p2Type = Ptype("P2 Type", numType, addable = True)
+p3Type = Ptype("P3 Type", numType, addable = True)
+hprType = Ptype("HPR Type", numType, addable = True)
+boolType = Ptype("Boolean Type", anyType, encoder = lambda x: "T" if x else "F", decoder = lambda s: True if s.equals("T") else False)
+stringType = Ptype("String Type", anyType)
 '''  Keeping just in case
 numType = ptype("Number")
 fnType = ptype("Function")

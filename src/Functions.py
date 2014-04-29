@@ -53,6 +53,16 @@ class TagSignal(Event):
             self.context = context
         return self.active
 """
+def tag(fn, s):
+    def tagFN(sm):
+        i = sm.i.now()
+        if i is None:
+            return None
+        res = fn(sm.state, i)
+        sm.state += 1
+        return res
+    return StateMachineF(0, maybeLift(s), tagFN)
+
 def hold(x, iv): #Holds the last value of a signal
     def holdFN(sm):
         i = sm.i.now();
@@ -74,12 +84,8 @@ def accum(x): #accumulates the value of a signal over time
         s = sm.i.now();
         if s!= None:
             sm.state += s
-            return s
-        else:
-            return sm.state
-
+        return sm.state
     return StateMachineF(0, maybeLift(x), accumFN)
-
 	
 def gTimeObs(x): #Global time Observer
 #Not sure about what variables will be passed into the gTOFN
@@ -106,10 +112,9 @@ def clock(x):
             Globals.currentTime = sm.state
             sm.state += sm.i.now() + Globals.dt
         # add the current clock signal to the list of fast updating signals (which doesn't exist yet)
-        
         return sm.state
-    
     return StateMachineF(0, maybeLift(x), clockFN)
+
 #make a clock signal too. Clock will control the heartbeat: make the heartbeat every second
 time = ObserverF(lambda: Globals.currentTime)
 def degrees( v):

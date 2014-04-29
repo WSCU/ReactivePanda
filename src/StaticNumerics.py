@@ -90,18 +90,8 @@ def sNormA(a):
 
 class SP2:
       def __init__(self, x, y):
-        tx = type(x)
-        ty = type(y)
-        if tx is IntType or tx is FloatType:
-            self.x = x
-        else:
-            print "recieved non-numeric type for x"
-            self.x = 0
-        if ty is IntType or ty is FloatType:
-            self.y = y
-        else:
-            print "recieved non-numeric type for y"
-            self.y = y
+        self.x = x
+        self.y = y
         self._type = p2Type
         self.zero = Zero()
       def __str__(self):
@@ -171,25 +161,9 @@ def dotP2(a,b):
 
 class SP3:
   def __init__(self, x, y, z):
-    
-      tx = type(x)
-      ty = type(y)
-      tz = type(z)
-      if tx is IntType or tx is FloatType:
-          self.x = x
-      else:
-          print "recieved non-numeric type for x"
-          self.x = 0
-      if ty is IntType or ty is FloatType:
-          self.y = y
-      else:
-          print "recieved non-numeric type for y"
-          self.y = 0
-      if tz is IntType or tz is FloatType:
-          self.z = z
-      else:
-          print "recieved non-numeric type for z"
-          self.z = 0
+      self.x = x
+      self.y = y
+      self.z = z
       self._type = p3Type
       self.zero = Zero()
   def __str__(self):

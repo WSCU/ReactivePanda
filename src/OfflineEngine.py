@@ -8,7 +8,7 @@ from Proxy import *
 
 def heartBeat(ct, events, verbose = False, test = False):
     #print "objects " + str(len(Globals.worldObjects))
-    Globals.dt = ct - Globals.currentTime
+    Globals.dt = ct - Globals.currentTime 
     Globals.currentTime = ct
     Globals.events = events
     Globals.thunks = []
@@ -92,13 +92,21 @@ def rightMouseEvents(l):
     Globals.simEvents.extend(["RBP"] + e)
 
 def holdTest():
-    q = printer("Integral", i = integral(1))
-    p = printer("Hold", i = hold(q.i, 0))
+    p = printer("Hold", i = hold(integral(1), 0))
     engine(50, verbose = True)
 
 def accumTest():
     p = printer("accum", i = accum(integral(1)))
     engine(50, verbose = True)
+
+def tagTest():
+    def tagF(v, s):
+        return tag(lambda i, v1: v, s)
+    def tags(v, s):
+        return tag(lambda i, v1: v[i % len(v)], s)
+    q = printer("Tags", i = tags([1, 2, 3, 4, 5, 6, 7, 2, 20], 1))
+    p = printer("Tag", i = tagF(1, 0))
+    engine(10, verbose = True)
 
 def mIntegrals():
     p = printer ("integal", i = integral(1))
@@ -106,7 +114,7 @@ def mIntegrals():
     engine(50, verbose = True)
 
 def main():
-    mIntegrals()
+    tagTest()
 if __name__ == "__main__":
     main()
 

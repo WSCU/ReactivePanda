@@ -12,66 +12,39 @@ from Types import *
 def maybeLift(x):
     t = type(x)
     if t is type(1):
-        return Lift0F(x)
+        return Lift0F(x, numType)
     if t is type(1.0):
-        return Lift0F(x)
-    if t is type(""):
-    	return Lift0F(x)
+        return Lift0F(x, numType)   
+    if t is type(" "):
+        return Lift0F(x, stringType)
+    if t is type(True):
+        return Lift0F(x, boolType)
     return x
     
 def lift(name, f, types = [], outType = anyType):
-	def fn(*args):
-		return LiftF(name,f,args,types = types, outType = outType)
-	return fn
-	
+    def fn(*args):
+        for arg in args:
+            arg = maybeLift(arg)
+            if not arg.name is "Lift0":
+                return LiftF(name,f,args,types = types, outType = outType)
+        return f(*args)
+    return fn
 
 class SFact:
     def __init__(self):
     	self._type = signalFactoryType
     def __add__(self,y):
         y = maybeLift(y)
-        atype = y.outType
-        stype = self.outType
-        if stype.addable:
-            if stype.infer(atype):
-                return LiftF("add",lambda x,y:x+y, [self,y])
-            else:
-                print "Tried adding non-matching types: " + self.name + ", Type: " + str(stype) + " and " + str(atype)
-        else:
-            print self.name + "does not have an addable type. Type: " + str(stype)
+        return LiftF("add",lambda x,y:x+y, [self,y], types = [self.outType, y.outType], outType = self.outType)
     def __radd__(self,y):
         y = maybeLift(y)
-        atype = y.outType
-        stype = self.outType
-        if stype.addable:
-            if stype.infer(atype):
-                return LiftF("add",lambda x,y:x+y, [self,y])
-            else:
-                print "Tried adding non-matching types: " + self.name + ", Type: " + str(stype) + " and " + str(atype)
-        else:
-            print self.name + "does not have an addable type. Type: " + str(stype)
+        return LiftF("add",lambda x,y:x+y, [self,y], types = [self.outType, y.outType], outType = self.outType)
     def __sub__(self,y):
         y = maybeLift(y)
-        atype = y.outType
-        stype = self.outType
-        if stype.addable:
-            if stype.infer(atype):
-                return LiftF("subtract",lambda x,y:x-y, [self,y])
-            else:
-                print "Tried subtracting non-matching types: " + self.name + ", Type: " + str(stype) + " and " + str(atype)
-        else:
-            print self.name + "does not have an addable type. Type: " + str(stype)
+        return Lift("subtract",lambda x,y:x-y, [self,y], types = [self.outType, y.outType], outType = self.outType)
     def __rsub__(self,y):
         y = maybeLift(y)
-        atype = y.outType
-        stype = self.outType
-        if stype.addable:
-            if stype.infer(atype):
-                return LiftF("subtract",lambda x,y:y-x, [self,y])
-            else:
-                print "Tried subtracting non-matching types: " + self.name + ", Type: " + str(stype) + " and " + str(atype)
-        else:
-            print self.name + "does not have an addable type. Type: " + str(stype)
+        return LiftF("subtract",lambda x,y:y-x, [self,y], types = [self.outType, y.outType], outType = self.outType)
     def __mul__(self,y):
         y = maybeLift(y)
         return LiftF("multiply",lambda x,y:x*y, [self,y])
@@ -126,12 +99,13 @@ class LiftF(SFact):
         #print self.outType
         #print expectedType
         self.args = list(self.args)
-        if  expectedType.infer(self.outType): # Return type check
-            if len(self.types) is 0 or len(self.args) is len(self.types): # number of arguments check
+        argsLen = len(self.args)
+        if addCheck(self) and expectedType.includes(self.outType): # Return type check
+            if len(self.types) is 0 or argLen is len(self.types): # number of arguments check
                 failed = False
                 for i in range(len(self.types)):
                     self.args[i] = maybeLift(self.args[i])
-                    if not self.types[i].infer(self.args[i].outType): # individual argument type check
+                    if not self.types[i].includes(self.args[i].outType): # individual argument type check
                         failed = True
                         print "Argument in " + self.name + " expects to be " + str(self.types[i]) + " but is a " + str(self.args[i].outType)
                 if not failed:
@@ -143,13 +117,14 @@ class LiftF(SFact):
             print "Expected " + str(expectedType) + " in " + self.name + ", recieved " + str(self.outType)
 
 class Lift0F(SFact):
-      def __init__(self, v):
+      def __init__(self, v, t):
           SFact.__init__(self)
-          self.outType = type(v)
-          self.name = "Bendicks"
+          t = type(v)
+          self.outType = t
+          self.name = "Lift0"
           self.v = v
       def start(self, expectedType = anyType):
-          if expectedType.infer(self.outType):
+          if expectedType.includes(self.outType):
               return Lift0(self.v), self.outType
           else:
               print "Expected " + str(expectedType) + " in " + self.name + ", recieved " + str(self.outType)
