@@ -71,11 +71,9 @@ class Proxy:
             for a in self._gReactions:
                 temp = a[0].now()
                 #print("Object: " + str(self) + " is updating: " + str(a[0]))
-                temp = a[0].now()
                 if temp != None:
                     #print("    " + str(temp) + " is being added to thunks")
                     thunks.add(lambda : a[1](self, temp))
-                self._updateSignals = {}
             self._updater(self)
             return thunks
 
