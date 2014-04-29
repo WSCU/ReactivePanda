@@ -87,6 +87,12 @@ def accum(x): #accumulates the value of a signal over time
         return sm.state
     return StateMachineF(0, maybeLift(x), accumFN)
 	
+def hit(m1, m2, trace):
+    def hitFN():
+        res = m1.touches(m2, trace = trace)
+        return res
+    return ObserverF(0, maybeLift(x), hitFN)
+
 def gTimeObs(x): #Global time Observer
 #Not sure about what variables will be passed into the gTOFN
     def gTOFN(): #will track the global time
@@ -94,7 +100,7 @@ def gTimeObs(x): #Global time Observer
             i = s.now()
             return i
 
-    return ObserverF(0, maybelift(x), gTOFN)
+    return ObserverF(0, maybeLift(x), gTOFN)
     
 #Local time Observer
 def lTimeObs(x): #Local time Observer
@@ -103,7 +109,7 @@ def lTimeObs(x): #Local time Observer
             i = i + s.now()
             return i
 
-    return ObserverF(0, maybelift(x), lTOFN)
+    return ObserverF(0, maybeLift(x), lTOFN)
 
 def clock(x):
     def clockFN(sm): # tracks and updates engine time

@@ -68,6 +68,10 @@ class PandaModel(Proxy):
         self._size=self._mParams['localSize']
         self._hpr=self._mParams['localOrientation']
         self._position=self._mParams['localPosition']
+        self._cRadius = self._mParams['cRadius']
+        self._cType = self._mParams['cType']
+        self._cFloor = self._mParams['cFloor']
+        self._cTop = self._mParams['cTop']
         self.size = Lift0(1)
         self.position = P3(1,1,1)
         self.hpr = HPR(0,0,0)
@@ -78,6 +82,55 @@ class PandaModel(Proxy):
         if size is not None:
             self.size = Lift0F(size)
         showModel(self)#This call needs to move into the updater method. We don't have it working with the engine yet.
+
+    def touches(self, handle, trace = False):
+        if trace:
+           print "Touch: " + repr(self) + " (" + self._cType + ") " + repr(handle) + " (" + handle._cType + ")"
+        mr = self._cRadius * self._size.now()
+        mp = self._position.now()
+        yr = handle._cRadius*handle._size.now()
+        yp = handle._position.now()
+        if trace:
+            print repr(mp) + " [" + repr(mr) + "] " + repr(yp) + " [" + repr(yr) + "]"
+        if self._cType == "sphere":
+            if handle._cType == "sphere":
+                return absP3(subP3(mp, yp)) < mr + yr
+            elif handle._cType == "cyl": # Test if the x,y points are close enough. This treats the sphere as a cylinder
+                d = absP2(subP2(P2(mp.x, mp.y), P2(yp.x, yp.y)))
+                if d > mr + yr:
+                    return False
+                else:
+                    cb = yp.z + handle._size.now()*handle._cFloor
+                    ct = yp.z + handle._size.now()*handle._cTop
+                    sb = mp.z-mr
+                    st = mp.z+mr
+                    # print str(cb) + " " + str(ct) + " " + str(sb) + " " + str(st)
+                    return ct > sb and cb < st
+        elif self._cType == "cyl":
+            if handle._cType == "sphere":
+                d = absP2(subP2(P2(mp.x, mp.y), P2(yp.x, yp.y)))
+                # print "c to s (dist = " + str(d) + ")"
+                if d > mr + yr:
+                    return False
+                else:
+                    cb = mp.z + self._size.now()*self._cFloor
+                    ct = mp.z + self._size.now()*self._cTop
+                    sb = yp.z-yr
+                    st = yp.z+yr
+                    # print str(cb) + " " + str(ct) + " " + str(sb) + " " + str(st)
+                    return ct > sb and cb < st
+            elif handle._cType == "cyl":
+                # print str(mp.x) + " , " + str(mp.y)
+                d = absP2(subP2(P2(mp.x, mp.y), P2(yp.x, yp.y)))
+                if trace:
+                    print "c to c (dist = " + str(d) + ") " + str(mr+yr)
+                if d > mr + yr:
+                    return False
+                else:
+                    res = self._cTop + mp.z > handle._cFloor + yp.z and self._cFloor + mp.z < handle._cTop + yp.z
+                    if trace:
+                        print "Result: " + str(res) + " " + str((self._cTop, mp.z, handle._cFloor, yp.z, self._cFloor, handle._cTop))
+                    return res
 
 def updater(self):
     #These parameters find the static offset which was created during initialization and the current position which is returned by the self.get() method
