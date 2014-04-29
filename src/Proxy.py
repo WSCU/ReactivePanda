@@ -3,8 +3,8 @@ from Factory import *
 from Types import proxyType
 
 class Proxy:
-    def __init__(self, name, updater):
-        self._types = {"position": p3Type, "hpr": hprType, "size": numType}
+    def __init__(self, name, updater, types):
+        self._types = types
         self._alive = True;
         self._type = proxyType
         self._signals = {}

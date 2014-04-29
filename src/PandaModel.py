@@ -40,7 +40,8 @@ def pandaModel(fileName = None, size = None, hpr = None, position = None):
     return res
 class PandaModel(Proxy):
     def __init__(self, fileName, size, hpr, position):
-        Proxy.__init__(self, name = str(fileName)+"-gID: "+str(Globals.nextModelId), updater = updater)
+        Proxy.__init__(self, name = str(fileName)+"-gID: "+str(Globals.nextModelId), updater = updater, 
+        types = {"position": p3Type, "hpr": hprType, "size": numType})
         Globals.nextModelId = Globals.nextModelId + 1
         self._mFile = FileSearch.fileSearch(fileName, "models",["egg"])
         #print "Object Name: "+ str(fileName)+"-gID: "+str(Globals.nextModelId);
@@ -67,7 +68,7 @@ class PandaModel(Proxy):
         self._size=self._mParams['localSize']
         self._hpr=self._mParams['localOrientation']
         self._position=self._mParams['localPosition']
-        self.size = Lift0F(1)
+        self.size = Lift0(1)
         self.position = P3(1,1,1)
         self.hpr = HPR(0,0,0)
         if position is not None:

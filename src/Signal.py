@@ -61,8 +61,8 @@ class Observer(CachedSignal):
         return self.f()
     
 class RVar(CachedSignal): #Defines reactive variables like on-screen text
-    def __init__(self, initValue, type):
-        CachedSignal.__init__(self)
+    def __init__(self, initValue, type = signalType):
+        CachedSignal.__init__(self, type)
         self.value = initValue
         self.type = type
     def refresh(self):

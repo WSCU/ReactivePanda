@@ -9,29 +9,34 @@ from direct.gui.DirectGui import *
 from Externals import postEvent
 from Signal import var
 from Factory import maybeLift
-class TextBox(Proxy): #Creates the text box object and updates the reactive text which will appear on screen
-    def __init__(self, position = None, size = 1, name = 'TextBox', width = 15):
+class TextBox(Proxy): #Creates the text box object that users can enter in values to
+    def __init__(self, position2D = None, size = 1, name = 'TextBox', width = 15): #Textbox is not working and not used right now
         Proxy.__init__(self, name = name, updater=updater)
-        if position is None:
-            position = P2(.95, g.nextNE2dY)
-            g.nextNE2dY = g.nextNE2dY - .1
-        self._textBox =  DirectEntry(pos = (position.x,0,position.y),scale=size*0.05, command=lambda v:textBoxChange(v,self), width = width)
-        """self.__dict__['text'] = var("")
-        self.__dict__['enter'] = EventMonitor(self.name)"""
+        self.size = maybeLift(size)
+        self.width = maybeLift(width)
+        if position2D is None:
+            position2D = P2(.95, Globals.nextNE2dY)
+            Globals.nextNE2dY = Globals.nextNE2dY - .1
+        self.text = var("")
+        self.enter = eventObserver("enter")
     
 def updater(self):
-    pass
+    p1 = self.get("position2D")
+    s = self.get("size")
+    w = self.get("width")
+    self._textBox =  DirectEntry(pos = (p1.x,0,p1.y),scale=s*0.05, command=lambda v:textBoxChange(v,self), width = w)
+
     
 def textBoxChange(v, self):
     postEvent(self.name, v)
-    self.__dict__['text'].set(v)
+    self.text.set(v)
 
 def textBox(*p, **k):
     return TextBox(*p, **k).enter
 
 class Text(Proxy):
-    def __init__(self, text = None, name = 'Text', position2D = None, size = 1, color = None):
-        Proxy.__init__(self, name, updater=textUpdater)
+    def __init__(self, text = None, name = 'Text', position = None, size = 1, color = None):
+        Proxy.__init__(self, name, updater=textUpdater, types = {"position": p2Type, "hpr": hprType, "size": numType})
         
         # This allows the text in the initializer to be reactive.  Not sure why other
         # constructors don't do this.
@@ -40,8 +45,10 @@ class Text(Proxy):
             self.text = maybeLift(text)
         else: 
             self.text = maybeLift("No current text")
-        if position2D is None:
-            self.position2D = P2(-.95, Globals.nextNW2dY)
+        if position is not None:
+            self.position = maybeLift(position)
+        else:
+            self.position = P2(-.95, Globals.nextNW2dY)
             Globals.nextNW2dY = Globals.nextNW2dY -.1
         # This code looks OK - we should be able to make the position reactive
         #else:
