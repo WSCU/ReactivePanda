@@ -6,7 +6,7 @@ Many predefined colors (stolen from Clastic)
 """
 
 from pandac.PandaModules import VBase4   
-from Types import numType, ColorType, ColorHSLType
+from Types import numType, colorType, colorHSLType
 from StaticNumerics import staticLerp
 from colorsys import rgb_to_hls, hls_to_rgb
 
@@ -14,7 +14,7 @@ class Color:
     """
     Color describes a color in RGB(0,1) or HSV(Hue, Saturation, Lightness)
     """
-    def __init__(self, r, g, b, a = 1, type = ColorType):
+    def __init__(self, r, g, b, a = 1, type = colorType):
         """
         Color constructor(r,g,b values are beween 0 and 1)(or HSL values)
         parameters:
@@ -24,7 +24,7 @@ class Color:
         a: color alpha value(default = 1)
         type: ColorType(default: ColorType, ColorHSLType)
         """
-        if(type == ColorHSLType):
+        if(type == colorHSLType):
             self.h = r
             self.s = g
             self.l = b
@@ -39,7 +39,7 @@ class Color:
         """
         transitions from rgb to hsl color
         """
-        if(self.type == ColorType):
+        if(self.type == colorType):
             hls = rgb_to_hls(self.r, self.g, self.b)
             self.h = hls[0]
             self.l = hls[1]
@@ -52,7 +52,7 @@ class Color:
         """
         transitions from hsl to rgb color
         """
-        if(self.type == ColorHSLType):
+        if(self.type == colorHSLType):
             rgb = hls_to_rgb(self.h, self.l, self.s)
             self.r = rgb[0]
             self.g = rgb[1]
@@ -67,7 +67,7 @@ class Color:
         This is used to get color values into the representation used within
         the Panda library
         """
-        if(self.type == ColorType):
+        if(self.type == colorType):
             return "[" + str(self.r) + ", " + str(self.g) + ", " + str(self.b) + "]"
         else:
             return "[" + str(self.h) + ", " + str(self.s) + ", " + str(self.l) + "]"
@@ -76,9 +76,9 @@ class Color:
         """
         Changes the representation to be used by Panda
         """
-        if(self.type == ColorHSLType):
+        if(self.type == colorHSLType):
             hsl_to_rgb()
-        self.type = ColorHSLType
+        self.type = colorHSLType
         return VBase4(self.r, self.g, self.b, self.a)
 
     
@@ -90,9 +90,9 @@ class Color:
         t: current time
         c2: transition color
         """
-        if(self.type == ColorHSLType):
+        if(self.type == colorHSLType):
             hsl_to_rgb()
-        self.type = ColorHSLType
+        self.type = colorHSLType
         return Color(staticLerp(t, self.r, c2.r),
                      staticLerp(t, self.g, c2.g),
                      staticLerp(t, self.b, c2.b),
@@ -102,7 +102,7 @@ class Color:
         """
         Returns a String representation of the Color
         """
-        if(self.type == ColorType):
+        if(self.type == colorType):
             return "(" + str(self.r) + ", " + str(self.g) + ", " + str(self.b) + ")"
         else:
             return "(" + str(self.h) + ", " + str(self.s) + ", " + str(self.l) + ")"
@@ -126,7 +126,7 @@ def colorHSL(h, s, l):
     s: Saturation(0, 100)
     l: lightness(0, 100)
     """
-    return Color(h, s, l, type = ColorHSLType)
+    return Color(h, s, l, type = colorHSLType)
 
 #Predefined Colors
 black = color24(0,0,0)

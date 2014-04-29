@@ -59,16 +59,19 @@ def addCheck(self):
     return True
 
 #  Predefined types used elsewhere
-anyType = Ptype("Any Type", None, addable = True)
+anyType = Ptype("Any", None, addable = True)
 signalType = Ptype("Signal", anyType)
-signalFactoryType = Ptype("Signal Factory Type", anyType)
-proxyType = Ptype("Proxy Type", anyType)
-numType = Ptype("Num Type", anyType, addable = True, encoder = lambda x: str(x), decoder = lambda x: float(x.strip()))
-p2Type = Ptype("P2 Type", numType, addable = True)
-p3Type = Ptype("P3 Type", numType, addable = True)
-hprType = Ptype("HPR Type", numType, addable = True)
-boolType = Ptype("Boolean Type", anyType, encoder = lambda x: "T" if x else "F", decoder = lambda s: True if s.equals("T") else False)
-stringType = Ptype("String Type", anyType)
+signalFactoryType = Ptype("Signal Factory", anyType)
+proxyType = Ptype("Proxy", anyType)
+numType = Ptype("Num", anyType, addable = True, encoder = lambda x: str(x), decoder = lambda x: float(x.strip()))
+p2Type = Ptype("P2", numType, addable = True)
+p3Type = Ptype("P3", numType, addable = True)
+hprType = Ptype("HPR", numType, addable = True)
+boolType = Ptype("Boolean", anyType, encoder = lambda x: "T" if x else "F", decoder = lambda s: True if s.equals("T") else False)
+stringType = Ptype("String", anyType)
+eventType = Ptype("Event", anyType)
+colorType = Ptype("Color", numType)
+colorHSLType = Ptype("Color", numType)
 '''  Keeping just in case
 numType = ptype("Number")
 fnType = ptype("Function")
