@@ -41,6 +41,7 @@ class Proxy:
                 ty = self._types[k]
             else:
                 ty = anyType
+            v = maybeLift(v)
             self._signals[k] = v.start(expectedType = ty)[0] # This is screwing up Integral
         self._updateSignals = {}
     def updater(self):
