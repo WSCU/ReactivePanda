@@ -1,14 +1,14 @@
 import Globals
 import math
 from panda3d.core import Quat
-#from Types import *
+from Types import hprType
 
 class SHPR:
   def __init__(self, h, p, r):
     self.h = h
     self.p = p
     self.r = r
-    #self.type = HPRType
+    self._type = hprType
   def __str__(self):
       return "HPR(%7.2f, %7.2f, %7.2f)" % ( self.h, self.p, self.r)
   def __add__(self, y):

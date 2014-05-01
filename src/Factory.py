@@ -19,7 +19,10 @@ def maybeLift(x):
         return Lift0F(x, stringType)
     if t is type(True):
         return Lift0F(x, boolType)
-    return x
+    t = x._type
+    if t is signalFactoryType:
+        return t
+    return Lift0F(x,t)
     
 def lift(name, f, types = [], outType = anyType):
     def fn(*args):
@@ -119,7 +122,6 @@ class LiftF(SFact):
 class Lift0F(SFact):
       def __init__(self, v, t):
           SFact.__init__(self)
-          t = type(v)
           self.outType = t
           self.name = "Lift0"
           self.v = v
