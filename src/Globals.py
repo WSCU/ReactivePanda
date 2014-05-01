@@ -28,6 +28,9 @@ dt = 1 #global delta time
 #world = dict() #dictionary of global signals 
 sl = {}
 
+#Global Error Tracker
+error = ""
+
 # Global GUI signals
 
 mouse =       None  # Current mouse position
@@ -58,10 +61,10 @@ collections = {}
 #osType = platform.system()  # OS That is being used. # NotReturning Correct osType should be Windows Insted of Java.
 #print osType
 #osType = 'Linux'
-osType = 'Windows'
-if osType == 'Linux':
+osType = 'Linux'
+if osType is 'Linux':
 #    print "we're on Linux"
     pandaPath = "/usr/lib/panda/lib/"           # Since we are on a Linux system we will now use a linux file path.
-if osType == 'Windows':
+if osType is 'Windows':
   #  print "we're on Windows"                   # Since we are on a Windows system we will use the windows file path.
     pandaPath = "/c/Panda3D-1.8.1"

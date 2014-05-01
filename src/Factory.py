@@ -103,6 +103,7 @@ class LiftF(SFact):
         #print expectedType
         self.args = list(self.args)
         argsLen = len(self.args)
+        Globals.error += "\n in Factory line "
         if addCheck(self) and expectedType.includes(self.outType): # Return type check
             if len(self.types) is 0 or argLen is len(self.types): # number of arguments check
                 failed = False
@@ -110,14 +111,16 @@ class LiftF(SFact):
                     self.args[i] = maybeLift(self.args[i])
                     if not self.types[i].includes(self.args[i].outType): # individual argument type check
                         failed = True
-                        print "Argument in " + self.name + " expects to be " + str(self.types[i]) + " but is a " + str(self.args[i].outType)
+                        Globals.error += "112, has and argument that expects to be " + str(self.types[i]) + " but is a " + str(self.args[i].outType)
                 if not failed:
                     ea = map(lambda x: maybeLift(x).start()[0], self.args)
                     return Lift(self.name,self.f, ea), self.outType
             else:
-                print "Incorrect number of arguments in " + self.name
+                Globals.error += "108, has an incorrect number of arguments"
         else:
-            print "Expected " + str(expectedType) + " in " + self.name + ", recieved " + str(self.outType)
+            Globals.error += "107, expected to be" + str(expectedType) + " but is " + str(self.outType)
+        print Globals.error
+        Globals.error = ""
 
 class Lift0F(SFact):
       def __init__(self, v, t):
@@ -129,7 +132,9 @@ class Lift0F(SFact):
           if expectedType.includes(self.outType):
               return Lift0(self.v), self.outType
           else:
-              print "Expected " + str(expectedType) + " in " + self.name + ", recieved " + str(self.outType)
+              Globals.error += "\n in Factory line 130, expected to be" + str(expectedType) + " but is a " + str(self.outType)
+              print Globals.error
+          Globals.error = ""
 
 #Creates a CachedValue factory
 class CachedValueF(SFact):

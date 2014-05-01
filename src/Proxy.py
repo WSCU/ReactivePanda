@@ -42,6 +42,7 @@ class Proxy:
             else:
                 ty = anyType
             v = maybeLift(v)
+            Globals.error = "On Line 46 of Proxy, In object " + self._name + ", attribute " + v.name
             self._signals[k] = v.start(expectedType = ty)[0] # This is screwing up Integral
         self._updateSignals = {}
     def updater(self):
@@ -49,10 +50,12 @@ class Proxy:
     def react(self, when, what):
         if alive:
             when = maybeLift(when)
+            Globals.error = "On Line 54 of Proxy, In object " + self._name + ", initializing reaction " + when.name
             self._gReactions.append((when.start()[0], what))
     def react1(self, when, what):
         if alive:
             when = maybeLift(when)
+            Globals.error = "On Line 59 of Proxy, In object " + self._name + ", initializing one time reaction " + when.name
             self._1Reactions.append((when.start()[0], what))
     def update(self):
         tempSigVals = {}
