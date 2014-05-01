@@ -13,11 +13,7 @@ from pandac.PandaModules import *
 
 class ALight(Proxy):
     def __init__(self, color = None, name = 'ambientLight'):
-        Proxy.__init__(self, name = name, types = {"color":colorType}, updater = updater)
-        if color is None:
-            self.color = white
-        else:
-            self.color = color
+        Proxy.__init__(self, name = name, types = {"color":(colorType, white)}, updater = updater)
         self._onScreen = False
         self._Light = AmbientLight('alight')
         showModel(self)
@@ -35,15 +31,7 @@ def showModel(self):
         
 class DLight(Proxy):
     def __init__(self, color = None, hpr = None, name = 'directionalLight'):
-        Proxy.__init__(self, name = name, types = {"color":colorType}, updater = updater)
-        if color is None:
-            self.color = white
-        else:
-            self.color = color
-        if hpr is None: 
-            hpr = HPR(0,0,0)
-        else: 
-            hpr = hpr
+        Proxy.__init__(self, name = name, types = {"color":(colorType, white), "hpr":(hprType, HPR(0,0,0))}, updater = updater)
         self._onScreen = False
         showModel(self)
     def updater(self):
@@ -51,12 +39,29 @@ class DLight(Proxy):
         self._Light.setColor(c.toVBase4())
         positionNow = self.get("position")
         hprNow = self.get("hpr")
+        
+class PLight(Proxy):
+    def __init__(self, color = None, position = None, name = 'pointLight'):
+        Proxy.init____(self, name = name, types = {"color":(colorType, white), "position":(positionType, P3(0,0,0))}, updater = updater)
+        self._onScreen = False; 
+        showModel(self)
+    def updater(self):
+        c = self.get("color")
+        self._Light.setColor(c.toVBase4())
+        positionNow = self.get("position")
+        
+def pointLight(color = None, position = None):
+    if color is None: 
+        return PLight(color)
+    else: 
+        return PLight(position)
 
 def directionalLight(color = None, hpr = None):
     if color is None:
         return DLight(hpr)
     else: 
         return DLight(color)
+
 
 
     
