@@ -24,7 +24,7 @@ class Ptype:
     def includes(self, itype):
         if itype is self or self is anyType:
             return True
-        elif itype.parent is self:
+        elif itype is self.parent:
             return True
 
     def encode(self, x):

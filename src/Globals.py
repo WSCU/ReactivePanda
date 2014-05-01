@@ -61,7 +61,7 @@ collections = {}
 #osType = platform.system()  # OS That is being used. # NotReturning Correct osType should be Windows Insted of Java.
 #print osType
 #osType = 'Linux'
-osType = 'Linux'
+osType = 'Windows'
 if osType is 'Linux':
 #    print "we're on Linux"
     pandaPath = "/usr/lib/panda/lib/"           # Since we are on a Linux system we will now use a linux file path.

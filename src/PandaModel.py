@@ -41,13 +41,15 @@ def pandaModel(fileName = None, size = None, hpr = None, position = None):
 class PandaModel(Proxy):
     def __init__(self, fileName, size, hpr, position):
         Proxy.__init__(self, name = str(fileName)+"-gID: "+str(Globals.nextModelId), updater = updater, 
-        types = {"position": p3Type, "hpr": hprType, "size": numType})
+        types = {"position": p3Type, "hpr": hprType ,"size": numType})
+        #(p3Type, SP3(0,0,0)), "hpr": (hprType, SHPR(0,0,0)), "size": (numType, 1)})
         Globals.nextModelId = Globals.nextModelId + 1
         self._mFile = FileSearch.fileSearch(fileName, "models",["egg"])
         #print "Object Name: "+ str(fileName)+"-gID: "+str(Globals.nextModelId);
         if self._mFile is None:
             print "Can't find model " + repr(fileName)
             self._mFile = Filename("/c/Panda3D-1.8.1/models/"+fileName)
+            #self._mParams = pandaParameters
             self._mParams = pandaParameters
         #self._mFile = Filename("/c/Panda3D-1.8.1/models/"+fileName)
         #print "File Path: " + repr(mFile)
@@ -72,7 +74,7 @@ class PandaModel(Proxy):
         self._cType = self._mParams['cType']
         self._cFloor = self._mParams['cFloor']
         self._cTop = self._mParams['cTop']
-        self.size = Lift0(1)
+        self.size = 1
         self.position = P3(1,1,1)
         self.hpr = HPR(0,0,0)
         if position is not None:
@@ -80,7 +82,7 @@ class PandaModel(Proxy):
         if hpr is not None:
             self.hpr = hpr
         if size is not None:
-            self.size = Lift0F(size)
+            self.size = size
         showModel(self)#This call needs to move into the updater method. We don't have it working with the engine yet.
 
     def touches(self, handle, trace = False):

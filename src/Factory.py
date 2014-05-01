@@ -20,10 +20,15 @@ def maybeLift(x):
     if t is type(True):
         return Lift0F(x, boolType)
     t = x._type
+  
     if t is signalFactoryType:
-        return t
+        print "if this is not happening we are screwed: "+str(t)+" and: " +str(x.name)
+        return x
+    if t is p3Type:
+        return Lift0F(x, t)
+    print "Lifting: "+str(x)+" :: " +str(t)
     return Lift0F(x,t)
-    
+    #return x
 def lift(name, f, types = [], outType = anyType):
     def fn(*args):
         for arg in args:
@@ -105,7 +110,7 @@ class LiftF(SFact):
         argsLen = len(self.args)
         Globals.error += "\n in Factory line "
         if addCheck(self) and expectedType.includes(self.outType): # Return type check
-            if len(self.types) is 0 or argLen is len(self.types): # number of arguments check
+            if len(self.types) is 0 or argsLen is len(self.types): # number of arguments check
                 failed = False
                 for i in range(len(self.types)):
                     self.args[i] = maybeLift(self.args[i])
@@ -152,6 +157,7 @@ class StateMachineF(CachedValueF):
         self.state = s0
         self.outType = anyType
         self.i = i
+        self.name = "State Machine Factory"
         self.f = f
     def start(self, expectedType = anyType):
         return StateMachine(self.state, self.i.start(expectedType = anyType)[0], self.f), self.outType
