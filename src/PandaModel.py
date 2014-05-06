@@ -47,7 +47,7 @@ class PandaModel(Proxy):
         #print "Object Name: "+ str(fileName)+"-gID: "+str(Globals.nextModelId);
         if self._mFile is None:
             print "Can't find model " + repr(fileName)
-            self._mFile = Filename("/c/Panda3D-1.8.1/models/"+fileName)
+            self._mFile = Filename(pandaPath + "models/"+fileName)
             #self._mParams = pandaParameters
             self._mParams = pandaParameters
         #self._mFile = Filename("/c/Panda3D-1.8.1/models/"+fileName)

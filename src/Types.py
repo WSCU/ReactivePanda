@@ -24,8 +24,10 @@ class Ptype:
     def includes(self, itype):
         if itype is self or self is anyType:
             return True
-        elif itype is self.parent:
+        elif self.parent.includes(itype):
             return True
+        else:
+            return False
 
     def encode(self, x):
         if self.encoder is None:
@@ -64,12 +66,14 @@ signalType = Ptype("Signal", anyType)
 signalFactoryType = Ptype("Signal Factory", anyType)
 proxyType = Ptype("Proxy", anyType)
 numType = Ptype("Num", anyType, addable = True, encoder = lambda x: str(x), decoder = lambda x: float(x.strip()))
-p2Type = Ptype("P2", numType, addable = True)
-p3Type = Ptype("P3", numType, addable = True)
+hasXYType = Ptype("hasXY", numType, addable = True)
+p2Type = Ptype("P2", hasXYType, addable = True)
+p3Type = Ptype("P3", hasXYType, addable = True)
 hprType = Ptype("HPR", numType, addable = True)
 boolType = Ptype("Boolean", anyType, encoder = lambda x: "T" if x else "F", decoder = lambda s: True if s.equals("T") else False)
 stringType = Ptype("String", anyType)
 eventType = Ptype("Event", anyType)
+fnType = Ptype("Function", anyType)
 colorType = Ptype("Color", numType)
 colorHSLType = Ptype("Color", numType)
 '''  Keeping just in case
