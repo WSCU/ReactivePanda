@@ -86,11 +86,26 @@ def accum(x): #accumulates the value of a signal over time
             sm.state += s
         return sm.state
     return StateMachineF(0, maybeLift(x), accumFN)
-	
-def hit(m1, m2, trace):
+
+def getCollection(m1):
+    if type(m1) is string:
+        try:
+            return Globals.collections[m1]
+        except KeyErorr as e:
+            print ("No collection with the name: " + m1)
+            return None
+    else:
+        return [m1]
+
+def hit(m1, m2, trace = False):
     def hitFN():
-        res = m1.touches(m2, trace = trace)
-        return res
+        m1 = getCollection(m1)
+        m2 = getCollection(m2)
+        for m in m1:
+            for e in m2:
+                if m.touches(e, trace = trace):
+                    return True
+        return False
     return ObserverF(0, maybeLift(x), hitFN)
 
 def gTimeObs(x): #Global time Observer

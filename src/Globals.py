@@ -1,6 +1,9 @@
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
+import subprocess
+from sys import platform as _platform
+
 currentTime = 1      # The current global time
 world = None         # The world object, exported to the user variable world
 cam = None           # The camera object, exported to the user variable cam
@@ -27,7 +30,7 @@ observers = {} #dictionary of observers
 dt = 1 #global delta time 
 #world = dict() #dictionary of global signals 
 sl = {}
-
+collections = {}
 #Global Error Tracker
 error = ""
 
@@ -57,14 +60,19 @@ texture = None  # Used to communicate with particle effect code from particle pa
 
 world = None
 
-collections = {}
 #osType = platform.system()  # OS That is being used. # NotReturning Correct osType should be Windows Insted of Java.
 #print osType
 #osType = 'Linux'
+""" Keeping in case we need to switch bac
 osType = 'Windows'
 if osType is 'Linux':
 #    print "we're on Linux"
     pandaPath = "/usr/lib/panda/lib/"           # Since we are on a Linux system we will now use a linux file path.
 if osType is 'Windows':
   #  print "we're on Windows"                   # Since we are on a Windows system we will use the windows file path.
+    pandaPath = "/c/Panda3D-1.8.1"
+"""
+if _platform == "linux" or _platform == "linux2":
+    pandaPath = subprocess.check_output("which panda3d", shell=True)
+elif _platform == "win32":
     pandaPath = "/c/Panda3D-1.8.1"

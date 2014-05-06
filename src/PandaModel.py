@@ -35,11 +35,10 @@ defaultModelParameters = {"localPosition" : SP3(0,0,0),
 pandaParameters = { "localSize" : 0.05,
                     "localPosition" : SP3( 0, 200, 0),
                     "localOrientation" : SHPR(0, 0, 0)}
-def pandaModel(fileName = None, size = None, hpr = None, position = None):
-    res = PandaModel(  fileName, size, hpr, position)
-    return res
+def pandaModel(fileName = None, size = None, hpr = None, position = None, collections = []):
+    return PandaModel(  fileName, size, hpr, position, collections)
 class PandaModel(Proxy):
-    def __init__(self, fileName, size, hpr, position):
+    def __init__(self, fileName, size, hpr, position, collections):
         Proxy.__init__(self, name = str(fileName)+"-gID: "+str(Globals.nextModelId), updater = updater, 
         types = {"position": p3Type, "hpr": hprType ,"size": numType})
         #(p3Type, SP3(0,0,0)), "hpr": (hprType, SHPR(0,0,0)), "size": (numType, 1)})
@@ -84,7 +83,12 @@ class PandaModel(Proxy):
         if size is not None:
             self.size = size
         showModel(self)#This call needs to move into the updater method. We don't have it working with the engine yet.
-
+        for tag in collections:
+            try:
+                Globals.collections[tag].append(self)
+            except KeyError:
+                Globals.collection[tag] = []
+                Globals.collections[tag].append(self)
     def touches(self, handle, trace = False):
         if trace:
            print "Touch: " + repr(self) + " (" + self._cType + ") " + repr(handle) + " (" + handle._cType + ")"

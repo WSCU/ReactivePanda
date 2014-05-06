@@ -113,6 +113,14 @@ def mIntegrals():
     q = printer ("integral 2", i = integral(p.i))
     engine(50, verbose = True)
 
+def reactTest():
+    def lightSwitch():
+        def lightSwitchf(sm):
+            if Globals.currentTime % 5 == 0:
+                return True
+            else return None
+    return StateMachineF(0, maybeLift
+
 def main():
     tagTest()
 if __name__ == "__main__":
