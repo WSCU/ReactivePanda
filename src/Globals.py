@@ -1,6 +1,8 @@
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
+import os
+
 currentTime = 1      # The current global time
 world = None         # The world object, exported to the user variable world
 cam = None           # The camera object, exported to the user variable cam
@@ -61,10 +63,13 @@ collections = {}
 #osType = platform.system()  # OS That is being used. # NotReturning Correct osType should be Windows Insted of Java.
 #print osType
 #osType = 'Linux'
+pandaPath = os.getcwd() + "/lib/"
+'''
 osType = 'Windows'
 if osType is 'Linux':
 #    print "we're on Linux"
-    pandaPath = "/usr/lib/panda/lib/"           # Since we are on a Linux system we will now use a linux file path.
+    pandaPath = os.getcwd()+"/lib/"           # Since we are on a Linux system we will now use a linux file path.
 if osType is 'Windows':
   #  print "we're on Windows"                   # Since we are on a Windows system we will use the windows file path.
-    pandaPath = "/c/Panda3D-1.8.1"
+    pandaPath = os.getcwd()+"/lib/"
+    '''
