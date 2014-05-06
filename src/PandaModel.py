@@ -40,7 +40,7 @@ def pandaModel(fileName = None, size = None, hpr = None, position = None, collec
 class PandaModel(Proxy):
     def __init__(self, fileName, size, hpr, position, collections):
         Proxy.__init__(self, name = str(fileName)+"-gID: "+str(Globals.nextModelId), updater = updater, 
-        types = {"position": p3Type, "hpr": hprType ,"size": numType})
+        types = {"position": p3Type, "hpr": hprType ,"localSize": numType})
         #(p3Type, SP3(0,0,0)), "hpr": (hprType, SHPR(0,0,0)), "size": (numType, 1)})
         Globals.nextModelId = Globals.nextModelId + 1
         self._mFile = FileSearch.fileSearch(fileName, "models",["egg"])
