@@ -87,17 +87,17 @@ def accum(x): #accumulates the value of a signal over time
         return sm.state
     return StateMachineF(0, maybeLift(x), accumFN)
 
-def getCollection(m1):
-    if type(m1) is string:
-        try:
-            return Globals.collections[m1]
-        except KeyErorr as e:
-            print ("No collection with the name: " + m1)
-            return None
-    else:
-        return [m1]
-
 def hit(m1, m2, trace = False):
+    def getCollection(m1):
+        if type(m1) is string:
+            try:
+                return Globals.collections[m1]
+            except KeyErorr as e:
+                print ("No collection with the name: " + m1)
+                return None
+        else:
+            return [m1]
+
     def hitFN():
         m1 = getCollection(m1)
         m2 = getCollection(m2)
