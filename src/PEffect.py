@@ -1,142 +1,45 @@
-import PEffect
-#!/usr/bin/env python
-#HappyDoc:# These variables should be discovered.
-#HappyDoc:TestInt=1
-#HappyDoc:TestString="String"
-#HappyDoc:TestStringModule=string.strip(' this has spaces in front and back ')
-#HappyDoc:url=urlencode({'a':'A', 'b':'B'})
-#HappyDoc:docStringFormat='StructuredText'
-#
-import g
-from Handle import *
+# To change this license header, choose License Headers in Project Properties.
+# To change this template file, choose Tools | Templates
+# and open the template in the editor.
 
-from FileUtils import *
-from pandac.PandaModules import *
-from direct.particles.Particles import *
+from Proxy import *
+from panda import *
 from direct.particles.ParticleEffect import *
 
-#import direct.directbase.DirectStart
-#from direct.directbase.TestStart import *
+class PEffect(Proxy):
 
-from Numerics import *
-from Handle import *
-from Model import findTexture
-#from Time import uniqueName
-from pandac.PandaModules import *
-from Color import *
-
-##In future, we should add a duration parameter to these particle effects to
-##make it easier to set more useful particle effects.
-##Kendric June09
-
-def stopIt(m, v):
-    m.stop()
-    m.exit()
-def startIt(m,v):
-    m.start()
-
-def explosion(**a):
-    e = explosions(**a)
-    e.react1(wait(2), stopIt)
-    return e
-
-
-
-class PEffect(Handle):
-
-    pid = 1
-    def __init__(self, particleFn, name = None,
+    pid = 1 #what is this? 
+    def __init__(self, particleFn, name = 'particleEffect', 
                hpr = None, position = None,
                 size = None,
-                duration = 0, ** a):
+                ** a): 
 
-        if name is None:
-            name = 'PEffect-%d' % PEffect.pid
-            PEffect.pid += 1
-
-        Handle.__init__(self, name = name, duration = duration)
+        Proxy.__init__(self, name = name, updater = updater, types = {"position":(p3Type, P3(0,0,0)), "hpr":(hprType, HPR(0,0,0)), "size":(numType, 1)})
 
         #pathname = "/lib/panda/lib/lib-original/particles/"
-        base.enableParticles()
+        base.enableParticles() #this should be in start in main program, this should probably go away 
         p = ParticleEffect()
         particleFn(p, a)
-        self.d.model = p  # ???
-
-
-
-        self.__dict__['position'] = newSignalRefd(self, 'position', P3Type, P3(0,0,0))
-        self.__dict__['hpr'] = newSignalRefd(self, 'hpr', HPRType, HPR(0,0,0))
-        self.__dict__['size'] = newSignalRefd(self, 'size', numType, 1)
-        if size is not None:
-             self.size.setBehavior(size)
-
-        if position is not None:
-            self.position.setBehavior(position)
-        if hpr is not None:
-            self.hpr.setBehavior(hpr)
-
-
+        self._effect = p 
         p.reparentTo(render)
         p.start()
-
-    def updater(self):
-
-        p = self.d.model
-        Handle.refresh(self)
-
-
-        position = self.__dict__['position'].now()
-        x = getX(position)
-        y = getY(position)
-        z = getZ(position)
-        p.setPos(x,y,z)
-        hpr = self.__dict__['hpr'].now()
-        h = getH(hpr)
-        pit = getP(hpr)
-        r = getR(hpr)
-        p.setHpr(degrees(h), degrees(pit), degrees(r))
-        s = self.size.now()
-        p.setScale(s)
-#        p.particlesDict["particles-1"].emitter.setRadiateOrgin(Point3(x,y,z))
-    def exit(self):
-        self.__dict__["started"]= False
-        self.d.model.disable()
-    def stop(self):
-        """
-        stop(self):
-            stops the emitter from emitting new particles and lets it finish
-            the effect on the particles left on screen.
-        """
-        self.__dict__["started"]= False
-        self.d.model.softStop()
-
-    def start(self):
-        """
-        start(self):
-            starts the Particle effect.
-        """
-        self.__dict__["started"] = True
-        self.d.model.softStart()
-
-    def reparentTo(self, handle):
-        print "Reparent"
-        p = self.d.model
-        p.reparentTo(handle.d.model)
-
-# Reaction Functions
-
-def exitScene(model, value):
-    model.exit()
-
-#def blowUp(effect = explosions(), time = 2, size = 1, offset = P3(0,0,0)):
-    #def r(model, value):
-        #pos = model.position.now()
-        #e = effect(position = pos + offset, size = size)
-        #e.react1(wait(2), exitScene)
-        #model.exit()
-    #return r
-
-def fireFn(self, dict):
+        
+def updater(self):
+    p = self._effect
+    position = self.get('position')
+    x = getX(position)
+    y = getY(position)
+    z = getZ(position)
+    p.setPos(x,y,z)
+    hpr = self.get('hpr')
+    heading = getH(hpr)
+    pitch = getP(hpr)
+    roll = getR(hpr)
+    p.setHpr(degrees(heading), degrees(pitch), degrees(roll))
+    s = self.get('size')
+    p.setScale(s)
+    
+"""def fireFn(self, dict):
 
     self.reset()
     self.setPos(0.000, 0.000, 0.000)
@@ -193,7 +96,6 @@ def fireFn(self, dict):
 def fire1(texture = "fire.png", **a):
     a["texture"] = texture
     return PEffect(fireFn, name = "fire", **a)
-
 
 def explosionsFn(self, dict):
     self.reset()
@@ -317,9 +219,9 @@ def fireWorks(headColor = yellow, tailColor = red, radius = .25, force = p3(0,0,
         return PEffect(fireWorkFn, name = "fireWork", **a)
 
 def fireWork(duration = 2,  **a):
-   return fireWorks(duration = duration, **a)
+   return fireWorks(duration = duration, **a)"""
 
-def intervalRingsFn(self, dict):
+"""def intervalRingsFn(self, dict):
 
     self.reset()
     self.setPos(0.000, 0.000, 0.000)
@@ -625,7 +527,7 @@ def warpSpeed(headColor = white, tailColor = blue,lifeSpan = 1, lifeSpanSpread =
     a["terminalVelocitySpread"] = terminalVelocitySpread
     a["lineScaler"] = lineScaler
     a["birthRate"] = birthRate
-    return PEffect(warpSpeedFn, name = "warpSpeed", **a)
+    return PEffect(warpSpeedFn, name = "warpSpeed", **a)"""
 
 def fireishFn(self, dict):
 
@@ -695,7 +597,7 @@ def fireish(texture = "fire.png",lifeSpan = 1, lifeSpanSpread = 2, mass = 10,
         return PEffect(fireishFn, name = "fireish", **a)
 
 
-def warpFaceFn(self, dict):
+"""def warpFaceFn(self, dict):
 
     self.reset()
     self.setPos(0.000, 0.000, 0.000)
@@ -969,6 +871,11 @@ def smokeTail(lifeSpan = 5, lifeSpanSpread = 0, mass = 0.005,
          a["terminalVelocitySpread"] = terminalVelocitySpread
          a["birthRate"] = birthRate
          a["force"] = force
-         return PEffect(smokeTailFn, name = "smokeTail", **a)
+         return PEffect(smokeTailFn, name = "smokeTail", **a)"""
+
+    
+
+
+
 
 
