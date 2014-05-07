@@ -1,6 +1,6 @@
 from Panda import *
 
-camera.position=p3(0,-30, 6)
+#cam.position=p3(0,-30, 6)
 
 world.gravity = p3(0,0,-5)
 

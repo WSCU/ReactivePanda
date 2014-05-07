@@ -14,7 +14,7 @@ from Proxy import *
 from Numerics import *
 from Functions import degrees
 from StaticNumerics import pi
-from Globals import pandaPath
+from Globals import pandaPath, sys
 import FileIO
 import FileSearch
 
@@ -47,7 +47,16 @@ class PandaModel(Proxy):
         #print "Object Name: "+ str(fileName)+"-gID: "+str(Globals.nextModelId);
         if self._mFile is None:
             print "Can't find model " + repr(fileName)
-            self._mFile = Filename(pandaPath + "models/"+fileName)
+            if(os.path.exists(pandaPath + "/" + fileName)):
+                self._mFile = Filename(pandaPath + "models/"+fileName)
+            else:
+                path = os.path.realpath(__file__)
+                p = path.split('/')
+                path = ""
+                p.pop()
+                for s in p:
+                    path += s + "/"
+                self._mFile = Filename(path + "lib/models/" + fileName)
             #self._mParams = pandaParameters
             self._mParams = pandaParameters
         #self._mFile = Filename("/c/Panda3D-1.8.1/models/"+fileName)

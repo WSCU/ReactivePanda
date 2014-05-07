@@ -1,7 +1,7 @@
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
-import os
+import sys, os
 from World import World
 
 currentTime = 1 # The current global time
@@ -57,7 +57,7 @@ collections = {}
 #osType = platform.system() # OS That is being used. # NotReturning Correct osType should be Windows Insted of Java.
 #print osType
 #osType = 'Linux'
-pandaPath = os.getcwd() + "/lib/"
+pandaPath = os.getcwd()
 '''
 osType = 'Windows'
 if osType is 'Linux':
