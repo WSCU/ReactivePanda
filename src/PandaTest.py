@@ -1,14 +1,4 @@
-import Engine
-import Globals as g
-from Text import *
-from Functions import time
-from PandaModels import *
-from Functions import *
-from StaticNumerics import cos, sin, pi
-from Numerics import cos, sin, pi
-from direct.actor import Actor
-import direct.directbase.DirectStart
-from panda3d.core import Filename
+from panda import *
 
 #mFile = Filename("/c/Panda3D-1.8.1/models/panda-model.egg.pz")
 #print "File Path: " + repr(mFile)
@@ -29,4 +19,8 @@ a = panda(size = 0.05, hpr = hpr(-1,0,1), position = P3(sin(integral(2)),5,cos(i
 #t = text(text = "We're like testing texting and stuff")
 #camera.setPos(0,-10,0)
 
-Engine.engine(0)
+a = panda(size = 0.05, position = P3(-5 + integral(1), 0, 0))
+b = panda(size = 0.05, position = P3(5 - integral(1), 0, 0))
+hit(a, b)
+
+start()
