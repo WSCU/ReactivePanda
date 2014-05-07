@@ -19,6 +19,8 @@ p2 = P2
 HPR      = lift("hpr", SHPR)
 hpr = HPR
 
+gravity  = P3(0,0,-1)
+
 getX     = lift("getX", lambda v:v.x, [hasXYType], numType)
 getY     = lift("getY", lambda v:v.y, [hasXYType], numType)
 getZ     = lift("getZ", lambda v:v.z, [p3Type], numType)

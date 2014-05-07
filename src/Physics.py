@@ -1,6 +1,5 @@
-from StaticNumerics import *
 from Functions import integral
-import Globals as g
+from Numerics import gravity
 
 
 # For whatever reason, the world object imported above is always None.  Thus we

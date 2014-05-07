@@ -41,7 +41,6 @@ rbutton = None # Right button state
 rbuttonPull = None # "Pulled" 2-D Point for the right button
 lbuttonPull = None # "Pulled" 2-D point for the left button
 
-gravity = P3(0,0,-1)
 
 # Used to identify signals
 
