@@ -48,7 +48,7 @@ class Proxy:
     def updater(self):
         self._updater(self)
     def react(self, when, what):
-        if alive:
+        if self._alive:
             when = maybeLift(when)
             Globals.error = "On Line 54 of Proxy, In object " + self._name + ", initializing reaction " + when.name
             self._gReactions.append((when.start()[0], what))
@@ -69,7 +69,7 @@ class Proxy:
                 temp = a[0].now()
                 if temp != None:
                     #print("    " + str(temp) + " is being added to thunks")
-                    thunks.add(lambda : a[1](self, temp))
+                    thunks.append(lambda : a[1](self, temp))
             if (len(thunks) >= 2):
                 print("Multiple one time reactions in a heartbeat")
             for a in self._gReactions:
@@ -77,7 +77,7 @@ class Proxy:
                 #print("Object: " + str(self) + " is updating: " + str(a[0]))
                 if temp != None:
                     #print("    " + str(temp) + " is being added to thunks")
-                    thunks.add(lambda : a[1](self, temp))
+                    thunks.append(lambda : a[1](self, temp))
             self._updater(self)
             return thunks
 

@@ -168,6 +168,7 @@ class ObserverF(CachedValueF):
         SFact.__init__(self)
         self.f = f
         self.outType = anyType
+        self.name = "ObserverF"
     def start(self, expectedType = anyType):
         return Observer(self.f), self.outType
     

@@ -89,7 +89,7 @@ def accum(x): #accumulates the value of a signal over time
 
 def hit(m1, m2, trace = False):
     def getCollection(m1):
-        if type(m1) is string:
+        if type(m1) is str:
             try:
                 return Globals.collections[m1]
             except KeyErorr as e:
@@ -99,14 +99,15 @@ def hit(m1, m2, trace = False):
             return [m1]
 
     def hitFN():
-        m1 = getCollection(m1)
-        m2 = getCollection(m2)
-        for m in m1:
-            for e in m2:
+        ml1 = getCollection(m1)
+        ml2 = getCollection(m2)
+        for m in ml1:
+            for e in ml2:
+                print ("**************** " + repr(m.touches(e)))
                 if m.touches(e, trace = trace):
                     print "Hit has happend"
                     return True
-        return False
+        return None
     return ObserverF(hitFN)
 
 def gTimeObs(x): #Global time Observer
