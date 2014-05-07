@@ -5,7 +5,7 @@
 from Proxy import *
 from Panda import *
 from direct.particles.ParticleEffect import *
-from PEffect import *
+from FileSearch import * 
 
 class PEffect(Proxy):
 
