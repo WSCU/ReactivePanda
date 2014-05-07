@@ -75,7 +75,7 @@ stringType = Ptype("String", anyType)
 eventType = Ptype("Event", anyType)
 fnType = Ptype("Function", anyType)
 colorType = Ptype("Color", numType)
-colorHSLType = Ptype("Color", numType)
+colorHSLType = Ptype("HSL Color", numType)
 '''  Keeping just in case
 numType = ptype("Number")
 fnType = ptype("Function")
