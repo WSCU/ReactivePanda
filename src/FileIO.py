@@ -9,6 +9,7 @@ Non-Reactive
 import csv
 #from panda3d.core import Filename
 from Types import *
+from Globals import pandaPath
 #from StaticNumerics import *
 from FileSearch import *
 
@@ -68,9 +69,9 @@ def saveDict(file, dict, types = {}):
     saveCSV(file, lines)   
 
 def findTexture(fileName):
-    tFile = fileSearch(fileName, "textures", ["jpg", "png", "jpeg"])
+    tFile = fileSearch(fileName, "lib/textures", ["jpg", "png", "jpeg"])
     if tFile is None:
-        tFile = fileSearch(g.pandaPath + "/textures/default.jpg")
+        tFile = fileSearch(pandaPath + "lib/textures/default.jpg")
     return loader.loadTexture(tFile)
 
 def findSound(fileName):

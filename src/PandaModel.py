@@ -35,10 +35,10 @@ defaultModelParameters = {"localPosition" : SP3(0,0,0),
 pandaParameters = { "localSize" : 0.05,
                     "localPosition" : SP3( 0, 200, 0),
                     "localOrientation" : SHPR(0, 0, 0)}
-def pandaModel(fileName = None, size = None, hpr = None, position = None, collections = []):
-    return PandaModel(  fileName, size, hpr, position, collections)
+def pandaModel(fileName = None, size = None, hpr = None, position = None, collections = [], texture = None):
+    return PandaModel(  fileName, size, hpr, position, collections, texture)
 class PandaModel(Proxy):
-    def __init__(self, fileName, size, hpr, position, collections):
+    def __init__(self, fileName, size, hpr, position, collections, texture):
         Proxy.__init__(self, name = str(fileName)+"-gID: "+str(Globals.nextModelId), updater = updater, 
         types = {"position": p3Type, "hpr": hprType ,"localSize": numType})
         #(p3Type, SP3(0,0,0)), "hpr": (hprType, SHPR(0,0,0)), "size": (numType, 1)})
@@ -73,15 +73,20 @@ class PandaModel(Proxy):
         self._cType = self._mParams['cType']
         self._cFloor = self._mParams['cFloor']
         self._cTop = self._mParams['cTop']
+        self._currentTexture = ""
         self.size = 1
         self.position = P3(1,1,1)
         self.hpr = HPR(0,0,0)
+        self.texture = ""
         if position is not None:
             self.position = position
         if hpr is not None:
             self.hpr = hpr
         if size is not None:
             self.size = size
+        if texture is not None:
+            self.texture = texture
+            
         showModel(self)#This call needs to move into the updater method. We don't have it working with the engine yet.
         for tag in collections:
             try:
@@ -153,7 +158,7 @@ def updater(self):
                 print repr(signal)
     
     
-    print "size signal: "+repr(sizeScalar)+"  offset size: "+repr(sizeOffset)
+    #print "size signal: "+repr(sizeScalar)+"  offset size: "+repr(sizeOffset)
     self._pandaModel.setScale(sizeScalar*sizeOffset)
     self._pandaModel.setPos(positionNow.x + positionOffset.x*sizeScalar,
                             positionNow.y + positionOffset.y*sizeScalar,
@@ -163,7 +168,13 @@ def updater(self):
     self._pandaModel.setHpr(degrees(hprNow.h + hprOffset.h),
                             degrees(hprNow.p + hprOffset.p),
                             degrees(hprNow.r + hprOffset.r))
- 
+    texture = self.get("texture")
+    if texture != "" and texture != self._currentTexture:
+        texf = FileSearch.findTexture(texture)
+        self._currentTexture = texture
+        #print "The texture is: "+repr(texf)
+        self._pandaModel.setTexture(texf, 1)
+            
 def showModel(self):
     if not self._onScreen:
            self._pandaModel.reparentTo(render)
