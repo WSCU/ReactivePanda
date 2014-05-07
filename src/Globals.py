@@ -2,9 +2,9 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 import os
+from World import World
 
 currentTime = 1 # The current global time
-world = None # The world object, exported to the user variable world
 cam = None # The camera object, exported to the user variable cam
 directObj = None # This is a DirectObject that accepts events from Panda3D
 panda3dCamera = None # The original Panda3d camera
@@ -51,7 +51,7 @@ findClickedModels = None
 
 texture = None # Used to communicate with particle effect code from particle panel
 
-world = None
+world = World()
 
 collections = {}
 #osType = platform.system() # OS That is being used. # NotReturning Correct osType should be Windows Insted of Java.

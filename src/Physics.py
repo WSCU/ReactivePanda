@@ -1,5 +1,5 @@
 from Functions import integral
-from Numerics import gravity
+from Globals import world
 
 
 # For whatever reason, the world object imported above is always None.  Thus we
@@ -7,6 +7,6 @@ from Numerics import gravity
 
 def launch(model, p0, v0, grav = None):
     if grav is None:
-        grav = g.gravity
+        grav = world.gravity
     model.velocity = v0 + integral(grav) 
     model.position = p0 + integral(model.velocity)
