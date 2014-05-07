@@ -1,5 +1,6 @@
-from panda import *
+from Panda import *
 from OfflineEngine import *
+from PEffect import *
 #mFile = Filename("/c/Panda3D-1.8.1/models/panda-model.egg.pz")
 #print "File Path: " + repr(mFile)
 """
