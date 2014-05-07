@@ -3,8 +3,9 @@
 # and open the template in the editor.
 
 from Proxy import *
-from panda import *
+from Panda import *
 from direct.particles.ParticleEffect import *
+from PEffect import *
 
 class PEffect(Proxy):
 
