@@ -22,11 +22,11 @@ def maybeLift(x):
     t = x._type
   
     if t is signalFactoryType:
-        print "if this is not happening we are screwed: "+str(t)+" and: " +str(x.name)
+        #print "if this is not happening we are in trouble: "+str(t)+" and: " +str(x.name)
         return x
     if t is p3Type:
         return Lift0F(x, t)
-    print "Lifting: "+str(x)+" :: " +str(t)
+    #print "Lifting: "+str(x)+" :: " +str(t)
     return Lift0F(x,t)
     #return x
 def lift(name, f, types = [], outType = anyType):
@@ -168,6 +168,7 @@ class ObserverF(CachedValueF):
         SFact.__init__(self)
         self.f = f
         self.outType = anyType
+        self.name = "ObserverF"
     def start(self, expectedType = anyType):
         return Observer(self.f), self.outType
     

@@ -42,7 +42,7 @@ class DLight(Proxy):
         
 class PLight(Proxy):
     def __init__(self, color = None, position = None, name = 'pointLight'):
-        Proxy.init____(self, name = name, types = {"color":(colorType, white), "position":(positionType, P3(0,0,0))}, updater = updater)
+        Proxy.init____(self, name = name, types = {"color":(colorType, white), "position":(p3Type, P3(0,0,0))}, updater = updater)
         self._onScreen = False; 
         showModel(self)
     def updater(self):
@@ -61,6 +61,12 @@ def directionalLight(color = None, hpr = None):
         return DLight(hpr)
     else: 
         return DLight(color)
+
+
+
+    
+
+
 
 
 

@@ -35,10 +35,10 @@ defaultModelParameters = {"localPosition" : SP3(0,0,0),
 pandaParameters = { "localSize" : 0.05,
                     "localPosition" : SP3( 0, 200, 0),
                     "localOrientation" : SHPR(0, 0, 0)}
-def pandaModel(fileName = None, size = None, hpr = None, position = None, collections = []):
-    return PandaModel(  fileName, size, hpr, position, collections)
+def pandaModel(fileName = None, size = None, hpr = None, position = None, collections = [], texture = None):
+    return PandaModel(  fileName, size, hpr, position, collections, texture)
 class PandaModel(Proxy):
-    def __init__(self, fileName, size, hpr, position, collections):
+    def __init__(self, fileName, size, hpr, position, collections, texture):
         Proxy.__init__(self, name = str(fileName)+"-gID: "+str(Globals.nextModelId), updater = updater, 
         types = {"position": p3Type, "hpr": hprType ,"localSize": numType})
         #(p3Type, SP3(0,0,0)), "hpr": (hprType, SHPR(0,0,0)), "size": (numType, 1)})
@@ -78,19 +78,24 @@ class PandaModel(Proxy):
         self._size=self._mParams['localSize']
         self._hpr=self._mParams['localOrientation']
         self._position=self._mParams['localPosition']
-        self._cRadius = self._mParams['cRadius']
+        self._cRadius = float(self._mParams['cRadius'])
         self._cType = self._mParams['cType']
         self._cFloor = self._mParams['cFloor']
         self._cTop = self._mParams['cTop']
+        self._currentTexture = ""
         self.size = 1
         self.position = P3(1,1,1)
         self.hpr = HPR(0,0,0)
+        self.texture = ""
         if position is not None:
             self.position = position
         if hpr is not None:
             self.hpr = hpr
         if size is not None:
             self.size = size
+        if texture is not None:
+            self.texture = texture
+            
         showModel(self)#This call needs to move into the updater method. We don't have it working with the engine yet.
         for tag in collections:
             try:
@@ -101,10 +106,12 @@ class PandaModel(Proxy):
     def touches(self, handle, trace = False):
         if trace:
            print "Touch: " + repr(self) + " (" + self._cType + ") " + repr(handle) + " (" + handle._cType + ")"
-        mr = self._cRadius * self._size.now()
-        mp = self._position.now()
-        yr = handle._cRadius*handle._size.now()
-        yp = handle._position.now()
+        #print (repr(self._cRadius))
+        #print (repr(self.get("size")))
+        mr = self._cRadius * self.get("size")
+        mp = self.get("position")
+        yr = handle.cRadius*handle.get("size")
+        yp = handle.get("position")
         if trace:
             print repr(mp) + " [" + repr(mr) + "] " + repr(yp) + " [" + repr(yr) + "]"
         if self._cType == "sphere":
@@ -115,12 +122,15 @@ class PandaModel(Proxy):
                 if d > mr + yr:
                     return False
                 else:
-                    cb = yp.z + handle._size.now()*handle._cFloor
-                    ct = yp.z + handle._size.now()*handle._cTop
+                    cb = yp.z + handle.self.get("size")*handle._cFloor
+                    ct = yp.z + handle.self.get("size")*handle._cTop
                     sb = mp.z-mr
                     st = mp.z+mr
                     # print str(cb) + " " + str(ct) + " " + str(sb) + " " + str(st)
-                    return ct > sb and cb < st
+                    if ct > sb and cb < st:
+                        return True
+                    else:
+                        return False
         elif self._cType == "cyl":
             if handle._cType == "sphere":
                 d = absP2(subP2(P2(mp.x, mp.y), P2(yp.x, yp.y)))
@@ -128,8 +138,8 @@ class PandaModel(Proxy):
                 if d > mr + yr:
                     return False
                 else:
-                    cb = mp.z + self._size.now()*self._cFloor
-                    ct = mp.z + self._size.now()*self._cTop
+                    cb = mp.z + self.get("size")*self._cFloor
+                    ct = mp.z + self.get("size")*self._cTop
                     sb = yp.z-yr
                     st = yp.z+yr
                     # print str(cb) + " " + str(ct) + " " + str(sb) + " " + str(st)
@@ -145,6 +155,7 @@ class PandaModel(Proxy):
                     res = self._cTop + mp.z > handle._cFloor + yp.z and self._cFloor + mp.z < handle._cTop + yp.z
                     if trace:
                         print "Result: " + str(res) + " " + str((self._cTop, mp.z, handle._cFloor, yp.z, self._cFloor, handle._cTop))
+                    print ("*****"+repr(res))
                     return res
 
 def updater(self):
@@ -162,7 +173,7 @@ def updater(self):
                 print repr(signal)
     
     
-    print "size signal: "+repr(sizeScalar)+"  offset size: "+repr(sizeOffset)
+    #print "size signal: "+repr(sizeScalar)+"  offset size: "+repr(sizeOffset)
     self._pandaModel.setScale(sizeScalar*sizeOffset)
     self._pandaModel.setPos(positionNow.x + positionOffset.x*sizeScalar,
                             positionNow.y + positionOffset.y*sizeScalar,
@@ -172,7 +183,13 @@ def updater(self):
     self._pandaModel.setHpr(degrees(hprNow.h + hprOffset.h),
                             degrees(hprNow.p + hprOffset.p),
                             degrees(hprNow.r + hprOffset.r))
- 
+    texture = self.get("texture")
+    if texture != "" and texture != self._currentTexture:
+        texf = FileSearch.findTexture(texture)
+        self._currentTexture = texture
+        #print "The texture is: "+repr(texf)
+        self._pandaModel.setTexture(texf, 1)
+            
 def showModel(self):
     if not self._onScreen:
            self._pandaModel.reparentTo(render)

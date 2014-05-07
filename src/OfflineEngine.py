@@ -67,7 +67,7 @@ def engine(tSteps, verbose = False, test = None):
 
 class Printer(Proxy):
     def __init__(self, name, args):
-        Proxy.__init__(self, name, printUpdate)
+        Proxy.__init__(self, name, printUpdate,)
         for k, v in args.items():
             print ("printer constructor init: " + str(k))
             setattr(self, k, v)
@@ -112,14 +112,6 @@ def mIntegrals():
     p = printer ("integal", i = integral(1))
     q = printer ("integral 2", i = integral(p.i))
     engine(50, verbose = True)
-
-def reactTest():
-    def lightSwitch():
-        def lightSwitchf(sm):
-            if Globals.currentTime % 5 == 0:
-                return True
-            else return None
-    return StateMachineF(0, maybeLift
 
 def main():
     tagTest()
