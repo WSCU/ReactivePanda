@@ -104,9 +104,10 @@ def hit(m1, m2, trace = False):
         for m in m1:
             for e in m2:
                 if m.touches(e, trace = trace):
+                    print "Hit has happend"
                     return True
         return False
-    return ObserverF(0, maybeLift(x), hitFN)
+    return ObserverF(hitFN)
 
 def gTimeObs(x): #Global time Observer
 #Not sure about what variables will be passed into the gTOFN

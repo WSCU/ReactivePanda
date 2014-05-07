@@ -45,13 +45,13 @@ class Ptype:
         r = self.tname
         return r
 
-def epectedArgCount(args, n):
+def expectedArgCount(args, n):
     return len(args) is n
 
 def addCheck(self):
     if self.name is "add" or self.name is "subtract":
         if self.outType.addable:
-            if expectedArgCount(args, 2) and self.types[0].includes(self.types[1]):
+            if expectedArgCount(self.args, 2) and self.types[0].includes(self.types[1]):
                 return True
             else:
                 print "Tried to add/subtract incompatible types" 
