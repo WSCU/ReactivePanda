@@ -17,7 +17,8 @@ def loadCSV(file):
     Reads the contents of a csv file and returns an array of each row.
     """
     print "File name string?" + str(file)
-    fileReader = csv.reader(open(file.toOsSpecific(), "r"),dialect = 'excel', quotes = QUOTES_NONE )
+
+    fileReader = csv.reader(open(file.toOsSpecific(), "r"),dialect = 'excel', quoting= csv.QUOTE_NONE )
    
     arr = []
     for row in fileReader:
@@ -44,6 +45,7 @@ def loadDict(file, types={}, defaults = {}):
         if len(l) == 2:
             key = l[0]
             val = l[1]
+            #print "*****************"+repr(key)
             if key in types:
                 val = types[key].decode(val)
             res[key] = val

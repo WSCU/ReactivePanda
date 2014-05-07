@@ -21,7 +21,7 @@ import FileSearch
 # This fills in all of the defaults
 parameterCache = {}
 defaultModelParameters = {"localPosition" : SP3(0,0,0),
-                          "localSize" : .05,
+                          "localSize" : 0.05,
                           "localOrientation" : SHPR(0,.25,0),
                           "joints" : [],
                           "animations" : None,
@@ -56,10 +56,10 @@ class PandaModel(Proxy):
             self._mParams = parameterCache[fileName]
         else:
             mParamFile = Filename(self._mFile)
-            print repr(mParamFile)
+            #print repr(mParamFile)
             mParamFile.setExtension("model")
             if mParamFile.exists():
-                self._mParams = FileIO.loadDict(mParamFile, defaults = defaultModelParameters)
+                self._mParams = FileIO.loadDict(mParamFile,types = self._types,  defaults = defaultModelParameters)
             else:
                 print "No .model for " + str(fileName)
                 self._mParams = defaultModelParameters
@@ -143,6 +143,7 @@ def updater(self):
     positionOffset = self._position
     positionNow = self.get("position")
     sizeScalar = self.get("size")
+    sizeOffset = self._size
     hprOffset = self._hpr
     hprNow = self.get( "hpr")
     
@@ -150,7 +151,10 @@ def updater(self):
     if Globals.eventSignals is not None: 
             for signal in Globals.events:
                 print repr(signal)
-    self._pandaModel.setScale(sizeScalar*self._size)
+    
+    
+    print "size signal: "+repr(sizeScalar)+"  offset size: "+repr(sizeOffset)
+    self._pandaModel.setScale(sizeScalar*sizeOffset)
     self._pandaModel.setPos(positionNow.x + positionOffset.x*sizeScalar,
                             positionNow.y + positionOffset.y*sizeScalar,
                             positionNow.z + positionOffset.z*sizeScalar)
