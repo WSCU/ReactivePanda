@@ -305,32 +305,32 @@ class RInterpRev:
         return self.i.interp(self.i.dur - t)
 
 
-def toS(d, p):
+def to(d, p):
     """
     Front End version of a InterpTo object
     """
     return InterpTo(d, p)
 
 # Reverse an interpolation
-def reverseS(i):
+def reverse(i):
     """
     Front End version of a InterpRev object    
     """
     return InterpRev(i)
 
-def moveS(d, p):
+def move(d, p):
     """
     Front End version of a InterpMove object
     """
     return InterpMove(d, p)
 
-def atS(p):
+def at(p):
     """
     Front End version of a InterpAt object
     """
     return InterpAt(p)
 
-def repeatS(n, i):
+def repeat(n, i):
     """
     Front End version of a InterpCycle object
     (not sure what this does)
