@@ -58,7 +58,7 @@ class PandaModel(Proxy):
                     path += s + "/"
                 self._mFile = Filename(path + "lib/models/" + fileName)
             #self._mParams = pandaParameters
-            self._mParams = pandaParameters
+            self._mParams = defaultModelParameters
         #self._mFile = Filename("/c/Panda3D-1.8.1/models/"+fileName)
         #print "File Path: " + repr(mFile)
         elif fileName in parameterCache:
@@ -69,6 +69,7 @@ class PandaModel(Proxy):
             mParamFile.setExtension("model")
             if mParamFile.exists():
                 self._mParams = FileIO.loadDict(mParamFile,types = self._types,  defaults = defaultModelParameters)
+            
             else:
                 print "No .model for " + str(fileName)
                 self._mParams = defaultModelParameters

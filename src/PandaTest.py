@@ -15,9 +15,9 @@ pandaObject.reparentTo(render)
 #a = panda(size = 0.05, hpr = hpr(-1,0,1), position = P3(sin(integral(2)),5,cos(integral(2))))
 #b = panda(size = 0.05, hpr = HPR(integral(2),-.75,0), position = P3(1,10,-.1*integral(2)))
 
-a = panda(size = 0.5, hpr = hpr(-1,0,1), position = P3(sin(integral(2)),5,cos(integral(2))), texture = "diaglColors")
-b = panda(size = 0.5, hpr = HPR(integral(2),-.75,0), position = P3(sin(integral(2)),5,cos(integral(3))))
-
+#a = panda(size = 0.5, hpr = hpr(-1,0,1), position = P3(sin(integral(2)),5,cos(integral(2))), texture = "diaglColors")
+#b = panda(size = 0.5, hpr = HPR(integral(2),-.75,0), position = P3(sin(integral(2)),5,cos(integral(3))))
+#pando = panda();
 #c = panda(position = P3(sin(integral(.2)),5+integral(10),cos(integral(.2))), hpr = HPR(integral(1),integral(.5),integral(1)))
 #d = boy(position = P3(1,1,integral(2)), hpr = HPR(1,0,0))
 #bee = bee(size = 0.5)
@@ -25,8 +25,8 @@ b = panda(size = 0.5, hpr = HPR(integral(2),-.75,0), position = P3(sin(integral(
 #t = text(text = "We're like testing texting and stuff")
 #camera.setPos(0,-10,0)
 
-a = soccerBall(size = 0.2, position = P3(2 - integral(1), 10, 0), hpr = hpr(1, 0, 0))
-b = soccerBall(size = 0.2, position = P3(-2 + integral(1), 10, 0), hpr = hpr(-1, 0, 0))
+a = soccerBall(size = 2, position = P3(2 - integral(1), 10, 0), hpr = hpr(1, 0, 0))
+b = soccerBall(size = 2, position = P3(-2 + integral(1), 10, 0), hpr = hpr(-1, 0, 0))
 def hitReact(p,v):
     a.position = P3(2 + integral(1), 10 , 2)
 a.react(hit(a,b,trace = True), hitReact)
