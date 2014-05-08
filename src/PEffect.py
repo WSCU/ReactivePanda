@@ -7,27 +7,45 @@ from Panda import *
 from direct.particles.ParticleEffect import *
 from FileSearch import * 
 
+
 class PEffect(Proxy):
+    defaultParameters = {"localPosition" : SP3(0,0,0),
+                          "localSize" : 0.05,
+                          "localOrientation" : SHPR(0,.25,0),
+                          "joints" : [],
+                          "animations" : None,
+                          "defaultAnimation" : None,
+                          "frame" : None,
+                          "cRadius" : 1,
+                          "cFloor" : 0,
+                          "cTop" : 1,
+                          "cType" : "cyl"}
 
     pid = 1 #what is this? 
     def __init__(self, particleFn, name = 'particleEffect', 
                hpr = None, position = None,
                 size = None,
                 ** a): 
-
-        Proxy.__init__(self, name = name, updater = updater, types = {"position":(p3Type, P3(0,0,0)), "hpr":(hprType, HPR(0,0,0)), "size":(numType, 1)})
-
+        return PEffect(particleFn, name, hpr, position, size)
+        Proxy.__init__(self, name = name, texture = texture, updater = updater, types = {"position":(p3Type, P3(0,0,0)), "hpr":(hprType, HPR(0,0,0)), "size":(numType, 1)})
+        
         #pathname = "/lib/panda/lib/lib-original/particles/"
         base.enableParticles() #this should be in start in main program, this should probably go away 
         p = ParticleEffect()
         particleFn(p, a)
         self._effect = p 
         p.reparentTo(render)
+        #self._currentTexture = ""
+       # self.texture = ""
+        if texture is not None:
+            self.texture = texture
+        
         p.start()
         
 def updater(self):
     p = self._effect
-    position = self.get('position')
+    position = self.get("position")
+    print("setting ", position)
     x = getX(position)
     y = getY(position)
     z = getZ(position)
@@ -39,6 +57,8 @@ def updater(self):
     p.setHpr(degrees(heading), degrees(pitch), degrees(roll))
     s = self.get('size')
     p.setScale(s)
+    #texture = self.get("texture")
+    
     
 """def fireFn(self, dict):
 
