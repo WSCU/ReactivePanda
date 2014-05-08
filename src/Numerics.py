@@ -4,6 +4,7 @@ from Types import *
 import math
 from SHPR import *
 from Color import Color, colorHSL
+from Interp import interpolateStatic
 
 pi       = maybeLift(math.pi)
 twopi    = maybeLift(2*pi)
