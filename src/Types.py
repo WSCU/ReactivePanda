@@ -61,10 +61,26 @@ def addCheck(self):
     return True
     
 def getPtype(self):
-    return self._type
+    if hasattr(x,'type'):  # Panda types all have a pType slot
+        return x.type
+    if x is None:
+        return noneType
+    t = type(x)
+    if t is type(1):
+        return numType
+    if t is type(1.0):
+        return numType
+    if t is type(True):
+        return boolType
+    if t is type('abc'):
+        return stringType
+    if t is type((1,2)):
+        return TupleType
+
+    return ptype("Unknown: " + str(t))
     
 def checkType(self, value, ptype):
-    if value._type is ptype:
+    if type(value) is ptype:
         return True
     return False
 
