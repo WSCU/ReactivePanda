@@ -59,6 +59,14 @@ def addCheck(self):
             print "Non Addable Type: " + str(self.outType)
         return False
     return True
+    
+def getPtype(self):
+    return self._type
+    
+def checkType(self, value, ptype):
+    if value._type is ptype:
+        return True
+    return False
 
 #  Predefined types used elsewhere
 anyType = Ptype("Any", None, addable = True)
