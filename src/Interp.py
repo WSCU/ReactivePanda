@@ -32,7 +32,7 @@ class Interp:
     """
     def __init__(self):
         self.interpolant = None
-        self._type = interpableType;
+        self._type = "interpableType";
     def __add__(self, x):
     	"""
     	Infix (+) operator
