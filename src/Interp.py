@@ -58,12 +58,7 @@ class InterpNext(Interp):
         Interp.__init__(self)
         self.i1 = i1
         self.i2 = i2
-        ty1 = getPType(i1)
-        ty2 = getPType(i2)
-        checkInterpableType(ty1)
-        checkInterpableType(ty2)
-        checkSameInterp(ty1, ty2)
-        self.type = ty1
+
     def getInterpolant(self, prev):
         """
         returns running interpolant
@@ -82,9 +77,6 @@ class InterpAt(Interp):
         """
         Interp.__init__(self)
         self.p = p
-        ty = getPType(p)
-        checkInterpableType(ty)
-        self.type = interpType(ty)
         
     def getInterpolant(self, prev):
         """
@@ -107,9 +99,6 @@ class InterpTo(Interp):
         Interp.__init__(self)
         self.dur = float(dur)
         self.p = p
-        ty = getPType(p)
-        checkInterpableType(ty)
-        self.type = interpType(ty)
         
     def getInterpolant(self, prev):
         """
@@ -132,9 +121,6 @@ class InterpMove(Interp):
         Interp.__init__(self)
         self.dur = float(dur)
         self.p = p
-        ty = getPType(p)
-        checkInterpableType(ty)
-        self.type = interpType(ty)
 
     def getInterpolant(self, prev):
         """
@@ -156,9 +142,6 @@ class InterpCycle(Interp):
         Interp.__init__(self)
         self.n = n
         self.i = i
-        ty = getPType(i)
-        checkInterpType(ty)
-        self.type = ty
     def getInterpolant(self, prev):
         return RInterpCycle(prev, self.n, self.i)
 
@@ -172,9 +155,6 @@ class InterpRev(Interp):
     	"""
         Interp.__init__(self)
         self.i = i
-        ty = getPType(i)
-        checkInterpType(ty)
-        self.type = ty
     def getInterpolant(self, prev):
         return RInterpRev(prev, self.i)
 
