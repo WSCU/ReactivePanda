@@ -76,7 +76,7 @@ eventType = Ptype("Event", anyType)
 fnType = Ptype("Function", anyType)
 colorType = Ptype("Color", numType)
 colorHSLType = Ptype("HSL Color", numType)
-interpableType = Ptype("Interp", anyType, addable = True)
+interpableType = Ptype("Interp", anyType)
 '''  Keeping just in case
 numType = ptype("Number")
 fnType = ptype("Function")
