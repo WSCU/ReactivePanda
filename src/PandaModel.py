@@ -108,19 +108,11 @@ class PandaModel(Proxy):
         if trace:
            print "Touch: " + repr(self) + " (" + self._cType + ") " + repr(handle) + " (" + handle._cType + ")"
         #print (repr(self._cRadius))
-<<<<<<< Updated upstream
         #print (repr(self.get("size")))
         mr = self._cRadius * self.get("size")
-        mp = self.get("position")
+        mp = self._get("position")
         yr = handle._cRadius*handle.get("size")
-        yp = handle.get("position")
-=======
-        #print (repr(self._get("size")))
-        mr = self._cRadius * self.__get("size")
-        mp = self.__get("position")
-        yr = handle.cRadius*handle.__get("size")
-        yp = handle.__get("position")
->>>>>>> Stashed changes
+        yp = handle._get("position")
         if trace:
             print repr(mp) + " [" + repr(mr) + "] " + repr(yp) + " [" + repr(yr) + "]"
         if self._cType == "sphere":
@@ -174,11 +166,9 @@ def updater(self):
     sizeScalar = self._get("size")
     sizeOffset = self._size
     hprOffset = self._hpr
-<<<<<<< Updated upstream
-    hprNow = self.get( "hpr")
-=======
+
     hprNow = self._get( "hpr")
->>>>>>> Stashed changes
+
 
     #This is the actual updates to position/size/hpr etc.
     if Globals.eventSignals is not None:

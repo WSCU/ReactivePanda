@@ -112,15 +112,6 @@ def mIntegrals():
     q = printer ("integral 2", i = integral(p.i))
     engine(50, verbose = True)
 
-<<<<<<< Updated upstream
-def funcTest():
-    p = printer ("p", get = integral(1))
-    q = printer ("q", i = integral(p.get))
-    engine(50, verbose = True)
-
-def main():
-    funcTest()
-=======
 def methodTest():
     p = printer ("p", get = integral(1))
     q = printer ("q", i = integral(p.get))
@@ -129,7 +120,6 @@ def methodTest():
 
 def main():
     methodTest()
->>>>>>> Stashed changes
 if __name__ == "__main__":
     main()
 

@@ -1,5 +1,4 @@
 import Globals
-import inspect
 from Factory import *
 from Types import proxyType
 
@@ -28,18 +27,13 @@ class Proxy:
         if name[0] == '_':
             return self.__dict__[name]
         else:
-<<<<<<< Updated upstream
-            if inspect.isfunction(self.__dict__[name]):
-                return self.__dict__[name]
-            else:
-                return ObserverF(lambda : self.get(name))
+            return ObserverF(lambda : self.get(name))
             #return self._signals[name]
     def get(self, name):
-=======
+
             return ObserverF(lambda : self._get(name))
             #return self._signals[name]
     def _get(self, name):
->>>>>>> Stashed changes
         try:
             return self._signals[name].now()
         except KeyError:
