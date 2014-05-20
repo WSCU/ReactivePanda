@@ -6,7 +6,7 @@ import sched, time
 from Signal import *
 from Factory import *
 from StaticNumerics import pi
-import Globals 
+import Globals
 
 def integerize(r):
     return LiftF("integerize", lambda x: int(x), [r])
@@ -75,7 +75,7 @@ def key(k, v):
     def keyfunc():
         if Globals.events:
             if k in Globals.events[0][1].keys():
-                return v        
+                return v
         return None
     return ObserverF(keyfunc)
 
@@ -103,8 +103,8 @@ def hit(m1, m2, trace = False):
         ml2 = getCollection(m2)
         for m in ml1:
             for e in ml2:
-                print ("**************** " + repr(m.touches(e)))
-                if m.touches(e, trace = trace):
+                print ("**************** " + repr(m._touches(e)))
+                if m._touches(e, trace = trace):
                     print "Hit has happend"
                     return True
         return None
@@ -118,7 +118,7 @@ def gTimeObs(x): #Global time Observer
             return i
 
     return ObserverF(0, maybeLift(x), gTOFN)
-    
+
 #Local time Observer
 def lTimeObs(x): #Local time Observer
     def lTOFN(i,s): #tracks how long ago some signal was started

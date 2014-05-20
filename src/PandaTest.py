@@ -11,7 +11,6 @@ pandaObject.reparentTo(render)
 #pandaObject.setScale(0.25, 0.25, 0.25)
 """
 #camera.setPos(100,0,0)
-
 #a = panda(size = 0.05, hpr = hpr(-1,0,1), position = P3(sin(integral(2)),5,cos(integral(2))))
 #b = panda(size = 0.05, hpr = HPR(integral(2),-.75,0), position = P3(1,10,-.1*integral(2)))
 
@@ -29,7 +28,7 @@ a = soccerBall(size = 2, position = P3(2 - integral(1), 10, 0), hpr = hpr(1, 0, 
 b = soccerBall(size = 2, position = P3(-2 + integral(1), 10, 0), hpr = hpr(-1, 0, 0))
 def hitReact(p,v):
     a.position = P3(2 + integral(1), 10 , 2)
-a.react(hit(a,b,trace = True), hitReact)
+a._react(hit(a,b,trace = True), hitReact)
 
 
 #a = panda(size = 0.1, position = P3(-5 + integral(1), 0, 0))

@@ -5,7 +5,7 @@ This has the type field but doesn't check args
 Many predefined colors (stolen from Clastic)
 """
 
-from pandac.PandaModules import VBase4   
+from pandac.PandaModules import VBase4
 from Types import numType, colorType, colorHSLType
 from StaticNumerics import staticLerp
 from colorsys import rgb_to_hls, hls_to_rgb
@@ -71,7 +71,7 @@ class Color:
             return "[" + str(self.r) + ", " + str(self.g) + ", " + str(self.b) + "]"
         else:
             return "[" + str(self.h) + ", " + str(self.s) + ", " + str(self.l) + "]"
-    
+
     def toVBase4(self):
         """
         Changes the representation to be used by Panda
@@ -81,7 +81,7 @@ class Color:
         self.type = colorHSLType
         return VBase4(self.r, self.g, self.b, self.a)
 
-    
+
 
     def interp(self, t, c2):
         """

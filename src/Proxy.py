@@ -28,17 +28,24 @@ class Proxy:
         if name[0] == '_':
             return self.__dict__[name]
         else:
+<<<<<<< Updated upstream
             if inspect.isfunction(self.__dict__[name]):
                 return self.__dict__[name]
             else:
                 return ObserverF(lambda : self.get(name))
             #return self._signals[name]
     def get(self, name):
+=======
+            return ObserverF(lambda : self._get(name))
+            #return self._signals[name]
+    def _get(self, name):
+>>>>>>> Stashed changes
         try:
             return self._signals[name].now()
         except KeyError:
             print( str(name) + " does not exist or has not been started in this Proxy " + repr(self))
-    def initialize(self):
+
+    def _initialize(self):
         for k, v in self._updateSignals.items():
             #print("Object: " + self._name + " is initializing: " + str(v))
             if self._types.has_key(k):
@@ -49,19 +56,19 @@ class Proxy:
             Globals.error = "On Line 46 of Proxy, In object " + self._name + ", attribute " + v.name
             self._signals[k] = v.start(expectedType = ty)[0] # This is screwing up Integral
         self._updateSignals = {}
-    def updater(self):
+    def _updater(self):
         self._updater(self)
-    def react(self, when, what):
+    def _react(self, when, what):
         if self._alive:
             when = maybeLift(when)
             Globals.error = "On Line 54 of Proxy, In object " + self._name + ", initializing reaction " + when.name
             self._gReactions.append((when.start()[0], what))
-    def react1(self, when, what):
+    def _react1(self, when, what):
         if alive:
             when = maybeLift(when)
             Globals.error = "On Line 59 of Proxy, In object " + self._name + ", initializing one time reaction " + when.name
             self._1Reactions.append((when.start()[0], what))
-    def update(self):
+    def _update(self):
         tempSigVals = {}
         if self._alive:
             for k, v in self._signals.items():

@@ -104,15 +104,23 @@ class PandaModel(Proxy):
             except KeyError:
                 Globals.collection[tag] = []
                 Globals.collections[tag].append(self)
-    def touches(self, handle, trace = False):
+    def _touches(self, handle, trace = False):
         if trace:
            print "Touch: " + repr(self) + " (" + self._cType + ") " + repr(handle) + " (" + handle._cType + ")"
         #print (repr(self._cRadius))
+<<<<<<< Updated upstream
         #print (repr(self.get("size")))
         mr = self._cRadius * self.get("size")
         mp = self.get("position")
         yr = handle._cRadius*handle.get("size")
         yp = handle.get("position")
+=======
+        #print (repr(self._get("size")))
+        mr = self._cRadius * self.__get("size")
+        mp = self.__get("position")
+        yr = handle.cRadius*handle.__get("size")
+        yp = handle.__get("position")
+>>>>>>> Stashed changes
         if trace:
             print repr(mp) + " [" + repr(mr) + "] " + repr(yp) + " [" + repr(yr) + "]"
         if self._cType == "sphere":
@@ -123,8 +131,8 @@ class PandaModel(Proxy):
                 if d > mr + yr:
                     return False
                 else:
-                    cb = yp.z + handle.self.get("size")*handle._cFloor
-                    ct = yp.z + handle.self.get("size")*handle._cTop
+                    cb = yp.z + handle.self._get("size")*handle._cFloor
+                    ct = yp.z + handle.self._get("size")*handle._cTop
                     sb = mp.z-mr
                     st = mp.z+mr
                     # print str(cb) + " " + str(ct) + " " + str(sb) + " " + str(st)
@@ -139,8 +147,8 @@ class PandaModel(Proxy):
                 if d > mr + yr:
                     return False
                 else:
-                    cb = mp.z + self.get("size")*self._cFloor
-                    ct = mp.z + self.get("size")*self._cTop
+                    cb = mp.z + self._get("size")*self._cFloor
+                    ct = mp.z + self._get("size")*self._cTop
                     sb = yp.z-yr
                     st = yp.z+yr
                     # print str(cb) + " " + str(ct) + " " + str(sb) + " " + str(st)
@@ -160,13 +168,17 @@ class PandaModel(Proxy):
                     return res
 
 def updater(self):
-    #These parameters find the static offset which was created during initialization and the current position which is returned by the self.get() method
+    #These parameters find the static offset which was created during initialization and the current position which is returned by the self._get() method
     positionOffset = self._position
-    positionNow = self.get("position")
-    sizeScalar = self.get("size")
+    positionNow = self._get("position")
+    sizeScalar = self._get("size")
     sizeOffset = self._size
     hprOffset = self._hpr
+<<<<<<< Updated upstream
     hprNow = self.get( "hpr")
+=======
+    hprNow = self._get( "hpr")
+>>>>>>> Stashed changes
 
     #This is the actual updates to position/size/hpr etc.
     if Globals.eventSignals is not None:
@@ -184,7 +196,7 @@ def updater(self):
     self._pandaModel.setHpr(degrees(hprNow.h + hprOffset.h),
                             degrees(hprNow.p + hprOffset.p),
                             degrees(hprNow.r + hprOffset.r))
-    texture = self.get("texture")
+    texture = self._get("texture")
     if texture != "" and texture != self._currentTexture:
         texf = FileSearch.findTexture(texture)
         self._currentTexture = texture

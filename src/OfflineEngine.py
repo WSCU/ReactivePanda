@@ -15,7 +15,7 @@ def heartBeat(ct, events, verbose = False, test = False):
     for worldObject in Globals.worldObjects:
         if verbose and not test:
             print("Updating object: " + str(worldObject))
-        Globals.thunks.extend(worldObject.update())
+        Globals.thunks.extend(worldObject._update())
     for e in Globals.events:
         if verbose and not test:
             print("Event " + str(e) + " is firing")
@@ -29,7 +29,7 @@ def heartBeat(ct, events, verbose = False, test = False):
     for obj in Globals.worldObjects:
         if verbose and not test:
             print("Initializing object: " + str(obj))
-        obj.initialize()
+        obj._initialize()
 
 def initialize(ct):
     Globals.thunks = []
@@ -69,7 +69,6 @@ class Printer(Proxy):
     def __init__(self, name, args):
         Proxy.__init__(self, name, printUpdate, {})
         for k, v in args.items():
-            print ("printer constructor init: " + str(k))
             setattr(self, k, v)
 
 def printer(name = "test object", **kwargs):
@@ -92,7 +91,7 @@ def rightMouseEvents(l):
     Globals.simEvents.extend(["RBP"] + e)
 
 def holdTest():
-    p = printer("Hold", i = hold(integral(1), 0))
+    p = printer("Hold", i = hold(1, 0))
     engine(50, verbose = True)
 
 def accumTest():
@@ -109,10 +108,11 @@ def tagTest():
     engine(10, verbose = True)
 
 def mIntegrals():
-    p = printer ("integal", i = integral(1))
+    p = printer ("integral", i = integral(1))
     q = printer ("integral 2", i = integral(p.i))
     engine(50, verbose = True)
 
+<<<<<<< Updated upstream
 def funcTest():
     p = printer ("p", get = integral(1))
     q = printer ("q", i = integral(p.get))
@@ -120,6 +120,16 @@ def funcTest():
 
 def main():
     funcTest()
+=======
+def methodTest():
+    p = printer ("p", get = integral(1))
+    q = printer ("q", i = integral(p.get))
+    a = printer ("new integral", i = accum(p.get))
+    engine(50, verbose = True)
+
+def main():
+    methodTest()
+>>>>>>> Stashed changes
 if __name__ == "__main__":
     main()
 
