@@ -27,9 +27,8 @@ class Proxy:
         if name[0] == '_':
             return self.__dict__[name]
         else:
-            return ObserverF(lambda : self.get(name))
+            return ObserverF(lambda : self._get(name))
             #return self._signals[name]
-
     def _get(self, name):
         try:
             return self._signals[name].now()
