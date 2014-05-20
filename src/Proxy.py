@@ -29,10 +29,7 @@ class Proxy:
         else:
             return ObserverF(lambda : self.get(name))
             #return self._signals[name]
-    def get(self, name):
 
-            return ObserverF(lambda : self._get(name))
-            #return self._signals[name]
     def _get(self, name):
         try:
             return self._signals[name].now()
