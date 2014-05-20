@@ -109,9 +109,9 @@ class PandaModel(Proxy):
            print "Touch: " + repr(self) + " (" + self._cType + ") " + repr(handle) + " (" + handle._cType + ")"
         #print (repr(self._cRadius))
         #print (repr(self.get("size")))
-        mr = self._cRadius * self.get("size")
+        mr = self._cRadius * self._get("size")
         mp = self._get("position")
-        yr = handle._cRadius*handle.get("size")
+        yr = handle._cRadius*handle._get("size")
         yp = handle._get("position")
         if trace:
             print repr(mp) + " [" + repr(mr) + "] " + repr(yp) + " [" + repr(yr) + "]"
