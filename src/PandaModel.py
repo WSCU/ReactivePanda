@@ -39,7 +39,7 @@ def pandaModel(fileName = None, size = None, hpr = None, position = None, collec
     return PandaModel(  fileName, size, hpr, position, collections, texture)
 class PandaModel(Proxy):
     def __init__(self, fileName, size, hpr, position, collections, texture):
-        Proxy.__init__(self, name = str(fileName)+"-gID: "+str(Globals.nextModelId), updater = updater, 
+        Proxy.__init__(self, name = str(fileName)+"-gID: "+str(Globals.nextModelId), updater = updater,
         types = {"position": p3Type, "hpr": hprType ,"localSize": numType})
         #(p3Type, SP3(0,0,0)), "hpr": (hprType, SHPR(0,0,0)), "size": (numType, 1)})
         Globals.nextModelId = Globals.nextModelId + 1
@@ -69,7 +69,7 @@ class PandaModel(Proxy):
             mParamFile.setExtension("model")
             if mParamFile.exists():
                 self._mParams = FileIO.loadDict(mParamFile,types = self._types,  defaults = defaultModelParameters)
-            
+
             else:
                 print "No .model for " + str(fileName)
                 self._mParams = defaultModelParameters
@@ -96,7 +96,7 @@ class PandaModel(Proxy):
             self.size = size
         if texture is not None:
             self.texture = texture
-            
+
         showModel(self)#This call needs to move into the updater method. We don't have it working with the engine yet.
         for tag in collections:
             try:
@@ -111,7 +111,7 @@ class PandaModel(Proxy):
         #print (repr(self.get("size")))
         mr = self._cRadius * self.get("size")
         mp = self.get("position")
-        yr = handle.cRadius*handle.get("size")
+        yr = handle._cRadius*handle.get("size")
         yp = handle.get("position")
         if trace:
             print repr(mp) + " [" + repr(mr) + "] " + repr(yp) + " [" + repr(yr) + "]"
@@ -167,20 +167,20 @@ def updater(self):
     sizeOffset = self._size
     hprOffset = self._hpr
     hprNow = self.get( "hpr")
-    
+
     #This is the actual updates to position/size/hpr etc.
-    if Globals.eventSignals is not None: 
+    if Globals.eventSignals is not None:
             for signal in Globals.events:
                 print repr(signal)
-    
-    
+
+
     #print "size signal: "+repr(sizeScalar)+"  offset size: "+repr(sizeOffset)
     self._pandaModel.setScale(sizeScalar*sizeOffset)
     self._pandaModel.setPos(positionNow.x + positionOffset.x*sizeScalar,
                             positionNow.y + positionOffset.y*sizeScalar,
                             positionNow.z + positionOffset.z*sizeScalar)
-                            
-     
+
+
     self._pandaModel.setHpr(degrees(hprNow.h + hprOffset.h),
                             degrees(hprNow.p + hprOffset.p),
                             degrees(hprNow.r + hprOffset.r))
@@ -190,7 +190,7 @@ def updater(self):
         self._currentTexture = texture
         #print "The texture is: "+repr(texf)
         self._pandaModel.setTexture(texf, 1)
-            
+
 def showModel(self):
     if not self._onScreen:
            self._pandaModel.reparentTo(render)

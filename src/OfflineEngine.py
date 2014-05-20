@@ -8,7 +8,7 @@ from Proxy import *
 
 def heartBeat(ct, events, verbose = False, test = False):
     #print "objects " + str(len(Globals.worldObjects))
-    Globals.dt = ct - Globals.currentTime 
+    Globals.dt = ct - Globals.currentTime
     Globals.currentTime = ct
     Globals.events = events
     Globals.thunks = []
@@ -67,7 +67,7 @@ def engine(tSteps, verbose = False, test = None):
 
 class Printer(Proxy):
     def __init__(self, name, args):
-        Proxy.__init__(self, name, printUpdate,)
+        Proxy.__init__(self, name, printUpdate, {})
         for k, v in args.items():
             print ("printer constructor init: " + str(k))
             setattr(self, k, v)
@@ -84,7 +84,7 @@ def leftMouseEvents(l):
     for i in l:
         e.append((i, True))
     Globals.simEvents.extend(["LBP"] + e)
-    
+
 def rightMouseEvents(l):
     e = []
     for i in l:
@@ -113,8 +113,13 @@ def mIntegrals():
     q = printer ("integral 2", i = integral(p.i))
     engine(50, verbose = True)
 
+def funcTest():
+    p = printer ("p", get = integral(1))
+    q = printer ("q", i = integral(p.get))
+    engine(50, verbose = True)
+
 def main():
-    tagTest()
+    funcTest()
 if __name__ == "__main__":
     main()
 

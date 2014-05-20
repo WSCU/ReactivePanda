@@ -1,4 +1,5 @@
 import Globals
+import inspect
 from Factory import *
 from Types import proxyType
 
@@ -27,10 +28,13 @@ class Proxy:
         if name[0] == '_':
             return self.__dict__[name]
         else:
-            return ObserverF(lambda : self.get(name))
+            if inspect.isfunction(self.__dict__[name]):
+                return self.__dict__[name]
+            else:
+                return ObserverF(lambda : self.get(name))
             #return self._signals[name]
     def get(self, name):
-        try: 
+        try:
             return self._signals[name].now()
         except KeyError:
             print( str(name) + " does not exist or has not been started in this Proxy " + repr(self))
