@@ -1,8 +1,6 @@
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
-import unittest
-import sched, time
 from Signal import *
 from Factory import *
 from StaticNumerics import pi
@@ -87,26 +85,36 @@ def accum(x): #accumulates the value of a signal over time
         return sm.state
     return StateMachineF(0, maybeLift(x), accumFN)
 
-def hit(m1, m2, trace = False):
-    def getCollection(m1):
-        if type(m1) is str:
+def getCollection(m):
+        if type(m) is str:
             try:
-                return Globals.collections[m1]
-            except KeyErorr as e:
-                print ("No collection with the name: " + m1)
+                return Globals.collections[m]
+            except KeyErorr:
+                print ("No collection with the name: " + m)
                 return None
         else:
-            return [m1]
+            return [m]
 
+def hit(m1, m2, reaction, trace = False):
     def hitFN():
         ml1 = getCollection(m1)
         ml2 = getCollection(m2)
         for m in ml1:
             for e in ml2:
-                print ("**************** " + repr(m._touches(e)))
                 if m._touches(e, trace = trace):
-                    print "Hit has happend"
-                    return True
+                    reaction()
+        return None
+    return ObserverF(hitFN)
+
+def hit1(m1, m2, reaction, trace = False):
+    def hitFN():
+        ml1 = getCollection(m1)
+        ml2 = getCollection(m2)
+        for m in ml1:
+            for e in ml2:
+                if m._touches(e, trace = trace):
+                    reaction()
+                    return
         return None
     return ObserverF(hitFN)
 
@@ -116,7 +124,6 @@ def gTimeObs(x): #Global time Observer
         if s!= None:
             i = s.now()
             return i
-
     return ObserverF(0, maybeLift(x), gTOFN)
 
 #Local time Observer
@@ -125,7 +132,6 @@ def lTimeObs(x): #Local time Observer
         if s!= None:
             i = i + s.now()
             return i
-
     return ObserverF(0, maybeLift(x), lTOFN)
 
 def clock(x):

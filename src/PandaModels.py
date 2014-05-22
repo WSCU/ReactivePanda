@@ -55,7 +55,7 @@ def sphere(**a):
     return pandaModel("sphere/sphere.egg", **a)
 
 def soccerBall(**a):#This one needs some atttention
-    return pandaModel("soccerball/soccerball.egg", **a)
+    return pandaModel("lib/models/soccerball/soccerball.egg", **a)
 
 def chair(**a):
     return pandaModel("deskChair/deskchair.egg",**a)
@@ -67,7 +67,7 @@ def russianBuilding(**a):
     return pandaModel("russianBuilding/tetris-building.egg", **a)
 
 def volleyBall(**a):
-    return pandaModel("volleyBall/volleyball.egg", **a)
+    return pandaModel("lib/models/volleyBall/volleyball.egg", **a)
 
 def stoplightSign(**a):
     return pandaModel("stoplight_sign/stoplight_sign.egg", **a)

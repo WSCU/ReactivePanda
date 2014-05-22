@@ -69,7 +69,6 @@ class PandaModel(Proxy):
             mParamFile.setExtension("model")
             if mParamFile.exists():
                 self._mParams = FileIO.loadDict(mParamFile,types = self._types,  defaults = defaultModelParameters)
-
             else:
                 print "No .model for " + str(fileName)
                 self._mParams = defaultModelParameters

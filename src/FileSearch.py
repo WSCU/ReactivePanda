@@ -12,7 +12,7 @@ def fileSearch(file, libDir = None, exts = []):
     Searches for given file in path
     """
     f1 = Filename.expandFrom(file)
-    if f1.exists():        
+    if f1.exists():
         return f1
     for e in exts:
         f1.setExtension(e)
@@ -35,7 +35,7 @@ def findTexture(fileName):
     """
     tFile = fileSearch(fileName, "textures", ["jpg", "png", "jpeg"])
     if tFile is None:
-        tFile = fileSearch(Globals.pandaPath + "/textures/default.jpg")
+        tFile = fileSearch(pandaPath + "/textures/default.jpg")
     return loader.loadTexture(tFile)
 
 

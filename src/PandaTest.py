@@ -24,15 +24,10 @@ pandaObject.reparentTo(render)
 #t = text(text = "We're like testing texting and stuff")
 #camera.setPos(0,-10,0)
 
-a = soccerBall(size = 2, position = P3(2 - integral(1), 10, 0), hpr = hpr(1, 0, 0))
-b = soccerBall(size = 2, position = P3(-2 + integral(1), 10, 0), hpr = hpr(-1, 0, 0))
-def hitReact(p,v):
+a = volleyBall(size = 1, position = P3(2 - integral(1), 10, 0), hpr = hpr(1, 0, 0))
+b = volleyBall(size = 1, position = P3(-2 + integral(1), 10, 0), hpr = hpr(-1, 0, 0))
+def hitReact():
     a.position = P3(2 + integral(1), 10 , 2)
-a._react(hit(a,b,trace = True), hitReact)
 
-
-#a = panda(size = 0.1, position = P3(-5 + integral(1), 0, 0))
-#b = panda(size = 0.05, position = P3(5 - integral(1), 0, 0))
-hit(a, b)
-
+world.hit = hit(a, b, hitReact)
 start()

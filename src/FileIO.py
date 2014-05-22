@@ -13,20 +13,20 @@ from Globals import pandaPath
 #from StaticNumerics import *
 from FileSearch import *
 
-def loadCSV(file):    
+def loadCSV(file):
     """
     Reads the contents of a csv file and returns an array of each row.
     """
     print "File name string?" + str(file)
 
     fileReader = csv.reader(open(file.toOsSpecific(), "r"),dialect = 'excel', quoting= csv.QUOTE_NONE )
-   
+
     arr = []
     for row in fileReader:
-        arr.append(row)        
+        arr.append(row)
     return arr
 
-def saveCSV(file, arr):    
+def saveCSV(file, arr):
     """
     Writes an array to the given csv file
     """
@@ -66,7 +66,7 @@ def saveDict(file, dict, types = {}):
         else:
             print "No type for " + k
         lines.append([k, v])
-    saveCSV(file, lines)   
+    saveCSV(file, lines)
 
 def findTexture(fileName):
     tFile = fileSearch(fileName, "lib/textures", ["jpg", "png", "jpeg"])
@@ -77,4 +77,4 @@ def findTexture(fileName):
 def findSound(fileName):
     return fileSearch(fileName, "sounds", ["wav", "mp3"])
 
-    
+
