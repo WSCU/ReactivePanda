@@ -80,8 +80,8 @@ class PandaModel(Proxy):
         self._position=self._mParams['localPosition']
         self._cRadius = float(self._mParams['cRadius'])
         self._cType = self._mParams['cType']
-        self._cFloor = self._mParams['cFloor']
-        self._cTop = self._mParams['cTop']
+        self._cFloor = float(self._mParams['cFloor'])
+        self._cTop = float(self._mParams['cTop'])
         self._currentTexture = ""
         self.size = 1
         self.position = P3(1,1,1)

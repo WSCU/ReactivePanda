@@ -28,29 +28,7 @@ def ref(key):
 
 def simkey(key, v):
     return {key : v}
-"""
-class TagSignal(Event):
-    def __init__(self, fn, s):
-        Event.__init__(self)
-        self.s = maybeLift(s)
-        self.fn = fn
-        self.i = 0
-        self.context = None
-    def refresh(self):
-        eventVal = self.s.now()
-        if eventVal is None:
-            return None
-        res = self.fn(self.i, eventVal)
-        self.i = self.i + 1
-        return res
-    def typecheck(self, etype):
-        return EventAnyType
-    def siginit(self, context):
-        if needInit(self, context):
-            self.active = TagSignal(self.fn, self.s.siginit(context))
-            self.context = context
-        return self.active
-"""
+
 def tag(fn, s):
     def tagFN(sm):
         i = sm.i.now()

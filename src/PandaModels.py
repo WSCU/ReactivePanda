@@ -4,7 +4,7 @@ from PandaModel import *
 # Characters/Creatures
 
 def panda(**a):
-    return pandaModel("panda-model.egg.pz", **a)
+    return pandaModel("lib/models/panda-model.egg.pz", **a)
 
 def teapot(**a):
     return pandaModel("teapot.egg.pz",**a)

@@ -24,8 +24,9 @@ pandaObject.reparentTo(render)
 #t = text(text = "We're like testing texting and stuff")
 #camera.setPos(0,-10,0)
 
-a = volleyBall(size = 1, position = P3(2 - integral(1), 10, 0), hpr = hpr(1, 0, 0))
-b = volleyBall(size = 1, position = P3(-2 + integral(1), 10, 0), hpr = hpr(-1, 0, 0))
+
+a = panda(size = 0.5, position = P3(2 - integral(1), 10, 0), hpr = hpr(-1, 0, 0))
+b = panda(size = 0.5, position = P3(-2 + integral(1), 10, 0), hpr = hpr(1, 0, 0))
 def hitReact():
     a.position = P3(2 + integral(1), 10 , 2)
 
