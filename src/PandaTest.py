@@ -23,12 +23,13 @@ pandaObject.reparentTo(render)
 #run()
 #t = text(text = "We're like testing texting and stuff")
 #camera.setPos(0,-10,0)
+r2 = r2d2(size = 1, position = P3(2 - integral(1), 10, 0))
 
-
+"""
 a = panda(size = 0.5, position = P3(2 - integral(1), 10, 0), hpr = hpr(-1, 0, 0))
 b = panda(size = 0.5, position = P3(-2 + integral(1), 10, 0), hpr = hpr(1, 0, 0))
 def hitReact():
     a.position = P3(2 + integral(1), 10 , 2)
-
 world.hit = hit(a, b, hitReact)
+"""
 start()
