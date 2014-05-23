@@ -45,7 +45,7 @@ class PandaModel(Proxy):
         Globals.nextModelId = Globals.nextModelId + 1
         self._mFile = FileSearch.fileSearch(fileName, "models",["egg"])
         #print "Object Name: "+ str(fileName)+"-gID: "+str(Globals.nextModelId);
-        if filename in parameterCache:
+        if fileName in parameterCache:
             self._mParams = parameterCache[fileName]
         elif self._mFile is None:
             print "Can't find model " + repr(fileName)
