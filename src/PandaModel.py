@@ -45,7 +45,9 @@ class PandaModel(Proxy):
         Globals.nextModelId = Globals.nextModelId + 1
         self._mFile = FileSearch.fileSearch(fileName, "models",["egg"])
         #print "Object Name: "+ str(fileName)+"-gID: "+str(Globals.nextModelId);
-        if self._mFile is None:
+        if filename in parameterCache:
+            self._mParams = parameterCache[fileName]
+        elif self._mFile is None:
             print "Can't find model " + repr(fileName)
             if(os.path.exists(pandaPath + "/" + fileName)):
                 self._mFile = Filename(pandaPath + "models/"+fileName)
@@ -61,8 +63,6 @@ class PandaModel(Proxy):
             self._mParams = defaultModelParameters
         #self._mFile = Filename("/c/Panda3D-1.8.1/models/"+fileName)
         #print "File Path: " + repr(mFile)
-        elif fileName in parameterCache:
-            self._mParams = parameterCache[fileName]
         else:
             mParamFile = Filename(self._mFile)
             #print repr(mParamFile)
