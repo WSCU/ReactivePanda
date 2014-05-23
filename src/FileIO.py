@@ -17,7 +17,7 @@ def loadCSV(file):
     """
     Reads the contents of a csv file and returns an array of each row.
     """
-    print "File name string?" + str(file)
+    #print "File name string?" + str(file)
 
     fileReader = csv.reader(open(file.toOsSpecific(), "r"),dialect = 'excel', quoting= csv.QUOTE_NONE )
 

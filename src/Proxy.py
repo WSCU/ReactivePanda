@@ -10,6 +10,8 @@ class Proxy:
         self._signals = {}
         self._1Reactions = []
         self._gReactions = []
+        self._gWhen = []
+        self._1When = []
         self._updateSignals = {}
         self._name = name
         self._updater = updater
@@ -43,42 +45,74 @@ class Proxy:
             else:
                 ty = anyType
             v = maybeLift(v)
-            Globals.error = "On Line 46 of Proxy, In object " + self._name + ", attribute " + v.name
+            Globals.error = "On Line 49 of Proxy, In object " + self._name + ", attribute " + v.name
             self._signals[k] = v.start(expectedType = ty)[0] # This is screwing up Integral
         self._updateSignals = {}
+
     def _updater(self):
         self._updater(self)
+
     def _react(self, when, what):
         if self._alive:
             when = maybeLift(when)
-            Globals.error = "On Line 54 of Proxy, In object " + self._name + ", initializing reaction " + when.name
+            Globals.error = "On Line 59 of Proxy, In object " + self._name + ", initializing reaction " + when.name
             self._gReactions.append((when.start()[0], what))
+
     def _react1(self, when, what):
         if alive:
             when = maybeLift(when)
             Globals.error = "On Line 59 of Proxy, In object " + self._name + ", initializing one time reaction " + when.name
             self._1Reactions.append((when.start()[0], what))
+
+    def _when(self, when, what):
+        Globals.error = "On Line 69 of Proxy, In object " + self._name + ", initializing when reaction"
+        self._gWhen.append(when, what)
+
+    def _when1(self, when, what):
+        Globals.error = "On Line 73 of Proxy, In object " + self._name + ", initializing one time when reaction"
+        self._1When.append(when, what)
+
     def _update(self):
-        tempSigVals = {}
+        #tempSigVals = {} Not sure what this is for - Lucas 5/22/14
         if self._alive:
             for k, v in self._signals.items():
                 #print("Objects: " + str(self) + " is updating: " + k)
                 v.now()
             thunks = []
+
+            #Evaluate one time reactions:
             for a in self._1Reactions:
                 #print("Object: " + str(self) + " is updating: " + str(a[0]))
                 temp = a[0].now()
                 if temp != None:
                     #print("    " + str(temp) + " is being added to thunks")
                     thunks.append(lambda : a[1](self, temp))
+                    break
+            self._1Reactions = []
             if (len(thunks) >= 2):
                 print("Multiple one time reactions in a heartbeat")
+
+            #Evaluate recurring reactions
             for a in self._gReactions:
                 temp = a[0].now()
                 #print("Object: " + str(self) + " is updating: " + str(a[0]))
                 if temp != None:
                     #print("    " + str(temp) + " is being added to thunks")
                     thunks.append(lambda : a[1](self, temp))
+
+            #Evaluate one time when reaction
+            for a in self._1When:
+                if a[0]():
+                    thunks.append(lambda : a[1](self))
+                    break
+            self._1When = []
+
+            #Evaluate recurring when reactions
+            for a in self._gWhen:
+                if a[0]():
+                    thunks.append(lambda: a[1](self))
+
+            #push to the actuall object
             self._updater(self)
             return thunks
 
