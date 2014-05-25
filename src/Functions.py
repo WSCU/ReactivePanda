@@ -1,6 +1,4 @@
-# To change this license header, choose License Headers in Project Properties.
-# To change this template file, choose Tools | Templates
-# and open the template in the editor.
+#Collection of useful and necessary functions used in the Reactive Engine.
 from Signal import *
 from Factory import *
 from StaticNumerics import pi
@@ -64,14 +62,14 @@ def accum(x): #accumulates the value of a signal over time
     return StateMachineF(0, maybeLift(x), accumFN)
 
 def getCollection(m):
-        if type(m) is str:
-            try:
-                return Globals.collections[m]
-            except KeyErorr:
-                print ("No collection with the name: " + m)
-                return None
-        else:
-            return [m]
+    if type(m) is str:
+        try:
+            return Globals.collections[m]
+        except KeyErorr:
+            print ("No collection with the name: " + m)
+            return None
+    else:
+        return [m]
 
 def hit(m1, m2, reaction, trace = False):
     def hitFN():

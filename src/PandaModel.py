@@ -50,7 +50,7 @@ class PandaModel(Proxy):
         elif self._mFile is None:
             print "Can't find model " + repr(fileName)
             if(os.path.exists(pandaPath + "/" + fileName)):
-                self._mFile = Filename(pandaPath + "models/"+fileName)
+                self._mFile = Filename(pandaPath + "lib/models/"+fileName)
             else:
                 path = os.path.realpath(__file__)
                 p = path.split('/')
@@ -101,7 +101,7 @@ class PandaModel(Proxy):
             try:
                 Globals.collections[tag].append(self)
             except KeyError:
-                Globals.collection[tag] = []
+                Globals.collections[tag] = []
                 Globals.collections[tag].append(self)
     def _touches(self, handle, trace = False):
         if trace:
@@ -155,7 +155,7 @@ class PandaModel(Proxy):
                     res = self._cTop + mp.z > handle._cFloor + yp.z and self._cFloor + mp.z < handle._cTop + yp.z
                     if trace:
                         print "Result: " + str(res) + " " + str((self._cTop, mp.z, handle._cFloor, yp.z, self._cFloor, handle._cTop))
-                    print ("*****"+repr(res))
+                    #print ("*****"+repr(res))
                     return res
 
 def updater(self):
