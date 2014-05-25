@@ -122,8 +122,8 @@ class PandaModel(Proxy):
                 if d > mr + yr:
                     return False
                 else:
-                    cb = yp.z + handle.self._get("size")*handle._cFloor
-                    ct = yp.z + handle.self._get("size")*handle._cTop
+                    cb = yp.z + handle._get("size")*handle._cFloor
+                    ct = yp.z + handle._get("size")*handle._cTop
                     sb = mp.z-mr
                     st = mp.z+mr
                     # print str(cb) + " " + str(ct) + " " + str(sb) + " " + str(st)

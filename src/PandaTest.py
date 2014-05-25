@@ -24,13 +24,11 @@ pandaObject.reparentTo(render)
 #t = text(text = "We're like testing texting and stuff")
 #camera.setPos(0,-10,0)
 
-r21 = r2d2(size = 1, position = P3(3 - integral(1), 10, 0), collections = ["r2"])
-r2 = r2d2(size = 1, position = P3(2 - integral(1), 10, 0), collections = ["r2"])
-b = panda(size = 0.5, position = P3(-2 + integral(1), 10, 0), hpr = hpr(1, 0, 0), collections = ["pandas", "enemies"])
-c = panda(size = 0.5, position = P3(-3 + integral(1), 10, 0), hpr = hpr(1, 0, 0), collections = ["pandas", "enemies"])
+ball = soccerBall(size = 0.5, position = P3(2 - integral(1), 10, 0))
+p = panda(size = 0.5, position = P3(-2 + integral(1), 10, 0), collections = ["pandas"])
 
 def hitReact():
-    r2.position = P3(2 + integral(1), 10 , 2)
+    ball.position = P3(2 + integral(1), 10 , 2)
 
-world.h = hit("r2", "pandas", hitReact)
+world.h = hit(ball, "pandas", hitReact)
 start()
