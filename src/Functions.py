@@ -94,6 +94,26 @@ def hit1(m1, m2, reaction, trace = False):
         return None
     return ObserverF(hitFN)
 
+def react(m, when, what):
+    coll = getCollection(m)
+    for proxy in coll:
+        proxy._react(when, what)
+
+def react1(m, when, what):
+    coll = getCollection(m)
+    for proxy in coll:
+        proxy._react1(when, what)
+
+def when(m, when, what):
+    coll = getCollection(m)
+    for proxy in coll:
+        proxy._when(when, what)
+
+def when1(m, when, what):
+    coll = getCollection(m)
+    for proxy in coll:
+        proxy._when1(when, what)
+
 def gTimeObs(x): #Global time Observer
 #Not sure about what variables will be passed into the gTOFN
     def gTOFN(): #will track the global time
