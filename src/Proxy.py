@@ -66,11 +66,11 @@ class Proxy:
 
     def _when(self, when, what):
         Globals.error = "On Line 69 of Proxy, In object " + self._name + ", initializing when reaction"
-        self._gWhen.append(when, what)
+        self._gWhen.append((when, what))
 
     def _when1(self, when, what):
         Globals.error = "On Line 73 of Proxy, In object " + self._name + ", initializing one time when reaction"
-        self._1When.append(when, what)
+        self._1When.append((when, what))
 
     def _update(self):
         #tempSigVals = {} Not sure what this is for - Lucas 5/22/14
@@ -81,36 +81,36 @@ class Proxy:
             thunks = []
 
             #Evaluate one time reactions:
-            for a in self._1Reactions:
+            for c in self._1Reactions:
                 #print("Object: " + str(self) + " is updating: " + str(a[0]))
-                temp = a[0].now()
+                temp = c[0].now()
                 if temp != None:
                     #print("    " + str(temp) + " is being added to thunks")
-                    thunks.append(lambda : a[1](self, temp))
+                    thunks.append(lambda : c[1](self, temp))
                     break
             self._1Reactions = []
             if (len(thunks) >= 2):
                 print("Multiple one time reactions in a heartbeat")
 
             #Evaluate recurring reactions
-            for a in self._gReactions:
-                temp = a[0].now()
+            for d in self._gReactions:
+                temp = d[0].now()
                 #print("Object: " + str(self) + " is updating: " + str(a[0]))
                 if temp != None:
                     #print("    " + str(temp) + " is being added to thunks")
-                    thunks.append(lambda : a[1](self, temp))
+                    thunks.append(lambda : d[1](self, temp))
 
             #Evaluate one time when reaction
             for a in self._1When:
                 if a[0]():
                     thunks.append(lambda : a[1](self))
+                    self._1When = []
                     break
-            self._1When = []
 
             #Evaluate recurring when reactions
-            for a in self._gWhen:
-                if a[0]():
-                    thunks.append(lambda: a[1](self))
+            for b in self._gWhen:
+                if b[0]():
+                    thunks.append(lambda: b[1](self))
 
             #push to the actuall object
             self._updater(self)
