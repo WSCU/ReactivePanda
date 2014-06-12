@@ -78,7 +78,7 @@ def hit(m1, m2, reaction, trace = False):
         for m in ml1:
             for e in ml2:
                 if m._touches(e, trace = trace):
-                    reaction()
+                    reaction(m, e)
         return None
     return ObserverF(hitFN)
 
@@ -89,7 +89,7 @@ def hit1(m1, m2, reaction, trace = False):
         for m in ml1:
             for e in ml2:
                 if m._touches(e, trace = trace):
-                    reaction()
+                    reaction(m, e)
                     return
         return None
     return ObserverF(hitFN)

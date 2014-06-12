@@ -27,8 +27,8 @@ pandaObject.reparentTo(render)
 ball = soccerBall(size = 0.5, position = P3(2 - integral(1), 10, 0))
 p = panda(size = 0.5, position = P3(-2 + integral(1), 10, 0), collections = ["pandas"])
 
-def hitReact():
-    ball.position = P3(2 + integral(1), 10 , 2)
+def hitReact(m, e):
+    m.position = P3(2 + integral(1), 10 , 2)
 
 world.h = hit(ball, "pandas", hitReact)
 start()
