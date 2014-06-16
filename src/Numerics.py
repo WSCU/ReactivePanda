@@ -5,6 +5,7 @@ import math
 from SHPR import *
 from Color import Color, colorHSL
 from Interp import interpolateStatic
+from Interp import repeat
 
 pi       = maybeLift(math.pi)
 twopi    = maybeLift(2*pi)
