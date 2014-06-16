@@ -5,8 +5,8 @@ Non-reactive
 """
 
 from panda3d.core import Filename
+from panda3d.core import Loader as loader
 from Globals import pandaPath
-from panda3d import loader
 
 def fileSearch(file, libDir = None, exts = []):
     """
