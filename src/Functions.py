@@ -114,21 +114,16 @@ def when1(m, when, what):
     for proxy in coll:
         proxy._when1(when, what)
 
-def gTimeObs(x): #Global time Observer
-#Not sure about what variables will be passed into the gTOFN
-    def gTOFN(): #will track the global time
-        if s!= None:
-            i = s.now()
-            return i
-    return ObserverF(0, maybeLift(x), gTOFN)
+def globaltime():
+    def gtF():
+        return Globals.currentTime
+    return ObserverF(gtF)
 
-#Local time Observer
-def lTimeObs(x): #Local time Observer
-    def lTOFN(i,s): #tracks how long ago some signal was started
-        if s!= None:
-            i = i + s.now()
-            return i
-    return ObserverF(0, maybeLift(x), lTOFN)
+def localtime():
+    starttime = Globals.currentTime
+    def ltF():
+        return Globals.currentTime - starttime
+    return ObserverF(ltf)
 
 def clock(x):
     def clockFN(sm): # tracks and updates engine time
