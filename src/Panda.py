@@ -4,6 +4,8 @@ from Functions import *
 from PandaModels import *
 from Color import *
 from Interp import *
+from Externals import *
+from Physics import *
 
 def start():
     _engine(0)
