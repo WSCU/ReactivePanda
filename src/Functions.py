@@ -119,11 +119,15 @@ def globaltime():
         return Globals.currentTime
     return ObserverF(gtF)
 
+time = globaltime()
+
 def localtime():
     starttime = Globals.currentTime
     def ltF():
         return Globals.currentTime - starttime
-    return ObserverF(ltf)
+    return ObserverF(ltF)
+
+localTime = localtime()
 
 def clock(x):
     def clockFN(sm): # tracks and updates engine time
