@@ -1,7 +1,7 @@
 from FileSearch import findSound
 from Types import SoundType
 from panda3d.core import Filename
-from panda3d import loader
+from panda3d.core import Loader as loader
 
 class Sound:
     def __init__(self, file, loopCount = 1, volume = 0.5):
