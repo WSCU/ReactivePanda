@@ -33,13 +33,13 @@ def hitReact(m, e):
 def whenTest():
     return Globals.currentTime > 2
 
-def whenTestReaction(m):
+def whenTestReaction(m, v):
     print("hi")
 
-def when1Test(m):
+def when1Test(m, v):
     print("When1?")
 
-when1(ball, whenTest, when1Test)
-when(ball, whenTest, whenTestReaction)
+when1(ball, Globals.currentTime > 2, when1Test)
+when(ball, Globals.currentTime > 2, whenTestReaction)
 world.h = hit(ball, "pandas", hitReact)
 start()

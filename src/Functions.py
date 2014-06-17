@@ -7,6 +7,7 @@ import Globals
 def integerize(r):
     return LiftF("integerize", lambda x: int(x), [r])
 
+
 def integral(x):
     def thunk(sm):
         i = sm.i.now()

@@ -46,6 +46,8 @@ class Proxy:
                 ty = anyType
             v = maybeLift(v)
             Globals.error = "On Line 49 of Proxy, In object " + self._name + ", attribute " + v.name
+            print(str(self._signals))
+            print(str(v))
             self._signals[k] = v.start(expectedType = ty)[0] # This is screwing up Integral
         self._updateSignals = {}
 
@@ -102,15 +104,15 @@ class Proxy:
 
             #Evaluate one time when reaction
             for a in self._1When:
-                if a[0]():
-                    thunks.append(lambda : a[1](self))
+                if a[0]:
+                    thunks.append(lambda : a[1](self, a[0]))
                     self._1When = []
                     break
 
             #Evaluate recurring when reactions
             for b in self._gWhen:
-                if b[0]():
-                    thunks.append(lambda: b[1](self))
+                if b[0]:
+                    thunks.append(lambda: b[1](self, b[0]))
 
             #push to the actuall object
             self._updater(self)
