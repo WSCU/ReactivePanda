@@ -96,6 +96,7 @@ class SFact:
     def __or__(self, y):
         y = maybeLift(y)
         return LiftF("and", lambda x, y: x | y, [self, y])
+        
 #Creates a Lift Factory
 class LiftF(SFact):
     def __init__(self,name,f, args, types = [], outType = anyType):
@@ -182,6 +183,8 @@ class ObserverF(CachedValueF):
         self.name = "ObserverF"
     def start(self, expectedType = anyType):
         return Observer(self.f), self.outType
+    def get(self):
+        return lambda: this.f
 
 def eventObserver(eName, eVal = None):
     def getEvent(ename):

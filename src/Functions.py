@@ -8,8 +8,10 @@ def integerize(r):
     return LiftF("integerize", lambda x: int(x), [r])
 
 def now(s):
-    return s.now()
-    
+    if isinstance(s, ObserverF):
+        return s.get()
+    return None
+
 def integral(x):
     def thunk(sm):
         i = sm.i.now()
