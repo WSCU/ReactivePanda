@@ -32,6 +32,7 @@ def maybeLift(x):
 def lift(name, f, types = [], outType = anyType):
     def fn(*args):
         for arg in args:
+            print("lift: " + str(arg))
             arg = maybeLift(arg)
             if not arg.name is "Lift0":
                 return LiftF(name,f,args,types = types, outType = outType)
@@ -184,7 +185,7 @@ class ObserverF(CachedValueF):
     def start(self, expectedType = anyType):
         return Observer(self.f), self.outType
     def get(self):
-        return lambda: this.f
+        return self.f()
 
 def eventObserver(eName, eVal = None):
     def getEvent(ename):
