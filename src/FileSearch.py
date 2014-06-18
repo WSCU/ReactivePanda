@@ -5,7 +5,6 @@ Non-reactive
 """
 
 from panda3d.core import Filename
-from panda3d.core import Loader as loader
 from Globals import pandaPath
 
 def fileSearch(file, libDir = None, exts = []):
@@ -36,7 +35,7 @@ def findTexture(fileName):
     """
     tFile = fileSearch(fileName, "textures", ["jpg", "png", "jpeg"])
     if tFile is None:
-        tFile = fileSearch(pandaPath + "/textures/default.jpg")
+        tFile = fileSearch("default.jpg", "textures")
     return loader.loadTexture(tFile)
 
 

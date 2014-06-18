@@ -6,7 +6,6 @@ import direct.directbase.DirectStart
 
 currentTime = 1 # The current global time
 cam = None # The camera object, exported to the user variable cam
-directObj = None # This is a DirectObject that accepts events from Panda3D
 panda3dCamera = camera # The original Panda3d camera
 objectNames = None # Hands out unique name to every panda object
 eventSignals = {}
