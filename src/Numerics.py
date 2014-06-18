@@ -61,6 +61,28 @@ const    = lift("const", lambda x: lambda y: x, [anyType], fnType)
 
 color    = lift("rgb color", Color, [numType, numType, numType], colorType)
 colora   = lift("rgb color", Color, [numType, numType, numType, numType], colorType)
-colorhsl = lift("hsl color", colorHSL, [numType, numType, numType], colorHSLType)
+colorhsl = lift("hsl color", colorHSL, [numType, numType, numType], colorType)
 
 string   = lift("string", str, [anyType], stringType)
+
+
+def encodeNums(*n):
+    s = ""
+    r = ""
+    for num in n:
+        r = r + s + str(num)
+        s = ","
+    return r
+
+def decodeNums(s, f):
+    nums = s.split(",")
+    return f(*map(lambda x: float(x.strip()), nums))
+
+p3Type.encoder = lambda p: encodeNums(p.x, p.y, p.z)
+p3Type.decoder = lambda s: decodeNums(s, p3)
+
+p2Type.encoder = lambda p: encodeNums(p.x, p.y)
+p2Type.decoder = lambda s: decodeNums(s, p2)
+
+hprType.encoder = lambda p: encodeNums(p.h, p.p, p.r)
+hprType.decoder = lambda s: decodeNums(s, hpr)

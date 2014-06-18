@@ -8,4 +8,5 @@ from Externals import *
 from Physics import *
 
 def start():
+    print("Starting...")
     _engine(0)

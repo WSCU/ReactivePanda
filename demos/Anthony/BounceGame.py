@@ -4,7 +4,7 @@ from Panda import *
 
 world.gravity = p3(0,0,-5)
 
-paddle = boeing707(size = 3)
+paddle = panda()
 
 def col(t):
     return interpolate(t, forever(at(red) + to(.5, purple) + to(.5, blue) + to(.5, green) + to(.5, yellow) + to(.5, orange) + to(.5, red)))
