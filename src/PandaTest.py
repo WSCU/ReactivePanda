@@ -34,9 +34,11 @@ def whenTest():
     return Globals.currentTime > 2
 
 def whenTestReaction(m, v):
+    print(Globals.currentTime)
     print("hi")
 
 def when1Test(m, v):
+    print(Globals.currentTime)
     print("When1?")
 
 when1(ball, Globals.currentTime > 2, when1Test)
