@@ -1,5 +1,5 @@
 from Functions import integral
-from Globals import world
+from World import world
 
 
 # For whatever reason, the world object imported above is always None.  Thus we

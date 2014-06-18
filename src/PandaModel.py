@@ -17,13 +17,14 @@ from StaticNumerics import pi
 from Globals import pandaPath, sys
 import FileIO
 import FileSearch
+from Color import *
 
 # This fills in all of the defaults
 parameterCache = {}
 defaultModelParameters = {"localPosition" : SP3(0,0,0),
-                          "localSize" : 0.05,
-                          "localOrientation" : SHPR(0,.25,0),
-                          "joints" : [],
+                          "localSize" : 1,
+                          "localOrientation" : SHPR(0,0,0),
+                          "joints" : [], # jointed models not currently supported
                           "animations" : None,
                           "defaultAnimation" : None,
                           "frame" : None,
@@ -32,15 +33,16 @@ defaultModelParameters = {"localPosition" : SP3(0,0,0),
                           "cTop" : 1,
                           "cType" : "cyl"}
 
-pandaParameters = { "localSize" : 0.05,
-                    "localPosition" : SP3( 0, 200, 0),
-                    "localOrientation" : SHPR(0, 0, 0)}
-def pandaModel(fileName = None, size = None, hpr = None, position = None, collections = [], texture = None):
-    return PandaModel(  fileName, size, hpr, position, collections, texture)
+def pandaModel(fileName = None, size = None, hpr = None, position = None, collections = [], color = None, texture = None):
+    return PandaModel(  fileName, size, hpr, position, collections, color, texture)
+
 class PandaModel(Proxy):
-    def __init__(self, fileName, size, hpr, position, collections, texture):
-        Proxy.__init__(self, name = str(fileName)+"-gID: "+str(Globals.nextModelId), updater = updater,
-        types = {"position": p3Type, "hpr": hprType ,"localSize": numType})
+    def __init__(self, fileName, size, hpr, position, collections, color, texture):
+        Proxy.__init__(self, name = str(fileName)+"-gID: "+str(Globals.nextModelId), updater = proxyUpdater,
+                             types = {"position": p3Type, "hpr": hprType , "size": numType,
+                                      "color": colorType, "texture": stringType})
+        modelTypes = {"localOrientation": hprType, "localSize": numType, "localPosition": p3Type,
+                      "cRadius": numType, "cType": stringType, "cFloor": numType, "cTop": numType}
         #(p3Type, SP3(0,0,0)), "hpr": (hprType, SHPR(0,0,0)), "size": (numType, 1)})
         Globals.nextModelId = Globals.nextModelId + 1
         self._mFile = FileSearch.fileSearch(fileName, "models",["egg"])
@@ -48,19 +50,7 @@ class PandaModel(Proxy):
         if fileName in parameterCache:
             self._mParams = parameterCache[fileName]
         elif self._mFile is None:
-            print "Can't find model " + repr(fileName)
-            if(os.path.exists(pandaPath + "/" + fileName)):
-                self._mFile = Filename(pandaPath + "lib/models/"+fileName)
-            else:
-                path = os.path.realpath(__file__)
-                p = path.split('/')
-                path = ""
-                p.pop()
-                for s in p:
-                    path += s + "/"
-                self._mFile = Filename(path + "lib/models/" + fileName)
-            #self._mParams = pandaParameters
-            self._mParams = defaultModelParameters
+            print "Can't find model " + repr(fileName) #should substitute pandafor unknown models
         #self._mFile = Filename("/c/Panda3D-1.8.1/models/"+fileName)
         #print "File Path: " + repr(mFile)
         else:
@@ -68,7 +58,7 @@ class PandaModel(Proxy):
             #print repr(mParamFile)
             mParamFile.setExtension("model")
             if mParamFile.exists():
-                self._mParams = FileIO.loadDict(mParamFile,types = self._types,  defaults = defaultModelParameters)
+                self._mParams = FileIO.loadDict(mParamFile,types = modelTypes,  defaults = defaultModelParameters)
             else:
                 print "No .model for " + str(fileName)
                 self._mParams = defaultModelParameters
@@ -84,9 +74,10 @@ class PandaModel(Proxy):
         self._cTop = float(self._mParams['cTop'])
         self._currentTexture = ""
         self.size = 1
-        self.position = P3(1,1,1)
+        self.position = P3(0,0,0)
         self.hpr = HPR(0,0,0)
         self.texture = ""
+        self.color = noColor
         if position is not None:
             self.position = position
         if hpr is not None:
@@ -95,6 +86,8 @@ class PandaModel(Proxy):
             self.size = size
         if texture is not None:
             self.texture = texture
+        if color is not None:
+            self.color = color
 
         showModel(self)#This call needs to move into the updater method. We don't have it working with the engine yet.
         for tag in collections:
@@ -158,7 +151,7 @@ class PandaModel(Proxy):
                     #print ("*****"+repr(res))
                     return res
 
-def updater(self):
+def proxyUpdater(self):
     #These parameters find the static offset which was created during initialization and the current position which is returned by the self._get() method
     positionOffset = self._position
     positionNow = self._get("position")
@@ -168,7 +161,7 @@ def updater(self):
 
     hprNow = self._get( "hpr")
 
-
+    #print str(positionNow) + " " + str(positionOffset) + " " + str(hprNow)
     #This is the actual updates to position/size/hpr etc.
     if Globals.eventSignals is not None:
             for signal in Globals.events:
@@ -181,7 +174,6 @@ def updater(self):
                             positionNow.y + positionOffset.y*sizeScalar,
                             positionNow.z + positionOffset.z*sizeScalar)
 
-
     self._pandaModel.setHpr(degrees(hprNow.h + hprOffset.h),
                             degrees(hprNow.p + hprOffset.p),
                             degrees(hprNow.r + hprOffset.r))
@@ -191,6 +183,10 @@ def updater(self):
         self._currentTexture = texture
         #print "The texture is: "+repr(texf)
         self._pandaModel.setTexture(texf, 1)
+    color = self._get("color")
+    if color.a != 0:
+        self._pandaModel.setColor(color.toVBase4())
+
 
 def showModel(self):
     if not self._onScreen:

@@ -2,12 +2,12 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 import sys, os
-from World import World
+import direct.directbase.DirectStart
 
 currentTime = 1 # The current global time
 cam = None # The camera object, exported to the user variable cam
 directObj = None # This is a DirectObject that accepts events from Panda3D
-panda3dCamera = None # The original Panda3d camera
+panda3dCamera = camera # The original Panda3d camera
 objectNames = None # Hands out unique name to every panda object
 eventSignals = {}
 newEvents = {} # Events that are being sensed but not reacted to yet
@@ -51,13 +51,12 @@ findClickedModels = None
 
 texture = None # Used to communicate with particle effect code from particle panel
 
-world = World()
-
 collections = {}
 #osType = platform.system() # OS That is being used. # NotReturning Correct osType should be Windows Insted of Java.
 #print osType
 #osType = 'Linux'
-pandaPath = os.getcwd()
+#pandaPath = os.getcwd()
+pandaPath = "/c/panda/lib"
 '''
 osType = 'Windows'
 if osType is 'Linux':

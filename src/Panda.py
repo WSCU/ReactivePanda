@@ -9,4 +9,5 @@ from Physics import *
 from Text import *
 
 def start():
+    print("Starting...")
     _engine(0)
