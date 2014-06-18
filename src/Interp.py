@@ -28,7 +28,7 @@ class Interp:
     """
     Base Interpolation Class
     Defines a path between two points in an arbitrary space(color, location, etc.)
-    
+
     """
     def __init__(self):
         self.interpolant = None
@@ -77,7 +77,7 @@ class InterpAt(Interp):
         """
         Interp.__init__(self)
         self.p = p
-        
+
     def getInterpolant(self, prev):
         """
         gets the running interpolant
@@ -99,7 +99,7 @@ class InterpTo(Interp):
         Interp.__init__(self)
         self.dur = float(dur)
         self.p = p
-        
+
     def getInterpolant(self, prev):
         """
         returns the running interpolant
@@ -140,6 +140,7 @@ class InterpCycle(Interp):
     	ty: interpolant type
     	"""
         Interp.__init__(self)
+        self.type = anyType #See if this is correct - 6/16/14 - Lucas
         self.n = n
         self.i = i
     def getInterpolant(self, prev):
@@ -254,7 +255,7 @@ class RInterpCycle:
             self.last = self.i.first + self.delta
 
     def interp(self, t):
-        """ 
+        """
         has something to do with delta
         """
         f = math.floor(t/self.i.dur)
@@ -294,7 +295,7 @@ def to(d, p):
 # Reverse an interpolation
 def reverse(i):
     """
-    Front End version of a InterpRev object    
+    Front End version of a InterpRev object
     """
     return InterpRev(i)
 

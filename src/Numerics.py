@@ -53,7 +53,7 @@ sub      = lift("sub", lambda x: lambda y: y-x, [numType], fnType)
 times    = lift("times", lambda x: lambda y: x*y, [numType], fnType)
 div      = lift("div", lambda x: lambda y: x/y, [numType], fnType)
 
-interpolate = lift("interpolate", interpolateStatic, [numType], anyType)
+interpolate = lift("interpolate", interpolateStatic, [numType, numType], anyType)
 forever = lift("forever", lambda i: repeat(-1, i), [numType], fnType)
 
 #dot      = lift(lambda x,y: genDot(x,y), "dot", infer="dot")

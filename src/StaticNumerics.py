@@ -10,6 +10,7 @@ import math
 import random
 import unittest
 from Types import *
+import Numerics
 
 # This is a where we park signal functions.
 
@@ -99,29 +100,29 @@ class SP2:
       def __add__(self, y):
           if y is self.zero:
               return self
-          return g.add(self, y)
+          return Numerics.add(self, y)
       def __radd__(self, y):
           if y is self.zero:
               return self
-          return g.add(y, self)
+          return Numerics.add(y, self)
       def __sub__(self, y):
           if y is self.zero:
               return self
-          return g.sub(self, y)
+          return Numerics.sub(self, y)
       def __rsub__(self, y):
           if y is self.zero:
               return self.zero.sub(self, zero)
-          return g.sub(y, self)
+          return Numerics.sub(y, self)
       def __mul__(self, y):
           if y is self.zero:
               return self.zero.mul(self, y)#what's this
-          return g.mul (self, y)
+          return Numerics.mul (self, y)
       def __rmul__(self, y):
           if y is self.zero:
               return self.zero.rmul(self, y)
-          return g.mul (y, self)
+          return Numerics.mul (y, self)
       def __abs__(self):
-          return g.abs(self)
+          return Numerics.abs(self)
       def __neg__(self):
           return scaleP2(-1, self)
       def interp(self, t, p2):
@@ -168,33 +169,33 @@ class SP3:
       self.zero = Zero()
   def __str__(self):
       return "P3(%7.2f, %7.2f, %7.2f)" % (self.x, self.y, self.z)
-  
+
   def __add__(self, y):
     if y is self.zero:
       return self
-    return g.add(self, y)
+    return Numerics.add(self, y)
   def __radd__(self, y):
     if y is self.zero:
       return self
-    return g.add(y, self)
+    return Numerics.add(y, self)
   def __sub__(self, y):
       if y is self.zero:
           return self
-      return g.sub(self, y)
+      return Numerics.sub(self, y)
   def __rsub__(self, y):
       if y is self.zero:
           return self.zero.sub(self, zero)
-      return g.sub(y, self)
+      return Numerics.sub(y, self)
   def __mul__(self, y):
       if y is self.zero:
           return self.zero.mul(self, y)#what's this
-      return g.mul (self, y)
+      return Numerics.mul (self, y)
   def __rmul__(self, y):
       if y is self.zero:
           return self.zero.rmul(self, y)
-      return g.mul (y, self)
+      return Numerics.mul (y, self)
   def __abs__(self):
-          return g.abs(self)
+          return Numerics.abs(self)
   def __neg__(self):
           return scaleP3(-1, self)
   def interp(self, t, p2):
@@ -245,12 +246,12 @@ def sFirst(p):
 
 def sSecond(p):
     p.second
-    
+
 def sHPRtoP3(p):
     return SP3(math.sin(p.h)* math.cos(p.p),
-        -math.cos(p.h)* math.cos(p.p), 
+        -math.cos(p.h)* math.cos(p.p),
         -math.sin(p.p))
-    
+
 def sP3toHPR(p):
     return SHPR(math.atan2(p.y, p.x) + pi/2,
               math.atan2(p.z, abs(SP2(p.x, p.y))),
@@ -297,7 +298,7 @@ def sStep(x):
         return 0
     else:
         return 1
-    
+
 
 def sSmoothStep(x):
     if (x < 0):

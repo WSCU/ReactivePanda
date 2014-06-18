@@ -6,7 +6,7 @@
 # Base Signal Factory class
 # extends to StateMachineF, LiftF, and Lift0F
 
-from Signal import * 
+from Signal import *
 from Types import *
 
 def maybeLift(x):
@@ -14,13 +14,13 @@ def maybeLift(x):
     if t is type(1):
         return Lift0F(x, numType)
     if t is type(1.0):
-        return Lift0F(x, numType)   
+        return Lift0F(x, numType)
     if t is type(" "):
         return Lift0F(x, stringType)
     if t is type(True):
         return Lift0F(x, boolType)
     t = x._type
-  
+
     if t is signalFactoryType:
         #print "if this is not happening we are in trouble: "+str(t)+" and: " +str(x.name)
         return x
@@ -49,7 +49,7 @@ class SFact:
         return LiftF("add",lambda x,y:x+y, [self,y], types = [self.outType, y.outType], outType = self.outType)
     def __sub__(self,y):
         y = maybeLift(y)
-        return Lift("subtract",lambda x,y:x-y, [self,y], types = [self.outType, y.outType], outType = self.outType)
+        return LiftF("subtract",lambda x,y:x-y, [self,y], types = [self.outType, y.outType], outType = self.outType)
     def __rsub__(self,y):
         y = maybeLift(y)
         return LiftF("subtract",lambda x,y:y-x, [self,y], types = [self.outType, y.outType], outType = self.outType)
@@ -88,7 +88,15 @@ class SFact:
         return LiftF("mod", lambda x, y: x % y, [self, y])
     def __int__(self):
         return self // 1
-#Creates a Lift Factory	
+    def __abs__(self):
+        return LiftF("abs", lambda x: abs(x), [self])
+    def __and__(self, y):
+        y = maybeLift(y)
+        return LiftF("and", lambda x, y: x & y, [self, y])
+    def __or__(self, y):
+        y = maybeLift(y)
+        return LiftF("and", lambda x, y: x | y, [self, y])
+#Creates a Lift Factory
 class LiftF(SFact):
     def __init__(self,name,f, args, types = [], outType = anyType):
         SFact.__init__(self)
@@ -98,8 +106,11 @@ class LiftF(SFact):
         self.name=name
         self.args = args
 
+    def __str__(self):
+        return "{0} - args: {1} - types: {2} - outType: {3}".format(str(self.name), map(str, self.args), map(str, self.types), str(self.outType))
+
     def start(self, expectedType = anyType):
-        #print self.name 
+        #print self.name
         #for arg in self.args:
             #print " " + repr(arg)
         # Type Checking
@@ -116,14 +127,14 @@ class LiftF(SFact):
                     self.args[i] = maybeLift(self.args[i])
                     if not self.types[i].includes(self.args[i].outType): # individual argument type check
                         failed = True
-                        Globals.error += "112, has and argument that expects to be " + str(self.types[i]) + " but is a " + str(self.args[i].outType)
+                        Globals.error += "112, has an argument that expects to be " + str(self.types[i]) + " but is a " + str(self.args[i].outType)
                 if not failed:
                     ea = map(lambda x: maybeLift(x).start()[0], self.args)
                     return Lift(self.name,self.f, ea), self.outType
             else:
-                Globals.error += "108, has an incorrect number of arguments"
+                Globals.error += "108, has an incorrect number of arguments (length of types and args don't match)"
         else:
-            Globals.error += "107, expected to be" + str(expectedType) + " but is " + str(self.outType)
+            Globals.error += "107, expected to be " + str(expectedType) + " but is " + str(self.outType)
         print Globals.error
         Globals.error = ""
 
@@ -137,7 +148,7 @@ class Lift0F(SFact):
           if expectedType.includes(self.outType):
               return Lift0(self.v), self.outType
           else:
-              Globals.error += "\n in Factory line 130, expected to be" + str(expectedType) + " but is a " + str(self.outType)
+              Globals.error += "\n in Factory line 130, expected to be " + str(expectedType) + " but is a " + str(self.outType)
               print Globals.error
           Globals.error = ""
 
@@ -171,9 +182,9 @@ class ObserverF(CachedValueF):
         self.name = "ObserverF"
     def start(self, expectedType = anyType):
         return Observer(self.f), self.outType
-    
+
 def eventObserver(eName, eVal = None):
-    def getEvent():
+    def getEvent(ename):
         if Globals.events.has_key(ename):
             return events[ename] if eVal is None else eVal
         return None

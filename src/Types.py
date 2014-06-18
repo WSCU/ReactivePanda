@@ -54,12 +54,12 @@ def addCheck(self):
             if expectedArgCount(self.args, 2) and self.types[0].includes(self.types[1]):
                 return True
             else:
-                print "Tried to add/subtract incompatible types" 
+                print "Tried to add/subtract incompatible types"
         else:
             print "Non Addable Type: " + str(self.outType)
         return False
     return True
-    
+
 def getPtype(self):
     if hasattr(x,'type'):  # Panda types all have a pType slot
         return x.type
@@ -78,7 +78,7 @@ def getPtype(self):
         return TupleType
 
     return ptype("Unknown: " + str(t))
-    
+
 def checkType(self, value, ptype):
     if type(value) is ptype:
         return True

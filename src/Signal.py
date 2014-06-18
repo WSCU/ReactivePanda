@@ -4,16 +4,16 @@ from Types import signalType
 class Signal:
 	def __init__(self):
 		self._type = signalType
-		
+
 class Lift0(Signal):
     def __init__(self, v):
         Signal.__init__(self)
         self.v = v
     def now(self):
         return self.v
-        
 
-		
+
+
 class Lift(Signal):
     def __init__(self,name, f, args):
     	Signal.__init__(self)
@@ -34,7 +34,7 @@ class CachedSignal(Signal):
         self.time = -1
     def now(self):
         if self.time is not Globals.currentTime:
-            self.cachedValue = self.now1() 
+            self.cachedValue = self.now1()
         return self.cachedValue
 
 
@@ -59,7 +59,7 @@ class Observer(CachedSignal):
         CachedSignal.__init__(self, f)
     def now1(self):
         return self.f()
-    
+
 class RVar(CachedSignal): #Defines reactive variables like on-screen text
     def __init__(self, initValue, type = signalType):
         CachedSignal.__init__(self, type)
