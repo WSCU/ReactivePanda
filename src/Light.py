@@ -53,8 +53,10 @@ class DLight(Proxy):
 
 def updatePLight(self):
     c = self._get("color")
+    p = self._get("position")
     self._PLight.setColor(c.toVBase4())
     self._Light.setColor(c.toVBase4())
+    self._Light.setPos(p.x, p.y)
     
 class PLight(Proxy):
     def __init__(self, color = None, position = None, name = 'pointLight'):
