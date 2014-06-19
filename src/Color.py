@@ -7,7 +7,7 @@ Many predefined colors (stolen from Clastic)
 
 from pandac.PandaModules import VBase4
 from Types import colorType
-from StaticNumerics import staticLerp
+import StaticNumerics
 from colorsys import rgb_to_hls, hls_to_rgb
 
 class Color:
@@ -73,10 +73,10 @@ class Color:
         t: current time
         c2: transition color
         """
-        return Color(staticLerp(t, self.r, c2.r),
-                     staticLerp(t, self.g, c2.g),
-                     staticLerp(t, self.b, c2.b),
-                     staticLerp(t, self.a, c2.a))
+        return Color(StaticNumerics.staticLerp(t, self.r, c2.r),
+                     StaticNumerics.staticLerp(t, self.g, c2.g),
+                     StaticNumerics.staticLerp(t, self.b, c2.b),
+                     StaticNumerics.staticLerp(t, self.a, c2.a))
 
     def __str__(self):
         """

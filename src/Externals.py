@@ -2,6 +2,7 @@
 import Globals
 from Factory import *
 from Signal import *
+import StaticNumerics
 from direct.actor import Actor
 from direct.showbase.DirectObject import DirectObject
 import Errors
@@ -25,21 +26,18 @@ def rbr(e = True):
 
 # This saves event occurances in g.newEvents
 def postEvent(ename, val = True):
-    print "posting " + ename
+    #print "posting " + ename
     Globals.newEvents[ename] = val
 
-lbutton = Globals.lbutton
-rbutton = Globals.rbutton
-rbuttonPull = Globals.rbuttonPull
-lbuttonPull = Globals.lbuttonPull
+
 
 def key(kname, val = True):
     kname = checkValidKey(kname)
-    return eventObserver(kname, val)
+    return getEventSignal(kname, val)
 
 def keyUp(kname, val = True):
     kname = checkValidKey(kname)
-    return eventObserver(kname + "-up", val)
+    return getEventSignal(kname + "-up", val)
 
 def leftClick(model, val = True):
     return getEventSignal(model.d.model.getTag('rpandaid') + "-leftclick", val)
@@ -58,31 +56,70 @@ def checkValidKey(s):
         if len(s) == 1 or s in allKeyNames:
             return s
     Errors.badKeyName(s)
+
+  # These methods handle signals from the GUI
+  # Cache keypress events so there's no duplication of key events - not
+  # sure this is useful but it can't hurt.  Probably not a good idea to
+  # have multiple accepts for the same event.
+
+
+def getEventSignal(ename, val):
+        if Globals.eventSignals.has_key(ename):
+            return tag(val, Globals.eventSignals[ename])
+        e = eventObserver(ename)
+        g.eventSignals[ename] = e
+        g.directObj.accept(ename, lambda: postEvent(ename))
+        return tag(val, e)
+
     
 def initEvents():
     directObj = DirectObject()
+    Globals.direct = directObj
     directObj.accept("mouse1", lambda: postEvent("mouse1"))
+    directObj.accept("mouse3", lambda: postEvent("mouse3"))
     directObj.accept("mouse1-up", lambda: postEvent("mouse1-up"))
-    directObj.accept("mouse3", lambda: postEvent("mouse1"))
-    directObj.accept("mouse3-up", lambda: postEvent("mouse1-up"))
-    base.buttonThrowers[0].node().setKeystrokeEvent('keystroke')
-    directObj.accept("keystroke", lambda v: postEvent(v))
-    directObj.accept("f1", lambda : postEvent("f1"))
-    directObj.accept("f2", lambda : postEvent("f2"))
-    directObj.accept("f3", lambda : postEvent("f3"))
-    directObj.accept("f4", lambda : postEvent("f4"))
-    directObj.accept("f5", lambda : postEvent("f5"))
-    directObj.accept("f6", lambda : postEvent("f6"))
-    directObj.accept("f7", lambda : postEvent("f7"))
-    directObj.accept("f8", lambda : postEvent("f8"))
-    directObj.accept("f9", lambda : postEvent("f9"))
-    directObj.accept("f10", lambda : postEvent("f10"))
-    directObj.accept("f11", lambda : postEvent("f11"))
-    directObj.accept("f12", lambda : postEvent("f12"))
-    directObj.accept("escape", lambda : postEvent("escape"))
-    directObj.accept("arrow_up", lambda : postEvent("arrow_up"))
-    directObj.accept("arrow_down", lambda : postEvent("arrow_down"))
-    directObj.accept("arrow_left", lambda : postEvent("arrow_left"))
-    directObj.accept("arrow_right", lambda : postEvent("arrow_right"))
+    directObj.accept("mouse3-up", lambda: postEvent("mouse3-up"))
+    Globals.mousePos = None
+    Globals.lbutton = False
+    Globals.rbutton = False
+    Globals.lbuttonPull = StaticNumerics.SP2(0,0)
+    Globals.rbuttonPull = StaticNumerics.SP2(0,0)
 
-    
+def pollGUI():
+    if base.mouseWatcherNode.hasMouse():
+       lbp = Globals.events.has_key("mouse1")
+       rbp = Globals.events.has_key("mouse3")
+       lbr = Globals.events.has_key("mouse1-up")
+       rbr = Globals.events.has_key("mouse3-up")
+       if lbp:
+           Globals.lbutton = True
+       if rbp:
+           Globals.rbutton = True
+       if lbr:
+           Globals.lbutton = False
+       if rbr:
+           Globals.rbutton = False
+       mpos = base.mouseWatcherNode.getMouse() #get the mouse position in Panda3D form
+       lastMousePos = Globals.mousePos
+       Globals.mousePos = StaticNumerics.SP2(mpos.getX(), mpos.getY())
+       if Globals.lbutton and lastMousePos is not None:
+               Globals.lbuttonPull = Globals.lbuttonPull + Globals.mousePos - lastMousePos
+       if Globals.rbutton and lastMousePos is not None:
+               Globals.rbuttonPull = Globals.rbuttonPull + Globals.mousePos - lastMousePos
+       # If a left / right mouse click has happened, ask Panda which model was clicked on.  Post an event
+       # if there is a model where the mouse clicked
+       if lbp or rbp:
+           # m = g.findClickedModels()
+           m = None
+           if m is not None:
+               if Globals.events.has_key("mouse1"):
+                    Globals.events[m + "-leftclick"] = True
+               else:
+                    Globals.events[m + "-rightclick"] = True
+
+mouse = ObserverF(lambda x: Globals.mouse)
+
+lbutton = ObserverF(lambda x: Globals.lbutton)
+rbutton = ObserverF(lambda x: Globals.rbutton)
+rbuttonPull = ObserverF(lambda x:Globals.rbuttonPull)
+lbuttonPull = ObserverF(lambda x:Globals.lbuttonPull)

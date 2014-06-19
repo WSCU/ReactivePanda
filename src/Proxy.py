@@ -40,7 +40,7 @@ class Proxy:
 
     def _initialize(self):
         for k, v in self._updateSignals.items():
-            print("Object: " + self._name + " is initializing field: " + k + " to " + str(v))
+            # print("Object: " + self._name + " is initializing field: " + k + " to " + str(v))
             if self._types.has_key(k):
                 ty = self._types[k]
             else:
