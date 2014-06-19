@@ -89,7 +89,7 @@ class Observer(Signal):
         Signal.__init__(self)
         self.f = f
     def now(self):
-        return self.f()
+        return self.f(self)
 
 class RVar(Signal): #Defines reactive variables like on-screen text
     def __init__(self, initValue, type = signalType):

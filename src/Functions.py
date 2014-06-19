@@ -3,6 +3,7 @@ from Signal import *
 from Factory import *
 from StaticNumerics import pi
 from Errors import *
+from World import world
 
 import Globals
 
@@ -49,13 +50,15 @@ def hold(iv, evt): #Holds the last value of an Event
             sm.value = i.value;
     return StateMachineF(initHold, maybeLift(evt),holdFN)
 
-def accum(x): #accumulates the value of a signal over time
+def accum(iv, evt): #accumulates the value of a signal over time
+    def initAccum(sm):
+        sm.value = iv
     def accumFN(sm):
         s = sm.i.now();
-        if s!= None:
-            sm.state += s
-        return sm.state
-    return StateMachineF(0, maybeLift(x), accumFN)
+        checkEvent(s, "accum")
+        if s.occurs():
+            sm.value = s.value(sm.value)
+    return StateMachineF(initAccum, maybeLift(evt), accumFN)
 
 def getCollection(m):
     if type(m) is str:
@@ -68,7 +71,7 @@ def getCollection(m):
         return [m]
 
 def hit(m1, m2, reaction, trace = False):
-    def hitFN():
+    def hitFN(o):
         ml1 = getCollection(m1)
         ml2 = getCollection(m2)
         for m in ml1:
@@ -79,7 +82,7 @@ def hit(m1, m2, reaction, trace = False):
     return ObserverF(hitFN)
 
 def hit1(m1, m2, reaction, trace = False):
-    def hitFN():
+    def hitFN(o):
         ml1 = getCollection(m1)
         ml2 = getCollection(m2)
         for m in ml1:
@@ -90,7 +93,11 @@ def hit1(m1, m2, reaction, trace = False):
         return None
     return ObserverF(hitFN)
 
-def react(m, when, what):
+def react(m, when, what = None):
+    if what is None:
+        what = when
+        when = m
+        m = world
     coll = getCollection(m)
     for proxy in coll:
         proxy._react(when, what)
@@ -110,22 +117,16 @@ def when1(m, when, what):
     for proxy in coll:
         proxy._when1(when, what)
 
-def globaltime():
-    def gtF():
-        return Globals.currentTime
-    return ObserverF(gtF)
-
-time = globaltime()
-
 def localtime():
-    starttime = Globals.currentTime
-    def ltF():
-        return Globals.currentTime - starttime
-    return ObserverF(ltF)
+    def ltF(o):
+        return Globals.currentTime - o.startTime
+    return ObserverF(ltF, type = numType)
 
 localTime = localtime()
 
 def clock(x):
+    def initClock(sm):
+        sm.value = 0
     def clockFN(sm): # tracks and updates engine time
         # state is the previous value of the clock
         if sm.state >= Globals.currentTime + Globals.dt:
@@ -133,9 +134,9 @@ def clock(x):
             sm.state += sm.i.now() + Globals.dt
         # add the current clock signal to the list of fast updating signals (which doesn't exist yet)
         return sm.state
-    return StateMachineF(0, maybeLift(x), clockFN)
+    return StateMachineF(initClock, maybeLift(x), clockFN)
 
 #make a clock signal too. Clock will control the heartbeat: make the heartbeat every second
-time = ObserverF(lambda: Globals.currentTime)
+time = ObserverF(lambda x: Globals.currentTime, type = numType)
 def degrees( v):
     return v*(180/pi)

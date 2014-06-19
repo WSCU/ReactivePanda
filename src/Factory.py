@@ -1,3 +1,5 @@
+import Globals
+import sys
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
@@ -129,15 +131,16 @@ class LiftF(SFact):
                     self.args[i] = maybeLift(self.args[i])
                     if not self.types[i].includes(self.args[i].outType): # individual argument type check
                         failed = True
-                        Globals.error += "112, has an argument that expects to be " + str(self.types[i]) + " but is a " + str(self.args[i].outType)
+                        Globals.error += "130, has an argument that expects to be " + str(self.types[i]) + " but is a " + str(self.args[i].outType)
                 if not failed:
                     ea = map(lambda x: maybeLift(x).start()[0], self.args)
                     return Lift(self.name,self.f, ea), self.outType
             else:
-                Globals.error += "108, has an incorrect number of arguments (length of types and args don't match)"
+                Globals.error += "126, has an incorrect number of arguments in " + self.name + " expected: " + str(argsLen) + " got: " + str(len(self.types))
         else:
-            Globals.error += "107, expected to be " + str(expectedType) + " but is " + str(self.outType)
+            Globals.error += "125, in " + self.name + " expected to be " + str(expectedType) + " but is " + str(self.outType)
         print Globals.error
+        sys.exit()
         Globals.error = ""
 
 class Lift0F(SFact):
@@ -164,7 +167,7 @@ class CachedValueF(SFact):
         return CachedValue(maybeLift(self.i)), self.outType
 
 #Creates a State Machine Factory
-class StateMachineF(CachedValueF):
+class StateMachineF(SFact):
     def __init__(self, s0, i, f):
         SFact.__init__(self)
         self.state = s0
@@ -179,17 +182,19 @@ class StateMachineF(CachedValueF):
         return StateMachine(self.state, input, self.f), self.outType
 
 #Creates a Observer Factory
-class ObserverF(CachedValueF):
-    def __init__(self, f):
+class ObserverF(SFact):
+    def __init__(self, f, type = anyType):
         SFact.__init__(self)
         self.f = f
-        self.outType = anyType
+        self.outType = type
         self.name = "ObserverF"
     def start(self, expectedType = anyType):
        # print "starting observer"
-        return Observer(self.f), self.outType
+        ro =  Observer(self.f)
+        ro.startTime = Globals.currentTime
+        return ro , self.outType
     def get(self):
-        return self.f()
+        return self.f(self)
 
 def eventObserver(eName, eVal = None):
     def getEvent(ename):
@@ -199,4 +204,4 @@ def eventObserver(eName, eVal = None):
             return EventValue(Globals.events[ename]) if eVal is None else EventValue(eVal)
 #        print "No: " + str(noEvent)
         return noEvent
-    return ObserverF(lambda: getEvent(eName))
+    return ObserverF(lambda x: getEvent(eName))
