@@ -51,16 +51,27 @@ class DLight(Proxy):
         else:
             self.hpr = SHPR(0,0,0)
 
-        
+def updatePLight(self):
+    c = self._get("color")
+    p = self._get("position")
+    self._PLight.setColor(c.toVBase4())
+    self._Light.setColor(c.toVBase4())
+    self._Light.setPos(p.x, p.y)
+    
 class PLight(Proxy):
     def __init__(self, color = None, position = None, name = 'pointLight'):
-        Proxy.init____(self, name = name, types = {"color":(colorType, white), "position":(p3Type, P3(0,0,0))}, updater = updater)
-        self._onScreen = False; 
-        showModel(self)
-    def updater(self):
-        c = self.get("color")
-        self._Light.setColor(c.toVBase4())
-        positionNow = self.get("position")
+        Proxy.__init__(self, name = name, types = {"color":(colorType, white), "position":(p3Type, P3(0,0,0))}, updater = updatePLight)
+        self._PLight = DirectionalLight("directionalLight")
+        self._Light = render.attachNewNode(self._PLight)
+        render.setLight(self._Light)
+        if color is not None:
+            self.color = color
+        else:
+            self.color = white
+        if position is not None:
+            self.position = position
+        else:
+            self.position = SP3(0,0,0)
         
 def pointLight(color = None, position = None):
     return PLight(color = color, position = position)

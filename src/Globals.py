@@ -57,6 +57,7 @@ collections = {}
 #osType = 'Linux'
 #pandaPath = os.getcwd()
 pandaPath = "/c/panda/lib"
+#pandaPath = "/c/users/outcast/documents/GitHub/Reactive-Engine/src/lib" #this is for Grahams personal machine
 '''
 osType = 'Windows'
 if osType is 'Linux':
