@@ -48,7 +48,7 @@ def loadDict(file, types={}, defaults = {}):
             #print "*****************"+ str(key) + " " + str(val)
             if key in types:
                 val = types[key].decode(val)
-                print str(val)
+                #print str(val)
             res[key] = val
     for k,v in defaults.iteritems():
         if not (k in res):

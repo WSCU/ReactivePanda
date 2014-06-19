@@ -39,16 +39,18 @@ class Proxy:
 
     def _initialize(self):
         for k, v in self._updateSignals.items():
-            #print("Object: " + self._name + " is initializing: " + str(v))
+            #print("Object: " + self._name + " is initializing field: " + k + " to " + str(v))
             if self._types.has_key(k):
                 ty = self._types[k]
             else:
                 ty = anyType
             v = maybeLift(v)
             Globals.error = "On Line 49 of Proxy, In object " + self._name + ", attribute " + v.name
-            print(str(self._signals))
-            print(str(v))
-            self._signals[k] = v.start(expectedType = ty)[0] # This is screwing up Integral
+            #print(str(self._signals))
+            #print(str(v))
+            sig = v.start(expectedType = ty)[0] # This is screwing up Integral
+            #print "initilize signal = " + repr(sig)
+            self._signals[k] = cache(sig)
         self._updateSignals = {}
 
     def _updater(self):
@@ -61,7 +63,7 @@ class Proxy:
             self._gReactions.append((when.start()[0], what))
 
     def _react1(self, when, what):
-        if alive:
+        if self._alive:
             when = maybeLift(when)
             Globals.error = "On Line 59 of Proxy, In object " + self._name + ", initializing one time reaction " + when.name
             self._1Reactions.append((when.start()[0], what))

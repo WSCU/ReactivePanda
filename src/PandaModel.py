@@ -168,9 +168,9 @@ def proxyUpdater(self):
 
     #print str(positionNow) + " " + str(positionOffset) + " " + str(hprNow)
     #This is the actual updates to position/size/hpr etc.
-    if Globals.eventSignals is not None:
-            for signal in Globals.events:
-                print repr(signal)
+    #if Globals.eventSignals is not None:
+    #        for signal in Globals.events:
+    #            print repr(signal)
 
 
     #print "size signal: "+repr(sizeScalar)+"  offset size: "+repr(sizeOffset)

@@ -32,7 +32,7 @@ def maybeLift(x):
 def lift(name, f, types = [], outType = anyType):
     def fn(*args):
         for arg in args:
-            print("lift: " + str(arg))
+            # print("lift: " + str(arg))
             arg = maybeLift(arg)
             if not arg.name is "Lift0":
                 return LiftF(name,f,args,types = types, outType = outType)
@@ -173,7 +173,10 @@ class StateMachineF(CachedValueF):
         self.name = "State Machine Factory"
         self.f = f
     def start(self, expectedType = anyType):
-        return StateMachine(self.state, self.i.start(expectedType = anyType)[0], self.f), self.outType
+        #print "initilizing state Machine " + repr(self.i)
+        input = self.i.start(expectedType = anyType)[0]
+        #print "state machine input: " + repr(input)
+        return StateMachine(self.state, input, self.f), self.outType
 
 #Creates a Observer Factory
 class ObserverF(CachedValueF):
@@ -183,13 +186,17 @@ class ObserverF(CachedValueF):
         self.outType = anyType
         self.name = "ObserverF"
     def start(self, expectedType = anyType):
+       # print "starting observer"
         return Observer(self.f), self.outType
     def get(self):
         return self.f()
 
 def eventObserver(eName, eVal = None):
     def getEvent(ename):
+#        print "Observing " + eName
         if Globals.events.has_key(ename):
-            return events[ename] if eVal is None else EventValue(eVal)
-        return EventValue()
+#            print "Event found:" + str(Globals.events[ename])
+            return EventValue(Globals.events[ename]) if eVal is None else EventValue(eVal)
+#        print "No: " + str(noEvent)
+        return noEvent
     return ObserverF(lambda: getEvent(eName))
