@@ -48,7 +48,7 @@ class Proxy:
             Globals.error = "On Line 49 of Proxy, In object " + self._name + ", attribute " + v.name
             print(str(self._signals))
             print(str(v))
-            self._signals[k] = v.start(expectedType = ty)[0] # This is screwing up Integral
+            self._signals[k] = cache(v.start(expectedType = ty)[0]) # This is screwing up Integral
         self._updateSignals = {}
 
     def _updater(self):

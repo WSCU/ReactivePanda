@@ -12,6 +12,7 @@ def heartBeat(ct, events):
     Globals.dt = ct - Globals.currentTime
     Globals.currentTime = ct
     Globals.events = events
+    Globals.newEvents = {}
     Globals.thunks = []
     #print "time steps: "+repr(ct)
     #for event in events:

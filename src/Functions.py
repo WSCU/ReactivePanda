@@ -2,15 +2,14 @@
 from Signal import *
 from Factory import *
 from StaticNumerics import pi
-import Globals
+from Errors import *
 
-def integerize(r):
-    return LiftF("integerize", lambda x: int(x), [r])
+import Globals
 
 def now(s):
     if isinstance(s, ObserverF):
         return s.get()
-    return None
+    return None  # Should be an error
 
 def integral(x):
     def thunk(sm):
@@ -23,24 +22,14 @@ def integral(x):
         return sm.state
     return StateMachineF(0, maybeLift(x), integralf)
 
-# this is a function that uses the Observer class to get a value from the signal list
-def ref(key):
-    def reffunc():
-        return Globals.sl[key]
-    return ObserverF(reffunc)
-
-def simkey(key, v):
-    return {key : v}
-
-def tag(fn, s):
+def tag(s):
     def tagFN(sm):
         i = sm.i.now()
         checkEvent(i, "tag")
         if not i.occurs():
-            return None
-        res = fn(sm.state, i.value)
+            return noEvent
         sm.state += 1
-        return res
+        return EventValue(sm.state)
     return StateMachineF(0, maybeLift(s), tagFN)
 
 def hold(iv, evt): #Holds the last value of an Event
@@ -51,14 +40,6 @@ def hold(iv, evt): #Holds the last value of an Event
             return i.value;
         return sm.state
     return StateMachineF(iv, maybeLift(evt),holdFN)
-
-def key(k, v):
-    def keyfunc():
-        if Globals.events:
-            if k in Globals.events[0][1].keys():
-                return v
-        return None
-    return ObserverF(keyfunc)
 
 def accum(x): #accumulates the value of a signal over time
     def accumFN(sm):

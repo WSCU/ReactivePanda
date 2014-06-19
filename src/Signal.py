@@ -1,17 +1,26 @@
 import Globals
+import Errors
 from Types import signalType, eventValueType
 
 class EventValue:
     def __init__(self, value = None):
         self._type = eventValueType
         self.value = value
-    def __add__(self, e): #check type of e someday
+    def __add__(self, e):
+        Errors.checkEvent(e, "event addition")
+ #       print "Event merge: " + str(self) + " " + str(e)
         if self.value is None:
             return e
         else:
             return self
     def occurs(self):
         return self.value is not None
+    def __str__(self):
+        if self.value is None:
+            return "<No Event>"
+        return "<" + str(self.value) + ">"
+
+noEvent = EventValue()
 
 class Signal:
     def __init__(self):
@@ -23,8 +32,6 @@ class Lift0(Signal):
         self.v = v
     def now(self):
         return self.v
-
-
 
 class Lift(Signal):
     def __init__(self,name, f, args):
@@ -39,21 +46,25 @@ class Lift(Signal):
 # Cached Signal that inherits Signal
 # Baisically is just a time stamp
 class CachedSignal(Signal):
-    def __init__(self, f):
+    def __init__(self, s):
         Signal.__init__(self)
-        self.f = f
         self.cachedValue = 0
         self.time = -1
+        self.s = s
     def now(self):
         if self.time is not Globals.currentTime:
-            self.cachedValue = self.now1()
+            self.cachedValue = self.s.now()
             self.time = Globals.currentTime
         return self.cachedValue
 
+def cache(s):
+    if isinstance(s, Lift0) or isinstance(s, StateMachine):
+        return s
+    return CachedSignal(s)
 
 # A State Machine signal
-class StateMachine(CachedSignal):
-    def __init__(self, s0, i, f):
+class StateMachine(Signal):
+    def __init__(self, s0, i, f, observer):
         CachedSignal.__init__(self, f)
         self.i = i
         self.state = s0
@@ -62,7 +73,7 @@ class StateMachine(CachedSignal):
         if self.time is not Globals.currentTime:
             self.state = self.f(self)
             self.time = Globals.currentTime
-        return self.state
+        return observer(self)
     def __rmul__(self, y): # JP is confused
         y = maybeLift(y)
         print "rmul in state machine... whats happening to me???"
