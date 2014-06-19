@@ -1,6 +1,7 @@
 import Globals
 from Factory import *
 from Types import proxyType
+import Errors
 
 class Proxy:
     def __init__(self, name, updater, types):
@@ -29,7 +30,7 @@ class Proxy:
         if name[0] == '_':
             return self.__dict__[name]
         else:
-            return ObserverF(lambda : self._get(name))
+            return ObserverF(lambda x: self._get(name))
             #return self._signals[name]
     def _get(self, name):
         try:
@@ -39,13 +40,13 @@ class Proxy:
 
     def _initialize(self):
         for k, v in self._updateSignals.items():
-            #print("Object: " + self._name + " is initializing field: " + k + " to " + str(v))
+            print("Object: " + self._name + " is initializing field: " + k + " to " + str(v))
             if self._types.has_key(k):
                 ty = self._types[k]
             else:
                 ty = anyType
             v = maybeLift(v)
-            Globals.error = "On Line 49 of Proxy, In object " + self._name + ", attribute " + v.name
+            Globals.error = "On Line 51 of Proxy, In object " + k + ", attribute " + str(v)
             #print(str(self._signals))
             #print(str(v))
             sig = v.start(expectedType = ty)[0] # This is screwing up Integral
@@ -88,7 +89,7 @@ class Proxy:
             for c in self._1Reactions:
                 #print("Object: " + str(self) + " is updating: " + str(a[0]))
                 temp = c[0].now()
-                checkEvent(temp, "One time reaction in " + self._name)
+                Errors.checkEvent(temp, "One time reaction in " + self._name)
                 if temp.occurs():
                     #print("    " + str(temp) + " is being added to thunks")
                     thunks.append(lambda : c[1](self, temp.value))
@@ -100,7 +101,7 @@ class Proxy:
             #Evaluate recurring reactions
             for d in self._gReactions:
                 temp = d[0].now()
-                checkEvent(temp, "recurring reaction in " + self._name)
+                Errors.checkEvent(temp, "recurring reaction in " + self._name)
                 #print("Object: " + str(self) + " is updating: " + str(a[0]))
                 if temp.occurs():
                     #print("    " + str(temp) + " is being added to thunks")

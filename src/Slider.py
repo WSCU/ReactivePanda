@@ -1,18 +1,17 @@
 
-import Globals
-from Handle import *
 from direct.gui.DirectGui import *
-from Time import *
-from Types import *
-from Text import *
 
-class Slider(Handle):
-    def __init__(self, size = 1, position = None, min = 0, max = 1, pageSize = None, init = None, name = 'Slider', label = None):
-        Handle.__init__(self, name = name)
-        if init is None:
-            init = min
-        if pageSize is None:
-            pageSize = (max - min) / 100
+import Globals
+from Factory import *
+from Types import *
+
+
+def slider(size=1, position=None, min=0, max=1, pageSize=None, init=None, name='Slider', label=None):
+    if init is None:
+        init = min
+    if pageSize is None:
+        pageSize = (max - min) / 100
+        '''
         t = getPType(size)
         if t != numType:
             argTypeError(self.name, t, numType, 'size')
@@ -28,41 +27,33 @@ class Slider(Handle):
         t = getPType(init)
         if t != numType:
             argTypeError(self.name, t, numType, 'init')
-
-        if position is None:
-            pos = (.95, 0, g.nextNE2dY)
-            g.nextNE2dY = g.nextNE2dY - .1
-        else:
-            t = getPType(position)
-            if t != P2Type:
-                argTypeError(self.name, t, P2Type, 'position')
-            pos = (position.x, 0, position.y)
-        self.d.model = DirectSlider(scale = .2*size, pos = pos, range = (min, max), pageSize = pageSize, value = init, command = self.setSlider)
-        self.d.value = SliderValue(self)
-        self.d.svalue = init
-        if label is not None:
-            text(text = label, position = SP2(pos[0]-.3, pos[2]))
-
+            '''
+    if position is None:
+        pos = (.95, 0, Globals.nextNE2dY)
+        Globals.nextNE2dY = Globals.nextNE2dY - .1
+    else:
+            #t = getPType(position)
+            #if t != P2Type:
+            #    argTypeError(self.name, t, P2Type, 'position')
+        pos = (position.x, 0, position.y)
+    val = [init]
+    slider = [0]
+    def cmd():
+        val[0] = slider[0]['value']
+    slider[0] = DirectSlider(scale=.2 * size, pos=pos, range=(min, max), pageSize=pageSize, value=init, command=cmd)
+    observer = ObserverF(lambda x: val[0], type = numType)
+    return observer
+        #if label is not None:
+        #    text(text = label, position = SP2(pos[0]-.3, pos[2]))
+'''
     def set(self, val):
         self.d.model['value'] = val
 
     def setSlider(self):
         self.d.svalue = self.d.model['value']
-
-    def refresh(self):
-        pass
-    def checkSignals(self, context):
-        pass
-    def maybeLift(self):
-        self.value
-
-
-def slider(*p, **a):
-    res = Slider(*p, **a)
-    return res.d.value
-
+'''
 # Slider utilities
-
+'''
 def sliderHPR(init = None, label = ""):
     h = slider(max = 2*pi, label = label + "-h")
     p = slider(max = 2*pi, label = label + "-p")
@@ -93,3 +84,4 @@ def sliderColor(init = black, label = "Color"):
     b = slider(min = 0, max = 1, init = init.b, label = label + "-b")
     a = slider(min = 0, max = 1, init = init.a, label = label + "-a")
     return colora(r, g, b, a)
+'''
