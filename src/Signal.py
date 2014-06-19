@@ -50,7 +50,10 @@ class CachedSignal(Signal):
         Signal.__init__(self)
         self.cachedValue = 0
         self.time = -1
+        #print "cache " + repr(s)
         self.s = s
+        if not isinstance(s, Lift):
+            die()
     def now(self):
         if self.time is not Globals.currentTime:
             self.cachedValue = self.s.now()
@@ -64,30 +67,33 @@ def cache(s):
 
 # A State Machine signal
 class StateMachine(Signal):
-    def __init__(self, s0, i, f, observer):
-        CachedSignal.__init__(self, f)
+    def __init__(self, s0, i, f):
+        #print "s0 = " + repr(s0) + " i = " + repr(i) + " f = " + repr(f)
+        Signal.__init__(self)
+        self.f = f
         self.i = i
-        self.state = s0
         self.time = -1
+        s0(self)
     def now(self):
         if self.time is not Globals.currentTime:
-            self.state = self.f(self)
+            self.f(self)
             self.time = Globals.currentTime
-        return observer(self)
+        return self.value
     def __rmul__(self, y): # JP is confused
         y = maybeLift(y)
         print "rmul in state machine... whats happening to me???"
         return LiftF("mul", lambda x,y: y*x, [self.state, y])
 
-class Observer(CachedSignal):
+class Observer(Signal):
     def __init__(self, f):
-        CachedSignal.__init__(self, f)
-    def now1(self):
+        Signal.__init__(self)
+        self.f = f
+    def now(self):
         return self.f()
 
-class RVar(CachedSignal): #Defines reactive variables like on-screen text
+class RVar(Signal): #Defines reactive variables like on-screen text
     def __init__(self, initValue, type = signalType):
-        CachedSignal.__init__(self, type)
+        Signal.__init__(self)
         self.value = initValue
         self.type = type
     def refresh(self):

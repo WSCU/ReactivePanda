@@ -11,35 +11,43 @@ def now(s):
         return s.get()
     return None  # Should be an error
 
+
+    
 def integral(x):
+    def initIntegral(s):
+        s.value = 0
     def thunk(sm):
         i = sm.i.now()
         #print "integral "+ str(sm.state) + " " + str(i) + " " + str(Globals.dt)
-        sm.state = sm.state + i * Globals.dt
+        sm.value = sm.value + i * Globals.dt
         #print sm.state
     def integralf(sm):
         Globals.thunks.append(lambda: thunk(sm))
-        return sm.state
-    return StateMachineF(0, maybeLift(x), integralf)
+        return sm.value
+    return StateMachineF(initIntegral, maybeLift(x), integralf)
 
 def tag(s):
+    def initTag(s):
+        s.count = 0
     def tagFN(sm):
         i = sm.i.now()
         checkEvent(i, "tag")
         if not i.occurs():
-            return noEvent
-        sm.state += 1
-        return EventValue(sm.state)
-    return StateMachineF(0, maybeLift(s), tagFN)
+            sm.value = noEvent
+        else:
+            sm.count += 1
+            sm.value = EventValue(sm.count)
+    return StateMachineF(initTag, maybeLift(s), tagFN)
 
 def hold(iv, evt): #Holds the last value of an Event
+    def initHold(sm):
+        sm.value = iv
     def holdFN(sm):
         i = sm.i.now();
         checkEvent(i, "hold")
         if i.occurs():
-            return i.value;
-        return sm.state
-    return StateMachineF(iv, maybeLift(evt),holdFN)
+            sm.value = i.value;
+    return StateMachineF(initHold, maybeLift(evt),holdFN)
 
 def accum(x): #accumulates the value of a signal over time
     def accumFN(sm):

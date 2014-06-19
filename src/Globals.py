@@ -28,6 +28,7 @@ observers = {} #dictionary of observers
 dt = 1 #global delta time
 #world = dict() #dictionary of global signals
 sl = {}
+eventListenerCache = {}
 
 #Global Error Tracker
 error = ""

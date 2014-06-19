@@ -33,7 +33,6 @@ def updateDLight(self):
     c = self._get("color")
     self._DLight.setColor(c.toVBase4())
     hprNow = self._get("hpr")
-    print str(hprNow)
     self._Light.setHpr(degrees(hprNow.h), degrees(hprNow.p), degrees(hprNow.r))
 
 class DLight(Proxy):
