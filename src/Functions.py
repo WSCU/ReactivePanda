@@ -1,7 +1,7 @@
 #Collection of useful and necessary functions used in the Reactive Engine.
 from Signal import *
 from Factory import *
-from StaticNumerics import pi
+from StaticNumerics import pi, zero
 from Errors import *
 from World import world
 
@@ -16,7 +16,7 @@ def now(s):
     
 def integral(x):
     def initIntegral(s):
-        s.value = 0
+        s.value = zero
     def thunk(sm):
         i = sm.i.now()
         #print "integral "+ str(sm.state) + " " + str(i) + " " + str(Globals.dt)
@@ -27,7 +27,13 @@ def integral(x):
         return sm.value
     return StateMachineF(initIntegral, maybeLift(x), integralf)
 
-def tag(s):
+def tag(v,evt):
+    return lift("tag", lambda e: EventValue(v) if e.occurs() else noEvent)(evt)
+
+def tagMap(fn, evt):
+    return lift("tag", lambda e: EventValue(fn(e.value)) if e.occurs() else noEvent) (evt)
+
+def tags(s, vals = None):
     def initTag(s):
         s.count = 0
     def tagFN(sm):
@@ -37,7 +43,7 @@ def tag(s):
             sm.value = noEvent
         else:
             sm.count += 1
-            sm.value = EventValue(sm.count)
+            sm.value = EventValue(sm.count) if bals is None else vals[sm.count % len(vals)]
     return StateMachineF(initTag, maybeLift(s), tagFN)
 
 def hold(iv, evt): #Holds the last value of an Event

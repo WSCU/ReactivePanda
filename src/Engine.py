@@ -1,10 +1,10 @@
 import unittest
 import sched, time
 #from StateMachine import *
-from Externals import initEvents
+from Externals import initEvents, pollGUI
 from Signal import *
 from Functions import *
-from Globals import *
+import Globals
 from direct.task import Task
 
 def heartBeat(ct, events):
@@ -14,6 +14,8 @@ def heartBeat(ct, events):
     Globals.events = events
     Globals.newEvents = {}
     Globals.thunks = []
+
+    pollGUI()
     #print "time steps: "+repr(ct)
     #for event in events:
         #print "Events: "+repr(event)

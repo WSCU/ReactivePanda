@@ -52,8 +52,8 @@ class CachedSignal(Signal):
         self.time = -1
         #print "cache " + repr(s)
         self.s = s
-        if not isinstance(s, Lift):
-            die()
+#        if not isinstance(s, Lift):  # Could also be an observer
+#            die()
     def now(self):
         if self.time is not Globals.currentTime:
             self.cachedValue = self.s.now()

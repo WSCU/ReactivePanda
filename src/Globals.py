@@ -7,6 +7,7 @@ import direct.directbase.DirectStart
 currentTime = 1 # The current global time
 cam = None # The camera object, exported to the user variable cam
 panda3dCamera = camera # The original Panda3d camera
+direct = None          # The directObj() used to communicate with the mouse / kayboard
 objectNames = None # Hands out unique name to every panda object
 eventSignals = {}
 newEvents = {} # Events that are being sensed but not reacted to yet
@@ -20,8 +21,7 @@ thunks = []
 tracking = False
 nextNE2dY = .95 # Positioning for 2-D controls
 nextNW2dY = .95
-tccontext = None
-initMousePos = None # True on the first tick when there is no prior location
+
 mousePos = None # Last location of the mouse
 nextModelId = 0
 observers = {} #dictionary of observers
@@ -35,9 +35,8 @@ error = ""
 
 # Global GUI signals
 
-mouse = None # Current mouse position
-lbutton = None # Left button state
-rbutton = None # Right button state
+lbutton = False # Left button state
+rbutton = False # Right button state
 rbuttonPull = None # "Pulled" 2-D Point for the right button
 lbuttonPull = None # "Pulled" 2-D point for the left button
 
@@ -45,9 +44,6 @@ lbuttonPull = None # "Pulled" 2-D point for the left button
 # Used to identify signals
 
 nextSignalRef = 0
-
-# Configuration stuff
-findClickedModels = None
 
 texture = None # Used to communicate with particle effect code from particle panel
 

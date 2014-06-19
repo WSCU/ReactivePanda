@@ -73,6 +73,8 @@ class PandaModel(Proxy):
         self._cFloor = float(self._mParams['cFloor'])
         self._cTop = float(self._mParams['cTop'])
         self._currentTexture = ""
+        self._onscreen = False   # This defers the reparenting until the model has been updated the first time
+        self._parent = render    # This is the parent - we could make this a parameter later
         if position is not None:
             self.position = position
         else:
@@ -93,8 +95,6 @@ class PandaModel(Proxy):
             self.color = color
         else:
             self.color = noColor
-
-        showModel(self)#This call needs to move into the updater method. We don't have it working with the engine yet.
         for tag in collections:
             try:
                 Globals.collections[tag].append(self)
@@ -107,9 +107,9 @@ class PandaModel(Proxy):
         #print (repr(self._cRadius))
         #print (repr(self.get("size")))
         mr = self._cRadius * self._get("size")
-        mp = self._get("position")
+        mp = self._get("position") + p3(0,0,0)
         yr = handle._cRadius*handle._get("size")
-        yp = handle._get("position")
+        yp = handle._get("position") + p3(0,0,0)
         if trace:
             print repr(mp) + " [" + repr(mr) + "] " + repr(yp) + " [" + repr(yr) + "]"
         if self._cType == "sphere":
@@ -159,12 +159,12 @@ class PandaModel(Proxy):
 def proxyUpdater(self):
     #These parameters find the static offset which was created during initialization and the current position which is returned by the self._get() method
     positionOffset = self._position
-    positionNow = self._get("position")
-    sizeScalar = self._get("size")
+    positionNow = self._get("position") + p3(0,0,0) # to make sure we do not get a zero object
+    sizeScalar = self._get("size") + 0
     sizeOffset = self._size
     hprOffset = self._hpr
 
-    hprNow = self._get( "hpr")
+    hprNow = self._get( "hpr") + hpr(0,0,0)
 
     #print str(positionNow) + " " + str(positionOffset) + " " + str(hprNow)
     #This is the actual updates to position/size/hpr etc.
@@ -191,9 +191,7 @@ def proxyUpdater(self):
     color = self._get("color")
     if color.a != 0:
         self._pandaModel.setColor(color.toVBase4())
-
-
-def showModel(self):
+    # This is used to keep the model off the screen until the first update happens
     if not self._onScreen:
-           self._pandaModel.reparentTo(render)
+           self._pandaModel.reparentTo(self._parent)
            self._onScreen = True

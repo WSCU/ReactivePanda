@@ -35,8 +35,7 @@ def lift(name, f, types = [], outType = anyType):
     def fn(*args):
         for arg in args:
             # print("lift: " + str(arg))
-            arg = maybeLift(arg)
-            if not arg.name is "Lift0":
+            if isinstance(arg, SFact):
                 return LiftF(name,f,args,types = types, outType = outType)
         return f(*args)
     return fn
@@ -109,6 +108,7 @@ class LiftF(SFact):
         self.outType = outType
         self.name=name
         self.args = args
+
 
     def __str__(self):
         return "{0} - args: {1} - types: {2} - outType: {3}".format(str(self.name), map(str, self.args), map(str, self.types), str(self.outType))

@@ -11,3 +11,7 @@ def checkEvent(evt, context):
 def badKeyName(n):
     print str(n) + " is not a valid key name"
     sys.exit()
+
+def errorOnStaticTypes(func, correct, y):
+    print func + " of " + correct + " bad argument: " + repr(y)
+    sys.exit()
