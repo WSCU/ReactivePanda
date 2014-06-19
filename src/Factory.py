@@ -190,6 +190,6 @@ class ObserverF(CachedValueF):
 def eventObserver(eName, eVal = None):
     def getEvent(ename):
         if Globals.events.has_key(ename):
-            return events[ename] if eVal is None else eVal
-        return None
+            return events[ename] if eVal is None else EventValue(eVal)
+        return EventValue()
     return ObserverF(lambda: getEvent(eName))

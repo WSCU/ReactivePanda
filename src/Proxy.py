@@ -86,21 +86,23 @@ class Proxy:
             for c in self._1Reactions:
                 #print("Object: " + str(self) + " is updating: " + str(a[0]))
                 temp = c[0].now()
-                if temp != None:
+                checkEvent(temp, "One time reaction in " + self._name)
+                if temp.occurs():
                     #print("    " + str(temp) + " is being added to thunks")
-                    thunks.append(lambda : c[1](self, temp))
+                    thunks.append(lambda : c[1](self, temp.value))
                     break
             self._1Reactions = []
             if (len(thunks) >= 2):
-                print("Multiple one time reactions in a heartbeat")
+                print("Multiple one time reactions in a heartbeat in object " + self._name)
 
             #Evaluate recurring reactions
             for d in self._gReactions:
                 temp = d[0].now()
+                checkEvent(temp, "recurring reaction in " + self._name)
                 #print("Object: " + str(self) + " is updating: " + str(a[0]))
-                if temp != None:
+                if temp.occurs():
                     #print("    " + str(temp) + " is being added to thunks")
-                    thunks.append(lambda : d[1](self, temp))
+                    thunks.append(lambda : d[1](self, temp.value))
 
             #Evaluate one time when reaction
             for a in self._1When:

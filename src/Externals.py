@@ -1,25 +1,12 @@
+import g
 import Globals
 from Factory import *
 from Signal import *
 from direct.actor import Actor
 from direct.showbase import DirectObject
-"""
-class ExternalF(SFact):
-    def __init__(self, fn):
-        SFact.__init__(self)
-        self.fn = fn
-    def start(self):
-        return ExternalS(fn)
-
-class ExternalS(Signal):
-    def __init__(self, fn):
-        Signal.__init__(self)
-    def now(self):
-       fn(Globals.currentTime) 
-"""
 
 def lbp(e = True): 
-    return getEventSignal("mouse1", e)
+    return eventObserver("mouse1", e)
 
 def rbp(e = True):
     return getEventSignal("mouse3", e)
@@ -35,17 +22,10 @@ def rbr(e = True):
   # sure this is useful but it can't hurt.  Probably not a good idea to
   # have multiple accepts for the same event.
 
-def getEventSignal(ename, val):
-        if Globals.events.has_key(ename):
-            return Globals.events[ename]
-        e = eventObserver(ename)
-        Globals.events[ename] = e
-        Globals.directObj.accept(ename, lambda: postEvent(ename))
-        return Globals.events[ename]
-
 # This saves event occurances in g.newEvents
 def postEvent(ename, val = True):
-        Globals.newEvents[ename] = val
+    print "posting " + ename
+    Globals.newEvents[ename] = val
 
 lbutton = Globals.lbutton
 rbutton = Globals.rbutton
@@ -74,14 +54,5 @@ keyRenamings = {"upArrow": "arrow_up", "downArrow": "arrow_down",
                 "leftArrow": "arrow_left", "rightArrow": "arrow_right",
                 "pageUp": "page_up", "pageDown": "page_down", " ": "space"}
 def initEvents():
-    lbp()
-    rbp()
-    lbr()
-    rbr()
-    """
-    key()
-    keyUp()
-    
-    leftClick()
-    rightClick()"""
-    
+    directObj = DirectObject()
+    directObj.accept("mouse1", lambda: postEvent("mouse1"))

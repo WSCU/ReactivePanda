@@ -73,21 +73,26 @@ class PandaModel(Proxy):
         self._cFloor = float(self._mParams['cFloor'])
         self._cTop = float(self._mParams['cTop'])
         self._currentTexture = ""
-        self.size = 1
-        self.position = P3(0,0,0)
-        self.hpr = HPR(0,0,0)
-        self.texture = ""
-        self.color = noColor
         if position is not None:
             self.position = position
+        else:
+            self.position = P3(0,0,0)
         if hpr is not None:
             self.hpr = hpr
+        else:
+            self.hpr = SHPR(0,0,0)
         if size is not None:
             self.size = size
+        else:
+            self.size = 1
         if texture is not None:
             self.texture = texture
+        else:
+            self.texture = ""
         if color is not None:
             self.color = color
+        else:
+            self.color = noColor
 
         showModel(self)#This call needs to move into the updater method. We don't have it working with the engine yet.
         for tag in collections:

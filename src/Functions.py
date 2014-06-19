@@ -35,20 +35,22 @@ def simkey(key, v):
 def tag(fn, s):
     def tagFN(sm):
         i = sm.i.now()
-        if i is None:
+        checkEvent(i, "tag")
+        if not i.occurs():
             return None
-        res = fn(sm.state, i)
+        res = fn(sm.state, i.value)
         sm.state += 1
         return res
     return StateMachineF(0, maybeLift(s), tagFN)
 
-def hold(x, iv): #Holds the last value of a signal
+def hold(iv, evt): #Holds the last value of an Event
     def holdFN(sm):
         i = sm.i.now();
-        if i != None:
-            return i;
-        return iv
-    return StateMachineF(iv, maybeLift(x),holdFN)
+        checkEvent(i, "hold")
+        if i.occurs():
+            return i.value;
+        return sm.state
+    return StateMachineF(iv, maybeLift(evt),holdFN)
 
 def key(k, v):
     def keyfunc():

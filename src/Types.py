@@ -101,6 +101,7 @@ fnType = Ptype("Function", anyType)
 colorType = Ptype("Color", numType)
 colorHSLType = Ptype("HSL Color", numType)
 interpableType = Ptype("Interp", anyType)
+eventValueType = Ptype("EventValue", anyType)
 '''  Keeping just in case
 numType = ptype("Number")
 fnType = ptype("Function")
