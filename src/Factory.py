@@ -22,6 +22,8 @@ def maybeLift(x):
         return Lift0F(x, stringType)
     if t is type(True):
         return Lift0F(x, boolType)
+    if t is type([]):
+        return Lift0F(x, listType)
     t = x._type
 
     if t is signalFactoryType:
@@ -135,7 +137,7 @@ class LiftF(SFact):
         Errors.checkNumArgs(len(self.types), argsLen, obj, self)
         for i in range(len(self.types)):
             self.args[i] = maybeLift(self.args[i])
-            checkType(obj, self, self.types[i],self.args[i].outType) # individual argument type check
+            checkType(obj, self, self.args[i].outType, self.types[i]) # individual argument type check
         ea = map(lambda x: maybeLift(x).start()[0], self.args)
         return Lift(self.name,self.f, ea), self.outType
 
@@ -145,13 +147,9 @@ class Lift0F(SFact):
           self.outType = t
           self.name = "Lift0"
           self.v = v
-      def start(self, expectedType = anyType):
-          if expectedType.includes(self.outType):
-              return Lift0(self.v), self.outType
-          else:
-              Globals.error += "\n in Factory line 130, expected to be " + str(expectedType) + " but is a " + str(self.outType)
-              print Globals.error
-          Globals.error = ""
+      def start(self, expectedType = anyType, obj = "ProxyObject"):
+          checkType(obj, self, self.outType, expectedType)
+          return Lift0(self.v), self.outType
 
 #Creates a CachedValue factory
 class CachedValueF(SFact):
@@ -159,7 +157,7 @@ class CachedValueF(SFact):
         SFact.__init__(self)
         self.outType = anyType
         self.i = i
-    def start(self, expectedType = anyType):
+    def start(self, expectedType = anyType, obj = "ProxyObject"):
         return CachedValue(maybeLift(self.i)), self.outType
 
 #Creates a State Machine Factory
@@ -179,7 +177,7 @@ class StateMachineF(SFact):
 
 #Creates a Observer Factory
 class ObserverF(SFact):
-    def __init__(self, f, type = anyType):
+    def __init__(self, f, type = anyType, obj = "ProxyObject"):
         SFact.__init__(self)
         self.f = f
         self.outType = type

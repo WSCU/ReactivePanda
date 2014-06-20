@@ -49,7 +49,7 @@ class Proxy:
             Globals.error = "On Line 51 of Proxy, In object " + k + ", attribute " + str(v)
             #print(str(self._signals))
             #print(str(v))
-            sig = v.start(expectedType = ty)[0] # This is screwing up Integral
+            sig = v.start(expectedType = ty, obj = self)[0] # This is screwing up Integral
             #print "initilize signal = " + repr(sig)
             self._signals[k] = cache(sig)
         self._updateSignals = {}

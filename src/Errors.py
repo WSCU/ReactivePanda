@@ -13,11 +13,11 @@ def badKeyName(n):
     sys.exit()
 
 def errorOnStaticTypes(func, correct, y):
-    print(func + " of " + correct + " bad argument: " + repr(y))
+    print(func + " of " + correct + " bad argument: " + str(y))
     sys.exit()
 
 def checkNumArgs(expected, got, obj, attr):
-    print str(expected) + " " + str(got)
+    #print str(expected) + " " + str(got)
     if expected is 0 or expected is got:
         return
     else:
