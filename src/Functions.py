@@ -121,7 +121,7 @@ def react1(m, when, what = None):
         when = m
         m = world
     if m is str:
-        saveForCollection("react", m, when, what)
+        saveForCollection("react1", m, when, what)
     coll = getCollection(m)
     for proxy in coll:
         proxy._react1(when, what)
@@ -132,7 +132,7 @@ def when(m, when, what = None):
         when = m
         m = world
     if m is str:
-        saveForCollection("react", m, when, what)
+        saveForCollection("when", m, when, what)
     coll = getCollection(m)
     for proxy in coll:
         proxy._when(when, what)
@@ -143,7 +143,7 @@ def when1(m, when, what = None):
         when = m
         m = world
     if m is str:
-        saveForCollection("react", m, when, what)
+        saveForCollection("when1", m, when, what)
     coll = getCollection(m)
     for proxy in coll:
         proxy._when1(when, what)
