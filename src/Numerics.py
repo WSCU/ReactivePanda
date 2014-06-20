@@ -78,19 +78,19 @@ string   = lift("string", str, [anyType], stringType)
 # reverse = lift(reverseS, "reverse", infer = "interpolate")
 # forever = lift(lambda i: repeatS(-1, i), "forever", infer = "interpolate")
 
-P3toHPR = lift(sP3toHPR, "P3toHPR", [p3Type], hprType)
+P3toHPR = lift("P3toHPR", sP3toHPR, [p3Type], hprType)
 p3ToHpr = P3toHPR
 
-HPRtoP3 = lift(sHPRtoP3, "HPRtoP3", [hprType], p3Type)
+HPRtoP3 = lift("HPRtoP3", sHPRtoP3, [hprType], p3Type)
 hprToP3 = HPRtoP3
 
-normA = lift(sNormA, "normA", [numType], numType)
+normA = lift("normA", sNormA, [numType], numType)
 
 def dist(x,y):
     return abs(x-y)
 
 
-format    = lift(lambda str, *a: str % a, "format")
+format    = lift("format", lambda str, *a: str % a)
 
 # Lifted conditional
 
