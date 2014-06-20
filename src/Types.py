@@ -20,7 +20,7 @@ class Ptype:
         self.parent = parent
 
     def includes(self, itype):
-        if itype is self or self is anyType:
+        if itype is self or self is anyType or itype is anyType:
             return True
         elif self.parent is not None and self.parent.includes(itype):
             return True
