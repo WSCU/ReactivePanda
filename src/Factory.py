@@ -171,7 +171,7 @@ class StateMachineF(SFact):
         self.i = i
         self.name = "State Machine Factory"
         self.f = f
-    def start(self, expectedType = anyType):
+    def start(self, expectedType = anyType, obj = "ProxyObject"):
         #print "initilizing state Machine " + repr(self.i)
         input = self.i.start(expectedType = anyType)[0]
         #print "state machine input: " + repr(input)
@@ -179,12 +179,12 @@ class StateMachineF(SFact):
 
 #Creates a Observer Factory
 class ObserverF(SFact):
-    def __init__(self, f, type = anyType, obj = "ProxyObject"):
+    def __init__(self, f, type = anyType):
         SFact.__init__(self)
         self.f = f
         self.outType = type
         self.name = "ObserverF"
-    def start(self, expectedType = anyType):
+    def start(self, expectedType = anyType, obj = "ProxyObject"):
        # print "starting observer"
         ro =  Observer(self.f)
         ro.startTime = Globals.currentTime

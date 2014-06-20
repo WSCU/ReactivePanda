@@ -151,6 +151,7 @@ springGreen = color24(0, 255, 127)
 coral = color24(240, 128, 128)
 salmon = color24(250, 128, 114)
 lavender = color24(186, 85, 211)
+pink = color24(255,0,179)
 
 def grayShade(n):
     """
