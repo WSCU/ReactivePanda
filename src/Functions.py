@@ -15,7 +15,7 @@ def now(s):
 
 def integral(x):
     def initIntegral(s):
-        s.value = zero
+        s.value = 0
     def thunk(sm):
         i = sm.i.now()
         #print "integral "+ str(sm.state) + " " + str(i) + " " + str(Globals.dt)

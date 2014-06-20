@@ -137,20 +137,21 @@ orange = color24(255,122,0)
 
 #Extra Colors (start)
 teal = color24(0,188,188) #Good Color :)
-tan = color24(210,180,140)
+lighttan = color24(210,180,140)
 cyan = color24(0,255,255)
 aquamarine = color24(112,219,147)
 slateGray = color24(198,226,255)
 purpleBlue = color24(71,60,139)
 bloodOrange = color24(255, 94, 77)
 fuchsia = color24(255, 51, 255)
-tan = color24(238, 197, 145)
+darktan = color24(238, 197, 145)
 lightTan = color24(255, 211, 155)
 olive = color24(128, 128, 0)
 springGreen = color24(0, 255, 127)
 coral = color24(240, 128, 128)
 salmon = color24(250, 128, 114)
 lavender = color24(186, 85, 211)
+pink = color24(255,0,179)
 
 def grayShade(n):
     """
