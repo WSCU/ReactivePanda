@@ -12,8 +12,7 @@ from Engine import *
 from Signal import *
 from Proxy import *
 from Numerics import *
-from Functions import degrees
-from StaticNumerics import pi
+from StaticNumerics import pi, degrees
 from Globals import pandaPath, sys
 import FileIO
 import FileSearch

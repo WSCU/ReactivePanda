@@ -144,5 +144,4 @@ def clock(x):
 
 #make a clock signal too. Clock will control the heartbeat: make the heartbeat every second
 time = ObserverF(lambda x: Globals.currentTime, type = numType)
-def degrees( v):
-    return v*(180/pi)
+

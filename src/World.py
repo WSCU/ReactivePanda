@@ -14,7 +14,7 @@ def updateCamera(self):
     pos = self._get("position")
     hpr = self._get("hpr")
     g.panda3dCamera.setPos(pos.x, pos.y, pos.z)
-    g.panda3dCamera.setHpr(Numerics.degrees(hpr.h), Numerics.degrees(hpr.p), Numerics.degrees(hpr.r))
+    g.panda3dCamera.setHpr(degrees(hpr.h), degrees(hpr.p), degrees(hpr.r))
 
 class Camera(Proxy):
 

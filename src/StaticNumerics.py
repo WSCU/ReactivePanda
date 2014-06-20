@@ -8,10 +8,6 @@
 #import g
 import math
 import random
-import unittest
-import sys
-
-import Numerics
 import Factory
 import Errors
 from Types import *
@@ -29,6 +25,9 @@ def sFraction(x):
 
 def staticLerp(t, x, y):
     return (1-t) * x + t * y
+
+def degrees( v):
+    return v*(180/pi)
 
 # This class is the 0 element in an arbitrary numeric
 # class.  It is used as the initial result of an integrator.
@@ -337,22 +336,3 @@ def sSmoothStep(x):
 random.seed()
 ################################################################
 
-# Here's our "unit".
-
-def Point2AddZero():
-    zero = Zero
-    p2 = SP2(2, 2)
-    p2 = p2 + zero
-    if p2.x != 2:
-        return false
-    if p2.y != 2:
-        return false
-    return true
-
-def Point2MultiplyZero():
-    zero = Zero
-    p2 = SP2(2, 2)
-    p2 = p2 * zero
-    if p2 != zero:
-        return false;
-    return true;
