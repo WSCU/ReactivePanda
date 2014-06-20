@@ -12,20 +12,17 @@ from types import *
 # User defined types have a type attribute.  This enables initialization time typechecking
 
 class Ptype:
-    def __init__(self, tname, parent, addable = False, encoder = None, decoder = None):
+    def __init__(self, tname, parent = None, addable = False, encoder = None, decoder = None):
         self.tname = tname
         self.addable = addable
         self.encoder = encoder
         self.decoder = decoder
-        if parent is None:
-            self.parent = self
-        else:
-            self.parent = parent
+        self.parent = parent
 
     def includes(self, itype):
         if itype is self or self is anyType:
             return True
-        elif self.parent.includes(itype):
+        elif self.parent is not None and self.parent.includes(itype):
             return True
         else:
             return False
@@ -64,9 +61,13 @@ def addCheck(self):
 def getPtype(v):
     if v is None:
         return noneType
-    if hasattr(v,'_type'):  # Panda types all have a PType slot
+    elif isinstance(v, Ptype):
+        return v
+    elif hasattr(v,'_type'):  # Panda types all have a PType slot
         return v._type
     t = type(v)
+    if t is type([]):
+        return listType
     if t is type(1):
         return numType
     if t is type(1.0):
@@ -78,37 +79,39 @@ def getPtype(v):
     if t is type((1,2)):
         return TupleType
 
-    return ptype("Unknown: " + str(t))
+    return Ptype("Unknown: " + str(t))
 
 def checkType(obj, attr, value, expected):
     got = getPtype(value)
-    if got is expected:
+    #print str(expected.includes(got)) + " " + str(got) + " " + str(expected)
+    if got.includes(expected):
         return
     if hasattr(obj, '_name'):
         name = obj._name
     else:
-        name = obj
+        name = repr(obj)
     Errors.typeError(expected, got, name, attr)
     
 
 #  Predefined types used elsewhere
-anyType = Ptype("Any", None, addable = True)
-signalType = Ptype("Signal", anyType)
-signalFactoryType = Ptype("Signal Factory", anyType)
-proxyType = Ptype("Proxy", anyType)
-numType = Ptype("Num", anyType, addable = True, encoder = lambda x: str(x), decoder = lambda x: float(x.strip()))
-hasXYType = Ptype("hasXY", numType, addable = True)
+anyType = Ptype("Any", addable = True)
+signalType = Ptype("Signal")
+signalFactoryType = Ptype("Signal Factory")
+proxyType = Ptype("Proxy")
+numType = Ptype("Num", addable = True, encoder = lambda x: str(x), decoder = lambda x: float(x.strip()))
+hasXYType = Ptype("hasXY", addable = True)
 p2Type = Ptype("P2", hasXYType, addable = True)
 p3Type = Ptype("P3", hasXYType, addable = True)
 hprType = Ptype("HPR", numType, addable = True)
-boolType = Ptype("Boolean", anyType, encoder = lambda x: "T" if x else "F", decoder = lambda s: True if s.equals("T") else False)
-stringType = Ptype("String", anyType, encoder = lambda x: x, decoder = lambda x: x)
-eventType = Ptype("Event", anyType)
-fnType = Ptype("Function", anyType)
+boolType = Ptype("Boolean", encoder = lambda x: "T" if x else "F", decoder = lambda s: True if s.equals("T") else False)
+stringType = Ptype("String", encoder = lambda x: x, decoder = lambda x: x)
+eventType = Ptype("Event")
+fnType = Ptype("Function")
 colorType = Ptype("Color", numType)
 colorHSLType = Ptype("HSL Color", numType)
-interpableType = Ptype("Interp", anyType)
-eventValueType = Ptype("EventValue", anyType)
+interpableType = Ptype("Interp")
+eventValueType = Ptype("EventValue")
+listType = Ptype("listType")
 '''  Keeping just in case
 numType = ptype("Number")
 fnType = ptype("Function")

@@ -1,3 +1,4 @@
+import Errors
 import Globals
 import sys
 # To change this license header, choose License Headers in Project Properties.
@@ -33,10 +34,16 @@ def maybeLift(x):
     #return x
 def lift(name, f, types = [], outType = anyType):
     def fn(*args):
+        #print str(len(types)) + " " + str(len(args))
+        Errors.checkNumArgs(len(types), len(args), "ProxyObject", name)
         for arg in args:
             # print("lift: " + str(arg))
             if isinstance(arg, SFact):
                 return LiftF(name,f,args,types = types, outType = outType)
+        if len(types) is not 0:
+            for i in range(len(args)):
+                #print "checking " + repr(args[i])
+                checkType("ProxyObject", name, args[i], types[i])
         return f(*args)
     return fn
 
@@ -113,7 +120,7 @@ class LiftF(SFact):
     def __str__(self):
         return "{0} - args: {1} - types: {2} - outType: {3}".format(str(self.name), map(str, self.args), map(str, self.types), str(self.outType))
 
-    def start(self, expectedType = anyType):
+    def start(self, expectedType = anyType, obj = "ProxyObject"):
         #print self.name
         #for arg in self.args:
             #print " " + repr(arg)
@@ -123,25 +130,14 @@ class LiftF(SFact):
         #print expectedType
         self.args = list(self.args)
         argsLen = len(self.args)
-        Globals.error += "\n in Factory line "
-        if addCheck(self) and expectedType.includes(self.outType): # Return type check
-            if len(self.types) is 0 or argsLen is len(self.types): # number of arguments check
-                failed = False
-                for i in range(len(self.types)):
-                    self.args[i] = maybeLift(self.args[i])
-                    if not self.types[i].includes(self.args[i].outType): # individual argument type check
-                        failed = True
-                        Globals.error += "130, has an argument that expects to be " + str(self.types[i]) + " but is a " + str(self.args[i].outType)
-                if not failed:
-                    ea = map(lambda x: maybeLift(x).start()[0], self.args)
-                    return Lift(self.name,self.f, ea), self.outType
-            else:
-                Globals.error += "126, has an incorrect number of arguments in " + self.name + " expected: " + str(argsLen) + " got: " + str(len(self.types))
-        else:
-            Globals.error += "125, in " + self.name + " expected to be " + str(expectedType) + " but is " + str(self.outType)
-        print Globals.error
-        sys.exit()
-        Globals.error = ""
+        addCheck(self)
+        checkType(obj, self, self.outType, expectedType)
+        Errors.checkNumArgs(len(self.types), argsLen, obj, self)
+        for i in range(len(self.types)):
+            self.args[i] = maybeLift(self.args[i])
+            checkType(obj, self, self.types[i],self.args[i].outType) # individual argument type check
+        ea = map(lambda x: maybeLift(x).start()[0], self.args)
+        return Lift(self.name,self.f, ea), self.outType
 
 class Lift0F(SFact):
       def __init__(self, v, t):

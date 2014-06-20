@@ -18,7 +18,7 @@ P3       = lift("SP3", SP3, types = [numType, numType, numType], outType = p3Typ
 p3 = P3
 P2       = lift("SP2", SP2, types = [numType, numType], outType = p2Type)
 p2 = P2
-HPR      = lift("hpr", SHPR)
+HPR      = lift("hpr", SHPR, types = [numType, numType, numType], outType = hprType)
 hpr = HPR
 
 gravity  = P3(0,0,-1)
