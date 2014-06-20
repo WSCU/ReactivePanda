@@ -117,7 +117,7 @@ def pollGUI():
                else:
                     Globals.events[m + "-rightclick"] = True
 
-mouse = ObserverF(lambda x: Globals.mouse)
+mouse = ObserverF(lambda x: Globals.mousePos)
 
 lbutton = ObserverF(lambda x: Globals.lbutton)
 rbutton = ObserverF(lambda x: Globals.rbutton)
