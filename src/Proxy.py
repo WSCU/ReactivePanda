@@ -93,8 +93,9 @@ class Proxy:
                 if temp.occurs():
                     #print("    " + str(temp) + " is being added to thunks")
                     thunks.append(lambda : c[1](self, temp.value))
+                    self._1Reactions = []
                     break
-            self._1Reactions = []
+
             if (len(thunks) >= 2):
                 print("Multiple one time reactions in a heartbeat in object " + self._name)
 

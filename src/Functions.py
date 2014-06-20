@@ -71,8 +71,8 @@ def getCollection(m):
         try:
             return Globals.collections[m]
         except KeyError:
-            print ("No collection with the name: " + m)
-            return None
+            print ("No collection with the name: " + m + " returning empty list")
+            return []
     else:
         return [m]
 
@@ -101,7 +101,7 @@ def hit1(m1, m2, reaction, trace = False):
 
 def saveForCollection(type, m, when, what):
     if m not in Globals.collectionReactions[type]:
-        Globals.collectionReactions[type][m] = {}
+        Globals.collectionReactions[type][m] = []
     Globals.collectionReactions[type][m].append([when, what])
 
 def react(m, when, what = None):
@@ -109,7 +109,7 @@ def react(m, when, what = None):
         what = when
         when = m
         m = world
-    if m is str:
+    if type(m) is str:
         saveForCollection("react", m, when, what)
     coll = getCollection(m)
     for proxy in coll:
