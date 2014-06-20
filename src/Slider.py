@@ -7,6 +7,8 @@ from Types import *
 
 
 def slider(size=1, position=None, min=0, max=1, pageSize=None, init=None, name='Slider', label=None):
+    checkType(name, "min", min, numType)
+    checkType(name, "max", max, numType)
     if init is None:
         init = min
     if pageSize is None:

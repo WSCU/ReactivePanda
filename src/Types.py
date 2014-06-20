@@ -4,6 +4,7 @@ This handles the typing of signal functions
 Composite types such as P2, P3, and HPR are serialized as numbers separated by commas.
 This parses those numbers.
 """
+import Errors
 
 from types import *
 
@@ -60,12 +61,12 @@ def addCheck(self):
         return False
     return True
 
-def getPtype(self):
-    if hasattr(x,'type'):  # Panda types all have a pType slot
-        return x.type
-    if x is None:
+def getPtype(v):
+    if v is None:
         return noneType
-    t = type(x)
+    if hasattr(v,'_type'):  # Panda types all have a PType slot
+        return v._type
+    t = type(v)
     if t is type(1):
         return numType
     if t is type(1.0):
@@ -79,10 +80,16 @@ def getPtype(self):
 
     return ptype("Unknown: " + str(t))
 
-def checkType(self, value, ptype):
-    if type(value) is ptype:
-        return True
-    return False
+def checkType(obj, attr, value, expected):
+    got = getPtype(value)
+    if got is expected:
+        return
+    if hasattr(obj, '_name'):
+        name = obj._name
+    else:
+        name = obj
+    Errors.typeError(expected, got, name, attr)
+    
 
 #  Predefined types used elsewhere
 anyType = Ptype("Any", None, addable = True)

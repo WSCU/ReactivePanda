@@ -13,7 +13,7 @@ def now(s):
     return None  # Should be an error
 
 
-    
+
 def integral(x):
     def initIntegral(s):
         s.value = zero
@@ -33,9 +33,9 @@ def tag(v,evt):
 def tagMap(fn, evt):
     return lift("tag", lambda e: EventValue(fn(e.value)) if e.occurs() else noEvent) (evt)
 
-def tags(s, vals = None):
-    def initTag(s):
-        s.count = 0
+def tagCount(evt):
+    def initTag(sm):
+        sm.count = 0
     def tagFN(sm):
         i = sm.i.now()
         checkEvent(i, "tag")
@@ -43,8 +43,11 @@ def tags(s, vals = None):
             sm.value = noEvent
         else:
             sm.count += 1
-            sm.value = EventValue(sm.count) if bals is None else vals[sm.count % len(vals)]
-    return StateMachineF(initTag, maybeLift(s), tagFN)
+            sm.value = EventValue(sm.count)
+    return StateMachineF(initTag, maybeLift(evt), tagFN)
+
+def tagList(l, evt):
+    return tagMap(lambda i: l[i%len(l)], tagCount(evt))
 
 def hold(iv, evt): #Holds the last value of an Event
     def initHold(sm):
@@ -70,9 +73,9 @@ def getCollection(m):
     if type(m) is str:
         try:
             return Globals.collections[m]
-        except KeyErorr:
-            print ("No collection with the name: " + m)
-            return None
+        except KeyError:
+            print ("No collection with the name: " + m + " returning empty list")
+            return []
     else:
         return [m]
 
@@ -99,26 +102,51 @@ def hit1(m1, m2, reaction, trace = False):
         return None
     return ObserverF(hitFN)
 
+def saveForCollection(type, m, when, what):
+    if m not in Globals.collectionReactions[type]:
+        Globals.collectionReactions[type][m] = []
+    Globals.collectionReactions[type][m].append([when, what])
+
 def react(m, when, what = None):
     if what is None:
         what = when
         when = m
         m = world
+    if type(m) is str:
+        saveForCollection("react", m, when, what)
     coll = getCollection(m)
     for proxy in coll:
         proxy._react(when, what)
 
-def react1(m, when, what):
+def react1(m, when, what = None):
+    if what is None:
+        what = when
+        when = m
+        m = world
+    if type(m) is str:
+        saveForCollection("react1", m, when, what)
     coll = getCollection(m)
     for proxy in coll:
         proxy._react1(when, what)
 
-def when(m, when, what):
+def when(m, when, what = None):
+    if what is None:
+        what = when
+        when = m
+        m = world
+    if type(m) is str:
+        saveForCollection("when", m, when, what)
     coll = getCollection(m)
     for proxy in coll:
         proxy._when(when, what)
 
-def when1(m, when, what):
+def when1(m, when, what = None):
+    if what is None:
+        what = when
+        when = m
+        m = world
+    if type(m) is str:
+        saveForCollection("when1", m, when, what)
     coll = getCollection(m)
     for proxy in coll:
         proxy._when1(when, what)

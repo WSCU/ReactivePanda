@@ -30,18 +30,5 @@ p = panda(size = 0.5, position = P3(-2 + integral(1), 10, 0), collections = ["pa
 def hitReact(m, e):
     m.position = P3(2 + integral(1), 10 , 2)
 
-def whenTest():
-    return Globals.currentTime > 2
-
-def whenTestReaction(m, v):
-    print(Globals.currentTime)
-    print("hi")
-
-def when1Test(m, v):
-    print(Globals.currentTime)
-    print("When1?")
-
-when1(ball, Globals.currentTime > 2, when1Test)
-when(ball, Globals.currentTime > 2, whenTestReaction)
 world.h = hit(ball, "pandas", hitReact)
 start()
