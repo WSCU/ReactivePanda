@@ -5,24 +5,29 @@ import Globals
 
 from Types import *
 import PandaModel
+import Proxy
+from Numerics import *
+from Color import *
+
 # This has a lot in common with PandaModel - there should be a super class
 # to hold the common code
 
 def geometryUpdater(o):
     PandaModel.modelUpdater(o)
-    side2 = self._get("side2")
-    if texture != "" and texture != self._currentSide2:
-        texf = FileSearch.findTexture(side2)
-        self._currentSide2 = texture
-        #print "The texture is: "+repr(texf)
-        self._pandaModel.setTexture(texf, 1)
+    if self._twosided:
+        side2 = self._get("side2")
+        if texture != "" and texture != self._currentSide2:
+            texf = FileSearch.findTexture(side2)
+            self._currentSide2 = texture
+            #print "The texture is: "+repr(texf)
+            self._pandaModel.setTexture(texf, 1)
     
 
-class GeometryHandle(Proxy):
-    def __init__(self, object, position=None, hpr=None, size = 1, color = None, texture = None, extraUpdates = lambda x:x):
-        Proxy.__init__(self, name="dynamicGeometry", updater = geometryUpdater,
-                       types = {"position": p3Type, "hpr": hprType , "size": numType,
-                                "color": colorType, "texture": stringType, "side2": stringType}))
+class GeometryHandle(Proxy.Proxy):
+    def __init__(self, object, position=None, hpr=None, size=1, color=None, texture=None, extraUpdates=lambda x:x):
+        Proxy.__init__(self, name="dynamicGeometry", updater=geometryUpdater,
+                       types={"position": p3Type, "hpr": hprType, "size": numType,
+                       "color": colorType, "texture": stringType, "side2": stringType})
         self._model = object
         Globals.nextModelId = Globals.nextModelId + 1
         self._extraUpdates = extraUpdates
@@ -31,11 +36,11 @@ class GeometryHandle(Proxy):
         if position is not None:
             self.position = position
         else:
-            self.position = P3(0,0,0)
+            self.position = P3(0, 0, 0)
         if hpr is not None:
             self.hpr = hpr
         else:
-            self.hpr = SHPR(0,0,0)
+            self.hpr = SHPR(0, 0, 0)
         if size is not None:
             self.size = size
         else:
@@ -92,15 +97,15 @@ def mesh(spacePoints, texturePoints, triangles, c):
 
 #####This seems to take the points we added in earlier and remove them.
 #####Why this is all static, I don't understand.
-        prim.addVertex(triangle[0])
-        prim.addVertex(triangle[1])
-        prim.addVertex(triangle[2])
-        prim.closePrimitive()
+    prim.addVertex(triangle[0])
+    prim.addVertex(triangle[1])
+    prim.addVertex(triangle[2])
+    prim.closePrimitive()
 
-    #Converting the vertices we just retrieved from the collection inside Geom.UHStatic into a node
+#Converting the vertices we just retrieved from the collection inside Geom.UHStatic into a node
 #####
 
-        geom.addPrimitive(prim)
+    geom.addPrimitive(prim)
 
     node = GeomNode('gnode')
     node.addGeom(geom)
@@ -116,18 +121,18 @@ def mesh(spacePoints, texturePoints, triangles, c):
     return nodePath
 
 def emptyModel(color = None, position = None, hpr = None, size = None, duration = 0):
-    nodePath = mesh([],[], [], white)
+    nodePath = mesh([], [], [], white)
     result = GeometryHandle(nodePath, position, hpr, size, color, None)
     return result
 
-def triangle(p1, p2, p3, color = None, position = None, hpr = None, size = None, texture = None, texP1 = P2(0,0), \
-             texP2 = P2(1, 0), texP3 = P2(0, 1), side2 = None,duration = 0):
-    #checking to ensure that the second argument is an instance of the third argument
+def triangle(p1, p2, p3, color = None, position = None, hpr = None, size = None, texture = None, texP1 = P2(0, 0), \
+    texP2 = P2(1, 0), texP3 = P2(0, 1), side2 = None, duration = 0):
+#checking to ensure that the second argument is an instance of the third argument
     #The first and fourth are for error handling.
     checkType("triangle", "first point", p1, p3Type)
     checkType("triangle", "second point", p2, p3Type)
     checkType("triangle", "third point", p3, p3Type)
-    nodePath = mesh([p1, p2, p3], [texP1, texP2, texP3], [[0,1,2]], white)
+    nodePath = mesh([p1, p2, p3], [texP1, texP2, texP3], [[0, 1, 2]], white)
     if (side2 is not None):
         nodePath.setTwoSided(False)
         result = GeometryHandle(nodePath, position, hpr, size, color, texture)
@@ -142,13 +147,13 @@ def triangle(p1, p2, p3, color = None, position = None, hpr = None, size = None,
     # result.d.model.setScale(0)
     return result
 
-def rectangle(p1, p2, p3, color = None, position=None, hpr=None, size=None, texture = None, side2 = None,
-              texP1 = P2(0,0), texP2 = P2(1,0), texP3 = P2(0,1), texP4 = P2(1,1), duration = 0):
-    if getPType(texture)==ColorType:
+def rectangle(p1, p2, p3, color = None, position = None, hpr = None, size = None, texture = None, side2 = None,
+    texP1 = P2(0, 0), texP2 = P2(1, 0), texP3 = P2(0, 1), texP4 = P2(1, 1), duration = 0):
+    if getPType(texture) == ColorType:
         color = texture
         texture = None
 
-    # If side2 is a string, it is interpreted as a file name in the pictures area
+# If side2 is a string, it is interpreted as a file name in the pictures area
     # If side2 is False, the texture is one sided (invisible from the back)
     #checking to ensure that the second argument is an instance of the third argument
     #The first and fourth are for error handling.
@@ -157,7 +162,7 @@ def rectangle(p1, p2, p3, color = None, position=None, hpr=None, size=None, text
     checkType("rectangle", "third point", p3, p3Type)
 
     p4 = p3 + p2 - p1
-    nodePath = mesh([p1, p2, p3, p4], [texP1, texP2, texP3, texP4], [[0,1,2], [2, 1, 3]], white)
+    nodePath = mesh([p1, p2, p3, p4], [texP1, texP2, texP3, texP4], [[0, 1, 2], [2, 1, 3]], white)
     if (side2 is not None):
         nodePath.setTwoSided(False)
         result = GeometryHandle(nodePath, position, hpr, size, color, texture)
@@ -172,7 +177,7 @@ def rectangle(p1, p2, p3, color = None, position=None, hpr=None, size=None, text
     #result.d.model.setScale(0)  # Hack - this is rendered too soon and we get 1 frame before update.  This keeps the model invisible
     #                            # until the first refresh
     return result
-
+'''
 def unitSquare(**a):
     return rectangle(P3(-1, 0, -1), P3(1, 0, -1), P3(-1, 0, 1), **a)
 
@@ -340,3 +345,4 @@ def surface(f, xmin = -10, xmax = 10, ymin = -10, ymax = 10, slices = 40, dx = N
     result.ymin = static(ymin)
     result.ymax = static(ymax)
     return result
+'''
