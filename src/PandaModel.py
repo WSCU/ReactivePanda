@@ -12,11 +12,11 @@ from Engine import *
 from Signal import *
 from Proxy import *
 from Numerics import *
-from Functions import degrees
 from StaticNumerics import pi
 from Globals import pandaPath, sys
 import FileIO
 import FileSearch
+import Functions
 from Color import *
 
 # This fills in all of the defaults
@@ -96,11 +96,17 @@ class PandaModel(Proxy):
         else:
             self.color = noColor
         for tag in collections:
-            try:
-                Globals.collections[tag].append(self)
-            except KeyError:
+            if tag not in Globals.collections:
                 Globals.collections[tag] = []
-                Globals.collections[tag].append(self)
+            Globals.collections[tag].append(self)
+
+        #Get saved reaction functions for this collection
+        for t, v in Globals.collectionReactions.items():
+            for tag in collections:
+                if tag in v:
+                    for args in v[tag]:
+                        getattr(Functions, t)(self, args[0], what = args[1])
+
     def _touches(self, handle, trace = False):
         if trace:
            print "Touch: " + repr(self) + " (" + self._cType + ") " + repr(handle) + " (" + handle._cType + ")"
@@ -179,9 +185,9 @@ def proxyUpdater(self):
                             positionNow.y + positionOffset.y*sizeScalar,
                             positionNow.z + positionOffset.z*sizeScalar)
 
-    self._pandaModel.setHpr(degrees(hprNow.h + hprOffset.h),
-                            degrees(hprNow.p + hprOffset.p),
-                            degrees(hprNow.r + hprOffset.r))
+    self._pandaModel.setHpr(Functions.degrees(hprNow.h + hprOffset.h),
+                            Functions.degrees(hprNow.p + hprOffset.p),
+                            Functions.degrees(hprNow.r + hprOffset.r))
     texture = self._get("texture")
     if texture != "" and texture != self._currentTexture:
         texf = FileSearch.findTexture(texture)

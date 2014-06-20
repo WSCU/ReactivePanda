@@ -13,7 +13,7 @@ def now(s):
     return None  # Should be an error
 
 
-    
+
 def integral(x):
     def initIntegral(s):
         s.value = zero
@@ -70,9 +70,9 @@ def getCollection(m):
     if type(m) is str:
         try:
             return Globals.collections[m]
-        except KeyErorr:
-            print ("No collection with the name: " + m)
-            return None
+        except KeyError:
+            print ("No collection with the name: " + m + " returning empty list")
+            return []
     else:
         return [m]
 
@@ -99,26 +99,51 @@ def hit1(m1, m2, reaction, trace = False):
         return None
     return ObserverF(hitFN)
 
+def saveForCollection(type, m, when, what):
+    if m not in Globals.collectionReactions[type]:
+        Globals.collectionReactions[type][m] = []
+    Globals.collectionReactions[type][m].append([when, what])
+
 def react(m, when, what = None):
     if what is None:
         what = when
         when = m
         m = world
+    if type(m) is str:
+        saveForCollection("react", m, when, what)
     coll = getCollection(m)
     for proxy in coll:
         proxy._react(when, what)
 
-def react1(m, when, what):
+def react1(m, when, what = None):
+    if what is None:
+        what = when
+        when = m
+        m = world
+    if m is str:
+        saveForCollection("react", m, when, what)
     coll = getCollection(m)
     for proxy in coll:
         proxy._react1(when, what)
 
-def when(m, when, what):
+def when(m, when, what = None):
+    if what is None:
+        what = when
+        when = m
+        m = world
+    if m is str:
+        saveForCollection("react", m, when, what)
     coll = getCollection(m)
     for proxy in coll:
         proxy._when(when, what)
 
-def when1(m, when, what):
+def when1(m, when, what = None):
+    if what is None:
+        what = when
+        when = m
+        m = world
+    if m is str:
+        saveForCollection("react", m, when, what)
     coll = getCollection(m)
     for proxy in coll:
         proxy._when1(when, what)
