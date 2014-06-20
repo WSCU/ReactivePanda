@@ -12,7 +12,7 @@ from Engine import *
 from Signal import *
 from Proxy import *
 from Numerics import *
-from StaticNumerics import pi
+from StaticNumerics import pi, degrees
 from Globals import pandaPath, sys
 import FileIO
 import FileSearch
@@ -185,9 +185,9 @@ def proxyUpdater(self):
                             positionNow.y + positionOffset.y*sizeScalar,
                             positionNow.z + positionOffset.z*sizeScalar)
 
-    self._pandaModel.setHpr(Functions.degrees(hprNow.h + hprOffset.h),
-                            Functions.degrees(hprNow.p + hprOffset.p),
-                            Functions.degrees(hprNow.r + hprOffset.r))
+    self._pandaModel.setHpr(degrees(hprNow.h + hprOffset.h),
+                            degrees(hprNow.p + hprOffset.p),
+                            degrees(hprNow.r + hprOffset.r))
     texture = self._get("texture")
     if texture != "" and texture != self._currentTexture:
         texf = FileSearch.findTexture(texture)
