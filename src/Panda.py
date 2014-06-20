@@ -8,6 +8,7 @@ from Text import *
 from Color import *
 from Light import *
 from Slider import slider
+from World import world, camera
 from Engine import engine as _engine
 
 def start():
