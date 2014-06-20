@@ -48,6 +48,7 @@ nextSignalRef = 0
 texture = None # Used to communicate with particle effect code from particle panel
 
 collections = {}
+collectionReactions = {"when1" : {}, "when": {}, "react": {}, "react1": {}}
 #osType = platform.system() # OS That is being used. # NotReturning Correct osType should be Windows Insted of Java.
 #print osType
 #osType = 'Linux'
