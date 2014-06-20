@@ -33,9 +33,9 @@ def tag(v,evt):
 def tagMap(fn, evt):
     return lift("tag", lambda e: EventValue(fn(e.value)) if e.occurs() else noEvent) (evt)
 
-def tags(s, vals = None):
-    def initTag(s):
-        s.count = 0
+def tagCount(evt):
+    def initTag(sm):
+        sm.count = 0
     def tagFN(sm):
         i = sm.i.now()
         checkEvent(i, "tag")
@@ -43,8 +43,11 @@ def tags(s, vals = None):
             sm.value = noEvent
         else:
             sm.count += 1
-            sm.value = EventValue(sm.count) if bals is None else vals[sm.count % len(vals)]
-    return StateMachineF(initTag, maybeLift(s), tagFN)
+            sm.value = EventValue(sm.count)
+    return StateMachineF(initTag, maybeLift(evt), tagFN)
+
+def tagList(l, evt):
+    return tagMap(lambda i: l[i%len(l)], tagCount(evt))
 
 def hold(iv, evt): #Holds the last value of an Event
     def initHold(sm):
