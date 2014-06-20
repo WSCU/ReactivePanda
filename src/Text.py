@@ -38,7 +38,7 @@ def textBox(*p, **k):
 
 class Text(Proxy):
     def __init__(self, text = None, name = 'Text', position = None, size = 1, color = None):
-        Proxy.__init__(self, name, updater=textUpdater, types = {"text": stringType, "color": colorType})
+        Proxy.__init__(self, name, updater=textUpdater, types = {"text": anyType, "color": colorType})
         if text is None:
             self.text = ""
         else:
