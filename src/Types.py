@@ -108,10 +108,10 @@ stringType = Ptype("String", encoder = lambda x: x, decoder = lambda x: x)
 eventType = Ptype("Event")
 fnType = Ptype("Function")
 colorType = Ptype("Color", numType)
-colorHSLType = Ptype("HSL Color", numType)
 interpableType = Ptype("Interp")
 eventValueType = Ptype("EventValue")
 listType = Ptype("listType")
+
 '''  Keeping just in case
 numType = ptype("Number")
 fnType = ptype("Function")
