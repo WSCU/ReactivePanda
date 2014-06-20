@@ -66,10 +66,12 @@ class SFact:
         return LiftF("subtract",lambda x,y:y-x, [self,y], types = [self.outType, y.outType], outType = self.outType)
     def __mul__(self,y):
         y = maybeLift(y)
-        return LiftF("multiply",lambda x,y:x*y, [self,y])
+        return LiftF("multiply",lambda x,y:x*y, [self,y], types = [self.outType, y.outType], outType = self.outType)
     def __rmul__(self,y):
         y = maybeLift(y)
-        return LiftF("multiply",lambda x,y:x*y, [self,y])
+        return LiftF("multiply",lambda x,y:x*y, [self,y], types = [self.outType, y.outType], outType = self.outType)
+    def __neg__(self):
+        return LiftF("neg", lambda x: -x, [self], types = [self.outType], outType = self.outType)
     def __div__(self, y):
         y = maybeLift(y)
         return LiftF("div", lambda x,y: x/y, [self, y])

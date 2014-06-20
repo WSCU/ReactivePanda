@@ -53,6 +53,13 @@ class SHPR:
         if isinstance(y, type(1)) or isinstance(y,type(1.0)):
             return scaleHPR(y, self)
         Errors.errorOnStaticTypes("Mul", "SHPR", y)
+    def __div__(self, y):
+        if y is zero:
+            print "Universal Explosion"
+            return zero
+        if isinstance(y, type(1)) or isinstance(y,type(1.0)):
+            return scaleHPR2((1.0/y), self)
+        Errors.errorOnStaticTypes("Div", "SP2", y)
     def __neg__(self):
         return scaleHPR(self, -1)
     def interp(self, t, p2):

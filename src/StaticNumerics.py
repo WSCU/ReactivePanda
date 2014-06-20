@@ -129,6 +129,13 @@ class SP2:
         if isinstance(y, type(1)) or isinstance(y,type(1.0)):
             return scaleP2(y, self)
         Errors.errorOnStaticTypes("Mul", "SP2", y)
+    def __div__(self, y):
+        if y is zero:
+            print "Universal Explosion"
+            return zero
+        if isinstance(y, type(1)) or isinstance(y,type(1.0)):
+            return scaleP2((1.0/y), self)
+        Errors.errorOnStaticTypes("Div", "SP2", y)
     def __abs__(self):
         return absP2(self)
     def __neg__(self):
@@ -220,6 +227,13 @@ class SP3:
         if isinstance(y, type(1)) or isinstance(y, type(1.5)):
             return scaleP3(y, self)
         Errors.errorOnStaticTypes("Mul", "SP3", y)
+    def __div__(self, y):
+        if y is zero:
+            print "Universal Explosion"
+            return zero
+        if isinstance(y, type(1)) or isinstance(y,type(1.0)):
+            return scaleP3((1.0/y), self)
+        Errors.errorOnStaticTypes("Div", "SP2", y)
     def __abs__(self):
         return absP3(self)
     def __neg__(self):
