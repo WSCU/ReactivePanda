@@ -39,7 +39,7 @@ def pandaModel(fileName = None, name = "PandaModel", size = None, hpr = None, po
 
 class PandaModel(Proxy):
     def __init__(self, fileName, size, hpr, position, tag, color, texture, name):
-        Proxy.__init__(self, name = str(name) + ":" + str(Globals.nextModelId), updater = proxyUpdater,
+        Proxy.__init__(self, name = str(name) + ":" + str(Globals.nextModelId), updater = modelUpdater,
                              types = {"position": p3Type, "hpr": hprType , "size": numType,
                                       "color": colorType, "texture": stringType})
         modelTypes = {"localOrientation": hprType, "localSize": numType, "localPosition": p3Type,
@@ -175,7 +175,7 @@ class PandaModel(Proxy):
                     #print ("*****"+repr(res))
                     return res
 
-def proxyUpdater(self):
+def modelUpdater(self):
     #These parameters find the static offset which was created during initialization and the current position which is returned by the self._get() method
     positionOffset = self._position
     positionNow = self._get("position") + p3(0,0,0) # to make sure we do not get a zero object

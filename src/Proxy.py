@@ -2,9 +2,10 @@ import Globals
 from Factory import *
 from Types import proxyType
 import Errors
+import Functions
 
 class Proxy:
-    def __init__(self, name, updater, types):
+    def __init__(self, name, updater, types, duration = 0):
         self._types = types
         self._alive = True;
         self._type = proxyType

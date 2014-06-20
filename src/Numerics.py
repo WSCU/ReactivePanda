@@ -65,6 +65,42 @@ colorhsl = lift("hsl color", colorHSL, [numType, numType, numType], colorType)
 
 string   = lift("string", str, [anyType], stringType)
 
+#norm      = lift(normP3, 'norm', [P3Type], P3Type)
+
+# Interpolation stuff
+
+# lerp = lift(lerpStatic, "lerp")
+# interpolate = lift(interpolateStatic, "interpolate", infer='interpolate')
+# to = lift(toS, "to", infer = "interpolate")
+# at = lift(atS, "at", infer = "interpolate")
+# move = lift(moveS, "move", infer = "interpolate")
+#repeat = lift(repeatS, "repeat", infer = "interpolate")
+# reverse = lift(reverseS, "reverse", infer = "interpolate")
+# forever = lift(lambda i: repeatS(-1, i), "forever", infer = "interpolate")
+
+P3toHPR = lift(sP3toHPR, "P3toHPR", [p3Type], hprType)
+p3ToHpr = P3toHPR
+
+HPRtoP3 = lift(sHPRtoP3, "HPRtoP3", [hprType], p3Type)
+hprToP3 = HPRtoP3
+
+normA = lift(sNormA, "normA", [numType], numType)
+
+def dist(x,y):
+    return abs(x-y)
+
+
+format    = lift(lambda str, *a: str % a, "format")
+
+# Lifted conditional
+
+def staticIf(test, x, y):
+    if test:
+        return x
+    return y
+
+choose = lift(staticIf, "choose")
+
 
 def encodeNums(*n):
     s = ""
