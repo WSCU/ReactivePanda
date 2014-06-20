@@ -105,7 +105,8 @@ class Proxy:
                 Errors.checkEvent(temp, "recurring reaction in " + self._name)
                 #print("Object: " + str(self) + " is updating: " + str(a[0]))
                 if temp.occurs():
-                    #print("    " + str(temp) + " is being added to thunks")
+                    #print("    " + repr(temp) + " is being added to thunks")
+                    #print "Thunks" + str(thunks) + " " + str(d)
                     thunks.append(lambda : d[1](self, temp.value))
 
             #Evaluate one time when reaction
@@ -131,3 +132,9 @@ class Proxy:
 
     def __repr__(self):
         return str(self._name)
+
+    def _exit(self):
+        print "Current objects: " + str(Globals.worldObjects)
+        Globals.worldObjects = [x for x in Globals.worldObjects if x is not self]
+        self._zombie = True
+

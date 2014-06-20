@@ -1,9 +1,10 @@
 #Collection of useful and necessary functions used in the Reactive Engine.
 from Signal import *
 from Factory import *
-from StaticNumerics import pi, zero
+from StaticNumerics import zero
 from Errors import *
 from World import world
+import Proxy
 
 import Globals
 
@@ -11,8 +12,6 @@ def now(s):
     if isinstance(s, ObserverF):
         return s.get()
     return None  # Should be an error
-
-
 
 def integral(x):
     def initIntegral(s):
@@ -88,14 +87,17 @@ def hit(m1, m2, reaction, trace = False):
                 if m._touches(e, trace = trace):
                     reaction(m, e)
         return None
-    return ObserverF(hitFN)
+    world.react(ObserverF(hitFN))
 
 def hit1(m1, m2, reaction, trace = False):
     def hitFN(o):
         ml1 = getCollection(m1)
         ml2 = getCollection(m2)
+        print ml1
+        print ml2
         for m in ml1:
             for e in ml2:
+                print "Does " + str(m) + " hit " + str(e)
                 if m._touches(e, trace = trace):
                     reaction(m, e)
                     return
@@ -151,6 +153,10 @@ def when1(m, when, what = None):
     for proxy in coll:
         proxy._when1(when, what)
 
+def exit(x):
+    if isinstance(x, Proxy.Proxy):
+        x._exit()
+        
 def localtime():
     def ltF(o):
         return Globals.currentTime - o.startTime
