@@ -27,7 +27,7 @@ class PEffect(Proxy):
                 size = None,
                 ** a): 
         return PEffect(particleFn, name, hpr, position, size)
-        Proxy.__init__(self, name = name, texture = texture, updater = updater, types = {"position":(p3Type, P3(0,0,0)), "hpr":(hprType, HPR(0,0,0)), "size":(numType, 1)})
+        Proxy.__init__(self, name = name, texture = texture, updater = updatePEffect, types = {"position":(p3Type, P3(0,0,0)), "hpr":(hprType, HPR(0,0,0)), "size":(numType, 1)})
         
         #pathname = "/lib/panda/lib/lib-original/particles/"
         base.enableParticles() #this should be in start in main program, this should probably go away 
@@ -42,7 +42,7 @@ class PEffect(Proxy):
         
         p.start()
         
-def updater(self):
+def updatePEffect(self):
     p = self._effect
     position = self.get("position")
     print("setting ", position)
