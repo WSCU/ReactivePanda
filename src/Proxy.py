@@ -133,8 +133,10 @@ class Proxy:
     def __repr__(self):
         return str(self._name)
 
+    def _remove(self):
+        pass
     def _exit(self):
-        print "Current objects: " + str(Globals.worldObjects)
         Globals.worldObjects = [x for x in Globals.worldObjects if x is not self]
         self._zombie = True
+        self._remove()    #  This is in the subclass
 
