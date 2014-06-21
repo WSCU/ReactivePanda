@@ -40,24 +40,25 @@ def geometryUpdater(self):
         self._pandaModel.setColor(colorNow.toVBase4())
     if self._twoSided:
         side2now = self._get("side2")
-        if texture != "" and texture != self._currentSide2:
+        if side2now != "" and side2now != self._currentSide2:
             tex = FileSearch.findTexture(side2now)
-            self._currentSide2 = tex
+            self._currentSide2 = side2now
             #print "The texture is: "+repr(texf)
-            self._sideTwo.setTexture(tex, 1)
+            self._sideTwo._pandaModel.setTexture(tex, 1)
     # This is used to keep the model off the screen until the first update happens
     if not self._onScreen:
-           self._pandaModel.reparentTo(self._parent)
+           self._reparent(self._parent)
            self._onScreen = True
 
     
 
 class GeometryHandle(Proxy.Proxy):
-    def __init__(self, object, position=None, hpr=None, size=1, color=None, texture=None, extraUpdates=lambda x:x, duration = 0):
+    def __init__(self, object, position=None, hpr=None, size=1, color=None, texture=None, extraUpdates=lambda x:x, duration = 0, parent = render):
         Proxy.Proxy.__init__(self, name="dynamicGeometry", updater=geometryUpdater,
                        types={"position": p3Type, "hpr": hprType, "size": numType,
                             "color": colorType, "texture": stringType, "side2": stringType})
         self._pandaModel = object
+        self._parent = parent
         Globals.nextModelId = Globals.nextModelId + 1
         self._onScreen = False
         self._parent = render
@@ -83,7 +84,8 @@ class GeometryHandle(Proxy.Proxy):
             self.color = color
         else:
             self.color = noColor
-
+    def _reparent(self, m):
+        self._pandaModel.reparentTo(m._pandaModel if isinstance(m,Proxy.Proxy) else m)
 
 # This creates a model on the fly.  The array of spacePoints and texturePoints have to be the same length.
 # The spacePoints contains P3 objects and texturePoints contains P2 objects.
@@ -111,7 +113,7 @@ def mesh(spacePoints, texturePoints, triangles, c):
     vdata = GeomVertexData('name', format, Geom.UHStatic)
 
     vertex = GeomVertexWriter(vdata, 'vertex')
-    normal = GeomVertexWriter(vdata, 'normal')
+#    normal = GeomVertexWriter(vdata, 'normal')
     color = GeomVertexWriter(vdata, 'color')
     texcoord = GeomVertexWriter(vdata, 'texcoord')
     for p in zip(spacePoints, c):
@@ -165,13 +167,18 @@ def triangle(p1, p2, p3, color = None, position = None, hpr = None, size = None,
     if (side2 is not None):
         nodePath.setTwoSided(False)
         result = GeometryHandle(nodePath, position, hpr, size, color, texture)
+        result._twoSided = True
         if side2 is not False:
+            result.side2 = side2
             otherSide = triangle(p2, p1, p3, texture = side2, side2 = False, texP1 = texP1, texP2 = texP2, texP3 = texP3)
-            otherSide.reparentTo(result)
-            result._twoSided = True
+#            otherSide._reparent(result)
+# Not working at the moment!
+            otherSide._pandaModel.reparentTo(result._pandaModel)
             result._sideTwo = otherSide
+        else:
+            result.side2 = ""
         return result
-    result = GeometryHandle(nodePath, position, hpr, size, color, texture, duration = duration)
+    result = GeometryHandle(nodePath, position, hpr, size, color, texture,  duration = duration)
     result._twoSided = False
     # result.d.model.setScale(0)
     return result
