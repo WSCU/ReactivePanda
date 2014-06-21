@@ -4,8 +4,8 @@ from Factory import *
 from Signal import *
 import StaticNumerics
 from direct.actor import Actor
-from direct.showbase.DirectObject import DirectObject
 import Errors
+import Functions
 
 def lbp(e = True): 
     return eventObserver("mouse1", e)
@@ -67,14 +67,13 @@ def getEventSignal(ename, val):
         if Globals.eventSignals.has_key(ename):
             return tag(val, Globals.eventSignals[ename])
         e = eventObserver(ename)
-        g.eventSignals[ename] = e
-        g.directObj.accept(ename, lambda: postEvent(ename))
-        return tag(val, e)
+        Globals.eventSignals[ename] = e
+        Globals.direct.accept(ename, lambda: postEvent(ename))
+        return Functions.tag(val, e)
 
     
 def initEvents():
-    directObj = DirectObject()
-    Globals.direct = directObj
+    directObj = Globals.direct
     directObj.accept("mouse1", lambda: postEvent("mouse1"))
     directObj.accept("mouse3", lambda: postEvent("mouse3"))
     directObj.accept("mouse1-up", lambda: postEvent("mouse1-up"))

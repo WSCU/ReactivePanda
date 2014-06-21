@@ -16,15 +16,19 @@ def heartBeat(ct, events):
     Globals.thunks = []
 
     pollGUI()
+
     #print "time steps: "+repr(ct)
     #for event in events:
         #print "Events: "+repr(event)
+    reactions = []
     for worldObject in Globals.worldObjects:
         #print("Updating object: " + repr(worldObject))
         #print repr(worldObject)
-        Globals.thunks.extend(worldObject._update())
+        reactions.extend(worldObject._update())
     for f in Globals.thunks:
         f()
+    for r in reactions:
+        r.react()
     for obj in Globals.newObjects:
         #print("Adding object: " + repr(obj))
         Globals.worldObjects.append(obj)

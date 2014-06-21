@@ -1,7 +1,7 @@
 from FileSearch import findSound
-from Types import SoundType
+from Types import soundType
 from panda3d.core import Filename
-from panda3d.core import Loader as loader
+
 
 class Sound:
     def __init__(self, file, loopCount = 1, volume = 0.5):
@@ -9,7 +9,7 @@ class Sound:
         self.filePath = findSound(file)
         self.foundSound = self.filePath is not None
         if self.foundSound:
-            self.type = SoundType
+            self.type = soundType
             self.volume = volume
             self.loopCount = loopCount
             # there's something strange here wuth the filename representation -

@@ -8,21 +8,15 @@ from Color import Color, colorHSL
 from Interp import interpolateStatic
 from Interp import repeat
 
-pi       = maybeLift(math.pi)
-twopi    = maybeLift(2*pi)
-ceiling  = lift("ceiling",math.ceil)
-floor    = lift("floor",math.floor)
-cos      = lift("cos",math.cos)
-sin      = lift("sin", math.sin)
+pi       = math.pi
+twopi    = 2*pi
 
-P3       = lift("SP3", SP3, types = [numType, numType, numType], outType = p3Type)
-p3 = P3
-P2       = lift("SP2", SP2, types = [numType, numType], outType = p2Type)
-p2 = P2
-HPR      = lift("hpr", SHPR, types = [numType, numType, numType], outType = hprType)
-hpr = HPR
-
-gravity  = P3(0,0,-1)
+p3       = lift("SP3", SP3, types = [numType, numType, numType], outType = p3Type)
+P3 = p3  # For backwards compatibility
+p2       = lift("SP2", SP2, types = [numType, numType], outType = p2Type)
+P2 = p2
+hpr      = lift("hpr", SHPR, types = [numType, numType, numType], outType = hprType)
+HPR = hpr
 
 getX     = lift("getX", lambda v:v.x, [hasXYType], numType)
 getY     = lift("getY", lambda v:v.y, [hasXYType], numType)
@@ -35,6 +29,7 @@ getR     = lift("getR", lambda v:v.r, [hprType], numType)
 getUp    = lift("getUp", lambda hpr:getUpHPR(hpr), [hprType], p3Type)
 
 radians  = lift("radians", math.radians, [numType], numType)
+# Delete this from elsewhere, use math.degrees in update functions
 degrees  = lift("degrees", math.degrees, [numType], numType)
 sin      = lift("sin", math.sin, [numType], numType)
 cos      = lift("cos", math.cos, [numType], numType)
@@ -68,16 +63,6 @@ string   = lift("string", str, [anyType], stringType)
 
 #norm      = lift(normP3, 'norm', [P3Type], P3Type)
 
-# Interpolation stuff
-
-# lerp = lift(lerpStatic, "lerp")
-# interpolate = lift(interpolateStatic, "interpolate", infer='interpolate')
-# to = lift(toS, "to", infer = "interpolate")
-# at = lift(atS, "at", infer = "interpolate")
-# move = lift(moveS, "move", infer = "interpolate")
-#repeat = lift(repeatS, "repeat", infer = "interpolate")
-# reverse = lift(reverseS, "reverse", infer = "interpolate")
-# forever = lift(lambda i: repeatS(-1, i), "forever", infer = "interpolate")
 
 P3toHPR = lift("P3toHPR", sP3toHPR, [p3Type], hprType)
 p3ToHpr = P3toHPR
@@ -109,7 +94,6 @@ interpolate = lift("interpolate", Interp.interpolateStatic)
 
 def itime(i):
     return interpolate(localTime, i)
-
 
 
 def encodeNums(*n):

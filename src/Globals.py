@@ -3,18 +3,19 @@
 # and open the template in the editor.
 import sys, os
 import direct.directbase.DirectStart
+from direct.showbase.DirectObject import DirectObject
 
 currentTime = 0 # The current global time
 cam = None # The camera object, exported to the user variable cam
 panda3dCamera = camera # The original Panda3d camera
-direct = None          # The directObj() used to communicate with the mouse / kayboard
+direct = DirectObject()       # The directObj() used to communicate with the mouse / kayboard
 objectNames = None # Hands out unique name to every panda object
 eventSignals = {}
 newEvents = {} # Events that are being sensed but not reacted to yet
 events = {} # This is a dictionary of all events posted in the previous tick interval
 simEvents = [] # Simulated events for use in the test engine.
 reactEvents = [] # Reactions that are not part of an object
-eventSignals = None # This is a dictionary of event values received since the last tick
+eventSignals = {} # This is a dictionary of event values received since the last tick
 newObjects = [] # The new list of active models assembled at every tick
 worldObjects = [] # list of all active objects
 thunks = []

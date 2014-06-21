@@ -4,6 +4,14 @@ from Types import proxyType
 import Errors
 import Functions
 
+class Reaction:
+    def __init__(self, fn, m, v):
+        self.fn = fn
+        self.m = m
+        self.v = v
+    def react(self):
+        self.fn(self.m, self.v)
+
 class Proxy:
     def __init__(self, name, updater, types, duration = 0):
         self._types = types
@@ -83,7 +91,7 @@ class Proxy:
                 Errors.checkEvent(temp, "One time reaction in " + self._name)
                 if temp.occurs():
                     #print("    " + str(temp) + " is being added to thunks")
-                    thunks.append(lambda : c[1](self, temp.value))
+                    thunks.append(Reaction(c[1], self, temp.value))
                     self._1Reactions = []
                     break
 
@@ -91,6 +99,7 @@ class Proxy:
                 print("Multiple one time reactions in a heartbeat in object " + self._name)
 
             #Evaluate recurring reactions
+            # print "Number of reactions in " + self._name + " " + str(len(self._gReactions))
             for d in self._gReactions:
                 temp = d[0].now()
                 Errors.checkEvent(temp, "recurring reaction in " + self._name)
@@ -98,7 +107,7 @@ class Proxy:
                 if temp.occurs():
                     #print("    " + repr(temp) + " is being added to thunks")
                     #print "Thunks" + str(thunks) + " " + str(d)
-                    thunks.append(lambda : d[1](self, temp.value))
+                    thunks.append(Reaction(d[1], self, temp.value))
 
             #push to the actuall object
             self._updater(self)

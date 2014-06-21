@@ -73,7 +73,8 @@ def getCollection(m):
         try:
             return Globals.collections[m]
         except KeyError:
-            print ("No collection with the name: " + m + " returning empty list")
+            # There may not be any model in a collection yet
+            # print ("No collection with the name: " + m + " returning empty list")
             return []
     else:
         return [m]
@@ -183,9 +184,9 @@ def clock(step, start = 0, end = 1000000):
 #make a clock signal too. Clock will control the heartbeat: make the heartbeat every second
 time = ObserverF(lambda x: Globals.currentTime, type = numType)
 
-def delay(n):
+def delay(n, absoluteTime = False):
     def initClock(sm):
-        sm.eventTime = Globals.currentTime + n
+        sm.eventTime = n + 0 if absoluteTime else Globals.currentTime
         sm.value = noEvent
         sm.fired = False
     def clockFN(sm): # tracks and updates engine time
@@ -197,6 +198,9 @@ def delay(n):
         else:
             sm.value = noEvent
     return StateMachineF(initClock, maybeLift(0), clockFN)
+
+def timeIs(n):
+    return delay(n, absoluteTime = True)
 
 def exitScene(m, v):
     exit(m)
