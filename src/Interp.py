@@ -167,7 +167,6 @@ def getInterpolant(i):
     """
     if i.interpolant is None:
         i.interpolant = i.getInterpolant(None)
-        i.interpolant.type = i.type
     return i.interpolant
 
 #  Classes for running interpolants:
@@ -322,8 +321,7 @@ def lerpStatic(t, v1, v2):
     """
     Return the actual location along the current path (used as base case in RInterpTo)
     """
-    ty1 = getPType(v1)
-    if ty1 is numType:   # Could resolve this in Signal.py
+    if type(v1) is type(1) or type(v1) is type(1.0):
         return (1-t) * v1 + t * v2
     return v1.interp(t, v2)
 

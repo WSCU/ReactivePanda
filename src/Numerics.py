@@ -1,3 +1,4 @@
+import Interp
 from StaticNumerics import *
 from Factory import *
 from Types import *
@@ -99,7 +100,16 @@ def staticIf(test, x, y):
         return x
     return y
 
-choose = lift(staticIf, "choose")
+choose = lift("choose", staticIf)
+
+# Interpolation functions
+
+lerp = lift("lerp", Interp.lerpStatic)
+interpolate = lift("interpolate", Interp.interpolateStatic)
+
+def itime(i):
+    return interpolate(localTime, i)
+
 
 
 def encodeNums(*n):

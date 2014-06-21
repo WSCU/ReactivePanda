@@ -10,6 +10,7 @@ import math
 import random
 import Factory
 import Errors
+import Interp
 from Types import *
 
 # This is a where we park signal functions.
@@ -22,9 +23,6 @@ cos = math.cos
 sin = math.sin
 def sFraction(x):
     return x - sFloor(x)
-
-def staticLerp(t, x, y):
-    return (1-t) * x + t * y
 
 def degrees( v):
     return v*(180/pi)
@@ -57,6 +55,9 @@ class Zero:
         return self
 
 zero = Zero()
+
+def staticLerp(t, x, y):
+    return (1-t)*x + t*y
 
 def staticLerpA(t, x, y):
     x1 = x / twopi
@@ -297,13 +298,6 @@ def sP3toHPR(p):
                 math.atan2(p.z, abs(SP2(p.x, p.y))),
                 0)
 
-# The P3 class, similar to P2
-
-#Took out SHPR and put it in a new file
-
-#P2Type.zero = SP2(0,0)
-#P3Type.zero = SP3(0,0,0)
-#HPRType.zero = SHPR(0,0,0)
 
 
 

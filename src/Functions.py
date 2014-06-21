@@ -138,7 +138,7 @@ def when(m, when, what = None):
         saveForCollection("when", m, when, what)
     coll = getCollection(m)
     for proxy in coll:
-        proxy._react(bbToE(when), what)
+        proxy._react(happen(when), what)
 
 def when1(m, when, what = None):
     if what is None:
@@ -149,7 +149,7 @@ def when1(m, when, what = None):
         saveForCollection("when1", m, when, what)
     coll = getCollection(m)
     for proxy in coll:
-        proxy._react1(bbToE(when), what)
+        proxy._react1(happen(when), what)
 
 def exit(x):
     if isinstance(x, Proxy.Proxy):
@@ -203,5 +203,42 @@ def exitScene(m, v):
 
 eventTrue = EventValue(True)
 
-def bbToE(b):
-    return lift("bbToE", lambda x:eventTrue if x else noEvent)(b)
+# This converts a boolean behavior into an event that fires whenever the
+# behavior is true
+def happen(b):
+    return lift("happen", lambda x:eventTrue if x else noEvent)(b)
+
+# This limits an event stream to the first event
+def once(e):
+    def initOnce(sm):
+        sm.value = noEvent
+        sm.fired = False
+    def onceFN(sm): # tracks and updates engine time
+        # state is the previous value of the clock
+        i = sm.i.now()
+        if i.occurs() and not sm.fired:
+            sm.value = i
+            sm.fired = True
+        else:
+            sm.value = noEvent
+    return StateMachineF(initOnce, maybeLift(e), onceFN)
+
+# This event occurs whenever the behavior changes.  Value of the event is the
+# new value of the behavior
+def changes(b):
+    def initChanges(sm):
+        sm.value = noEvent
+        sm.last = EventValue()  # This is any value tha is guaranteed not to be in the input
+    def changesFN(sm): # tracks and updates engine time
+        # state is the previous value of the clock
+        v = sm.i.now()
+        if v != sm.last:
+            sm.value = EventValue(v)
+            sm.last = v
+        else:
+            sm.value = noEvent
+    return StateMachineF(initChanges, maybeLift(e), changesFN)
+
+# Filter an event stream.  Only event values that satify fn will occur
+def filter(fn, e):
+    lift("filter", lambda val: EventValue(fn(val.value)) if val.occurs() else noEvent)

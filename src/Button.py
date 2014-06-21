@@ -5,7 +5,6 @@
 from Proxy import *
 from Types import *
 from direct.gui.DirectGui import *
-from Time import *
 import StaticNumerics
 import Factory
 import Externals
