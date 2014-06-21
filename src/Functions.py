@@ -78,22 +78,29 @@ def getCollection(m):
     else:
         return [m]
 
-def hitE(m1, m2, reaction, trace = False):
+def hitE(m1, m2, trace = False):
     def hitFN(o):
         ml1 = getCollection(m1)
         ml2 = getCollection(m2)
+        res = []
         for m in ml1:
             for e in ml2:
-                if m._touches(e, trace = trace):
-                    return EventValue(e)
-        return noEvent
-    world.react(ObserverF(hitFN))
+                if m is not e and m._touches(e, trace = trace):
+                    res.append((m,e))
+        if res == []:
+            return noEvent
+        return EventValue(res)
+    return ObserverF(hitFN)
+
 
 def hit(m1, m2, reaction, trace = False):
-    react(m1, hitE(m1, m2, trace = trace), reaction)
+    def hitReaction(m,v):
+        for p in v:
+            reaction(p[0], p[1])
+    react(m1, hitE(m1, m2, trace = trace), hitReaction)
 
-def hit1(m1, m2, reaction, trace = False):
-    react1(m1, hitE(m1, m2, trace = trace), reaction)
+#def hit1(m1, m2, reaction, trace = False):
+#    react1(m1, hitE(m1, m2, trace = trace), reaction)
 
 def saveForCollection(type, m, when, what):
     if m not in Globals.collectionReactions[type]:
