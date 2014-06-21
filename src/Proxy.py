@@ -12,8 +12,6 @@ class Proxy:
         self._signals = {}
         self._1Reactions = []
         self._gReactions = []
-        self._gWhen = []
-        self._1When = []
         self._updateSignals = {}
         self._name = name
         self._updater = updater
@@ -70,14 +68,6 @@ class Proxy:
             Globals.error = "On Line 59 of Proxy, In object " + self._name + ", initializing one time reaction " + when.name
             self._1Reactions.append((when.start()[0], what))
 
-    def _when(self, when, what):
-        Globals.error = "On Line 69 of Proxy, In object " + self._name + ", initializing when reaction"
-        self._gWhen.append((when, what))
-
-    def _when1(self, when, what):
-        Globals.error = "On Line 73 of Proxy, In object " + self._name + ", initializing one time when reaction"
-        self._1When.append((when, what))
-
     def _update(self):
         #tempSigVals = {} Not sure what this is for - Lucas 5/22/14
         if self._alive:
@@ -110,18 +100,6 @@ class Proxy:
                     #print "Thunks" + str(thunks) + " " + str(d)
                     thunks.append(lambda : d[1](self, temp.value))
 
-            #Evaluate one time when reaction
-            for a in self._1When:
-                if a[0]:
-                    thunks.append(lambda : a[1](self, a[0]))
-                    self._1When = []
-                    break
-
-            #Evaluate recurring when reactions
-            for b in self._gWhen:
-                if b[0]:
-                    thunks.append(lambda: b[1](self, b[0]))
-
             #push to the actuall object
             self._updater(self)
             return thunks
@@ -138,6 +116,6 @@ class Proxy:
         pass
     def _exit(self):
         Globals.worldObjects = [x for x in Globals.worldObjects if x is not self]
-        self._zombie = True
+        self._alive = False
         self._remove()    #  This is in the subclass
 
