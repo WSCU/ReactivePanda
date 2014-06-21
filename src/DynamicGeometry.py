@@ -50,7 +50,10 @@ def geometryUpdater(self):
            self._reparent(self._parent)
            self._onScreen = True
 
-    
+def getModel(x):
+    if hasattr(x, "_pandaModel"):
+        x = x._pandaModel
+    return x
 
 class GeometryHandle(Proxy.Proxy):
     def __init__(self, object, position=None, hpr=None, size=1, color=None, texture=None, extraUpdates=lambda x:x, duration = 0, parent = render):
@@ -58,7 +61,7 @@ class GeometryHandle(Proxy.Proxy):
                        types={"position": p3Type, "hpr": hprType, "size": numType,
                             "color": colorType, "texture": stringType, "side2": stringType})
         self._pandaModel = object
-        self._parent = parent
+        self._parent = PandaModel.getModel(parent)
         Globals.nextModelId = Globals.nextModelId + 1
         self._onScreen = False
         self._parent = render
@@ -85,7 +88,7 @@ class GeometryHandle(Proxy.Proxy):
         else:
             self.color = noColor
     def _reparent(self, m):
-        self._pandaModel.reparentTo(m._pandaModel if isinstance(m,Proxy.Proxy) else m)
+        self._pandaModel.reparentTo(m)
 
 # This creates a model on the fly.  The array of spacePoints and texturePoints have to be the same length.
 # The spacePoints contains P3 objects and texturePoints contains P2 objects.
@@ -156,8 +159,8 @@ def emptyModel(color = None, position = None, hpr = None, size = None, duration 
     result = GeometryHandle(nodePath, position, hpr, size, color, None)
     return result
 
-def triangle(p1, p2, p3, color = None, position = None, hpr = None, size = None, texture = None, texP1 = P2(0, 0), \
-    texP2 = P2(1, 0), texP3 = P2(0, 1), side2 = None, duration = 0):
+def triangle(p1, p2, p3, color = None, position = None, hpr = None, size = None, texture = None, texP1 = p2(0, 0), \
+    texP2 = p2(1, 0), texP3 = p2(0, 1), side2 = None, duration = 0):
 #checking to ensure that the second argument is an instance of the third argument
     #The first and fourth are for error handling.
     checkType("triangle", "first point", p1, p3Type)

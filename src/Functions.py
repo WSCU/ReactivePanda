@@ -186,7 +186,8 @@ time = ObserverF(lambda x: Globals.currentTime, type = numType)
 
 def delay(n, absoluteTime = False):
     def initClock(sm):
-        sm.eventTime = n + 0 if absoluteTime else Globals.currentTime
+        sm.eventTime = n + (0 if absoluteTime else Globals.currentTime)
+        print "Die at " + str(sm.eventTime)
         sm.value = noEvent
         sm.fired = False
     def clockFN(sm): # tracks and updates engine time
