@@ -23,7 +23,7 @@ def randomBall(m, v):
     s = sphere(position = p3(4-localTime, -.8, randomRange(-2.5,2.5)), size = randomRange(.05,.2), duration = 8, color = color(randomRange(.8,1),randomRange(.8,1),randomRange(.8,1)))
     hit(s, p, endGame)
 
-a = clock(step = .5)
+a = clock(.5)
 react(a, randomBall)
 
 start()
