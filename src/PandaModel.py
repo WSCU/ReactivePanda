@@ -34,8 +34,8 @@ defaultModelParameters = {"localPosition" : SP3(0,0,0),
                           "cTop" : 1,
                           "cType" : "cyl"}
 
-def pandaModel(fileName = None, name = "PandaModel", size = None, hpr = None, position = None, tag = [], color = None, texture = None):
-    return PandaModel(  fileName, size, hpr, position, tag, color, texture, name)
+def pandaModel(fileName = None, name = "PandaModel", size = None, hpr = None, position = None, tag = [], color = None, texture = None, parent = render):
+    return PandaModel(  fileName, size, hpr, position, tag, color, texture, name, parent)
 
 class PandaModel(Proxy):
     def __init__(self, fileName, size, hpr, position, tag, color, texture, name):
@@ -46,6 +46,7 @@ class PandaModel(Proxy):
                       "cRadius": numType, "cType": stringType, "cFloor": numType, "cTop": numType}
         #(p3Type, SP3(0,0,0)), "hpr": (hprType, SHPR(0,0,0)), "size": (numType, 1)})
         Globals.nextModelId = Globals.nextModelId + 1
+        self._parent = parent
         self._mFile = FileSearch.fileSearch(fileName, "models",["egg"])
         #print "Object Name: "+ str(fileName)+"-gID: "+str(Globals.nextModelId);
         if type(tag) == type("s"):
@@ -121,7 +122,7 @@ class PandaModel(Proxy):
                 Globals.collections[c] = [x for x in old if x is not self]
 
     def _reparent(self, m):
-        self._pandaModel.x
+        self._pandaModel.reparentTo(m._pandaModel if isinstance(m,Proxy) else m)
     def _touches(self, handle, trace = False):
         if trace:
            print "Touch: " + repr(self) + " (" + self._cType + ") " + repr(handle) + " (" + handle._cType + ")"
@@ -214,5 +215,5 @@ def modelUpdater(self):
         self._pandaModel.setColor(color.toVBase4())
     # This is used to keep the model off the screen until the first update happens
     if not self._onScreen:
-           self._pandaModel.reparentTo(self._parent)
+           self._reparent(self._parent)
            self._onScreen = True
