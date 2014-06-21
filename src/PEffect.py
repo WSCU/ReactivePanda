@@ -4,62 +4,128 @@
 
 from Proxy import *
 from Panda import *
+from pandac.PandaModules import *
+from pandac.PandaModules import *
+from direct.particles.Particles import *
 from direct.particles.ParticleEffect import *
 from FileSearch import * 
 
+def peffectUpdater(self):
+    #These parameters find the static offset which was created during initialization and the current position which is returned by the self._get() method
+    positionNow = self._get("position") + p3(0,0,0) # to make sure we do not get a zero object
+    sizeNow = self._get("size") + 0
+    hprNow = self._get( "hpr") + hpr(0,0,0)
+
+    #print "size signal: "+repr(sizeScalar)+"  offset size: "+repr(sizeOffset)
+    self._pandaModel.setScale(sizeNow)
+    self._pandaModel.setPos(positionNow.x, positionNow.y, positionNow.z)
+    self._pandaModel.setHpr(degrees(hprNow.h),
+                            degrees(hprNow.p),
+                            degrees(hprNow.r))
+    if not self._onScreen:
+           self._pandaModel.reparentTo(self._parent)
+           self._onScreen = True
 
 class PEffect(Proxy):
-    defaultParameters = {"localPosition" : SP3(0,0,0),
-                          "localSize" : 0.05,
-                          "localOrientation" : SHPR(0,.25,0),
-                          "joints" : [],
-                          "animations" : None,
-                          "defaultAnimation" : None,
-                          "frame" : None,
-                          "cRadius" : 1,
-                          "cFloor" : 0,
-                          "cTop" : 1,
-                          "cType" : "cyl"}
 
-    pid = 1 #what is this? 
     def __init__(self, particleFn, name = 'particleEffect', 
                hpr = None, position = None,
                 size = None,
-                ** a): 
-        return PEffect(particleFn, name, hpr, position, size)
-        Proxy.__init__(self, name = name, texture = texture, updater = updatePEffect, types = {"position":(p3Type, P3(0,0,0)), "hpr":(hprType, HPR(0,0,0)), "size":(numType, 1)})
+                **a): 
+        Proxy.__init__(self, name = name, updater = peffectUpdater, types = {"position":p3Type, "hpr":hprType, "size":numType})
         
         #pathname = "/lib/panda/lib/lib-original/particles/"
-        base.enableParticles() #this should be in start in main program, this should probably go away 
+        #base.enableParticles() #this should be in start in main program, this should probably go away
+        base.enableParticles()
         p = ParticleEffect()
+        self._pandaModel = p
+        self._onScreen = False
+        self._parent = render
+        if position is not None:
+            self.position = position
+        else:
+            self.position = P3(0, 0, 0)
+        if hpr is not None:
+            self.hpr = hpr
+        else:
+            self.hpr = SHPR(0, 0, 0)
+        if size is not None:
+            self.size = size
+        else:
+            self.size = 1
         particleFn(p, a)
-        self._effect = p 
         p.reparentTo(render)
-        #self._currentTexture = ""
-       # self.texture = ""
-        if texture is not None:
-            self.texture = texture
-        
         p.start()
-        
-def updatePEffect(self):
-    p = self._effect
-    position = self.get("position")
-    print("setting ", position)
-    x = getX(position)
-    y = getY(position)
-    z = getZ(position)
-    p.setPos(x,y,z)
-    hpr = self.get('hpr')
-    heading = getH(hpr)
-    pitch = getP(hpr)
-    roll = getR(hpr)
-    p.setHpr(degrees(heading), degrees(pitch), degrees(roll))
-    s = self.get('size')
-    p.setScale(s)
-    #texture = self.get("texture")
     
-    
+
+def fireishFn(self, dict):
+
+    self.reset()
+    self.setPos(0.000, 0.000, 0.000)
+    self.setHpr(0.000, 0.000, 0.000)
+    self.setScale(1.000, 1.000, 1.000)
+    p0 = Particles.Particles('particles-1')
+    # Particles parameters
+    p0.setFactory("PointParticleFactory")
+    p0.setRenderer("SpriteParticleRenderer")
+    p0.setEmitter("DiscEmitter")
+    p0.setPoolSize(1024)
+    p0.setBirthRate(dict["birthRate"])
+    p0.setLitterSize(10)
+    p0.setLitterSpread(0)
+    p0.setSystemLifespan(1200.0000)
+    p0.setLocalVelocityFlag(1)
+    p0.setSystemGrowsOlderFlag(0)
+    # Factory parameters
+    p0.factory.setLifespanBase(dict["lifeSpan"])
+    p0.factory.setLifespanSpread(dict["lifeSpanSpread"])
+    p0.factory.setMassBase(dict["mass"])
+    p0.factory.setMassSpread(dict["massSpread"])
+    p0.factory.setTerminalVelocityBase(dict["terminalVelocity"])
+    p0.factory.setTerminalVelocitySpread(dict["terminalVelocitySpread"])
+    # Point factory parameters
+    # Renderer parameters
+    p0.renderer.setAlphaMode(BaseParticleRenderer.PRALPHAOUT)
+    p0.renderer.setUserAlpha(0.22)
+    # Sprite parameters
+    #print __import__("g").texture
+    p0.renderer.setTexture(findTexture(dict["texture"]))
+    p0.renderer.setColor(Vec4(1.00, 1.00, 1.00, 1.00))
+    p0.renderer.setXScaleFlag(1)
+    p0.renderer.setYScaleFlag(1)
+    p0.renderer.setAnimAngleFlag(0)
+    p0.renderer.setInitialXScale(0.0050)
+    p0.renderer.setFinalXScale(0.0200)
+    p0.renderer.setInitialYScale(0.0100)
+    p0.renderer.setFinalYScale(0.0200)
+    p0.renderer.setNonanimatedTheta(0.0000)
+    p0.renderer.setAlphaBlendMethod(BaseParticleRenderer.PPNOBLEND)
+    p0.renderer.setAlphaDisable(0)
+    # Emitter parameters
+    p0.emitter.setEmissionType(BaseParticleEmitter.ETRADIATE)
+    p0.emitter.setAmplitude(1.0000)
+    p0.emitter.setAmplitudeSpread(0.0000)
+    p0.emitter.setOffsetForce(Vec3(0.0000, 0.0000, 3.0000))
+    p0.emitter.setExplicitLaunchVector(Vec3(1.0000, 0.0000, 0.0000))
+    p0.emitter.setRadiateOrigin(Point3(0.0000, 0.0000, 0.0000))
+    # Disc parameters
+    p0.emitter.setRadius(0.5000)
+    self.addParticles(p0)
+
+def fireish(texture = "fire.png",lifeSpan = 1, lifeSpanSpread = 2, mass = 10,
+     massSpread = 3, terminalVelocity = 10, terminalVelocitySpread = 3, lineScaler = 3,
+     birthRate = 0.02,  **a):
+        a["texture"] = texture
+        a["lifeSpan"] = lifeSpan
+        a["lifeSpanSpread"] = lifeSpanSpread
+        a["mass"] = mass
+        a["massSpread"] = massSpread
+        a["terminalVelocity"] = terminalVelocity
+        a["terminalVelocitySpread"] = terminalVelocitySpread
+        a["birthRate"] = birthRate
+        return PEffect(fireishFn, name = "fire", **a)
+
+
 """def fireFn(self, dict):
 
     self.reset()
@@ -549,73 +615,6 @@ def warpSpeed(headColor = white, tailColor = blue,lifeSpan = 1, lifeSpanSpread =
     a["lineScaler"] = lineScaler
     a["birthRate"] = birthRate
     return PEffect(warpSpeedFn, name = "warpSpeed", **a)"""
-
-def fireishFn(self, dict):
-
-    self.reset()
-    self.setPos(0.000, 0.000, 0.000)
-    self.setHpr(0.000, 0.000, 0.000)
-    self.setScale(1.000, 1.000, 1.000)
-    p0 = Particles.Particles('particles-1')
-    # Particles parameters
-    p0.setFactory("PointParticleFactory")
-    p0.setRenderer("SpriteParticleRenderer")
-    p0.setEmitter("DiscEmitter")
-    p0.setPoolSize(1024)
-    p0.setBirthRate(dict["birthRate"])
-    p0.setLitterSize(10)
-    p0.setLitterSpread(0)
-    p0.setSystemLifespan(1200.0000)
-    p0.setLocalVelocityFlag(1)
-    p0.setSystemGrowsOlderFlag(0)
-    # Factory parameters
-    p0.factory.setLifespanBase(dict["lifeSpan"])
-    p0.factory.setLifespanSpread(dict["lifeSpanSpread"])
-    p0.factory.setMassBase(dict["mass"])
-    p0.factory.setMassSpread(dict["massSpread"])
-    p0.factory.setTerminalVelocityBase(dict["terminalVelocity"])
-    p0.factory.setTerminalVelocitySpread(dict["terminalVelocitySpread"])
-    # Point factory parameters
-    # Renderer parameters
-    p0.renderer.setAlphaMode(BaseParticleRenderer.PRALPHAOUT)
-    p0.renderer.setUserAlpha(0.22)
-    # Sprite parameters
-    #print __import__("g").texture
-    p0.renderer.setTexture(findTexture(dict["texture"]))
-    p0.renderer.setColor(Vec4(1.00, 1.00, 1.00, 1.00))
-    p0.renderer.setXScaleFlag(1)
-    p0.renderer.setYScaleFlag(1)
-    p0.renderer.setAnimAngleFlag(0)
-    p0.renderer.setInitialXScale(0.0050)
-    p0.renderer.setFinalXScale(0.0200)
-    p0.renderer.setInitialYScale(0.0100)
-    p0.renderer.setFinalYScale(0.0200)
-    p0.renderer.setNonanimatedTheta(0.0000)
-    p0.renderer.setAlphaBlendMethod(BaseParticleRenderer.PPNOBLEND)
-    p0.renderer.setAlphaDisable(0)
-    # Emitter parameters
-    p0.emitter.setEmissionType(BaseParticleEmitter.ETRADIATE)
-    p0.emitter.setAmplitude(1.0000)
-    p0.emitter.setAmplitudeSpread(0.0000)
-    p0.emitter.setOffsetForce(Vec3(0.0000, 0.0000, 3.0000))
-    p0.emitter.setExplicitLaunchVector(Vec3(1.0000, 0.0000, 0.0000))
-    p0.emitter.setRadiateOrigin(Point3(0.0000, 0.0000, 0.0000))
-    # Disc parameters
-    p0.emitter.setRadius(0.5000)
-    self.addParticles(p0)
-
-def fireish(texture = "fire.png",lifeSpan = 1, lifeSpanSpread = 2, mass = 10,
-     massSpread = 3, terminalVelocity = 10, terminalVelocitySpread = 3, lineScaler = 3,
-     birthRate = 0.02,  **a):
-        a["texture"] = texture
-        a["lifeSpan"] = lifeSpan
-        a["lifeSpanSpread"] = lifeSpanSpread
-        a["mass"] = mass
-        a["massSpread"] = massSpread
-        a["terminalVelocity"] = terminalVelocity
-        a["terminalVelocitySpread"] = terminalVelocitySpread
-        a["birthRate"] = birthRate
-        return PEffect(fireishFn, name = "fireish", **a)
 
 
 """def warpFaceFn(self, dict):
