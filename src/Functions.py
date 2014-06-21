@@ -209,8 +209,8 @@ eventTrue = EventValue(True)
 
 # This converts a boolean behavior into an event that fires whenever the
 # behavior is true
-def happen(b):
-    return lift("happen", lambda x:eventTrue if x else noEvent)(b)
+def happen(b, val = True):
+    return lift("happen", lambda x:EventValue(val) if x else noEvent)(b)
 
 # This limits an event stream to the first event
 def once(e):
