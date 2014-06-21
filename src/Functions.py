@@ -131,7 +131,7 @@ def when(m, when, what = None):
         saveForCollection("when", m, when, what)
     coll = getCollection(m)
     for proxy in coll:
-        proxy._when(when, what)
+        proxy._react(bbToE(when), what)
 
 def when1(m, when, what = None):
     if what is None:
@@ -142,7 +142,7 @@ def when1(m, when, what = None):
         saveForCollection("when1", m, when, what)
     coll = getCollection(m)
     for proxy in coll:
-        proxy._when1(when, what)
+        proxy._react1(bbToE(when), what)
 
 def exit(x):
     if isinstance(x, Proxy.Proxy):
@@ -184,7 +184,6 @@ def delay(n):
     def clockFN(sm): # tracks and updates engine time
         # state is the previous value of the clock
         if not sm.fired and Globals.currentTime >= sm.eventTime:
-            print "Die panda!"
             sm.value = EventValue(True)
             sm.fired = True
         # add the current clock signal to the list of fast updating signals (which doesn't exist yet)
@@ -194,3 +193,8 @@ def delay(n):
 
 def exitScene(m, v):
     exit(m)
+
+eventTrue = EventValue(True)
+
+def bbToE(b):
+    return lift("bbToE", lambda x:eventTrue if x else noEvent)(b)
