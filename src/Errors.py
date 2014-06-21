@@ -1,6 +1,5 @@
 import sys
 import Signal
-from Types import *
 
 def checkEvent(evt, context):
     if not isinstance(evt, Signal.EventValue):

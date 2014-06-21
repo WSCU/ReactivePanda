@@ -8,31 +8,61 @@ import PandaModel
 import Proxy
 from Numerics import *
 from Color import *
+from panda3d.core import *
+import FileSearch
+import Types
+
 
 # This has a lot in common with PandaModel - there should be a super class
 # to hold the common code
 
-def geometryUpdater(o):
-    PandaModel.modelUpdater(o)
-    if self._twosided:
-        side2 = self._get("side2")
+def geometryUpdater(self):
+    #These parameters find the static offset which was created during initialization and the current position which is returned by the self._get() method
+    positionNow = self._get("position") + p3(0,0,0) # to make sure we do not get a zero object
+    sizeNow = self._get("size") + 0
+    hprNow = self._get( "hpr") + hpr(0,0,0)
+    textureNow = self._get("texture")
+    colorNow = self._get("color")
+
+    #print "size signal: "+repr(sizeScalar)+"  offset size: "+repr(sizeOffset)
+    self._pandaModel.setScale(sizeNow)
+    self._pandaModel.setPos(positionNow.x, positionNow.y, positionNow.z)
+    self._pandaModel.setHpr(degrees(hprNow.h),
+                            degrees(hprNow.p),
+                            degrees(hprNow.r))
+    if textureNow != "" and textureNow != self._currentTexture:
+        texf = FileSearch.findTexture(textureNow)
+        self._currentTexture = textureNow
+        #print "The texture is: "+repr(texf)
+        self._pandaModel.setTexture(texf, 1)
+
+    if colorNow.a != 0:
+        self._pandaModel.setColor(colorNow.toVBase4())
+    if self._twoSided:
+        side2now = self._get("side2")
         if texture != "" and texture != self._currentSide2:
-            texf = FileSearch.findTexture(side2)
-            self._currentSide2 = texture
+            tex = FileSearch.findTexture(side2now)
+            self._currentSide2 = tex
             #print "The texture is: "+repr(texf)
-            self._pandaModel.setTexture(texf, 1)
+            self._sideTwo.setTexture(tex, 1)
+    # This is used to keep the model off the screen until the first update happens
+    if not self._onScreen:
+           self._pandaModel.reparentTo(self._parent)
+           self._onScreen = True
+
     
 
 class GeometryHandle(Proxy.Proxy):
-    def __init__(self, object, position=None, hpr=None, size=1, color=None, texture=None, extraUpdates=lambda x:x):
-        Proxy.__init__(self, name="dynamicGeometry", updater=geometryUpdater,
+    def __init__(self, object, position=None, hpr=None, size=1, color=None, texture=None, extraUpdates=lambda x:x, duration = 0):
+        Proxy.Proxy.__init__(self, name="dynamicGeometry", updater=geometryUpdater,
                        types={"position": p3Type, "hpr": hprType, "size": numType,
-                       "color": colorType, "texture": stringType, "side2": stringType})
-        self._model = object
+                            "color": colorType, "texture": stringType, "side2": stringType})
+        self._pandaModel = object
         Globals.nextModelId = Globals.nextModelId + 1
-        self._extraUpdates = extraUpdates
         self._onScreen = False
         self._parent = render
+        self._currentTexture = ""
+        self._currentSide2 = ""
         if position is not None:
             self.position = position
         else:
@@ -97,15 +127,14 @@ def mesh(spacePoints, texturePoints, triangles, c):
 
 #####This seems to take the points we added in earlier and remove them.
 #####Why this is all static, I don't understand.
-    prim.addVertex(triangle[0])
-    prim.addVertex(triangle[1])
-    prim.addVertex(triangle[2])
-    prim.closePrimitive()
+        prim.addVertex(triangle[0])
+        prim.addVertex(triangle[1])
+        prim.addVertex(triangle[2])
+        prim.closePrimitive()
 
 #Converting the vertices we just retrieved from the collection inside Geom.UHStatic into a node
 #####
-
-    geom.addPrimitive(prim)
+        geom.addPrimitive(prim)
 
     node = GeomNode('gnode')
     node.addGeom(geom)
@@ -149,11 +178,7 @@ def triangle(p1, p2, p3, color = None, position = None, hpr = None, size = None,
 
 def rectangle(p1, p2, p3, color = None, position = None, hpr = None, size = None, texture = None, side2 = None,
     texP1 = P2(0, 0), texP2 = P2(1, 0), texP3 = P2(0, 1), texP4 = P2(1, 1), duration = 0):
-    if getPType(texture) == ColorType:
-        color = texture
-        texture = None
-
-# If side2 is a string, it is interpreted as a file name in the pictures area
+    # If side2 is a string, it is interpreted as a file name in the pictures area
     # If side2 is False, the texture is one sided (invisible from the back)
     #checking to ensure that the second argument is an instance of the third argument
     #The first and fourth are for error handling.

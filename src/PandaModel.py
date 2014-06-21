@@ -120,6 +120,8 @@ class PandaModel(Proxy):
                 old = Globals.collections[c]
                 Globals.collections[c] = [x for x in old if x is not self]
 
+    def _reparent(self, m):
+        self._pandaModel.x
     def _touches(self, handle, trace = False):
         if trace:
            print "Touch: " + repr(self) + " (" + self._cType + ") " + repr(handle) + " (" + handle._cType + ")"
@@ -214,4 +216,3 @@ def modelUpdater(self):
     if not self._onScreen:
            self._pandaModel.reparentTo(self._parent)
            self._onScreen = True
-
