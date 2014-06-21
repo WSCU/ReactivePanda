@@ -125,8 +125,9 @@ def fireish(texture = "fire.png",lifeSpan = 1, lifeSpanSpread = 2, mass = 10,
         a["birthRate"] = birthRate
         return PEffect(fireishFn, name = "fire", **a)
 
+fire = fireish
 
-"""def fireFn(self, dict):
+def fireFn(self, dict):
 
     self.reset()
     self.setPos(0.000, 0.000, 0.000)
@@ -306,9 +307,9 @@ def fireWorks(headColor = yellow, tailColor = red, radius = .25, force = p3(0,0,
         return PEffect(fireWorkFn, name = "fireWork", **a)
 
 def fireWork(duration = 2,  **a):
-   return fireWorks(duration = duration, **a)"""
+   return fireWorks(duration = duration, **a)
 
-"""def intervalRingsFn(self, dict):
+def intervalRingsFn(self, dict):
 
     self.reset()
     self.setPos(0.000, 0.000, 0.000)
@@ -420,6 +421,7 @@ def likeFountainWaterFn(self,dict):
 def likeFountainWater( **a):
     return PEffect(likeFountainWaterFn, name = "likeFountainWater", **a)
 
+fountain = likeFountainWater
 
 def rainFn(self, dict):
 
@@ -614,10 +616,10 @@ def warpSpeed(headColor = white, tailColor = blue,lifeSpan = 1, lifeSpanSpread =
     a["terminalVelocitySpread"] = terminalVelocitySpread
     a["lineScaler"] = lineScaler
     a["birthRate"] = birthRate
-    return PEffect(warpSpeedFn, name = "warpSpeed", **a)"""
+    return PEffect(warpSpeedFn, name = "warpSpeed", **a)
 
 
-"""def warpFaceFn(self, dict):
+def warpFaceFn(self, dict):
 
     self.reset()
     self.setPos(0.000, 0.000, 0.000)
@@ -891,7 +893,7 @@ def smokeTail(lifeSpan = 5, lifeSpanSpread = 0, mass = 0.005,
          a["terminalVelocitySpread"] = terminalVelocitySpread
          a["birthRate"] = birthRate
          a["force"] = force
-         return PEffect(smokeTailFn, name = "smokeTail", **a)"""
+         return PEffect(smokeTailFn, name = "smokeTail", **a)
 
     
 

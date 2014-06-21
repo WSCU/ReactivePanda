@@ -12,7 +12,7 @@ from Slider import slider
 from World import world, camera
 from DynamicGeometry import triangle, rectangle
 from Engine import engine as _engine
-from PEffect import fireish
+from PEffect import *
 
 def start():
     print("Starting...")
