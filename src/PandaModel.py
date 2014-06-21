@@ -34,11 +34,11 @@ defaultModelParameters = {"localPosition" : SP3(0,0,0),
                           "cTop" : 1,
                           "cType" : "cyl"}
 
-def pandaModel(fileName = None, name = "PandaModel", size = None, hpr = None, position = None, tag = [], color = None, texture = None, parent = render):
-    return PandaModel(  fileName, size, hpr, position, tag, color, texture, name, parent)
+def pandaModel(fileName = None, name = "PandaModel", size = None, hpr = None, position = None, tag = [], color = None, texture = None, parent = render, duration = 0):
+    return PandaModel(  fileName, size, hpr, position, tag, color, texture, name, parent, duration)
 
 class PandaModel(Proxy):
-    def __init__(self, fileName, size, hpr, position, tag, color, texture, name, parent):
+    def __init__(self, fileName, size, hpr, position, tag, color, texture, name, parent, duration):
         Proxy.__init__(self, name = str(name) + ":" + str(Globals.nextModelId), updater = modelUpdater,
                              types = {"position": p3Type, "hpr": hprType , "size": numType,
                                       "color": colorType, "texture": stringType})
@@ -113,6 +113,8 @@ class PandaModel(Proxy):
                 if tag in v:
                     for args in v[tag]:
                         getattr(Functions, t)(self, args[0], what = args[1])
+        if duration > 0:
+            react1(self, delay(duration), exitScene)
 
     def _remove(self):
             if self._pandaModel is not None:
