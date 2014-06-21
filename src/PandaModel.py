@@ -38,7 +38,7 @@ def pandaModel(fileName = None, name = "PandaModel", size = None, hpr = None, po
     return PandaModel(  fileName, size, hpr, position, tag, color, texture, name, parent)
 
 class PandaModel(Proxy):
-    def __init__(self, fileName, size, hpr, position, tag, color, texture, name):
+    def __init__(self, fileName, size, hpr, position, tag, color, texture, name, parent):
         Proxy.__init__(self, name = str(name) + ":" + str(Globals.nextModelId), updater = modelUpdater,
                              types = {"position": p3Type, "hpr": hprType , "size": numType,
                                       "color": colorType, "texture": stringType})
