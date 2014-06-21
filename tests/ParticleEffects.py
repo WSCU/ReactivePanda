@@ -3,7 +3,7 @@ from Panda import *
 world.color = black
 
 #fireish()
-fire()
+#fire() #same as above
 #fire1()
 #explosions()
 #fireWorks()

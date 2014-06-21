@@ -49,7 +49,7 @@ def chicken (**a):
 
 def dragon (**a):
     return pandaModel("dragon3/dragon3.egg", name = "Dragon", **a)
-
+condecendingDragon = dragon
 # Objects and Shapes
 
 def sphere(**a):

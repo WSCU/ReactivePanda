@@ -13,6 +13,7 @@ from World import world, camera
 from DynamicGeometry import triangle, rectangle
 from Engine import engine as _engine
 from PEffect import *
+from Button import button
 
 def start():
     print("Starting...")

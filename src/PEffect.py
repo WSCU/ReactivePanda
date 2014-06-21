@@ -30,9 +30,9 @@ class PEffect(Proxy):
 
     def __init__(self, particleFn, name = 'particleEffect', 
                hpr = None, position = None,
-                size = None,
+                size = None, duration = 0,
                 **a): 
-        Proxy.__init__(self, name = name, updater = peffectUpdater, types = {"position":p3Type, "hpr":hprType, "size":numType})
+        Proxy.__init__(self, name = name + ":" + str(Globals.nextModelId), updater = peffectUpdater, types = {"position":p3Type, "hpr":hprType, "size":numType})
         
         #pathname = "/lib/panda/lib/lib-original/particles/"
         #base.enableParticles() #this should be in start in main program, this should probably go away
@@ -56,6 +56,9 @@ class PEffect(Proxy):
         particleFn(p, a)
         p.reparentTo(render)
         p.start()
+
+        if duration > 0:
+            react1(self, delay(duration), exitScene)
     
 
 def fireishFn(self, dict):
