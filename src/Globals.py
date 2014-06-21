@@ -4,7 +4,7 @@
 import sys, os
 import direct.directbase.DirectStart
 
-currentTime = 1 # The current global time
+currentTime = 0 # The current global time
 cam = None # The camera object, exported to the user variable cam
 panda3dCamera = camera # The original Panda3d camera
 direct = None          # The directObj() used to communicate with the mouse / kayboard

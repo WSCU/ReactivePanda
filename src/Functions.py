@@ -176,3 +176,21 @@ def clock(step, start = 0, end = 1000000):
 #make a clock signal too. Clock will control the heartbeat: make the heartbeat every second
 time = ObserverF(lambda x: Globals.currentTime, type = numType)
 
+def delay(n):
+    def initClock(sm):
+        sm.eventTime = Globals.currentTime + n
+        sm.value = noEvent
+        sm.fired = False
+    def clockFN(sm): # tracks and updates engine time
+        # state is the previous value of the clock
+        if not sm.fired and Globals.currentTime >= sm.eventTime:
+            print "Die panda!"
+            sm.value = EventValue(True)
+            sm.fired = True
+        # add the current clock signal to the list of fast updating signals (which doesn't exist yet)
+        else:
+            sm.value = noEvent
+    return StateMachineF(initClock, maybeLift(0), clockFN)
+
+def exitScene(m, v):
+    exit(m)
