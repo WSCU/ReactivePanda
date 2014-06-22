@@ -24,6 +24,7 @@ class Button:
             position = StaticNumerics.SP2(-.95, Globals.nextNW2dY)
             Globals.nextNW2dY = Globals.nextNW2dY -.1
         self._name = name + str(Globals.nextModelId)
+        Globals.nextModelId += 1
         self._click = Factory.eventObserver(self._name, e)
         self._pandaModel = DirectButton(text = text, pos = (position.x, 0, position.y), scale = size*0.1, command = lambda: Externals.postEvent(self._name))
 
