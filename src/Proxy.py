@@ -124,7 +124,6 @@ class Proxy:
     def _remove(self):
         pass
     def _exit(self):
-        print "in _exit"
         Globals.worldObjects = [x for x in Globals.worldObjects if x is not self]
         self._alive = False
         self._remove()    #  This is in the subclass
