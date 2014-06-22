@@ -58,7 +58,7 @@ class PEffect(Proxy):
         p.start()
 
         if duration > 0:
-            react1(self, delay(duration), exitScene)
+            react(self, delay(duration), exitScene)
     
 
 def fireishFn(self, dict):

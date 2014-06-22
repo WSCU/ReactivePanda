@@ -119,7 +119,7 @@ class PandaModel(Proxy):
                     for args in v[tag]:
                         getattr(Functions, t)(self, args[0], what = args[1])
         if duration > 0:
-            react1(self, delay(duration), exitScene)
+            react(self, delay(duration), exitScene)
 
     def _remove(self):
             if self._pandaModel is not None:

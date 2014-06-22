@@ -10,7 +10,7 @@ from Color import *
 from Light import *
 from Slider import slider, sliderHpr, sliderColor, sliderP3
 from World import world, camera
-from DynamicGeometry import triangle, rectangle
+from DynamicGeometry import triangle, rectangle, emptyModel, photoWheel, cube, tetra
 from Engine import engine as _engine
 from PEffect import *
 from Button import button
