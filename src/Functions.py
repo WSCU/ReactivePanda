@@ -100,8 +100,8 @@ def hit(m1, m2, reaction, trace = False):
             reaction(p[0], p[1])
     react(m1, hitE(m1, m2, trace = trace), hitReaction)
 
-#def hit1(m1, m2, reaction, trace = False):
-#    react1(m1, hitE(m1, m2, trace = trace), reaction)
+def hit1(m1, m2, reaction, trace = False):
+    react1(m1, hitE(m1, m2, trace = trace), reaction)
 
 def saveForCollection(type, m, when, what):
     if m not in Globals.collectionReactions[type]:
