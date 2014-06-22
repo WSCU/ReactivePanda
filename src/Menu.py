@@ -28,6 +28,7 @@ class Menu:
             checkType(self.name, "position", position, p2Type)
             pos = (position.x, 0, position.y)
         self._name = name + str(Globals.nextModelId)
+        Globals.nextModelId += 1
         self._pandaModel =  DirectOptionMenu(pos = pos,scale=size*0.15,items=items, command=self.setValue)
         self.value = -1
     def getValue(self, e):

@@ -1,3 +1,4 @@
+import Globals
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
@@ -17,7 +18,8 @@ def updateALight(self):
 
 class ALight(Proxy):
     def __init__(self, color = None, name = 'ambientLight'):
-        Proxy.__init__(self, name = name, types = {"color":colorType}, updater = updateALight)
+        Proxy.__init__(self, name = name + str(Globals.nextModelId), types = {"color":colorType}, updater = updateALight)
+        Globals.nextModelId += 1
         self._ALight = AmbientLight('alight')
         self._Light = render.attachNewNode(self._ALight)
         render.setLight(self._Light)
@@ -25,9 +27,6 @@ class ALight(Proxy):
             self.color = color
         else:
             self.color = white
-
-def ambientLight(color = None):
-    return ALight(color = color)
  
 def updateDLight(self):
     c = self._get("color")
@@ -37,7 +36,8 @@ def updateDLight(self):
 
 class DLight(Proxy):
     def __init__(self, color = None, hpr = None, name = 'directionalLight'):
-        Proxy.__init__(self, name = name, types = {"color":colorType, "hpr":hprType}, updater = updateDLight)
+        Proxy.__init__(self, name = name + str(Globals.nextModelId), types = {"color":colorType, "hpr":hprType}, updater = updateDLight)
+        Globals.nextModelId += 1
         self._DLight = DirectionalLight("directionalLight")
         self._Light = render.attachNewNode(self._DLight)
         render.setLight(self._Light)
@@ -56,13 +56,14 @@ def updatePLight(self):
     p = self._get("position")
     print str(p)
     self._PLight.setColor(c.toVBase4())
-    self._Light.setPos(p.x, p.y,  p.z)
+    self._Light.setPos(p.x, p.y, p.z)
     print self._Light.getPos()
     
 class PLight(Proxy):
     def __init__(self, color = None, position = None, name = 'pointLight'):
-        Proxy.__init__(self, name = name, types = {"color":colorType, "position":p3Type}, updater = updatePLight)
-        self._PLight = DirectionalLight("directionalLight")
+        Proxy.__init__(self, name = name + str(Globals.nextModelId), types = {"color":colorType, "position":p3Type}, updater = updatePLight)
+        Globals.nextModelId += 1
+        self._PLight = PointLight("pointLight")
         self._Light = render.attachNewNode(self._PLight)
         render.setLight(self._Light)
         if color is not None:
@@ -80,15 +81,5 @@ def pointLight(color = None, position = None):
 def directionalLight(color = None, hpr = None):
     return DLight(color = color, hpr = hpr)
 
-
-
-
-    
-
-
-
-
-
-    
-
-
+def ambientLight(color = None):
+    return ALight(color = color)
