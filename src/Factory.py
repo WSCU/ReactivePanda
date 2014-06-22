@@ -192,6 +192,28 @@ class ObserverF(SFact):
     def get(self):
         return self.f(self)
 
+class RVarF(SFact):
+    def __init__(self, initValue):
+        SFact.__init__(self)
+        self.value = initValue
+        self.type = getPtype(initValue)
+    def start(self, expectedType = anyType, obj = "ProxyObject"):
+        return Observer(lambda x:self.value), self.type
+    def get(self):    #  Used inside reaction code
+        return self.value
+    def set(self, val):
+        self.value = val
+    def add(self, val):
+        self.value = self.value + val;
+    def sub(self, val):
+        self.value = self.value - val;
+    def times(self, val):
+        self.value = self.value * val
+
+
+def var(init): #Actual variable signal
+    return RVarF(init)
+
 def eventObserver(eName, eVal = None):
     def getEvent(ename):
 #        print "Observing " + eName

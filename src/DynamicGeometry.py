@@ -47,6 +47,7 @@ def geometryUpdater(self):
             self._sideTwo._pandaModel.setTexture(tex, 1)
     # This is used to keep the model off the screen until the first update happens
     if not self._onScreen:
+           print "Attach geometry " + repr(self) + " to " + repr(self._parent)
            self._reparent(self._parent)
            self._onScreen = True
 
@@ -56,7 +57,7 @@ def getModel(x):
     return x
 
 class GeometryHandle(Proxy.Proxy):
-    def __init__(self, object, position=None, hpr=None, size=1, color=None, texture=None, extraUpdates=lambda x:x, duration = 0, parent = render):
+    def __init__(self, object, position=None, hpr=None, size=1, color=None, texture=None, duration = 0, parent = render):
         Proxy.Proxy.__init__(self, name="dynamicGeometry", updater=geometryUpdater,
                        types={"position": p3Type, "hpr": hprType, "size": numType,
                             "color": colorType, "texture": stringType, "side2": stringType})
@@ -64,7 +65,6 @@ class GeometryHandle(Proxy.Proxy):
         self._parent = PandaModel.getModel(parent)
         Globals.nextModelId = Globals.nextModelId + 1
         self._onScreen = False
-        self._parent = render
         self._currentTexture = ""
         self._currentSide2 = ""
         if position is not None:
@@ -160,7 +160,7 @@ def emptyModel(color = None, position = None, hpr = None, size = None, duration 
     return result
 
 def triangle(p1, p2, p3, color = None, position = None, hpr = None, size = None, texture = None, texP1 = p2(0, 0), \
-    texP2 = p2(1, 0), texP3 = p2(0, 1), side2 = None, duration = 0):
+    texP2 = p2(1, 0), texP3 = p2(0, 1), side2 = None, duration = 0, parent = render):
 #checking to ensure that the second argument is an instance of the third argument
     #The first and fourth are for error handling.
     checkType("triangle", "first point", p1, p3Type)
@@ -169,19 +169,21 @@ def triangle(p1, p2, p3, color = None, position = None, hpr = None, size = None,
     nodePath = mesh([p1, p2, p3], [texP1, texP2, texP3], [[0, 1, 2]], white)
     if (side2 is not None):
         nodePath.setTwoSided(False)
-        result = GeometryHandle(nodePath, position, hpr, size, color, texture)
+        result = GeometryHandle(nodePath, position = position, hpr = hpr, size = size,
+                                color = color, texture = texture, parent = parent)
         result._twoSided = True
         if side2 is not False:
             result.side2 = side2
-            otherSide = triangle(p2, p1, p3, texture = side2, side2 = False, texP1 = texP1, texP2 = texP2, texP3 = texP3)
+            otherSide = triangle(p2, p1, p3, texture = side2, side2 = False, texP1 = texP1, texP2 = texP2, texP3 = texP3, parent = result)
 #            otherSide._reparent(result)
 # Not working at the moment!
-            otherSide._pandaModel.reparentTo(result._pandaModel)
+#            otherSide._pandaModel.reparentTo(result._pandaModel)
             result._sideTwo = otherSide
         else:
             result.side2 = ""
         return result
-    result = GeometryHandle(nodePath, position, hpr, size, color, texture,  duration = duration)
+    result = GeometryHandle(nodePath, position = position, hpr = hpr, size = size, color = color,
+                            texture = texture,  duration = duration, parent = parent)
     result._twoSided = False
     # result.d.model.setScale(0)
     return result

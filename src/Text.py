@@ -7,7 +7,6 @@ import StaticNumerics
 import Numerics
 from direct.gui.DirectGui import *
 from Externals import postEvent
-from Signal import var
 from Factory import maybeLift
 from Color import yellow
 
