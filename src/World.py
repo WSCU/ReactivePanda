@@ -1,6 +1,7 @@
 import Proxy
 import Globals
 import math
+import Functions
 from Types import *
 from StaticNumerics import *
 from Color import gray
@@ -32,3 +33,13 @@ class World(Proxy.Proxy):
 
 world = World()
 camera = Camera()
+# Clear out the world.  This doesn't reset the global time or camera position.
+def resetWorld():
+    for m in Globals.worldObjects:
+        if m is not world and m is not camera:
+            Functions.exit(m)
+    #world.d.switches = []
+    #world.d.newswitches = []
+    Globals.nextNE2dY = .95         # Positioning for 2-D controls - old controls should be gone
+    Globals.nextNW2dY = .95
+    print "done"

@@ -152,6 +152,7 @@ def when1(m, when, what = None):
         proxy._react1(happen(when), what)
 
 def exit(x):
+    print "in exit"
     if isinstance(x, Proxy.Proxy):
         x._exit()
 
