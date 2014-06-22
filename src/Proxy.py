@@ -13,7 +13,7 @@ class Reaction:
         self.fn(self.m, self.v)
 
 class Proxy:
-    def __init__(self, name, updater, types, duration = 0):
+    def __init__(self, name, updater, types = {}, duration = 0):
         self._types = types
         self._alive = True;
         self._type = proxyType

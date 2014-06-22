@@ -11,7 +11,7 @@ from Color import *
 
 class Slider:
     def __init__(self, size, position, min, max, pageSize, init, label):
-        name = "slider"
+        name = "slider" + str(Globals.nextModelId)
         checkType(name, "min", min, numType)
         checkType(name, "max", max, numType)
         if init is not None:
@@ -27,12 +27,13 @@ class Slider:
             pos = (position.x, 0, position.y)
         if label is not None:
             Text.text(text = label, position = SP2(pos[0]-.3, pos[2]))
-        self.pandaModel = DirectSlider(scale=.2 * size, pos=pos, range=(min, max), pageSize=pageSize, value=init, command=self.setValue)
+        self._name = name
+        self._pandaModel = DirectSlider(scale=.2 * size, pos=pos, range=(min, max), pageSize=pageSize, value=init, command=self.setValue)
         self.value = init
     def getValue(self, x):
         return self.value
     def setValue(self):
-        self.value = self.pandaModel["value"]
+        self.value = self._pandaModel["value"]
 
 
 def slider(size=1, position=None, min=0, max=1, pageSize=None, init=None, name='Slider', label=None):
