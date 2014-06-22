@@ -11,6 +11,7 @@ import random
 import Factory
 import Errors
 import Interp
+from SHPR import *
 from Types import *
 
 # This is a where we park signal functions.

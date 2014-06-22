@@ -3,7 +3,7 @@ from Signal import *
 from Factory import *
 from StaticNumerics import zero
 from Errors import *
-from World import world
+import World
 import Proxy
 
 import Globals
@@ -112,7 +112,7 @@ def react(m, when, what = None):
     if what is None:
         what = when
         when = m
-        m = world
+        m = World.world
     if type(m) is str:
         saveForCollection("react", m, when, what)
     coll = getCollection(m)
@@ -123,7 +123,7 @@ def react1(m, when, what = None):
     if what is None:
         what = when
         when = m
-        m = world
+        m = World.world
     if type(m) is str:
         saveForCollection("react1", m, when, what)
     coll = getCollection(m)
@@ -145,7 +145,7 @@ def when1(m, when, what = None):
     if what is None:
         what = when
         when = m
-        m = world
+        m = World.world
     if type(m) is str:
         saveForCollection("when1", m, when, what)
     coll = getCollection(m)

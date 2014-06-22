@@ -16,6 +16,7 @@ from PEffect import *
 from Button import button
 from Sound import play
 from Menu import menu
+from Bezier import *
 
 def start():
     print("Starting...")

@@ -2,7 +2,6 @@
 # A reactive menu
 
 from direct.gui.DirectGui import *
-from Time import *
 from Externals import postEvent
 import Factory
 import Globals
