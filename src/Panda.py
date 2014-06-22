@@ -15,6 +15,7 @@ from Engine import engine as _engine
 from PEffect import *
 from Button import button
 from Sound import play
+from Menu import menu
 
 def start():
     print("Starting...")

@@ -54,13 +54,14 @@ class DLight(Proxy):
 def updatePLight(self):
     c = self._get("color")
     p = self._get("position")
+    print str(p)
     self._PLight.setColor(c.toVBase4())
-    self._Light.setColor(c.toVBase4())
-    self._Light.setPos(p.x, p.y)
+    self._Light.setPos(p.x, p.y,  p.z)
+    print self._Light.getPos()
     
 class PLight(Proxy):
     def __init__(self, color = None, position = None, name = 'pointLight'):
-        Proxy.__init__(self, name = name, types = {"color":(colorType, white), "position":(p3Type, P3(0,0,0))}, updater = updatePLight)
+        Proxy.__init__(self, name = name, types = {"color":colorType, "position":p3Type}, updater = updatePLight)
         self._PLight = DirectionalLight("directionalLight")
         self._Light = render.attachNewNode(self._PLight)
         render.setLight(self._Light)
