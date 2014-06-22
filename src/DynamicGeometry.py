@@ -56,13 +56,16 @@ def getModel(x):
     return x
 
 class GeometryHandle(Proxy.Proxy):
-    def __init__(self, object, position=None, hpr=None, size=1, color=None, texture=None, duration = 0, parent = render):
+    def __init__(self, object, position=None, hpr=None, size=1, color=None,
+                 texture=None, duration = 0, parent = render, name = "gemometry"):
         Proxy.Proxy.__init__(self, name="dynamicGeometry", updater=geometryUpdater,
                        types={"position": p3Type, "hpr": hprType, "size": numType,
                             "color": colorType, "texture": stringType, "sideTwo": stringType})
         self._pandaModel = object
         self._parent = PandaModel.getModel(parent)
+        self._name = name + str(Globals.nextModelID)
         Globals.nextModelId = Globals.nextModelId + 1
+        self._name = name + str()
         self._onScreen = False
         self._currentTexture = ""
         self._currentsideTwo = ""

@@ -76,6 +76,7 @@ class PandaModel(Proxy):
                 self._mParams = defaultModelParameters
             parameterCache[fileName] = self._mParams
         self._pandaModel = loader.loadModel(self._mFile)
+        self._pandaModel.setTag('rpandaid', str(self._name))
         self._onScreen = False
         self._size=self._mParams['localSize']
         self._hpr=self._mParams['localOrientation']
