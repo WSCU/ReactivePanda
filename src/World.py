@@ -1,10 +1,10 @@
 import Proxy
-import Globals as g
-from Proxy import Proxy
-import Numerics
+import Globals
+import math
 from Types import *
 from StaticNumerics import *
 from Color import gray
+import Numerics
 
 def updateWorld(self):
     c = self._get("color")
@@ -13,22 +13,22 @@ def updateWorld(self):
 def updateCamera(self):
     pos = self._get("position")
     hpr = self._get("hpr")
-    g.panda3dCamera.setPos(pos.x, pos.y, pos.z)
-    g.panda3dCamera.setHpr(degrees(hpr.h), degrees(hpr.p), degrees(hpr.r))
+    Globals.panda3dCamera.setPos(pos.x, pos.y, pos.z)
+    Globals.panda3dCamera.setHpr(math.degrees(hpr.h), math.degrees(hpr.p), math.degrees(hpr.r))
 
-class Camera(Proxy):
+class Camera(Proxy.Proxy):
 
     def __init__(self):
-        Proxy.__init__(self, "camera", updateCamera, {"position": p3Type, "hpr": hprType})
+        Proxy.Proxy.__init__(self, "camera", updateCamera, {"position": p3Type, "hpr": hprType})
         self.position = Numerics.p3(0, -10, 0)
         self.hpr = Numerics.hpr(0,0,0)
 
-class World(Proxy):
+class World(Proxy.Proxy):
 
     def __init__(self):
-        Proxy.__init__(self, "world", updateWorld, {"color": colorType, "gravity": p3Type})
-        self.gravity = Numerics.P3(0,0,-1)
+        Proxy.Proxy.__init__(self, "world", updateWorld, {"color": colorType, "gravity": p3Type})
         self.color = gray
+        self.gravity = Numerics.p3(-1,0,0)
 
 world = World()
 camera = Camera()
