@@ -95,9 +95,6 @@ choose = lift("choose", staticIf)
 lerp = lift("lerp", Interp.lerpStatic)
 interpolate = lift("interpolate", Interp.interpolateStatic)
 
-def itime(i):
-    return interpolate(localTime, i)
-
 
 def encodeNums(*n):
     s = ""

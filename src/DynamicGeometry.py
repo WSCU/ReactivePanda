@@ -267,6 +267,7 @@ def tetra(t1, t2, t3, t4, v1 = P3(-1, -1, -1), v2 = P3(1,-1,-1),v3 = P3(0, 1, -1
 #
 # This creates a single object with subobjects for each piece of the picture
 #
+# To assemble a picture send each fragment to p3(0,0,0)
 
 def slicePicture(p,columns = 1, rows = 1, **a):
     center = emptyModel(**a)
@@ -296,7 +297,7 @@ def slicePicture(p,columns = 1, rows = 1, **a):
 # This creates fragment objects that are not parented to anything
 # Spatial locations are stored in the fragments
 # This isn't smart enough to match the aspect of the picture to the generated pieces.
-
+# To assemble a picture send each fragment to "_location"
 
 def blastPicture(p,columns = 1, rows = 1, **a):
     res = []
@@ -312,9 +313,9 @@ def blastPicture(p,columns = 1, rows = 1, **a):
             ur = P2((x+1)*xsz, (y+1)*ysz)
             r = rectangle(P3(-xsz, 0, -ysz), P3(xsz, 0, -ysz), P3(-xsz, 0, ysz),
                           texP1 = ll, texP2 = lr, texP3 = ul, texP4 = ur, texture = p)
-            r.location = static(P3(2*(x+.5)*xsz-1, 0, 2*(y+.5)*ysz-1))
-            r.x = static(xi)
-            r.y = static(yi)
+            r._location = P3(2*(x+.5)*xsz-1, 0, 2*(y+.5)*ysz-1)
+            r._x = xi
+            r._y = yi
             yi = yi + 1
             res.append(r)
         xi = xi + 1

@@ -93,7 +93,6 @@ def hitE(m1, m2, trace = False):
         return EventValue(res)
     return ObserverF(hitFN)
 
-
 def hit(m1, m2, reaction, trace = False):
     def hitReaction(m,v):
         for p in v:
@@ -134,7 +133,7 @@ def when(m, when, what = None):
     if what is None:
         what = when
         when = m
-        m = world
+        m = World.world
     if type(m) is str:
         saveForCollection("when", m, when, what)
     coll = getCollection(m)
