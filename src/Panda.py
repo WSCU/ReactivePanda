@@ -10,11 +10,15 @@ from Color import *
 from Light import *
 from Slider import slider, sliderHpr, sliderColor, sliderP3
 from World import world, camera
-from DynamicGeometry import triangle, rectangle
+from DynamicGeometry import triangle, rectangle, emptyModel, photoWheel, cube, tetra, blastPicture, slicePicture
 from Engine import engine as _engine
 from PEffect import *
 from Button import button
 from Sound import play
+from Menu import menu
+from Bezier import *
+from Utils import itime
+
 
 def start():
     print("Starting...")

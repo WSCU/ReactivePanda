@@ -1,4 +1,4 @@
-# Done
+    # Done
 
 # This is the non-reactive version of the numeric classes.  To get the overloading right,
 # we have to go through contortions using radd, rsub, and rmul so that an ordinary
@@ -11,6 +11,7 @@ import random
 import Factory
 import Errors
 import Interp
+from SHPR import *
 from Types import *
 
 # This is a where we park signal functions.

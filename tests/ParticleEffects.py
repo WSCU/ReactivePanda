@@ -5,7 +5,7 @@ world.color = black
 #fireish()
 #fire() #same as above
 #fire1()
-#explosions()
+explosions()
 #fireWorks()
 #fireWork()
 #intervalRings()
@@ -17,5 +17,6 @@ world.color = black
 #heavySnow()
 #lightSnow()
 #smokeTail()
+
 
 start()

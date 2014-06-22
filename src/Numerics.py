@@ -11,9 +11,12 @@ from Interp import repeat
 pi       = math.pi
 twopi    = 2*pi
 
-p3       = lift("SP3", SP3, types = [numType, numType, numType], outType = p3Type)
+p3       = lift("p3", SP3, types = [numType, numType, numType], outType = p3Type)
 P3 = p3  # For backwards compatibility
-p2       = lift("SP2", SP2, types = [numType, numType], outType = p2Type)
+p3C       = lift("P3C", SP3C, [numType, numType, numType], outType = p3Type)
+P3C = p3C
+
+p2       = lift("p2", SP2, types = [numType, numType], outType = p2Type)
 P2 = p2
 hpr      = lift("hpr", SHPR, types = [numType, numType, numType], outType = hprType)
 HPR = hpr
@@ -91,9 +94,6 @@ choose = lift("choose", staticIf)
 
 lerp = lift("lerp", Interp.lerpStatic)
 interpolate = lift("interpolate", Interp.interpolateStatic)
-
-def itime(i):
-    return interpolate(localTime, i)
 
 
 def encodeNums(*n):

@@ -76,6 +76,7 @@ class PandaModel(Proxy):
                 self._mParams = defaultModelParameters
             parameterCache[fileName] = self._mParams
         self._pandaModel = loader.loadModel(self._mFile)
+        self._pandaModel.setTag('rpandaid', str(self._name))
         self._onScreen = False
         self._size=self._mParams['localSize']
         self._hpr=self._mParams['localOrientation']
@@ -119,7 +120,7 @@ class PandaModel(Proxy):
                     for args in v[tag]:
                         getattr(Functions, t)(self, args[0], what = args[1])
         if duration > 0:
-            react1(self, delay(duration), exitScene)
+            react(self, delay(duration), exitScene)
 
     def _remove(self):
             if self._pandaModel is not None:

@@ -2,7 +2,6 @@
 
 # A reactive button
 
-from Proxy import *
 from Types import *
 from direct.gui.DirectGui import *
 import StaticNumerics
@@ -19,12 +18,13 @@ import Globals
 # Methods / Attributes
 #   click - an event that generates a
 
-class Button(Proxy):
+class Button:
     def __init__(self, text, position = None, size = 1, name = 'Button', e = True):
         if position is None:
             position = StaticNumerics.SP2(-.95, Globals.nextNW2dY)
             Globals.nextNW2dY = Globals.nextNW2dY -.1
-        Proxy.__init__(self, name = name  + ":" + str(Globals.nextModelId), updater = updateButton, types = {"position":p2Type, "name":stringType,"size":numType})
+        self._name = name + str(Globals.nextModelId)
+        Globals.nextModelId += 1
         self._click = Factory.eventObserver(self._name, e)
         self._pandaModel = DirectButton(text = text, pos = (position.x, 0, position.y), scale = size*0.1, command = lambda: Externals.postEvent(self._name))
 
