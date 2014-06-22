@@ -3,6 +3,8 @@
 
 from Panda import *
 
-panda(position = p3(time,[],0))
+grassScene()
+panda(position = p3(time,0,0))
+launchCamera("medevil")
 
 start()
