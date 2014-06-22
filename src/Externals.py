@@ -6,6 +6,7 @@ import StaticNumerics
 from direct.actor import Actor
 import Errors
 import Functions
+import Click
 
 def lbp(e = True): 
     return eventObserver("mouse1", e)
@@ -40,10 +41,10 @@ def keyUp(kname, val = True):
     return getEventSignal(kname + "-up", val)
 
 def leftClick(model, val = True):
-    return getEventSignal(model.d.model.getTag('rpandaid') + "-leftclick", val)
+    return getEventSignal(model._pandaModel.getTag('rpandaid') + "-leftclick", val)
 
 def rightClick(model, val = True):
-    return getEventSignal(model.d.model.getTag('rpandaid') + "-rightclick", val)
+    return getEventSignal(model._pandaModel.getTag('rpandaid') + "-rightclick", val)
 
 allKeyNames = ["escape", "f1","f2","f3","f4","f5","f6","f7","f8","f9","f10","f11","f12"]
 
@@ -73,6 +74,7 @@ def getEventSignal(ename, val):
 
     
 def initEvents():
+    base.disableMouse() 
     directObj = Globals.direct
     directObj.accept("mouse1", lambda: postEvent("mouse1"))
     directObj.accept("mouse3", lambda: postEvent("mouse3"))
@@ -108,8 +110,7 @@ def pollGUI():
        # If a left / right mouse click has happened, ask Panda which model was clicked on.  Post an event
        # if there is a model where the mouse clicked
        if lbp or rbp:
-           # m = g.findClickedModels()
-           m = None
+           m = Click.findClickedModels()
            if m is not None:
                if Globals.events.has_key("mouse1"):
                     Globals.events[m + "-leftclick"] = True
