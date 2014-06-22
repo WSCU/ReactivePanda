@@ -8,7 +8,7 @@ import Errors
 import Functions
 import Click
 
-def lbp(e = True): 
+def lbp(e = True):
     return eventObserver("mouse1", e)
 
 def rbp(e = True):
@@ -46,7 +46,7 @@ def leftClick(model, val = True):
 def rightClick(model, val = True):
     return getEventSignal(model._pandaModel.getTag('rpandaid') + "-rightclick", val)
 
-allKeyNames = ["escape", "f1","f2","f3","f4","f5","f6","f7","f8","f9","f10","f11","f12"]
+allKeyNames = ["escape", "f1","f2","f3","f4","f5","f6","f7","f8","f9","f10","f11","f12", "space"]
 
 keyRenamings = {"upArrow": "arrow_up", "downArrow": "arrow_down",
                 "leftArrow": "arrow_left", "rightArrow": "arrow_right"}
@@ -72,7 +72,7 @@ def getEventSignal(ename, val):
         Globals.direct.accept(ename, lambda: postEvent(ename))
         return Functions.tag(val, e)
 
-    
+
 def initEvents():
     base.disableMouse() 
     directObj = Globals.direct
