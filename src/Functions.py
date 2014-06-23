@@ -26,6 +26,23 @@ def integral(x):
         return sm.value
     return StateMachineF(initIntegral, maybeLift(x), integralf)
 
+def deriv(sig, init = zero):
+    def initDeriv(sm):
+        sm.value = init
+        sm.first = True
+    def thunk(sm):
+        i = sm.i.now()
+        print str(i)
+        if not sm.first:
+            sm.value = (i - sm.previous) * (1/Globals.dt)
+        else:
+            sm.first = False
+        sm.previous = i
+    def derivf(sm):
+        Globals.thunks.append(lambda: thunk(sm))
+        return sm.value
+    return StateMachineF(initDeriv, maybeLift(sig), derivf)
+
 def tag(v,evt):
     return lift("tag", lambda e: EventValue(v) if e.occurs() else noEvent)(evt)
 

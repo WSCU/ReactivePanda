@@ -274,6 +274,8 @@ def dotP3(a, b):
 
 # Construct a polar 2-D point
 def SP2Polar(r, theta):
+    r = r + 0
+    theta = theta + 0
     return SP2(r * math.cos(theta), r * math.sin(theta))
 
 def SP3C(r, theta, z):
