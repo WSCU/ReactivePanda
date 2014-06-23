@@ -3,9 +3,9 @@ from Panda import *
 world.color = black
 
 #fireish()
-fire()
+#fire() #same as above
 #fire1()
-#explosions()
+explosions()
 #fireWorks()
 #fireWork()
 #intervalRings()
@@ -17,5 +17,6 @@ fire()
 #heavySnow()
 #lightSnow()
 #smokeTail()
+
 
 start()

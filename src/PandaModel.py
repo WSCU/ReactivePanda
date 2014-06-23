@@ -34,6 +34,11 @@ defaultModelParameters = {"localPosition" : SP3(0,0,0),
                           "cTop" : 1,
                           "cType" : "cyl"}
 
+def getModel(x):
+    if hasattr(x, "_pandaModel"):
+        x = x._pandaModel
+    return x
+
 def pandaModel(fileName = None, name = "PandaModel", size = None, hpr = None, position = None, tag = [], color = None, texture = None, parent = render, duration = 0):
     return PandaModel(  fileName, size, hpr, position, tag, color, texture, name, parent, duration)
 
@@ -46,7 +51,7 @@ class PandaModel(Proxy):
                       "cRadius": numType, "cType": stringType, "cFloor": numType, "cTop": numType}
         #(p3Type, SP3(0,0,0)), "hpr": (hprType, SHPR(0,0,0)), "size": (numType, 1)})
         Globals.nextModelId = Globals.nextModelId + 1
-        self._parent = parent
+        self._parent = getModel(parent)
         self._mFile = FileSearch.fileSearch(fileName, "models",["egg"])
         #print "Object Name: "+ str(fileName)+"-gID: "+str(Globals.nextModelId);
         if type(tag) == type("s"):
@@ -71,6 +76,7 @@ class PandaModel(Proxy):
                 self._mParams = defaultModelParameters
             parameterCache[fileName] = self._mParams
         self._pandaModel = loader.loadModel(self._mFile)
+        self._pandaModel.setTag('rpandaid', str(self._name))
         self._onScreen = False
         self._size=self._mParams['localSize']
         self._hpr=self._mParams['localOrientation']
@@ -81,7 +87,7 @@ class PandaModel(Proxy):
         self._cTop = float(self._mParams['cTop'])
         self._currentTexture = ""
         self._onscreen = False   # This defers the reparenting until the model has been updated the first time
-        self._parent = render    # This is the parent - we could make this a parameter later
+        self._parent = parent
         if position is not None:
             self.position = position
         else:
@@ -114,7 +120,7 @@ class PandaModel(Proxy):
                     for args in v[tag]:
                         getattr(Functions, t)(self, args[0], what = args[1])
         if duration > 0:
-            react1(self, delay(duration), exitScene)
+            react(self, delay(duration), exitScene)
 
     def _remove(self):
             if self._pandaModel is not None:
@@ -124,7 +130,7 @@ class PandaModel(Proxy):
                 Globals.collections[c] = [x for x in old if x is not self]
 
     def _reparent(self, m):
-        self._pandaModel.reparentTo(m._pandaModel if isinstance(m,Proxy) else m)
+        self._pandaModel.reparentTo(m)
     def _touches(self, handle, trace = False):
         if trace:
            print "Touch: " + repr(self) + " (" + self._cType + ") " + repr(handle) + " (" + handle._cType + ")"

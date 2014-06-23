@@ -91,30 +91,3 @@ class Observer(Signal):
     def now(self):
         return self.f(self)
 
-class RVar: #Defines reactive variables like on-screen text
-    def __init__(self, initValue, type):
-        Signal.__init__(self)
-        self.value = initValue
-        self.type = type
-    def refresh(self):
-        return self.value
-    def typecheck(self, etype):
-        return self.type
-    def siginit(self, context):
-        return self   #  This should never happen!
-    def get(self):    #  Used inside reaction code
-        return self.value
-    def set(self, val):
-        self.value = val
-    def add(self, val):
-        self.value = self.value + val;
-    def sub(self, val):
-        self.value = self.value - val;
-    def times(self, val):
-        self.value = self.value * val
-    def now(self):
-        return self.value
-
-
-def var(init): #Actual variable signal
-    return RVar(init, type(init))

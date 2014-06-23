@@ -111,6 +111,8 @@ colorType = Ptype("Color", numType)
 interpableType = Ptype("Interp")
 eventValueType = Ptype("EventValue")
 listType = Ptype("listType")
+soundType = Ptype("sound")
+noneType = Ptype("None")
 
 '''  Keeping just in case
 numType = ptype("Number")

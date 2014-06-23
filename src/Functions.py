@@ -3,7 +3,7 @@ from Signal import *
 from Factory import *
 from StaticNumerics import zero
 from Errors import *
-from World import world
+import World
 import Proxy
 
 import Globals
@@ -25,6 +25,23 @@ def integral(x):
         Globals.thunks.append(lambda: thunk(sm))
         return sm.value
     return StateMachineF(initIntegral, maybeLift(x), integralf)
+
+def deriv(sig, init = zero):
+    def initDeriv(sm):
+        sm.value = init
+        sm.first = True
+    def thunk(sm):
+        i = sm.i.now()
+        print str(i)
+        if not sm.first:
+            sm.value = (i - sm.previous) * (1/Globals.dt)
+        else:
+            sm.first = False
+        sm.previous = i
+    def derivf(sm):
+        Globals.thunks.append(lambda: thunk(sm))
+        return sm.value
+    return StateMachineF(initDeriv, maybeLift(sig), derivf)
 
 def tag(v,evt):
     return lift("tag", lambda e: EventValue(v) if e.occurs() else noEvent)(evt)
@@ -73,24 +90,31 @@ def getCollection(m):
         try:
             return Globals.collections[m]
         except KeyError:
-            print ("No collection with the name: " + m + " returning empty list")
+            # There may not be any model in a collection yet
+            # print ("No collection with the name: " + m + " returning empty list")
             return []
     else:
         return [m]
 
-def hitE(m1, m2, reaction, trace = False):
+def hitE(m1, m2, trace = False):
     def hitFN(o):
         ml1 = getCollection(m1)
         ml2 = getCollection(m2)
+        res = []
         for m in ml1:
             for e in ml2:
-                if m._touches(e, trace = trace):
-                    return EventValue(e)
-        return noEvent
-    world.react(ObserverF(hitFN))
+                if m is not e and m._touches(e, trace = trace):
+                    res.append((m,e))
+        if res == []:
+            return noEvent
+        return EventValue(res)
+    return ObserverF(hitFN)
 
 def hit(m1, m2, reaction, trace = False):
-    react(m1, hitE(m1, m2, trace = trace), reaction)
+    def hitReaction(m,v):
+        for p in v:
+            reaction(p[0], p[1])
+    react(m1, hitE(m1, m2, trace = trace), hitReaction)
 
 def hit1(m1, m2, reaction, trace = False):
     react1(m1, hitE(m1, m2, trace = trace), reaction)
@@ -104,7 +128,7 @@ def react(m, when, what = None):
     if what is None:
         what = when
         when = m
-        m = world
+        m = World.world
     if type(m) is str:
         saveForCollection("react", m, when, what)
     coll = getCollection(m)
@@ -115,7 +139,7 @@ def react1(m, when, what = None):
     if what is None:
         what = when
         when = m
-        m = world
+        m = World.world
     if type(m) is str:
         saveForCollection("react1", m, when, what)
     coll = getCollection(m)
@@ -126,23 +150,23 @@ def when(m, when, what = None):
     if what is None:
         what = when
         when = m
-        m = world
+        m = World.world
     if type(m) is str:
         saveForCollection("when", m, when, what)
     coll = getCollection(m)
     for proxy in coll:
-        proxy._react(bbToE(when), what)
+        proxy._react(happen(when), what)
 
 def when1(m, when, what = None):
     if what is None:
         what = when
         when = m
-        m = world
+        m = World.world
     if type(m) is str:
         saveForCollection("when1", m, when, what)
     coll = getCollection(m)
     for proxy in coll:
-        proxy._react1(bbToE(when), what)
+        proxy._react1(happen(when), what)
 
 def exit(x):
     if isinstance(x, Proxy.Proxy):
@@ -176,9 +200,10 @@ def clock(step, start = 0, end = 1000000):
 #make a clock signal too. Clock will control the heartbeat: make the heartbeat every second
 time = ObserverF(lambda x: Globals.currentTime, type = numType)
 
-def delay(n):
+def delay(n, absoluteTime = False):
     def initClock(sm):
-        sm.eventTime = Globals.currentTime + n
+        sm.eventTime = n + (0 if absoluteTime else Globals.currentTime)
+        print "Die at " + str(sm.eventTime)
         sm.value = noEvent
         sm.fired = False
     def clockFN(sm): # tracks and updates engine time
@@ -191,10 +216,50 @@ def delay(n):
             sm.value = noEvent
     return StateMachineF(initClock, maybeLift(0), clockFN)
 
+def timeIs(n):
+    return delay(n, absoluteTime = True)
+
 def exitScene(m, v):
     exit(m)
 
 eventTrue = EventValue(True)
 
-def bbToE(b):
-    return lift("bbToE", lambda x:eventTrue if x else noEvent)(b)
+# This converts a boolean behavior into an event that fires whenever the
+# behavior is true
+def happen(b, val = True):
+    return lift("happen", lambda x:EventValue(val) if x else noEvent)(b)
+
+# This limits an event stream to the first event
+def once(e):
+    def initOnce(sm):
+        sm.value = noEvent
+        sm.fired = False
+    def onceFN(sm): # tracks and updates engine time
+        # state is the previous value of the clock
+        i = sm.i.now()
+        if i.occurs() and not sm.fired:
+            sm.value = i
+            sm.fired = True
+        else:
+            sm.value = noEvent
+    return StateMachineF(initOnce, maybeLift(e), onceFN)
+
+# This event occurs whenever the behavior changes.  Value of the event is the
+# new value of the behavior
+def changes(b):
+    def initChanges(sm):
+        sm.value = noEvent
+        sm.last = EventValue()  # This is any value tha is guaranteed not to be in the input
+    def changesFN(sm): # tracks and updates engine time
+        # state is the previous value of the clock
+        v = sm.i.now()
+        if v != sm.last:
+            sm.value = EventValue(v)
+            sm.last = v
+        else:
+            sm.value = noEvent
+    return StateMachineF(initChanges, maybeLift(e), changesFN)
+
+# Filter an event stream.  Only event values that satify fn will occur
+def filter(fn, e):
+    lift("filter", lambda val: EventValue(fn(val.value)) if val.occurs() else noEvent)

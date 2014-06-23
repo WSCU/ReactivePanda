@@ -1,3 +1,4 @@
+import Interp
 from StaticNumerics import *
 from Factory import *
 from Types import *
@@ -7,12 +8,8 @@ from Color import Color, colorHSL
 from Interp import interpolateStatic
 from Interp import repeat
 
-pi       = maybeLift(math.pi)
-twopi    = maybeLift(2*pi)
-ceiling  = lift("ceiling",math.ceil)
-floor    = lift("floor",math.floor)
-cos      = lift("cos",math.cos)
-sin      = lift("sin", math.sin)
+pi       = math.pi
+twopi    = 2*pi
 
 P3       = lift("SP3", SP3, types = [numType, numType, numType], outType = p3Type)
 p3 = P3
@@ -23,7 +20,10 @@ hpr = HPR
 P3C       = lift('P3C',SP3C,[numType, numType, numType], outType = p3Type)
 p3c = P3C
 
-gravity  = P3(0,0,-1)
+p2       = lift("p2", SP2, types = [numType, numType], outType = p2Type)
+P2 = p2
+hpr      = lift("hpr", SHPR, types = [numType, numType, numType], outType = hprType)
+HPR = hpr
 
 getX     = lift("getX", lambda v:v.x, [hasXYType], numType)
 getY     = lift("getY", lambda v:v.y, [hasXYType], numType)
@@ -36,6 +36,7 @@ getR     = lift("getR", lambda v:v.r, [hprType], numType)
 getUp    = lift("getUp", lambda hpr:getUpHPR(hpr), [hprType], p3Type)
 
 radians  = lift("radians", math.radians, [numType], numType)
+# Delete this from elsewhere, use math.degrees in update functions
 degrees  = lift("degrees", math.degrees, [numType], numType)
 sin      = lift("sin", math.sin, [numType], numType)
 cos      = lift("cos", math.cos, [numType], numType)
@@ -69,16 +70,6 @@ string   = lift("string", str, [anyType], stringType)
 
 #norm      = lift(normP3, 'norm', [P3Type], P3Type)
 
-# Interpolation stuff
-
-# lerp = lift(lerpStatic, "lerp")
-# interpolate = lift(interpolateStatic, "interpolate", infer='interpolate')
-# to = lift(toS, "to", infer = "interpolate")
-# at = lift(atS, "at", infer = "interpolate")
-# move = lift(moveS, "move", infer = "interpolate")
-#repeat = lift(repeatS, "repeat", infer = "interpolate")
-# reverse = lift(reverseS, "reverse", infer = "interpolate")
-# forever = lift(lambda i: repeatS(-1, i), "forever", infer = "interpolate")
 
 P3toHPR = lift("P3toHPR", sP3toHPR, [p3Type], hprType)
 p3ToHpr = P3toHPR
@@ -101,7 +92,12 @@ def staticIf(test, x, y):
         return x
     return y
 
-choose = lift(staticIf, "choose")
+choose = lift("choose", staticIf)
+
+# Interpolation functions
+
+lerp = lift("lerp", Interp.lerpStatic)
+interpolate = lift("interpolate", Interp.interpolateStatic)
 
 
 def encodeNums(*n):
