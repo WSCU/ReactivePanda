@@ -8,7 +8,8 @@ from pandac.PandaModules import *
 from pandac.PandaModules import *
 from direct.particles.Particles import *
 from direct.particles.ParticleEffect import *
-from FileSearch import * 
+from FileSearch import *
+import PandaModel
 
 def peffectUpdater(self):
     #These parameters find the static offset which was created during initialization and the current position which is returned by the self._get() method
@@ -23,6 +24,7 @@ def peffectUpdater(self):
                             degrees(hprNow.p),
                             degrees(hprNow.r))
     if not self._onScreen:
+#           print "Reparenting " + repr(self) + " to " + repr(self._parent)
            self._pandaModel.reparentTo(self._parent)
            self._onScreen = True
 
@@ -30,7 +32,7 @@ class PEffect(Proxy):
 
     def __init__(self, particleFn, name = 'particleEffect', 
                hpr = None, position = None,
-                size = None, duration = 0,
+                size = None, duration = 0, parent = render,
                 **a): 
         Proxy.__init__(self, name = name + ":" + str(Globals.nextModelId), updater = peffectUpdater, types = {"position":p3Type, "hpr":hprType, "size":numType})
         
@@ -40,7 +42,7 @@ class PEffect(Proxy):
         p = ParticleEffect()
         self._pandaModel = p
         self._onScreen = False
-        self._parent = render
+        self._parent = getModel(parent)
         if position is not None:
             self.position = position
         else:
@@ -54,7 +56,6 @@ class PEffect(Proxy):
         else:
             self.size = 1
         particleFn(p, a)
-        p.reparentTo(render)
         p.start()
 
         if duration > 0:

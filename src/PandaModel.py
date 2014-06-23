@@ -87,7 +87,7 @@ class PandaModel(Proxy):
         self._cTop = float(self._mParams['cTop'])
         self._currentTexture = ""
         self._onscreen = False   # This defers the reparenting until the model has been updated the first time
-        self._parent = parent
+        self._parent = getModel(parent)
         if position is not None:
             self.position = position
         else:
@@ -130,6 +130,7 @@ class PandaModel(Proxy):
                 Globals.collections[c] = [x for x in old if x is not self]
 
     def _reparent(self, m):
+#        print "reparent " + repr(self) + " to " + repr(m)
         self._pandaModel.reparentTo(m)
     def _touches(self, handle, trace = False):
         if trace:
