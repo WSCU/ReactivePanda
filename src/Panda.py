@@ -17,7 +17,7 @@ from Button import button
 from Sound import play
 from Menu import menu
 from Bezier import *
-from Utils import itime
+from Utils import itime, pointForward, flatRod
 
 
 def start():
