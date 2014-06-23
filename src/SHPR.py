@@ -2,8 +2,9 @@ import Globals
 import math
 import StaticNumerics
 import Factory
+import Numerics
 from panda3d.core import Quat
-from Types import hprType
+from Types import hprType, numType, getPtype
 
 class SHPR:
     def __init__(self, h, p, r):
@@ -46,11 +47,15 @@ class SHPR:
             return zero
         if isinstance(y, type(1)) or isinstance(y,type(1.0)):
             return scaleHPR(y, self)
+        if getPtype(y).includes(numType):
+            return scaleHPR(y, self)
         Errors.errorOnStaticTypes("Mul", "SHPR", y)
     def __rmul__(self, s):
         if y is StaticNumerics.zero:
             return zero
         if isinstance(y, type(1)) or isinstance(y,type(1.0)):
+            return scaleHPR(y, self)
+        if getPtype(y).includes(numType):
             return scaleHPR(y, self)
         Errors.errorOnStaticTypes("Mul", "SHPR", y)
     def __div__(self, y):
@@ -58,7 +63,9 @@ class SHPR:
             print "Universal Explosion"
             return zero
         if isinstance(y, type(1)) or isinstance(y,type(1.0)):
-            return scaleHPR2((1.0/y), self)
+            return scaleHPR((1.0/y), self)
+        if getPtype(y).includes(numType):
+            return scaleHPR((1.0/y), self)
         Errors.errorOnStaticTypes("Div", "SP2", y)
     def __neg__(self):
         return scaleHPR(self, -1)
@@ -74,7 +81,7 @@ def subHPR(a, b):
     return SHPR(a.h-b.h, a.p-b.p, a.r-b.r)
 
 def scaleHPR(s, a):
-    return SHPR(a.h * s, a.p * s, a.r * s)
+    return Numerics.HPR(a.h * s, a.p * s, a.r * s)
 
 def getUpHPR(hpr):
     q = Quat()

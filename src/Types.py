@@ -63,6 +63,8 @@ def getPtype(v):
         return noneType
     elif isinstance(v, Ptype):
         return v
+    elif hasattr(v,'outType'):
+        return v.outType
     elif hasattr(v,'_type'):  # Panda types all have a PType slot
         return v._type
     t = type(v)

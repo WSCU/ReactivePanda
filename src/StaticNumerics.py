@@ -11,6 +11,7 @@ import random
 import Factory
 import Errors
 import Interp
+import Numerics
 from SHPR import *
 from Types import *
 
@@ -124,11 +125,15 @@ class SP2:
             return zero
         if isinstance(y, type(1)) or isinstance(y,type(1.0)):
             return scaleP2(y, self)
+        if getPtype(y).includes(numType):
+            return scaleP2(y, self)
         Errors.errorOnStaticTypes("Mul", "SP2", y)
     def __rmul__(self, y):
         if y is zero:
             return zero
         if isinstance(y, type(1)) or isinstance(y,type(1.0)):
+            return scaleP2(y, self)
+        if getPtype(y).includes(numType):
             return scaleP2(y, self)
         Errors.errorOnStaticTypes("Mul", "SP2", y)
     def __div__(self, y):
@@ -137,6 +142,8 @@ class SP2:
             return zero
         if isinstance(y, type(1)) or isinstance(y,type(1.0)):
             return scaleP2((1.0/y), self)
+        if getPtype(y).includes(numType):
+            return scaleP2(1.0/y, self)
         Errors.errorOnStaticTypes("Div", "SP2", y)
     def __abs__(self):
         return absP2(self)
@@ -166,7 +173,7 @@ def subP2(a, b):
     return SP2(a.x-b.x, a.y-b.y)
 
 def scaleP2(s, a):
-    return SP2(s * a.x, s * a.y)
+    return Numerics.P2(s * a.x, s * a.y)
 
 def absP2(a):
     return math.sqrt(a.x * a.x + a.y * a.y)
@@ -222,11 +229,17 @@ class SP3:
             return zero
         if isinstance(y, type(1)) or isinstance(y,type(1.0)):
             return scaleP3(y, self)
+        #print getPtype(y)
+        if getPtype(y).includes(numType):
+            return scaleP3(y, self)
         Errors.errorOnStaticTypes("Mul", "SP3", y)
     def __rmul__(self, y):
         if y is zero:
             return zero.rmul(self, y)
         if isinstance(y, type(1)) or isinstance(y, type(1.5)):
+            return scaleP3(y, self)
+        #print getPtype(y)
+        if getPtype(y).includes(numType):
             return scaleP3(y, self)
         Errors.errorOnStaticTypes("Mul", "SP3", y)
     def __div__(self, y):
@@ -234,6 +247,8 @@ class SP3:
             print "Universal Explosion"
             return zero
         if isinstance(y, type(1)) or isinstance(y,type(1.0)):
+            return scaleP3((1.0/y), self)
+        if getPtype(y).includes(numType):
             return scaleP3((1.0/y), self)
         Errors.errorOnStaticTypes("Div", "SP2", y)
     def __abs__(self):
@@ -266,7 +281,7 @@ def addP3(a, p):
 def subP3(a, p):
     return SP3(a.x - p.x, a.y - p.y, a.z - p.z)
 def scaleP3(s, a):
-    return SP3(a.x * s, a.y * s, a.z * s);
+    return Numerics.P3(a.x * s, a.y * s, a.z * s);
 def absP3(a):
     return math.sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
 def dotP3(a, b):
