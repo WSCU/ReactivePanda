@@ -235,9 +235,9 @@ def photoWheel(p, radius = 1.2, height = 1.2, **a):
     for i in range(total):
       r = (2*pi/total)*i
       r2 = (2*pi/total)*(i+1)
-      p1 = p3C(radius, r, height)
-      p2 = p3C(radius, r, 0)
-      p3 = p3C(radius, r2, 0)
+      p1 = p3c(radius, r, height)
+      p2 = p3c(radius, r, 0)
+      p3 = p3c(radius, r2, 0)
       ph = rectangle(p2,p3,p1, texture = p[i], parent = center)
     return center
 
