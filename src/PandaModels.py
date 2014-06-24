@@ -58,6 +58,8 @@ def sphere(**a):
 def soccerBall(**a):#This one needs some atttention
     return pandaModel("soccerball/soccerball.egg", name = "SoccerBall", **a)
 
+soccerball = soccerBall
+
 def chair(**a):
     return pandaModel("deskChair/deskchair.egg", name = "Chair", **a)
 
