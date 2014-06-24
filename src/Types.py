@@ -81,7 +81,7 @@ def getPtype(v):
     if t is type((1,2)):
         return TupleType
 
-    return Ptype("Unknown: " + str(t))
+    return anyType
 
 def checkType(obj, attr, value, expected):
     got = getPtype(value)
