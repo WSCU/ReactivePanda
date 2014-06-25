@@ -54,8 +54,8 @@ collectionReactions = {"when1" : {}, "when": {}, "react": {}, "react1": {}}
 #osType = 'Linux'
 #pandaPath = os.getcwd()
 #pandaPath = "/c/panda/lib"
-#pandaPath = "/c/Reactive-Engine/src/lib"
-pandaPath = "/c/panda/lib"
+pandaPath = "/c/Reactive-Engine/src/lib"
+#pandaPath = "/c/panda/lib"
 #pandaPath = "/c/users/outcast/documents/GitHub/Reactive-Engine/src/lib" #this is for Grahams personal machine
 '''
 osType = 'Windows'
