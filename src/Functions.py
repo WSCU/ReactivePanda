@@ -220,6 +220,7 @@ def timeIs(n):
     return delay(n, absoluteTime = True)
 
 def exitScene(m, v):
+    print "exitScene"
     exit(m)
 
 eventTrue = EventValue(True)

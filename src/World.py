@@ -42,4 +42,7 @@ def resetWorld():
     #world.d.newswitches = []
     Globals.nextNE2dY = .95         # Positioning for 2-D controls - old controls should be gone
     Globals.nextNW2dY = .95
+    clearReactions(world)
+    clearReactions(camera)
+    # Should make all DirectGUI stuff invisible
     print "done"

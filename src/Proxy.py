@@ -128,3 +128,6 @@ class Proxy:
         self._alive = False
         self._remove()    #  This is in the subclass
 
+def clearReactions(m):
+    self._1Reactions = []
+    self._gReactions = []

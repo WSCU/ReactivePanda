@@ -60,7 +60,10 @@ class PEffect(Proxy):
 
         if duration > 0:
             react(self, delay(duration), exitScene)
-    
+
+    def _remove(self):
+        if self._pandaModel is not None:
+            self._pandaModel.detachNode()
 
 def fireishFn(self, dict):
 

@@ -57,6 +57,13 @@ class Zero:
         return self
 
 zero = Zero()
+zero.x = 0
+zero.y = 0
+zero.z = 0
+zero.h = 0
+zero.p = 0
+zero.r = 0
+
 
 def staticLerp(t, x, y):
     return (1-t)*x + t*y

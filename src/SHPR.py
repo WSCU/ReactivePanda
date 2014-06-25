@@ -3,6 +3,7 @@ import math
 import StaticNumerics
 import Factory
 import Numerics
+import Errors
 from panda3d.core import Quat
 from Types import hprType, numType, getPtype
 
@@ -70,9 +71,9 @@ class SHPR:
     def __neg__(self):
         return scaleHPR(self, -1)
     def interp(self, t, p2):
-        return SHPR(staticLerpA(t, self.h, p2.h),
-                    staticLerpA(t, self.p, p2.p),
-                    staticLerpA(t, self.r, p2.r))
+        return SHPR(StaticNumerics.staticLerpA(t, self.h, p2.h),
+                    StaticNumerics.staticLerpA(t, self.p, p2.p),
+                    StaticNumerics.staticLerpA(t, self.r, p2.r))
 
 def addHPR(a, b):
     return SHPR(a.h + b.h, a.p + b.p, a.r + b.r)
