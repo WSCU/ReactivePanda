@@ -93,6 +93,9 @@ class GeometryHandle(Proxy.Proxy):
             react(self, delay(duration), exitScene)
     def _reparent(self, m):
         self._pandaModel.reparentTo(m)
+    def _remove(self):
+        if self._pandaModel is not None:
+            self._pandaModel.detachNode()
 
 # This creates a model on the fly.  The array of spacePoints and texturePoints have to be the same length.
 # The spacePoints contains P3 objects and texturePoints contains P2 objects.
