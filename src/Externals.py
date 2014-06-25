@@ -66,7 +66,7 @@ def checkValidKey(s):
 
 def getEventSignal(ename, val):
         if Globals.eventSignals.has_key(ename):
-            return tag(val, Globals.eventSignals[ename])
+            return Functions.tag(val, Globals.eventSignals[ename])
         e = eventObserver(ename)
         Globals.eventSignals[ename] = e
         Globals.direct.accept(ename, lambda: postEvent(ename))
