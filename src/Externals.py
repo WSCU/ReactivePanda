@@ -80,11 +80,12 @@ def initEvents():
     directObj.accept("mouse3", lambda: postEvent("mouse3"))
     directObj.accept("mouse1-up", lambda: postEvent("mouse1-up"))
     directObj.accept("mouse3-up", lambda: postEvent("mouse3-up"))
-    Globals.mousePos = None
+    Globals.mousePos = StaticNumerics.SP2(0,0)
     Globals.lbutton = False
     Globals.rbutton = False
     Globals.lbuttonPull = StaticNumerics.SP2(0,0)
     Globals.rbuttonPull = StaticNumerics.SP2(0,0)
+
 
 def pollGUI():
     if base.mouseWatcherNode.hasMouse():
