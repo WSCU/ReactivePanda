@@ -119,7 +119,7 @@ def pollGUI():
 
 mouse = ObserverF(lambda x: Globals.mousePos)
 
-lbutton = ObserverF(lambda x: Globals.lbutton)
-rbutton = ObserverF(lambda x: Globals.rbutton)
-rbuttonPull = ObserverF(lambda x:Globals.rbuttonPull)
-lbuttonPull = ObserverF(lambda x:Globals.lbuttonPull)
+lbutton = ObserverF(lambda x: Globals.lbutton, boolType)
+rbutton = ObserverF(lambda x: Globals.rbutton, boolType)
+rbuttonPull = ObserverF(lambda x:Globals.rbuttonPull, p2Type)
+lbuttonPull = ObserverF(lambda x:Globals.lbuttonPull, p2Type)

@@ -137,6 +137,7 @@ class LiftF(SFact):
         addCheck(self)
         checkType(obj, self, self.outType, expectedType)
         Errors.checkNumArgs(len(self.types), argsLen, obj, self)
+        # JP is confused by this code
         for i in range(len(self.types)):
             self.args[i] = maybeLift(self.args[i])
             checkType(obj, self, self.args[i].outType, self.types[i]) # individual argument type check

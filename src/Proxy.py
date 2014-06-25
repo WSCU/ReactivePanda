@@ -129,5 +129,5 @@ class Proxy:
         self._remove()    #  This is in the subclass
 
 def clearReactions(m):
-    self._1Reactions = []
-    self._gReactions = []
+    m._1Reactions = []
+    m._gReactions = []

@@ -4,6 +4,7 @@ import sched, time
 from Externals import initEvents, pollGUI
 from Signal import *
 from Functions import *
+import World
 import Globals
 from direct.task import Task
 
@@ -36,6 +37,16 @@ def heartBeat(ct, events):
     for obj in Globals.worldObjects:
         #print("Initializing object: " + repr(obj))
         obj._initialize()
+    if Globals.resetFlag is not None:
+        for m in Globals.worldObjects:
+            if m is not World.world and m is not World.camera:
+                exit(m)
+        Globals.nextNE2dY = .95         # Positioning for 2-D controls - old controls should be gone
+        Globals.nextNW2dY = .95
+        Proxy.clearReactions(World.world)
+        Proxy.clearReactions(World.camera)
+        Globals.resetFlag()
+        Globals.resetFlag = None
 #will need to check the proxy module to find the right name for this initialize method
 #make an initialize method that clears out all the variables and resets the clock
 def initialize(ct):

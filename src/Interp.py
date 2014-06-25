@@ -317,6 +317,9 @@ def repeat(n, i):
     """
     return InterpCycle(n, i)
 
+def forever(i):
+    return repeat(-1, i)
+
 def lerpStatic(t, v1, v2):
     """
     Return the actual location along the current path (used as base case in RInterpTo)

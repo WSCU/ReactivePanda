@@ -31,8 +31,7 @@ dt = 1 #global delta time
 sl = {}
 eventListenerCache = {}
 
-#Global Error Tracker
-error = ""
+resetFlag = None
 
 # Global GUI signals
 

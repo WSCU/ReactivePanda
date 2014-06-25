@@ -203,7 +203,6 @@ time = ObserverF(lambda x: Globals.currentTime, type = numType)
 def delay(n, absoluteTime = False):
     def initClock(sm):
         sm.eventTime = n + (0 if absoluteTime else Globals.currentTime)
-        print "Die at " + str(sm.eventTime)
         sm.value = noEvent
         sm.fired = False
     def clockFN(sm): # tracks and updates engine time
@@ -220,7 +219,6 @@ def timeIs(n):
     return delay(n, absoluteTime = True)
 
 def exitScene(m, v):
-    print "exitScene"
     exit(m)
 
 eventTrue = EventValue(True)
@@ -264,3 +262,8 @@ def changes(b):
 # Filter an event stream.  Only event values that satify fn will occur
 def filter(fn, e):
     lift("filter", lambda val: EventValue(fn(val.value)) if val.occurs() else noEvent)
+
+def atTime(t,f):
+    def r(m,v):
+        f()
+    react1(timeIs(t), r)
