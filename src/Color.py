@@ -48,7 +48,7 @@ class Color:
         return hsl[1]
 
     def getL(self):
-        hsl= getHSL()
+        hsl= self.getHSL()
         return hsl[2]
 
     def show(self):

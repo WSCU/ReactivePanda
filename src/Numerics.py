@@ -63,6 +63,14 @@ color    = lift("rgb color", Color, [numType, numType, numType], colorType)
 colora   = lift("rgb color", Color, [numType, numType, numType, numType], colorType)
 colorhsl = lift("hsl color", colorHSL, [numType, numType, numType], colorType)
 
+getR     = lift("getR", lambda x: x.r, [colorType], numType)
+getG     = lift("getG", lambda x: x.g, [colorType], numType)
+getB     = lift("getB", lambda x: x.b, [colorType], numType)
+
+getH     = lift("getH", lambda x: x.getH(), [colorType], numType)
+getS     = lift("getS", lambda x: x.getS(), [colorType], numType)
+getL     = lift("getL", lambda x: x.getL(), [colorType], numType)
+
 string   = lift("string", str, [anyType], stringType)
 
 #norm      = lift(normP3, 'norm', [P3Type], P3Type)

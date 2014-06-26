@@ -125,28 +125,16 @@ class LiftF(SFact):
         return "{0} - args: {1} - types: {2} - outType: {3}".format(str(self.name), map(str, self.args), map(str, self.types), str(self.outType))
 
     def start(self, expectedType = anyType, obj = "ProxyObject"):
-        #print self.name
-        #for arg in self.args:
-            #print " " + repr(arg)
-        # Type Checking
-        # List contains arg types with the last type in the list represents the expected return type
-        #print self.outType
-        #print expectedType
         self.args = list(self.args)
         argsLen = len(self.args)
         addCheck(self)
         checkType(obj, self, self.outType, expectedType)
         Errors.checkNumArgs(len(self.types), argsLen, obj, self)
-        # JP is confused by this code
-        #for i in range(len(self.types)):
-        #    self.args[i] = maybeLift(self.args[i])
-        #    checkType(obj, self, self.args[i], self.types[i]) # individual argument type check
         ea = map(lambda x: maybeLift(x).start(), self.args)
         for i in range(len(self.types)):
             #print str(ea[i][0]) + " " + str(ea[i][1])
             checkType(obj, self, ea[i][1], self.types[i])
-        e = map(lambda x: x[0], ea)
-        return Lift(self.name,self.f, e), self.outType
+        return Lift(self.name,self.f, map(lambda x: x[0], ea)), self.outType
 
 class Lift0F(SFact):
       def __init__(self, v, t):
