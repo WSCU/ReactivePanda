@@ -8,7 +8,7 @@ def itime(i):
 # Place one object (usually a camera) behind another, always oriented toward the
 # object and at a fixed height and distance
 def flatRod(cam, target, distance = 3, height = 0.5):
-      cam.position = target.position + p3C(distance,  getH(target.hpr)+pi/2, height)
+      cam.position = target.position + p3c(distance,  getH(target.hpr)+pi/2, height)
       cam.hpr = hpr(getH(target.hpr)+pi,0,0)
 
 def pointForward(m):
