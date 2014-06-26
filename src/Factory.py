@@ -44,7 +44,7 @@ def lift(name, f, types = [], outType = anyType):
                 return LiftF(name,f,args,types = types, outType = outType)
         if len(types) is not 0:
             for i in range(len(args)):
-                #print "checking " + repr(args[i])
+                #print "checking " + repr(args[i]) + ' ' + repr(types[i])
                 checkType("ProxyObject", name, args[i], types[i])
         return f(*args)
     return fn
@@ -138,11 +138,15 @@ class LiftF(SFact):
         checkType(obj, self, self.outType, expectedType)
         Errors.checkNumArgs(len(self.types), argsLen, obj, self)
         # JP is confused by this code
+        #for i in range(len(self.types)):
+        #    self.args[i] = maybeLift(self.args[i])
+        #    checkType(obj, self, self.args[i], self.types[i]) # individual argument type check
+        ea = map(lambda x: maybeLift(x).start(), self.args)
         for i in range(len(self.types)):
-            self.args[i] = maybeLift(self.args[i])
-            checkType(obj, self, self.args[i].outType, self.types[i]) # individual argument type check
-        ea = map(lambda x: maybeLift(x).start()[0], self.args)
-        return Lift(self.name,self.f, ea), self.outType
+            #print str(ea[i][0]) + " " + str(ea[i][1])
+            checkType(obj, self, ea[i][1], self.types[i])
+        e = map(lambda x: x[0], ea)
+        return Lift(self.name,self.f, e), self.outType
 
 class Lift0F(SFact):
       def __init__(self, v, t):
