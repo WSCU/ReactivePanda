@@ -69,9 +69,9 @@ getR     = lift("getR", lambda x: x.r, [colorType], numType)
 getG     = lift("getG", lambda x: x.g, [colorType], numType)
 getB     = lift("getB", lambda x: x.b, [colorType], numType)
 
-getH     = lift("getH", lambda x: x.getH(), [colorType], numType)
-getS     = lift("getS", lambda x: x.getS(), [colorType], numType)
-getL     = lift("getL", lambda x: x.getL(), [colorType], numType)
+getCH     = lift("getH", lambda x: x.getH(), [colorType], numType)
+getCS     = lift("getS", lambda x: x.getS(), [colorType], numType)
+getCL     = lift("getL", lambda x: x.getL(), [colorType], numType)
 
 string   = lift("string", str, [anyType], stringType)
 
