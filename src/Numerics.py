@@ -50,6 +50,8 @@ log      = lift("log", math.log, [numType], numType)
 ceiling  = lift("ceiling", sCeiling, [numType], numType)
 floor    = lift("floor", sFloor, [numType], numType)
 fraction = lift("fraction", sFraction, [numType], numType)
+max      = lift("max", max, [numType,numType], numType)
+min      = lift("min", min, [numType,numType], numType)
 # sections
 add      = lift("add", lambda x: lambda y: x+y, [numType], fnType)
 sub      = lift("sub", lambda x: lambda y: y-x, [numType], fnType)
