@@ -11,6 +11,7 @@ from Color import *
 from panda3d.core import *
 import FileSearch
 import Types
+import Functions
 
 
 # This has a lot in common with PandaModel - there should be a super class
@@ -90,7 +91,7 @@ class GeometryHandle(Proxy.Proxy):
         else:
             self.color = noColor
         if duration != 0:
-            react(self, delay(duration), exitScene)
+            Functions.react(self, Functions.delay(duration), Functions.exitScene)
     def _reparent(self, m):
         self._pandaModel.reparentTo(m)
     def _remove(self):
@@ -223,7 +224,7 @@ def rectangle(p1, p2, p3, color = None, position = None, hpr = None, size = None
             result._twoSided = False
         return result
     result = GeometryHandle(nodePath, position = position, hpr = hpr, size = size,
-                                color = color, texture = texture, parent = parent)
+                                color = color, texture = texture, parent = parent, duration = duration)
     result._twoSided = False
     #result.d.model.setScale(0)  # Hack - this is rendered too soon and we get 1 frame before update.  This keeps the model invisible
     #                            # until the first refresh
