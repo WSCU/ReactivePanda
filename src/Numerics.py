@@ -39,7 +39,9 @@ radians  = lift("radians", math.radians, [numType], numType)
 # Delete this from elsewhere, use math.degrees in update functions
 degrees  = lift("degrees", math.degrees, [numType], numType)
 sin      = lift("sin", math.sin, [numType], numType)
+asin     = lift("asin", math.asin, [numType], numType)
 cos      = lift("cos", math.cos, [numType], numType)
+acos     = lift("acos", math.acos, [numType], numType)
 tan      = lift("tan", math.tan, [numType], numType)
 atan2    = lift("atan2", math.atan2, [numType, numType], numType)
 sqrt     = lift("sqrt", math.sqrt, [numType], numType)
@@ -50,6 +52,8 @@ log      = lift("log", math.log, [numType], numType)
 ceiling  = lift("ceiling", sCeiling, [numType], numType)
 floor    = lift("floor", sFloor, [numType], numType)
 fraction = lift("fraction", sFraction, [numType], numType)
+max      = lift("max", max, [numType,numType], numType)
+min      = lift("min", min, [numType,numType], numType)
 # sections
 add      = lift("add", lambda x: lambda y: x+y, [numType], fnType)
 sub      = lift("sub", lambda x: lambda y: y-x, [numType], fnType)
@@ -62,6 +66,14 @@ const    = lift("const", lambda x: lambda y: x, [anyType], fnType)
 color    = lift("rgb color", Color, [numType, numType, numType], colorType)
 colora   = lift("rgb color", Color, [numType, numType, numType, numType], colorType)
 colorhsl = lift("hsl color", colorHSL, [numType, numType, numType], colorType)
+
+getR     = lift("getR", lambda x: x.r, [colorType], numType)
+getG     = lift("getG", lambda x: x.g, [colorType], numType)
+getB     = lift("getB", lambda x: x.b, [colorType], numType)
+
+getCH     = lift("getH", lambda x: x.getH(), [colorType], numType)
+getCS     = lift("getS", lambda x: x.getS(), [colorType], numType)
+getCL     = lift("getL", lambda x: x.getL(), [colorType], numType)
 
 string   = lift("string", str, [anyType], stringType)
 

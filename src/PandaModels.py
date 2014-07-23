@@ -131,3 +131,9 @@ def forestSky(**a):
 
 def farmSky(**a):
     return pandaModel("farmSky/farmsky.egg", name = "farmSky", **a)
+
+def celestial(**a):
+    return pandaModel("celestial/celestial.egg", name = "celestial", **a)
+
+def sunset(**a):
+    return pandaModel("sunset/sunset.egg", name = "sunset", **a)

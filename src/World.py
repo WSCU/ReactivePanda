@@ -29,7 +29,7 @@ class World(Proxy.Proxy):
     def __init__(self):
         Proxy.Proxy.__init__(self, "world", updateWorld, {"color": colorType, "gravity": p3Type})
         self.color = gray
-        self.gravity = Numerics.p3(-1,0,0)
+        self.gravity = Numerics.p3(0,0,-1)
 
 world = World()
 camera = Camera()

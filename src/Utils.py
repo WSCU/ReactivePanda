@@ -11,6 +11,7 @@ def flatRod(cam, target, distance = 3, height = 0.5):
       cam.position = target.position + p3c(distance,  getH(target.hpr)+pi/2, height)
       cam.hpr = hpr(getH(target.hpr)+pi,0,0)
 
+
 def pointForward(m):
     m.hpr = P3toHPR(deriv(m.position, p3(0,0,0)))
 
