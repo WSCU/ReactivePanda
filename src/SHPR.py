@@ -9,9 +9,9 @@ from Types import hprType, numType, getPtype
 
 class SHPR:
     def __init__(self, h, p, r):
-        self.h = h
-        self.p = p
-        self.r = r
+        self.h = h+0
+        self.p = p+0
+        self.r = r+0
         self._type = hprType
     def __str__(self):
         return "HPR(%7.2f, %7.2f, %7.2f)" % (self.h, self.p, self.r)

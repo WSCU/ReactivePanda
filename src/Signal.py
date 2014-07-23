@@ -41,6 +41,7 @@ class Lift(Signal):
         self.args=args
     def now(self):
     	ea = map (lambda a: a.now() , self.args)
+        # print "eval " + self.name + " " + str(ea) + " = " + str(self.f(*ea))
     	return self.f(*ea)
 
 # Cached Signal that inherits Signal
