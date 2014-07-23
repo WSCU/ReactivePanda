@@ -8,5 +8,5 @@ from World import world
 def launch(model, p0, v0, grav = None):
     if grav is None:
         grav = world.gravity
-    model.velocity = v0 + integral(grav) 
-    model.position = p0 + integral(model.velocity)
+    model.velocity = integral(grav, v0) 
+    model.position = integral(model.velocity, p0)

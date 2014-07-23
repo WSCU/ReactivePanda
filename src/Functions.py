@@ -13,7 +13,10 @@ def now(s):
         return s.get()
     return None  # Should be an error
 
-def integral(x):
+def integralInternal(x):  # This reurns the special value Zero() at the initial sampling.
+                          # This should always be added to something so that the Zero is never
+                          # returned to user code.  Only the __add__ method inthe Zero class is
+                          # supported so only addition will remove the Zrto
     def initIntegral(s):
         s.value = zero
     def thunk(sm):
@@ -25,6 +28,9 @@ def integral(x):
         Globals.thunks.append(lambda: thunk(sm))
         return sm.value
     return StateMachineF(initIntegral, maybeLift(x), integralf)
+
+def integral(x, v0):
+    return integralInternal(x) + v0
 
 def deriv(sig, init = zero):
     def initDeriv(sm):

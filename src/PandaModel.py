@@ -190,12 +190,12 @@ class PandaModel(Proxy):
 def modelUpdater(self):
     #These parameters find the static offset which was created during initialization and the current position which is returned by the self._get() method
     positionOffset = self._position
-    positionNow = self._get("position") + p3(0,0,0) # to make sure we do not get a zero object
+    positionNow = self._get("position") 
     sizeScalar = self._get("size") + 0
     sizeOffset = self._size
     hprOffset = self._hpr
 
-    hprNow = self._get( "hpr") + hpr(0,0,0)
+    hprNow = self._get( "hpr")
 
     #print str(positionNow) + " " + str(positionOffset) + " " + str(hprNow)
     #This is the actual updates to position/size/hpr etc.

@@ -35,35 +35,12 @@ def degrees( v):
 
 # Note that the destination is never changed.
 class Zero:
-    def __init__(self):
-        pass
     def __str__(self):
         return "0"
     def __add__(self, y):
         return  y
-    def __radd__(self, y):
-        return y
-    def __sub__(self, y):
-        return -y
-    def __rsub__(self, y):
-        return y
-    def __mul__(self, y):
-        return self
-    def __rmul__(self, y):
-        return self
-    def __abs__(self):
-        return self
-    def __neg__(self):
-        return self
 
 zero = Zero()
-zero.x = 0
-zero.y = 0
-zero.z = 0
-zero.h = 0
-zero.p = 0
-zero.r = 0
-
 
 def staticLerp(t, x, y):
     return (1-t)*x + t*y

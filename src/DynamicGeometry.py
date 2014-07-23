@@ -19,9 +19,9 @@ import Functions
 
 def geometryUpdater(self):
     #These parameters find the static offset which was created during initialization and the current position which is returned by the self._get() method
-    positionNow = self._get("position") + p3(0,0,0) # to make sure we do not get a zero object
-    sizeNow = self._get("size") + 0
-    hprNow = self._get( "hpr") + hpr(0,0,0)
+    positionNow = self._get("position")
+    sizeNow = self._get("size")
+    hprNow = self._get( "hpr")
     textureNow = self._get("texture")
     colorNow = self._get("color")
 

@@ -95,7 +95,7 @@ def holdTest():
     engine(50, verbose = True)
 
 def accumTest():
-    p = printer("accum", i = accum(integral(1)))
+    p = printer("accum", i = accum(integral(1, 0)))
     engine(50, verbose = True)
 
 def tagTest():
@@ -108,13 +108,13 @@ def tagTest():
     engine(10, verbose = True)
 
 def mIntegrals():
-    p = printer ("integral", i = integral(1))
-    q = printer ("integral 2", i = integral(p.i))
+    p = printer ("integral", i = integral(1, 0))
+    q = printer ("integral 2", i = integral(p.i, 0))
     engine(50, verbose = True)
 
 def methodTest():
-    p = printer ("p", get = integral(1))
-    q = printer ("q", i = integral(p.get))
+    p = printer ("p", get = integral(1, 0))
+    q = printer ("q", i = integral(p.get, 0))
     a = printer ("new integral", i = accum(p.get))
     engine(50, verbose = True)
 
