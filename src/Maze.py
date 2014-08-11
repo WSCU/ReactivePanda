@@ -153,108 +153,110 @@ def openings(self, (x, y), (x0, y0)):
 def findInMaze(m,c):
     print getPType(m)
         if getPType(m) != "maze":
-print "Not a maze"
-exit()
-return m.find(c)
+        print "Not a maze"
+        exit()
+    return m.find(c)
 def find1InMaze(m,c):
-if getPType(m) != "maze":
-print "Not a Maze"
-exit()
-x = m.find(c)
-if (len(x) == 0):
-print "no objects in array"
-exit()
-if len(x) > 1:
-print "too many " + c + " objects in maze"
-exit()
-return x[0]
+    if getPType(m) != "maze":
+        print "Not a Maze"
+        exit()
+    x = m.find(c)
+    if (len(x) == 0):
+        print "no objects in array"
+        exit()
+    if len(x) > 1:
+        print "too many " + c + " objects in maze"
+        exit()
+    return x[0]
 def mazeWall(m,p):
-if (p.x >= m.w) or (p.x <= 0) or (p.y >= m.h) or (p.y <= 0):
-return False
-else:
-return m.bools[int(p.y)][int(m.h-(p.x)-1)]
+    if (p.x >= m.w) or (p.x <= 0) or (p.y >= m.h) or (p.y <= 0):
+        return False
+    else:
+        return m.bools[int(p.y)][int(m.h-(p.x)-1)]
 # Not presently used
 def wallForceStatic(m,p,r):
-res = SP3(0,0,0)
-lx = sFraction(p.x)
-ly = sFraction(p.y)
-dirx = r.x > p.x
-diry = r.y > p.y
-dist = sqrt((r.x - p.x)*(r.x - p.x) + (r.y - p.y)*(r.y - p.y))
-frx = sFloor(r.x)
-fry = sFloor(r.y)
-fpx = sFloor(p.x)
-fpy = sFloor(p.y)
-if mazeWall(m,p + P3(1,0,0)) and lx >.8:
-res = res + P3(-1,0,0)*((lx-.8)*5)
-print fry
-if not (fry == fpy):
-if diry:
-res = res + P3(0,1,0)*.4*dist
-else:
-res = res + P3(0,-1,0)*.4*dist
-if mazeWall(m,p + P3(-1,0,0))and lx <.2:
-res = res + P3(1,0,0)* ((.2-lx)*5)
-if not (fry == fpy):
-if diry:
-res = res + P3(0,1,0)*.4*dist
-else:
-res = res + P3(0,-1,0)*.4*dist
-if mazeWall(m,p + P3(0,1,0)) and ly >.8:
-res = res + P3(0,-1,0)*((ly-.8)*5)
-if not (frx == fpx):
-if dirx:
-res = res + P3(1,0,0)*.4*dist
-else:
-res = res + P3(-1,0,0)*.4*dist
-if mazeWall(m,p + P3(0,-1,0))and ly <.2:
-res = res + P3(0,1,0)* ((.2-ly)*5)
-if not (frx == fpx):
-if dirx:
-res = res + P3(1,0,0)*.4*dist
-else:
-res = res + P3(-1,0,0)*.4*dist
-return res
+    res = SP3(0,0,0)
+    lx = sFraction(p.x)
+    ly = sFraction(p.y)
+    dirx = r.x > p.x
+    diry = r.y > p.y
+    dist = sqrt((r.x - p.x)*(r.x - p.x) + (r.y - p.y)*(r.y - p.y))
+    frx = sFloor(r.x)
+    fry = sFloor(r.y)
+    fpx = sFloor(p.x)
+    fpy = sFloor(p.y)
+    if mazeWall(m,p + P3(1,0,0)) and lx >.8:
+        res = res + P3(-1,0,0)*((lx-.8)*5)
+        print fry
+    if not (fry == fpy):
+        if diry:
+            res = res + P3(0,1,0)*.4*dist
+        else:
+            res = res + P3(0,-1,0)*.4*dist
+    if mazeWall(m,p + P3(-1,0,0))and lx <.2:
+        res = res + P3(1,0,0)* ((.2-lx)*5)
+    if not (fry == fpy):
+        if diry:
+            res = res + P3(0,1,0)*.4*dist
+        else:
+            res = res + P3(0,-1,0)*.4*dist
+    if mazeWall(m,p + P3(0,1,0)) and ly >.8:
+        res = res + P3(0,-1,0)*((ly-.8)*5)
+    if not (frx == fpx):
+        if dirx:
+            res = res + P3(1,0,0)*.4*dist
+        else:
+            res = res + P3(-1,0,0)*.4*dist
+    if mazeWall(m,p + P3(0,-1,0))and ly <.2:
+        res = res + P3(0,1,0)* ((.2-ly)*5)
+    if not (frx == fpx):
+        if dirx:
+            res = res + P3(1,0,0)*.4*dist
+        else:
+            res = res + P3(-1,0,0)*.4*dist
+            return res
 # I think this should be changed to take an initial point and return that if
 # movement is impossible.
 # Given a maze m, an object with a radius rad, and a proposed point d return
 def wallHitStatic(m,rad,d):
-up = 5000
-down = -5000
-left = -5000
-right = 5000
-if mazeWall(m,P3(d.x,d.y+1,0)):
-up = ceiling(d.y)-rad
-if mazeWall(m,P3(d.x,d.y-1,0)):
-down = floor(d.y)+rad
-if mazeWall(m,P3(d.x-1,d.y,0)):
-left = floor(d.x)+rad
-if mazeWall(m,P3(d.x+1,d.y,0)):
-right = ceiling(d.x)-rad
-x= clamp(d.x,left,right)
-y= clamp(d.y,down,up)
+    up = 5000
+    down = -5000
+    left = -5000
+    right = 5000
+    if mazeWall(m,P3(d.x,d.y+1,0)):
+        up = ceiling(d.y)-rad
+    if mazeWall(m,P3(d.x,d.y-1,0)):
+        down = floor(d.y)+rad
+    if mazeWall(m,P3(d.x-1,d.y,0)):
+        left = floor(d.x)+rad
+    if mazeWall(m,P3(d.x+1,d.y,0)):
+        right = ceiling(d.x)-rad
+        x= clamp(d.x,left,right)
+        y= clamp(d.y,down,up)
 # This should probably retain the z coordinate of the input ...
-return P3(x,y,0)
+    return P3(x,y,0)
 # Return a value between mi and ma
 def clamp(x,mi,ma):
-x = max(x,mi)
-x = min(x,ma)
-return x
+    x = max(x,mi)
+    x = min(x,ma)
+    return x
 def moveInMaze(model, maze, p0, vel):
-def f(s, v):
-(oldTime, oldPos) = s
-t = g.currentTime
-p1 = oldPos + v*(t - oldTime)
-p2 = wallHitStatic(maze, model.cRadius * model.size.now() , p1)
+    def f(s, v):
+        (oldTime, oldPos) = s
+        t = g.currentTime
+        p1 = oldPos + v*(t - oldTime)
+        p2 = wallHitStatic(maze, model.cRadius * model.size.now() , p1)
 # print "Try: " + str(p1) + " Corrected: " + str(p2)
-if mazeWall(maze, p2):
-print "In wall"
-p2 = oldPos
-return ((t, p2), p2)
-model.position = tracker(f, (g.currentTime, p0), vel, P3Type)
+        if mazeWall(maze, p2):
+            print "In wall"
+            p2 = oldPos
+        return ((t, p2), p2)
+        model.position = tracker(f, (g.currentTime, p0), vel, P3Type)
 def mazeStrategy(model, maze, strategy, vel, s0, pos, lastPos = (-1, -1)):
-def chooseDir(m, d):
-(s, pos, lastPos) = d
+    def chooseDir(m, d):
+    (s, pos, lastPos) = d
+    
+    
 mazeStrategy(model, maze, strategy, vel, s, pos, lastPos)
 deltaT = 1/(vel + 0.0)
 (s, newPos) = strategy(s0, maze.openings(pos, lastPos), pos)

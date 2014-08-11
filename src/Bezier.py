@@ -1,6 +1,6 @@
              # allow use of actor
 from direct.gui.DirectGui import *            # 2D GUI elements
-#from Maze import *
+from Maze import *
 #from Racetrack import *
 from World import *
 #from Time import *

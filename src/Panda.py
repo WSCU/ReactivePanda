@@ -1,6 +1,7 @@
 from Numerics import *
 from Functions import *
 from PandaModels import *
+from Maze import *
 from Interp import *
 from Externals import lbp, lbr, rbp, rbr, lbr, key, keyUp, leftClick, rightClick,\
                       mouse, lbutton, rbutton, lbuttonPull, rbuttonPull
