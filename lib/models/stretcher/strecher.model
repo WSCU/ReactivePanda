@@ -1,0 +1,9 @@
+fileName,strecher.egg
+name,Stretcher
+localSize,0.018
+localPosition,P3","-0.04","0.02","0.69
+localOrientation,HPR","-3.14","0.00","0.00
+cRadius,0.93
+cFloor,0.0
+cTop,0.93
+cType,cyl

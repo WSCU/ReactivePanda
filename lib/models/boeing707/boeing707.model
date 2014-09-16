@@ -1,0 +1,9 @@
+fileName,boeing707.egg
+name,Boeing707
+localSize,0.0179508233691
+localPosition,"0.02,0.02,0.00"
+localOrientation,"3.141,0.00,0.00"
+cRadius,0.719298481941
+cFloor,0.0
+cTop,0.3
+cType,cyl

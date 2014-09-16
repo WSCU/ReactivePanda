@@ -1,0 +1,7 @@
+fileName,soccerball/soccerball.egg
+name,SoccerBall
+localSize,1.8
+cRadius,1
+cFloor,-1
+cTop,1
+cType,sphere

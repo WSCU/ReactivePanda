@@ -1,0 +1,13 @@
+salespitch=
+textures=wizard.png invis.png 
+name=Good Wizard
+license=CCA 2.0
+other-files=
+id=goodwizard
+date=2003-10-23
+animated-models=gw01 
+keywords=Character
+animations=gw04 gw07 gw06 gw03 gw08 gw05 gw02 
+modeler=Shalin Shodan
+painter=Neo Aribarg
+animator=Shalin Shodan

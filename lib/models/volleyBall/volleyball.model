@@ -1,0 +1,8 @@
+fileName,volleyBall/volleyball.egg
+name,VolleyBall
+localSize,1.8 
+cRadius,1
+cFloor,-1
+cTop,1
+cType,sphere
+                    
