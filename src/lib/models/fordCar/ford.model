@@ -1,9 +1,0 @@
-fileName,ford.egg
-name,FordCar
-localSize,0.116412728843
-localPosition,"0.32,-0.56,0.00"
-localOrientation,"0.00,0.00,0.00"
-cRadius,0.798245787621
-cFloor,0.0
-cTop,1.0
-cType,cyl
