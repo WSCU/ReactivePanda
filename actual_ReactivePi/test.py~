@@ -1,8 +1,0 @@
-
-from Reactive import *
-
-text(time*2)
-start()
-
-for i in range(10):
-    heartbeat(i, {})
