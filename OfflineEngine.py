@@ -65,18 +65,6 @@ def engine(tSteps, verbose = False, test = None):
         heartBeat(steps, events, verbose=verbose)
         steps+=1
 
-class Printer(Proxy):
-    def __init__(self, name, args):
-        Proxy.__init__(self, name, printUpdate, {})
-        for k, v in args.items():
-            setattr(self, k, v)
-
-def printer(name = "test object", **kwargs):
-    return Printer(name, kwargs)
-
-def printUpdate(proxy):
-    for k, v in proxy._signals.items():
-        print (k + ": " + str(v.state))
 
 def leftMouseEvents(l):
     e = []

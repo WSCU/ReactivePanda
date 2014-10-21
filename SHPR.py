@@ -1,11 +1,10 @@
-import Globals
-import math
-import StaticNumerics
-import Factory
-import Numerics
-import Errors
+from pythonfrp.StaticNumerics import zero, staticLerpA, SP3
+import pythonfrp.Factory as Factory
+import pythonfrp.Errors as Errors
 from panda3d.core import Quat
-from Types import hprType, numType, getPtype
+from pythonfrp.Types import hprType, numType, getPtype
+from . Numerics import HPR
+import math
 
 class SHPR:
     def __init__(self, h, p, r):
@@ -16,7 +15,7 @@ class SHPR:
     def __str__(self):
         return "HPR(%7.2f, %7.2f, %7.2f)" % (self.h, self.p, self.r)
     def __add__(self, y):
-        if y is StaticNumerics.zero:
+        if y is zero:
             return self
         if isinstance(y, SHPR):
             return addHPR(self, y)
@@ -24,13 +23,13 @@ class SHPR:
             return y + self
         Errors.errorOnStaticTypes("Add", "SHPR", y)
     def __radd__(self, y):
-        if y is StaticNumerics.zero:
+        if y is zero:
             return self
         if isinstance(y, SHPR):
             return addHPR(self, y)
         Errors.errorOnStaticTypes("Add", "SHPR", y)
     def __sub__(self, y):
-        if y is StaticNumerics.zero:
+        if y is zero:
             return self
         if isinstance(y, SHPR):
             return subHPR(self, y)
@@ -38,21 +37,21 @@ class SHPR:
             return Factory.Lift0F(self, hprType) - y
         Errors.errorOnStaticTypes("Sub", "SHPR", y)
     def __rsub__(self, y):
-        if y is StaticNumerics.zero:
+        if y is zero:
             return self
         if isinstance(y, SHPR):
             return subHPR(self, y)
         Errors.errorOnStaticTypes("Sub", "SHPR", y)
     def __mul__(self, y):
-        if y is StaticNumerics.zero:
+        if y is zero:
             return zero
         if isinstance(y, type(1)) or isinstance(y,type(1.0)):
             return scaleHPR(y, self)
         if getPtype(y).includes(numType):
             return scaleHPR(y, self)
         Errors.errorOnStaticTypes("Mul", "SHPR", y)
-    def __rmul__(self, s):
-        if y is StaticNumerics.zero:
+    def __rmul__(self, y):
+        if y is zero:
             return zero
         if isinstance(y, type(1)) or isinstance(y,type(1.0)):
             return scaleHPR(y, self)
@@ -61,7 +60,7 @@ class SHPR:
         Errors.errorOnStaticTypes("Mul", "SHPR", y)
     def __div__(self, y):
         if y is zero:
-            print "Universal Explosion"
+            print("Universal Explosion")
             return zero
         if isinstance(y, type(1)) or isinstance(y,type(1.0)):
             return scaleHPR((1.0/y), self)
@@ -71,9 +70,9 @@ class SHPR:
     def __neg__(self):
         return scaleHPR(self, -1)
     def interp(self, t, p2):
-        return SHPR(StaticNumerics.staticLerpA(t, self.h, p2.h),
-                    StaticNumerics.staticLerpA(t, self.p, p2.p),
-                    StaticNumerics.staticLerpA(t, self.r, p2.r))
+        return SHPR(staticLerpA(t, self.h, p2.h),
+                    staticLerpA(t, self.p, p2.p),
+                    staticLerpA(t, self.r, p2.r))
 
 def addHPR(a, b):
     return SHPR(a.h + b.h, a.p + b.p, a.r + b.r)
@@ -82,11 +81,12 @@ def subHPR(a, b):
     return SHPR(a.h-b.h, a.p-b.p, a.r-b.r)
 
 def scaleHPR(s, a):
-    return Numerics.HPR(a.h * s, a.p * s, a.r * s)
+    return HPR(a.h * s, a.p * s, a.r * s)
 
 def getUpHPR(hpr):
     q = Quat()
-    q.setHpr(VBase3(math.degrees(hpr.h), math.degrees(hpr.p), math.degrees(hpr.r)))
+    q.setHpr(VBase3(math.degrees(hpr.h), math.degrees(hpr.p),
+                math.degrees(hpr.r)))
     v = q.getUp()
     return SP3(v.x, v.y, v.z)
 
