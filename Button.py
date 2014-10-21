@@ -2,12 +2,12 @@
 
 # A reactive button
 
-from Types import *
-from direct.gui.DirectGui import *
-import StaticNumerics
-import Factory
-import Externals
-import Globals
+from pythonfrp.Types import *
+from direct.gui.DirectGui import DirectButton
+import pythonfrp.StaticNumerics as StaticNumerics
+import pythonfrp.Factory as Factory
+from . import Externals
+from . import Globals
 
 # Arguments to the button constructor:
 #   text            String        Normal text (required)

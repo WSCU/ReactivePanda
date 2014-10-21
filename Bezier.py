@@ -1,31 +1,33 @@
              # allow use of actor
 from direct.gui.DirectGui import *            # 2D GUI elements
-from Maze import *
+from . Maze import *
 #from Racetrack import *
-from World import *
+from . World import *
 #from Time import *
-from Color import *
-from PandaModels import *
-from Proxy import *
-from Numerics import *
-from StaticNumerics import randomChoice, random01, random11, randomInt, shuffle
-from Slider import *
-from Text import *
+from . Color import *
+from . PandaModels import *
+from pythonfrp.Proxy import *
+from pythonfrp.Numerics import *
+from . Numerics import *
+from . Slider import *
+from . Text import *
 #from Signal import time, static
 #from FRP import *
 # from Switch import *
-from Light import *
-from Sound import *
-from Button import *
-from Menu import *
-from PEffect import *
-from DynamicGeometry import *
+from . Light import *
+from . Sound import *
+from . Button import *
+from . Menu import *
+from . PEffect import *
+from . DynamicGeometry import *
 #from Interp import *
 #from TextBox import *
 #from PoseAndScriptFiles import *
 #from Utils import *
 #from Roll import *
-from Globals import*
+from . Globals import *
+from . Camera import camera
+from pythonfrp.Functions import *
 
 class Bezier:
     def __init__ (self, p00, p01, p02, p03):
@@ -37,10 +39,10 @@ class Bezier:
 #        bunny(position = self.p01)
 #        bunny(position = self.p02)
 #        bunny(position = self.p03)
-        print "p00 "+ str(p00)
-        print "p01 "+ str(p01)
-        print "p02 "+ str(p02)
-        print "p03 "+ str(p03)
+        print("p00 "+ str(p00))
+        print("p01 "+ str(p01))
+        print("p02 "+ str(p02))
+        print("p03 "+ str(p03))
 
     def interp(self, time):
         p10 = staticLerp(time, self.p00, self.p01)
@@ -118,7 +120,7 @@ class Patch:
                        break
         #print str(pe.duration)
         localT = (time - pe.start)/pe.duration
-        print "Time " + str(time) + " Local t " + str(localT) + " # " + str(i)
+        print("Time " + str(time) + " Local t " + str(localT) + " # " + str(i))
         roll = staticLerpA(localT, pe.roll, pe.rollFinal)
         pos, v = pe.bezier.interp(localT)
         #print "velocity "+str(v)
@@ -166,7 +168,7 @@ def deltaT(p1, v1, p2, v2):
 def saveCamera(name):
     status = var("Ready")
     len = var(0)
- 
+
     text(status, position = P2(0, .95))
     text(" ")
     text(format("Camera: %s", camera.position))
@@ -189,7 +191,7 @@ def saveCamera(name):
         spline.add( cp, chpr, now(speed))
         status.set("Added a point at " + str(cp) + " hpr = " + str(chpr))  # Should say where and how many
         #bunny(position = cp, hpr = chpr)
-        
+
     react(spb,addPoint)
     def camerapreview(m, v):
         for m in models[0]:
@@ -261,4 +263,4 @@ def launchCamera(fileName):
     fileLoader.close()
     camera.position = spline.getPos(time)
     camera.hpr = spline.getHPR(time)
-   
+

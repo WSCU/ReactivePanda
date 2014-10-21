@@ -6,8 +6,8 @@ Many predefined colors (stolen from Clastic)
 """
 
 from pandac.PandaModules import VBase4
-from Types import colorType
-import StaticNumerics
+from pythonfrp.Types import colorType
+import pythonfrp.StaticNumerics as StaticNumerics
 from colorsys import rgb_to_hls, hls_to_rgb
 
 class Color:
@@ -57,7 +57,7 @@ class Color:
         the Panda library
         """
         return "[" + str(self.r) + ", " + str(self.g) + ", " + str(self.b) + "]"
-        
+
     def toVBase4(self):
         """
         Changes the representation to be used by Panda

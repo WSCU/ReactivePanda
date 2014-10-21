@@ -30,12 +30,12 @@ def peffectUpdater(self):
 
 class PEffect(Proxy):
 
-    def __init__(self, particleFn, name = 'particleEffect', 
+    def __init__(self, particleFn, name = 'particleEffect',
                hpr = None, position = None,
                 size = None, duration = 0, parent = render,
-                **a): 
+                **a):
         Proxy.__init__(self, name = name + ":" + str(Globals.nextModelId), updater = peffectUpdater, types = {"position":p3Type, "hpr":hprType, "size":numType})
-        
+
         #pathname = "/lib/panda/lib/lib-original/particles/"
         #base.enableParticles() #this should be in start in main program, this should probably go away
         base.enableParticles()
@@ -902,7 +902,7 @@ def smokeTail(lifeSpan = 5, lifeSpanSpread = 0, mass = 0.005,
          a["force"] = force
          return PEffect(smokeTailFn, name = "smokeTail", **a)
 
-    
+
 
 
 

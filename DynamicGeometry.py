@@ -1,17 +1,17 @@
 
 # Todo: add code for surface normals
 
-import Globals
+from . import Globals
 
-from Types import *
-import PandaModel
-import Proxy
-from Numerics import *
-from Color import *
+from pythonfrp.Types import *
+from . import PandaModel
+import pythonfrp.Proxy as Proxy
+from . Numerics import *
+from . Color import *
 from panda3d.core import *
-import FileSearch
-import Types
-import Functions
+from . import FileSearch
+import pythonfrp.Types as Types
+import pythonfrp.Functions as Functions
 
 
 # This has a lot in common with PandaModel - there should be a super class
@@ -180,7 +180,7 @@ def triangle(p1, p2, p3, color = None, position = None, hpr = None, size = None,
     if (sideTwo is not None):
         nodePath.setTwoSided(False)
         result = GeometryHandle(nodePath, position = position, hpr = hpr, size = size,
-                                color = color, texture = texture, parent = parent)        
+                                color = color, texture = texture, parent = parent)
         if sideTwo is not False:
             result.sideTwo = sideTwo
             otherSide = triangle(p2, p1, p3, texture = sideTwo, sideTwo = False, texP1 = texP1, texP2 = texP2, texP3 = texP3, parent = result)

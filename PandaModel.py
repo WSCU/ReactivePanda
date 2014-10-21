@@ -9,16 +9,16 @@
 from direct.actor import Actor
 import direct.directbase.DirectStart
 from panda3d.core import Filename
-from Engine import *
-from Signal import *
-from Proxy import *
-from Numerics import *
-from StaticNumerics import pi, degrees
-import Globals
-import FileIO
-import FileSearch
-import Functions
-from Color import *
+from pythonfrp.Signal import *
+from pythonfrp.Proxy import *
+from pythonfrp.Numerics import *
+from . Numerics import *
+from pythonfrp.StaticNumerics import pi, degrees
+import pythonfrp.Globals as Globals
+from . import FileIO
+from . import FileSearch
+from pythonfrp.Functions import *
+from . Color import *
 
 # This fills in all of the defaults
 parameterCache = {}
@@ -62,7 +62,7 @@ class PandaModel(Proxy):
         if fileName in parameterCache:
             self._mParams = parameterCache[fileName]
         elif self._mFile is None:
-            print "Can't find model " + repr(fileName) #should substitute pandafor unknown models
+            print("Can't find model " + repr(fileName)) #should substitute pandafor unknown models
         #self._mFile = Filename("/c/Panda3D-1.8.1/models/"+fileName)
         #print "File Path: " + repr(mFile)
         else:
@@ -72,7 +72,7 @@ class PandaModel(Proxy):
             if mParamFile.exists():
                 self._mParams = FileIO.loadDict(mParamFile,types = modelTypes,  defaults = defaultModelParameters)
             else:
-                print "No .model for " + str(fileName)
+                print("No .model for " + str(fileName))
                 self._mParams = defaultModelParameters
             parameterCache[fileName] = self._mParams
         self._pandaModel = loader.loadModel(self._mFile)
@@ -134,7 +134,7 @@ class PandaModel(Proxy):
         self._pandaModel.reparentTo(m)
     def _touches(self, handle, trace = False):
         if trace:
-           print "Touch: " + repr(self) + " (" + self._cType + ") " + repr(handle) + " (" + handle._cType + ")"
+           print("Touch: " + repr(self) + " (" + self._cType + ") " + repr(handle) + " (" + handle._cType + ")")
         #print (repr(self._cRadius))
         #print (repr(self.get("size")))
         mr = self._cRadius * self._get("size")
@@ -142,7 +142,7 @@ class PandaModel(Proxy):
         yr = handle._cRadius*handle._get("size")
         yp = handle._get("position") + p3(0,0,0)
         if trace:
-            print repr(mp) + " [" + repr(mr) + "] " + repr(yp) + " [" + repr(yr) + "]"
+            print (repr(mp) + " [" + repr(mr) + "] " + repr(yp) + " [" + repr(yr) + "]")
         if self._cType == "sphere":
             if handle._cType == "sphere":
                 return absP3(subP3(mp, yp)) < mr + yr
@@ -177,20 +177,20 @@ class PandaModel(Proxy):
                 # print str(mp.x) + " , " + str(mp.y)
                 d = absP2(subP2(P2(mp.x, mp.y), P2(yp.x, yp.y)))
                 if trace:
-                    print "c to c (dist = " + str(d) + ") " + str(mr+yr)
+                    print ("c to c (dist = " + str(d) + ") " + str(mr+yr))
                 if d > mr + yr:
                     return False
                 else:
                     res = self._cTop + mp.z > handle._cFloor + yp.z and self._cFloor + mp.z < handle._cTop + yp.z
                     if trace:
-                        print "Result: " + str(res) + " " + str((self._cTop, mp.z, handle._cFloor, yp.z, self._cFloor, handle._cTop))
+                        print( "Result: " + str(res) + " " + str((self._cTop, mp.z, handle._cFloor, yp.z, self._cFloor, handle._cTop)))
                     #print ("*****"+repr(res))
                     return res
 
 def modelUpdater(self):
     #These parameters find the static offset which was created during initialization and the current position which is returned by the self._get() method
     positionOffset = self._position
-    positionNow = self._get("position") 
+    positionNow = self._get("position")
     sizeScalar = self._get("size") + 0
     sizeOffset = self._size
     hprOffset = self._hpr
