@@ -1,12 +1,12 @@
-
-import Globals
-from Factory import *
-from Signal import *
-import StaticNumerics
+import pythonfrp.Globals as Globals
+from pythonfrp.Factory import *
+from pythonfrp.Signal import *
+from pythonfrp.Types import *
+import pythonfrp.StaticNumerics as StaticNumerics
 from direct.actor import Actor
-import Errors
-import Functions
-import Click
+import pythonfrp.Errors as Errors
+import pythonfrp.Functions as Functions
+from . import Click
 
 def lbp(e = True):
     return eventObserver("mouse1", e)
@@ -74,7 +74,7 @@ def getEventSignal(ename, val):
 
 
 def initEvents():
-    base.disableMouse() 
+    base.disableMouse()
     directObj = Globals.direct
     directObj.accept("mouse1", lambda: postEvent("mouse1"))
     directObj.accept("mouse3", lambda: postEvent("mouse3"))

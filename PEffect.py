@@ -2,14 +2,14 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 
-from Proxy import *
-from Panda import *
+from pythonfrp.Proxy import *
+from . Panda import *
 from pandac.PandaModules import *
 from pandac.PandaModules import *
 from direct.particles.Particles import *
 from direct.particles.ParticleEffect import *
-from FileSearch import *
-import PandaModel
+from . FileSearch import *
+from . import PandaModel
 
 def peffectUpdater(self):
     #These parameters find the static offset which was created during initialization and the current position which is returned by the self._get() method

@@ -1,15 +1,11 @@
-import Globals
-# To change this license header, choose License Headers in Project Properties.
-# To change this template file, choose Tools | Templates
-# and open the template in the editor.
-
+from . import Globals
 from direct.actor import Actor
 import direct.directbase.DirectStart
-from Engine import *
-from Signal import *
-from Proxy import *
-from Numerics import *
-from Color import *
+from . Engine import *
+from pythonfrp.Signal import *
+from pythonfrp.Proxy import *
+from pythonfrp.Numerics import *
+from . Color import *
 from pandac.PandaModules import *
 
 def updateALight(self):
@@ -27,7 +23,7 @@ class ALight(Proxy):
             self.color = color
         else:
             self.color = white
- 
+
 def updateDLight(self):
     c = self._get("color")
     self._DLight.setColor(c.toVBase4())
@@ -56,7 +52,7 @@ def updatePLight(self):
     p = self._get("position")
     self._PLight.setColor(c.toVBase4())
     self._Light.setPos(p.x, p.y, p.z)
-    
+
 class PLight(Proxy):
     def __init__(self, color = None, position = None, name = 'pointLight'):
         Proxy.__init__(self, name = name + str(Globals.nextModelId), types = {"color":colorType, "position":p3Type}, updater = updatePLight)
@@ -72,7 +68,7 @@ class PLight(Proxy):
             self.position = position
         else:
             self.position = SP3(0,0,0)
-        
+
 def pointLight(color = None, position = None):
     return PLight(color = color, position = position)
 

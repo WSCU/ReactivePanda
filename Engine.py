@@ -4,6 +4,7 @@
 from pythonfrp.Signal import *
 from pythonfrp.Functions import *
 import pythonfrp.Globals as frpGlobals
+from . import Camera
 from . Externals import initEvents, pollGUI
 
 
@@ -54,7 +55,7 @@ def initialize(ct):
     frpGlobals.newModels = []
     frpGlobals.worldObjects = {}
     frpGlobals.events = []
-    frpGlobals.panda3dCamera = camera #Panda3-D built in camera
+    Camera.panda3dCamera = Camera.camera #Panda3-D built in camera
     frpGlobals.world = world
 
 def engine(ct):

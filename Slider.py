@@ -1,13 +1,11 @@
-
 from direct.gui.DirectGui import *
-
-import Globals
-from Factory import *
-from Types import *
-import Text
-from StaticNumerics import SP2
-from Numerics import *
-from Color import *
+from . import Globals
+from pythonfrp.Factory import *
+from pythonfrp.Types import *
+from . import Text
+from pythonfrp.StaticNumerics import SP2
+from pythonfrp.Numerics import *
+from . Color import *
 
 class Slider:
     def __init__(self, size, position, min, max, pageSize, init, label):

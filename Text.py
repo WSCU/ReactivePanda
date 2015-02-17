@@ -1,14 +1,14 @@
 import Globals
-from Proxy import *
+from pythonfrp.Proxy import *
 import colorsys
 from direct.gui.OnscreenText import OnscreenText
-from Types import * 
+from pythonfrp.Types import *
 import StaticNumerics
-import Numerics
+import pythonfrp.Numerics as Numerics
 from direct.gui.DirectGui import *
-from Externals import postEvent
-from Factory import maybeLift
-from Color import yellow
+from . Externals import postEvent
+from pythonfrp.Factory import maybeLift
+from . Color import yellow
 
 class TextBox(Proxy): #Creates the text box object that users can enter in values to
     def __init__(self, position = None, size = 1, name = 'TextBox', width = 15):
@@ -22,14 +22,14 @@ class TextBox(Proxy): #Creates the text box object that users can enter in value
             Globals.nextNE2dY = Globals.nextNE2dY - .1
         self.text = var("")
         self.enter = eventObserver("enter")
-    
+
 def textboxUpdater(self):
     p1 = self.get("position")
     s = self.get("size")
     w = self.get("width")
     self._textBox =  DirectEntry(pos = (p1.x,0,p1.y),scale=s*0.05, command=lambda v:textBoxChange(v,self), width = w)
 
-    
+
 def textBoxChange(v, self):
     postEvent(self.name, v)
     self.text.set(v)

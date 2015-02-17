@@ -1,10 +1,9 @@
-
 # A reactive menu
 
 from direct.gui.DirectGui import *
-from Externals import postEvent
-import Factory
-import Globals
+import pythonfrp.Factory as Factory
+from pythonfrp.Types import checkType, p2Type, numType
+from . import Globals
 
 # Arguments to the button constructor:
 #   text            String        Normal text (required)
@@ -24,7 +23,7 @@ class Menu:
             pos = (.95, 0, g.nextNE2dY)
             Globals.nextNE2dY = Globals.nextNE2dY - .1
         else:
-            checkType(self.name, "position", position, p2Type)
+            checkType(name, "position", position, p2Type)
             pos = (position.x, 0, position.y)
         self._name = name + str(Globals.nextModelId)
         Globals.nextModelId += 1

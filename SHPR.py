@@ -3,7 +3,7 @@ import pythonfrp.Factory as Factory
 import pythonfrp.Errors as Errors
 from panda3d.core import Quat
 from pythonfrp.Types import hprType, numType, getPtype
-from . Numerics import HPR
+#from . Numerics import HPR - Unused recursive import, nice!
 import math
 
 class SHPR:

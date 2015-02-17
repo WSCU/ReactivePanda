@@ -1,7 +1,5 @@
-import math
 from DynamicGeometry import *
 import sys
-from FRP import *
 # This code creates a maze object from data stored in a file
 # Each character in the file corresponds to a square in the maze.
 # Uppercase letters correspond to walls, as defined by wall_C functions
@@ -50,7 +48,7 @@ class Maze:
             s = set()
             #print dir(sys.modules[modname])
             #print sys.modules[modname]
-        for ln in xrange(self.h):   
+        for ln in xrange(self.h):
             l = contents[ln]
                 # print l
         for cn in xrange(self.w):
@@ -62,6 +60,7 @@ class Maze:
             if(c==" "):
                 feature = None
             else:
+                pass # What is is else supposed to do?
         if(c.isupper()):
             f= "sys.modules[modname].wall_"+c
             if not(("wall_"+c) in dir(sys.modules[modname])):
@@ -77,7 +76,7 @@ class Maze:
             feature = eval(f)(cn,self.h-ln-1)
             self.objects[ln][cn] = feature
             self.bools[ln][cn]= self.chars[ln][cn].isupper()
-            print self.chars[ln]
+            print(self.chars[ln])
             #for e in s:
             # print e
             # Create the floor - this can be a solid color or a picture
@@ -101,7 +100,7 @@ def wallForce(self, s,r):
     return lift(lambda x,r: wallForceStatic(self, x,r), "wallForce", [P3Type,P3Type], P3Type)(s,r)
 def wallHit(self, rad, pos):
     return lift(lambda rad,pos: wallHitStatic(self, rad, pos), "wallForce", [numType,P3Type], P3Type)(rad, pos)
-def openings(self, (x, y), (x0, y0)):
+def openings(self, x, y, x0, y0):
     res = []
     dir = None
     if x0 == -1:
@@ -123,49 +122,49 @@ def openings(self, (x, y), (x0, y0)):
 # This creates a solid cube in the maze. There are six textures. The first texture is the default.
 # x and y are in maze coordinates.
 # If no color is given a random color is chosen.
-    def mazeCube(x,y,col = None,north=None,south=None,east=None,west=None,top=None,bottom=None):
-        if(col == None):
-            col = color(0, random01(),random01())
-        if(north == None):
-            north = col
-        if(south == None):
-            south = col
-        if(east == None):
-            east = col
-        if(west == None):
-            west = col
-        if(top == None):
-            top = col
-        if(bottom == None):
-            bottom = col
-        return cube(
-            north,
-            south,
-            east,
-            west,
-            top,
-            bottom,
-            position = P3(x+.5,y+.5,0),size=.49)
-            # Use size = .49 so that the textures on adjacent cubes don't touch
-            # Create a maze from a file (f) The value of m
-   def maze(f,m, color = springGreen):
-        return Maze(f,m, color)
+def mazeCube(x,y,col = None,north=None,south=None,east=None,west=None,top=None,bottom=None):
+    if(col == None):
+        col = color(0, random01(),random01())
+    if(north == None):
+        north = col
+    if(south == None):
+        south = col
+    if(east == None):
+        east = col
+    if(west == None):
+        west = col
+    if(top == None):
+        top = col
+    if(bottom == None):
+        bottom = col
+    return cube(
+        north,
+        south,
+        east,
+        west,
+        top,
+        bottom,
+        position = P3(x+.5,y+.5,0),size=.49)
+        # Use size = .49 so that the textures on adjacent cubes don't touch
+        # Create a maze from a file (f) The value of m
+def maze(f,m, color = springGreen):
+    return Maze(f,m, color)
 def findInMaze(m,c):
-    print getPType(m)
-        if getPType(m) != "maze":
-        print "Not a maze"
+    print(getPType(m))
+    if getPType(m) != "maze":
+        print("Not a maze")
         exit()
     return m.find(c)
 def find1InMaze(m,c):
     if getPType(m) != "maze":
-        print "Not a Maze"
+        print("Not a Maze")
         exit()
     x = m.find(c)
     if (len(x) == 0):
-        print "no objects in array"
+        print("no objects in array")
         exit()
     if len(x) > 1:
-        print "too many " + c + " objects in maze"
+        print("too many " + c + " objects in maze")
         exit()
     return x[0]
 def mazeWall(m,p):
@@ -187,7 +186,7 @@ def wallForceStatic(m,p,r):
     fpy = sFloor(p.y)
     if mazeWall(m,p + P3(1,0,0)) and lx >.8:
         res = res + P3(-1,0,0)*((lx-.8)*5)
-        print fry
+        print(fry)
     if not (fry == fpy):
         if diry:
             res = res + P3(0,1,0)*.4*dist
@@ -248,15 +247,17 @@ def moveInMaze(model, maze, p0, vel):
         p2 = wallHitStatic(maze, model.cRadius * model.size.now() , p1)
 # print "Try: " + str(p1) + " Corrected: " + str(p2)
         if mazeWall(maze, p2):
-            print "In wall"
+            print("In wall")
             p2 = oldPos
         return ((t, p2), p2)
         model.position = tracker(f, (g.currentTime, p0), vel, P3Type)
+
+"""
 def mazeStrategy(model, maze, strategy, vel, s0, pos, lastPos = (-1, -1)):
     def chooseDir(m, d):
     (s, pos, lastPos) = d
-    
-    
+
+
 mazeStrategy(model, maze, strategy, vel, s, pos, lastPos)
 deltaT = 1/(vel + 0.0)
 (s, newPos) = strategy(s0, maze.openings(pos, lastPos), pos)
@@ -264,3 +265,4 @@ vv = P3(newPos[0] - pos[0], newPos[1] - pos[1], 0)
 model.position = P3(pos[0]+.5, pos[1]+.5, 0) + integral(vv * vel)
 model.hpr = P3toHPR(vv)
 model.react1(tag((s, newPos, pos), wait(deltaT)), chooseDir)
+"""

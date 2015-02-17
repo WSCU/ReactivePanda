@@ -9,13 +9,13 @@
 from direct.actor import Actor
 import direct.directbase.DirectStart
 from panda3d.core import Filename
-from pythonfrp.Signal import *
-from pythonfrp.Proxy import *
 from pythonfrp.Numerics import *
+import pythonfrp.Globals as frpGlobals
+from . import PandaGlobals
 from . Numerics import *
-from pythonfrp.StaticNumerics import pi, degrees
-import pythonfrp.Globals as Globals
+from pythonfrp.StaticNumerics import degrees
 from . import FileIO
+import pythonfrp.Proxy as Proxy
 from . import FileSearch
 from pythonfrp.Functions import *
 from . Color import *
@@ -42,18 +42,18 @@ def getModel(x):
 def pandaModel(fileName = None, name = "PandaModel", size = None, hpr = None, position = None, tag = [], color = None, texture = None, parent = render, duration = 0):
     return PandaModel(  fileName, size, hpr, position, tag, color, texture, name, parent, duration)
 
-class PandaModel(Proxy):
+class PandaModel(Proxy.Proxy):
     def __init__(self, fileName, size, hpr, position, tag, color, texture, name, parent, duration):
-        Proxy.__init__(self, name = str(name) + ":" + str(Globals.nextModelId), updater = modelUpdater,
+        Proxy.Proxy.__init__(self, name = str(name) + ":" + str(PandaGlobals.nextModelId), updater = modelUpdater,
                              types = {"position": p3Type, "hpr": hprType , "size": numType,
                                       "color": colorType, "texture": stringType})
         modelTypes = {"localOrientation": hprType, "localSize": numType, "localPosition": p3Type,
                       "cRadius": numType, "cType": stringType, "cFloor": numType, "cTop": numType}
         #(p3Type, SP3(0,0,0)), "hpr": (hprType, SHPR(0,0,0)), "size": (numType, 1)})
-        Globals.nextModelId = Globals.nextModelId + 1
+        PandaGlobals.nextModelId = PandaGlobals.nextModelId + 1
         self._parent = getModel(parent)
         self._mFile = FileSearch.fileSearch(fileName, "models",["egg"])
-        #print "Object Name: "+ str(fileName)+"-gID: "+str(Globals.nextModelId);
+        #print "Object Name: "+ str(fileName)+"-gID: "+str(PandaGlobals.nextModelId);
         if type(tag) == type("s"):
             collections = [tag]
         else:
@@ -109,12 +109,12 @@ class PandaModel(Proxy):
         else:
             self.color = noColor
         for tag in collections:
-            if tag not in Globals.collections:
-                Globals.collections[tag] = [self]
-            Globals.collections[tag].append(self)
+            if tag not in frpGlobals.collections:
+                frpGlobals.collections[tag] = [self]
+            frpGlobals.collections[tag].append(self)
 
         #Get saved reaction functions for this collection
-        for t, v in Globals.collectionReactions.items():
+        for t, v in frpGlobals.collectionReactions.items():
             for tag in collections:
                 if tag in v:
                     for args in v[tag]:
@@ -126,8 +126,8 @@ class PandaModel(Proxy):
             if self._pandaModel is not None:
                 self._pandaModel.detachNode()
             for c in self._collections:
-                old = Globals.collections[c]
-                Globals.collections[c] = [x for x in old if x is not self]
+                old = frp.PandaGlobals.collections[c]
+                frp.PandaGlobals.collections[c] = [x for x in old if x is not self]
 
     def _reparent(self, m):
 #        print "reparent " + repr(self) + " to " + repr(m)
@@ -199,8 +199,8 @@ def modelUpdater(self):
 
     #print str(positionNow) + " " + str(positionOffset) + " " + str(hprNow)
     #This is the actual updates to position/size/hpr etc.
-    #if Globals.eventSignals is not None:
-    #        for signal in Globals.events:
+    #if PandaGlobals.eventSignals is not None:
+    #        for signal in PandaGlobals.events:
     #            print repr(signal)
 
 

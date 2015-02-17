@@ -1,6 +1,6 @@
 
-from Numerics import *
-from Functions import *
+from pythonfrp.Numerics import *
+from pythonfrp.Functions import *
 
 def itime(i):
     return interpolate(localTime, i)

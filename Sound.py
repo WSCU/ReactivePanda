@@ -1,5 +1,5 @@
 from FileSearch import findSound
-from Types import soundType
+from pythonfrp.Types import soundType
 from panda3d.core import Filename
 
 

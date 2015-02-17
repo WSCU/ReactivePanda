@@ -1,5 +1,5 @@
 
-from PandaModel import *
+from . PandaModel import *
 
 # Characters/Creatures
 
