@@ -1,5 +1,5 @@
 from direct.gui.DirectGui import *
-from . import Globals
+from . import PandaGlobals as Globals
 from pythonfrp.Factory import *
 from pythonfrp.Types import *
 from . import Text
