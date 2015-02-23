@@ -1,8 +1,8 @@
-Reactive-Engine
+ReactivePanda
 ===============
 ReactivePanda is a library that aims to make it easier to teach programming to middle school / high school aged students.
 
-Our philosophy is tha using a non-domain specific langague such as python with the addition of reactive programming elements allows for an easier introduction and transition to more advanced programming.
+Our philosophy is that using a non-domain specific langague such as python with the addition of reactive programming elements allows for an easier introduction and transition to more advanced programming.
 
 This library is a wrapper of the [panda3d](panda3d.org) game engine.
 
