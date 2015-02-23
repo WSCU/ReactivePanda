@@ -1,9 +1,9 @@
-import Globals
+from . import PandaGlobals
 from panda3d.core import *
 
 def findClickedModels():
     pickerNode = CollisionNode('mouseRay')
-    pickerNP = Globals.panda3dCamera.attachNewNode(pickerNode)
+    pickerNP = PandaGlobals.panda3dCamera.attachNewNode(pickerNode)
     pickerNode.setFromCollideMask(GeomNode.getDefaultCollideMask())
     pickerRay = CollisionRay()
     pickerNode.addSolid(pickerRay)

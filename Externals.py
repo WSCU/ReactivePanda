@@ -1,4 +1,5 @@
 import pythonfrp.Globals as Globals
+from . import PandaGlobals
 from pythonfrp.Factory import *
 from pythonfrp.Signal import *
 from pythonfrp.Types import *
@@ -69,22 +70,22 @@ def getEventSignal(ename, val):
             return Functions.tag(val, Globals.eventSignals[ename])
         e = eventObserver(ename)
         Globals.eventSignals[ename] = e
-        Globals.direct.accept(ename, lambda: postEvent(ename))
+        PandaGlobals.direct.accept(ename, lambda: postEvent(ename))
         return Functions.tag(val, e)
 
 
 def initEvents():
     base.disableMouse()
-    directObj = Globals.direct
+    directObj = PandaGlobals.direct
     directObj.accept("mouse1", lambda: postEvent("mouse1"))
     directObj.accept("mouse3", lambda: postEvent("mouse3"))
     directObj.accept("mouse1-up", lambda: postEvent("mouse1-up"))
     directObj.accept("mouse3-up", lambda: postEvent("mouse3-up"))
-    Globals.mousePos = StaticNumerics.SP2(0,0)
-    Globals.lbutton = False
-    Globals.rbutton = False
-    Globals.lbuttonPull = StaticNumerics.SP2(0,0)
-    Globals.rbuttonPull = StaticNumerics.SP2(0,0)
+    PandaGlobals.mousePos = StaticNumerics.SP2(0,0)
+    PandaGlobals.lbutton = False
+    PandaGlobals.rbutton = False
+    PandaGlobals.lbuttonPull = StaticNumerics.SP2(0,0)
+    PandaGlobals.rbuttonPull = StaticNumerics.SP2(0,0)
 
 
 def pollGUI():
@@ -94,20 +95,20 @@ def pollGUI():
        lbr = Globals.events.has_key("mouse1-up")
        rbr = Globals.events.has_key("mouse3-up")
        if lbp:
-           Globals.lbutton = True
+           PandaGlobals.lbutton = True
        if rbp:
-           Globals.rbutton = True
+           PandaGlobals.rbutton = True
        if lbr:
-           Globals.lbutton = False
+           PandaGlobals.lbutton = False
        if rbr:
-           Globals.rbutton = False
+           PandaGlobals.rbutton = False
        mpos = base.mouseWatcherNode.getMouse() #get the mouse position in Panda3D form
-       lastMousePos = Globals.mousePos
-       Globals.mousePos = StaticNumerics.SP2(mpos.getX(), mpos.getY())
-       if Globals.lbutton and lastMousePos is not None:
-               Globals.lbuttonPull = Globals.lbuttonPull + Globals.mousePos - lastMousePos
-       if Globals.rbutton and lastMousePos is not None:
-               Globals.rbuttonPull = Globals.rbuttonPull + Globals.mousePos - lastMousePos
+       lastMousePos = PandaGlobals.mousePos
+       PandaGlobals.mousePos = StaticNumerics.SP2(mpos.getX(), mpos.getY())
+       if PandaGlobals.lbutton and lastMousePos is not None:
+               PandaGlobals.lbuttonPull = PandaGlobals.lbuttonPull + PandaGlobals.mousePos - lastMousePos
+       if PandaGlobals.rbutton and lastMousePos is not None:
+               PandaGlobals.rbuttonPull = PandaGlobals.rbuttonPull + PandaGlobals.mousePos - lastMousePos
        # If a left / right mouse click has happened, ask Panda which model was clicked on.  Post an event
        # if there is a model where the mouse clicked
        if lbp or rbp:
@@ -118,9 +119,9 @@ def pollGUI():
                else:
                     Globals.events[m + "-rightclick"] = True
 
-mouse = ObserverF(lambda x: Globals.mousePos)
+mouse = ObserverF(lambda x: PandaGlobals.mousePos)
 
-lbutton = ObserverF(lambda x: Globals.lbutton, boolType)
-rbutton = ObserverF(lambda x: Globals.rbutton, boolType)
-rbuttonPull = ObserverF(lambda x:Globals.rbuttonPull, p2Type)
-lbuttonPull = ObserverF(lambda x:Globals.lbuttonPull, p2Type)
+lbutton = ObserverF(lambda x: PandaGlobals.lbutton, boolType)
+rbutton = ObserverF(lambda x: PandaGlobals.rbutton, boolType)
+rbuttonPull = ObserverF(lambda x:PandaGlobals.rbuttonPull, p2Type)
+lbuttonPull = ObserverF(lambda x:PandaGlobals.lbuttonPull, p2Type)

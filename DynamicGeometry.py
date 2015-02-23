@@ -1,7 +1,7 @@
 
 # Todo: add code for surface normals
 
-from . import Globals
+from . import PandaGlobals as Globals
 
 from pythonfrp.Types import *
 from . import PandaModel

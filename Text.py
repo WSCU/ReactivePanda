@@ -1,4 +1,4 @@
-import Globals
+from . import PandaGlobals as Globals
 from pythonfrp.Proxy import *
 import colorsys
 from direct.gui.OnscreenText import OnscreenText

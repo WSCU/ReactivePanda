@@ -1,4 +1,4 @@
-from . import Globals
+from . import PandaGlobals as Globals
 from direct.actor import Actor
 import direct.directbase.DirectStart
 from . Engine import *

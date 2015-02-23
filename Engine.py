@@ -6,6 +6,7 @@ from pythonfrp.Functions import *
 import pythonfrp.Globals as frpGlobals
 from . import Camera
 from . Externals import initEvents, pollGUI
+from direct.task import Task
 
 
 def heartBeat(ct, events):

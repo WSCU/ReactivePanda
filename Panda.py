@@ -2,7 +2,7 @@ from pythonfrp.Numerics import *
 from . Numerics import *
 from pythonfrp.Functions import *
 from . PandaModels import *
-#from . Maze import * --Currently not working. 11/18/14
+
 from pythonfrp.Interp import *
 from . Externals import lbp, lbr, rbp, rbr, lbr, key, keyUp, leftClick, rightClick,\
                       mouse, lbutton, rbutton, lbuttonPull, rbuttonPull

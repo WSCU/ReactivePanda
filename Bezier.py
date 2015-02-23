@@ -25,7 +25,7 @@ from . DynamicGeometry import *
 #from PoseAndScriptFiles import *
 #from Utils import *
 #from Roll import *
-from . Globals import *
+from . PandaGlobals import *
 from . Camera import camera
 from pythonfrp.Functions import *
 

@@ -7,7 +7,7 @@ from direct.gui.DirectGui import DirectButton
 import pythonfrp.StaticNumerics as StaticNumerics
 import pythonfrp.Factory as Factory
 from . import Externals
-from . import Globals
+from . import PandaGlobals as Globals
 
 # Arguments to the button constructor:
 #   text            String        Normal text (required)

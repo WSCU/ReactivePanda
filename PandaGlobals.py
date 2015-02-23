@@ -18,22 +18,7 @@ lbuttonPull = None # "Pulled" 2-D point for the left button
 texture = None # Used to communicate with particle effect code from particle panel
 
 
+# Temporary for testing, this needs to be automatically set
+pandaPath = "/f/prog/ReactivePanda/lib"
 
-pandaPath = "/c/Reactive-Engine/src/lib"
-#osType = platform.system() # OS That is being used. # NotReturning Correct osType should be Windows Insted of Java.
-#print osType
-#osType = 'Linux'
-#pandaPath = os.getcwd()
-#pandaPath = "/c/panda/lib"
-#pandaPath = "/c/panda/lib"
-#pandaPath = "/c/users/outcast/documents/GitHub/Reactive-Engine/src/lib" #this is for Grahams personal machine
-'''
-osType = 'Windows'
-if osType is 'Linux':
-# print "we're on Linux"
-pandaPath = os.getcwd()+"/lib/" # Since we are on a Linux system we will now use a linux file path.
-if osType is 'Windows':
-# print "we're on Windows" # Since we are on a Windows system we will use the windows file path.
-pandaPath = os.getcwd()+"/lib/"
-'''
 
