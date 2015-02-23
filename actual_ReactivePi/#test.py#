@@ -1,7 +1,0 @@
-
-from Reactive import *
-
-l = dimLight(pin=0, 
-
-
-start()
