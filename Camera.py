@@ -9,8 +9,8 @@ from pythonfrp.Types import hprType, p3Type
 def updateCamera(self):
     pos = self._get("position")
     hpr = self._get("hpr")
-    panda3dCamera.setPos(pos.x, pos.y, pos.z)
-    panda3dCamera.setHpr(math.degrees(hpr.h), math.degrees(hpr.p), math.degrees(hpr.r))
+    PandaGlobals.panda3dCamera.setPos(pos.x, pos.y, pos.z)
+    PandaGlobals.panda3dCamera.setHpr(math.degrees(hpr.h), math.degrees(hpr.p), math.degrees(hpr.r))
 
 class Camera(Proxy.Proxy):
     def __init__(self):
@@ -20,4 +20,4 @@ class Camera(Proxy.Proxy):
 
 
 camera = Camera()
-panda3dCamera = camera
+
