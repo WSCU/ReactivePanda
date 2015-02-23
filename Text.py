@@ -1,10 +1,8 @@
-from . import PandaGlobals as Globals
+from . import PandaGlobals
 from pythonfrp.Proxy import *
-import colorsys
 from direct.gui.OnscreenText import OnscreenText
 from pythonfrp.Types import *
 import StaticNumerics
-import pythonfrp.Numerics as Numerics
 from direct.gui.DirectGui import *
 from . Externals import postEvent
 from pythonfrp.Factory import maybeLift
@@ -18,8 +16,8 @@ class TextBox(Proxy): #Creates the text box object that users can enter in value
         self.size = maybeLift(size)
         self.width = maybeLift(width)
         if position is None:
-            position = StaticNumerics.SP2(.95, Globals.nextNE2dY)
-            Globals.nextNE2dY = Globals.nextNE2dY - .1
+            position = StaticNumerics.SP2(.95, PandaGlobals.nextNE2dY)
+            PandaGlobals.nextNE2dY = PandaGlobals.nextNE2dY - .1
         self.text = var("")
         self.enter = eventObserver("enter")
 
@@ -49,8 +47,8 @@ class Text(Proxy):
         else:
             self.color = color
         if position is None:
-            position = StaticNumerics.SP2(-.95, Globals.nextNW2dY)
-            Globals.nextNW2dY = Globals.nextNW2dY -.1
+            position = StaticNumerics.SP2(-.95, PandaGlobals.nextNW2dY)
+            PandaGlobals.nextNW2dY = PandaGlobals.nextNW2dY -.1
         self._textObject = OnscreenText(pos = (position.x, position.y), scale = size*0.05, mayChange = True)
         #self._text = OnscreenText(pos = (position.x, position.y), scale = size*0.05, fg = color.toVBase4(), mayChange = True)
 

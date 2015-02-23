@@ -1,4 +1,4 @@
-from . import PandaGlobals as Globals
+from . import PandaGlobals as PandaGlobals
 from direct.actor import Actor
 import direct.directbase.DirectStart
 from . Engine import *
@@ -14,8 +14,8 @@ def updateALight(self):
 
 class ALight(Proxy):
     def __init__(self, color = None, name = 'ambientLight'):
-        Proxy.__init__(self, name = name + str(Globals.nextModelId), types = {"color":colorType}, updater = updateALight)
-        Globals.nextModelId += 1
+        Proxy.__init__(self, name = name + str(PandaGlobals.nextModelId), types = {"color":colorType}, updater = updateALight)
+        PandaGlobals.nextModelId += 1
         self._ALight = AmbientLight('alight')
         self._Light = render.attachNewNode(self._ALight)
         render.setLight(self._Light)
@@ -32,8 +32,8 @@ def updateDLight(self):
 
 class DLight(Proxy):
     def __init__(self, color = None, hpr = None, name = 'directionalLight'):
-        Proxy.__init__(self, name = name + str(Globals.nextModelId), types = {"color":colorType, "hpr":hprType}, updater = updateDLight)
-        Globals.nextModelId += 1
+        Proxy.__init__(self, name = name + str(PandaGlobals.nextModelId), types = {"color":colorType, "hpr":hprType}, updater = updateDLight)
+        PandaGlobals.nextModelId += 1
         self._DLight = DirectionalLight("directionalLight")
         self._Light = render.attachNewNode(self._DLight)
         render.setLight(self._Light)
@@ -55,8 +55,8 @@ def updatePLight(self):
 
 class PLight(Proxy):
     def __init__(self, color = None, position = None, name = 'pointLight'):
-        Proxy.__init__(self, name = name + str(Globals.nextModelId), types = {"color":colorType, "position":p3Type}, updater = updatePLight)
-        Globals.nextModelId += 1
+        Proxy.__init__(self, name = name + str(PandaGlobals.nextModelId), types = {"color":colorType, "position":p3Type}, updater = updatePLight)
+        PandaGlobals.nextModelId += 1
         self._PLight = PointLight("pointLight")
         self._Light = render.attachNewNode(self._PLight)
         render.setLight(self._Light)
