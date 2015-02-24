@@ -2,7 +2,6 @@
 from direct.gui.DirectGui import * # 2D GUI elements
 from . Maze import *
 #from Racetrack import *
-from pythonfrp.World import *
 #from Time import *
 from . Color import *
 from . PandaModels import *

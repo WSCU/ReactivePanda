@@ -1,4 +1,4 @@
-import pythonfrp.Globals as Globals
+import pythonfrp.Globals
 from . import PandaGlobals
 from pythonfrp.Factory import *
 from pythonfrp.Signal import *
@@ -29,7 +29,7 @@ def rbr(e = True):
 # This saves event occurances in g.newEvents
 def postEvent(ename, val = True):
     #print "posting " + ename
-    Globals.newEvents[ename] = val
+    pythonfrp.Globals.newEvents[ename] = val
 
 
 
@@ -66,10 +66,10 @@ def checkValidKey(s):
 
 
 def getEventSignal(ename, val):
-        if Globals.eventSignals.has_key(ename):
-            return Functions.tag(val, Globals.eventSignals[ename])
+        if pythonfrp.Globals.eventSignals.has_key(ename):
+            return Functions.tag(val, pythonfrp.Globals.eventSignals[ename])
         e = eventObserver(ename)
-        Globals.eventSignals[ename] = e
+        pythonfrp.Globals.eventSignals[ename] = e
         PandaGlobals.direct.accept(ename, lambda: postEvent(ename))
         return Functions.tag(val, e)
 
@@ -90,10 +90,10 @@ def initEvents():
 
 def pollGUI():
     if base.mouseWatcherNode.hasMouse():
-       lbp = Globals.events.has_key("mouse1")
-       rbp = Globals.events.has_key("mouse3")
-       lbr = Globals.events.has_key("mouse1-up")
-       rbr = Globals.events.has_key("mouse3-up")
+       lbp = pythonfrp.Globals.events.has_key("mouse1")
+       rbp = pythonfrp.Globals.events.has_key("mouse3")
+       lbr = pythonfrp.Globals.events.has_key("mouse1-up")
+       rbr = pythonfrp.Globals.events.has_key("mouse3-up")
        if lbp:
            PandaGlobals.lbutton = True
        if rbp:
@@ -114,10 +114,10 @@ def pollGUI():
        if lbp or rbp:
            m = Click.findClickedModels()
            if m is not None:
-               if Globals.events.has_key("mouse1"):
-                    Globals.events[m + "-leftclick"] = True
+               if pythonfrp.Globals.events.has_key("mouse1"):
+                    pythonfrp.Globals.events[m + "-leftclick"] = True
                else:
-                    Globals.events[m + "-rightclick"] = True
+                    pythonfrp.Globals.events[m + "-rightclick"] = True
 
 mouse = ObserverF(lambda x: PandaGlobals.mousePos)
 

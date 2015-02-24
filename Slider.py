@@ -1,5 +1,5 @@
 from direct.gui.DirectGui import *
-from . import PandaGlobals as Globals
+from . import PandaGlobals
 from pythonfrp.Factory import *
 from pythonfrp.Types import *
 from . import Text
@@ -9,7 +9,7 @@ from . Color import *
 
 class Slider:
     def __init__(self, size, position, min, max, pageSize, init, label):
-        name = "slider" + str(Globals.nextModelId)
+        name = "slider" + str(PandaGlobals.nextModelId)
         checkType(name, "min", min, numType)
         checkType(name, "max", max, numType)
         if init is not None:
@@ -19,8 +19,8 @@ class Slider:
         if pageSize is None:
             pageSize = (max - min) / 100
         if position is None:
-            pos = (.95, 0, Globals.nextNE2dY)
-            Globals.nextNE2dY = Globals.nextNE2dY - .1
+            pos = (.95, 0, PandaGlobals.nextNE2dY)
+            PandaGlobals.nextNE2dY = PandaGlobals.nextNE2dY - .1
         else:
             pos = (position.x, 0, position.y)
         if label is not None:
