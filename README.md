@@ -18,4 +18,4 @@ This produces a pandamodel that rotates based on the current time.
 
 Documentation and website
 ---
-All documentation and other information can be found at our webstie, [reactive-engine.org](reactive-engine.org)
+All documentation and other information can be found at our webstie, [reactive-engine.org](http://www.reactive-engine.org)
