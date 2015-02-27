@@ -3,13 +3,13 @@
 # and open the template in the editor.
 
 from pythonfrp.Proxy import *
+from . import PandaGlobals
 from . Panda import *
 from pandac.PandaModules import *
 from pandac.PandaModules import *
 from direct.particles.Particles import *
 from direct.particles.ParticleEffect import *
 from . FileSearch import *
-from . import PandaModel
 
 def peffectUpdater(self):
     #These parameters find the static offset which was created during initialization and the current position which is returned by the self._get() method
@@ -34,7 +34,7 @@ class PEffect(Proxy):
                hpr = None, position = None,
                 size = None, duration = 0, parent = render,
                 **a):
-        Proxy.__init__(self, name = name + ":" + str(Globals.nextModelId), updater = peffectUpdater, types = {"position":p3Type, "hpr":hprType, "size":numType})
+        Proxy.__init__(self, name = name + ":" + str(PandaGlobals.nextModelId), updater = peffectUpdater, types = {"position":p3Type, "hpr":hprType, "size":numType})
 
         #pathname = "/lib/panda/lib/lib-original/particles/"
         #base.enableParticles() #this should be in start in main program, this should probably go away

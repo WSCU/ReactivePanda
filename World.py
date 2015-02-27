@@ -18,7 +18,7 @@ class World(Proxy.Proxy):
 world = World()
 
 # Clear out the world.  This doesn't reset the global time or camera position.
-def resetWorld(continueFn):
+def resetWorld(continueFn = None):
     Globals.resetFlag=continueFn
     # Should make all DirectGUI stuff invisible
     print("done")
