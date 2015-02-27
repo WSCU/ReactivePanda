@@ -1,4 +1,4 @@
-from Panda import *
+from ReactivePanda.Panda import *
 
 m = menu(['awesome','possum','pants','.com'])
 text(m)

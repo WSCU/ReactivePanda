@@ -1,4 +1,4 @@
-from ReactivePanda.Panda import *
+from ReactiveReactivePanda.Panda.ReactivePanda.Panda import *
 
 #textBox()
 def r(m,v):

@@ -1,3 +1,3 @@
-from Panda import *
+from ReactivePanda.Panda import *
 tetra("realpanda", "sand", "fire", "earthmap", hpr=hpr(time, time*0.324,0))
 start()

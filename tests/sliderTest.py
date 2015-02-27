@@ -1,4 +1,4 @@
-from Panda import *
+from ReactivePanda.Panda import *
 
 s1 = slider()
 text(format("s1 = %f", s1))

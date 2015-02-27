@@ -1,4 +1,4 @@
-from Panda import *
+from ReactivePanda.Panda import *
 
 text(lbutton)
 text(rbutton)

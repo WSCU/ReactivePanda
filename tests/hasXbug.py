@@ -1,4 +1,4 @@
-from Panda import *
+from ReactivePanda.Panda import *
 
 #angle = getX(lbuttonPull)*pi
 

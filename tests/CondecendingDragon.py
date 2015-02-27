@@ -1,4 +1,4 @@
-from Panda import *
+from ReactivePanda.Panda import *
 
 grassScene()
 boyBalloon(position = p3(0,0,sin(time)/3-1))

@@ -1,4 +1,4 @@
-from Panda import *
+from ReactivePanda.Panda import *
 
 def destroy2(m,v):
     exit(m)

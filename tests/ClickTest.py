@@ -1,4 +1,4 @@
-from ReactivePanda.Panda import *
+from ReactiveReactivePanda.Panda.ReactivePanda.Panda import *
 
 def bigger(m, v):
     s = now(m.size)

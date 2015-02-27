@@ -1,4 +1,4 @@
-from Panda import *
+from ReactivePanda.Panda import *
 
 
 p = panda(hpr = hpr(time/2,sin(time),0), position = p3(sin(time),0,0))
