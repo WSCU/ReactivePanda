@@ -1,5 +1,5 @@
 import Globals
-from Panda import *
+from ReactivePanda.Panda import *
 # Prints a message when the two models touch
 
 b = soccerBall(position = p3(-2, 0, 0))

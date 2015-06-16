@@ -1,4 +1,4 @@
-from ReactiveReactivePanda.Panda.ReactivePanda.Panda import *
+from ReactivePanda.Panda import *
 
 world.color = black
 panda()

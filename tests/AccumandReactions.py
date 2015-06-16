@@ -1,4 +1,4 @@
-from ReactiveReactivePanda.Panda.ReactivePanda.Panda import *
+from ReactivePanda.Panda import *
 
 panda(position = p3(accum(0, lbp(lambda x: x+.1)),0,0))
 #def areaction(m,v):
