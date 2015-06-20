@@ -19,6 +19,6 @@ texture = None # Used to communicate with particle effect code from particle pan
 
 
 # Temporary for testing, this needs to be automatically set
-pandaPath = "/home/luke/prog/ReactivePanda/lib/"
+pandaPath = "/c/Panda/ReactivePanda/lib"
 
 panda3dCamera = camera
