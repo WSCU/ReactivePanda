@@ -20,7 +20,7 @@ def updateMenu(self):
 class Menu:
     def __init__(self, items, position = None, size = 1, name = 'Menu'):
         if position is None:
-            pos = (.95, 0, g.nextNE2dY)
+            pos = (.95, 0, Globals.nextNE2dY)
             Globals.nextNE2dY = Globals.nextNE2dY - .1
         else:
             checkType(name, "position", position, p2Type)

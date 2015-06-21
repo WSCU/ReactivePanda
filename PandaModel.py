@@ -126,8 +126,8 @@ class PandaModel(Proxy.Proxy):
             if self._pandaModel is not None:
                 self._pandaModel.detachNode()
             for c in self._collections:
-                old = frp.PandaGlobals.collections[c]
-                frp.PandaGlobals.collections[c] = [x for x in old if x is not self]
+                old = frpGlobals.collections[c]
+                frpGlobals.collections[c] = [x for x in old if x is not self]
 
     def _reparent(self, m):
 #        print "reparent " + repr(self) + " to " + repr(m)

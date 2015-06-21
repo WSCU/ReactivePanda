@@ -3,8 +3,9 @@
 
 from ReactivePanda.Panda import *
 
-grassScene()
-panda(position = p3(time,0,0))
-launchCamera("medevil")
+#grassScene()
+#panda(position = p3(time,0,0))
+#launchCamera("medevil")
+panda()
 
 start()

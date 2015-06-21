@@ -1,4 +1,4 @@
-from Panda import *
+from ReactivePanda.Panda import *
 
 modelObject = [0]
 modelFile = [""]
@@ -61,7 +61,7 @@ targetRect = rectangle(P3(ts* wallLeft,-ts* wallDepth,floor+1.001),P3(ts*wallRig
 
 rightRect = rectangle(lowerRight,frontRight,backRight,green)
 noseRect = rectangle(P3(-0.05, -1, 0.001), P3(0.05, -1, 0.001), P3(-0.05, -1, 0.1), yellow)
-modelObject[0] = pandaModel(fileName = "panda-model.egg.pz", position = e.position, hpr = e.hpr, size=size*e.size)
+modelObject[0] = pandaModel(fileName = "C:/Users/Camp/Desktop/Dropbox/car.egg", position = e.position, hpr = e.hpr, size=size*e.size)
 def setModel(x, mname):
     modelFile[0] = mname
     if modelObject[0] is not 0:

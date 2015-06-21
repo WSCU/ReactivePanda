@@ -1,7 +1,7 @@
 
 # Todo: add code for surface normals
 
-from . import PandaGlobals as Globals
+from . import PandaGlobals
 
 from pythonfrp.Types import *
 from . import PandaModel
@@ -64,8 +64,8 @@ class GeometryHandle(Proxy.Proxy):
                             "color": colorType, "texture": stringType, "sideTwo": stringType})
         self._pandaModel = object
         self._parent = PandaModel.getModel(parent)
-        self._name = name + str(Globals.nextModelId)
-        Globals.nextModelId = Globals.nextModelId + 1
+        self._name = name + str(PandaGlobals.nextModelId)
+        PandaGlobals.nextModelId = PandaGlobals.nextModelId + 1
         self._name = name + str()
         self._onScreen = False
         self._currentTexture = ""
