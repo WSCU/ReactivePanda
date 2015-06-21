@@ -1,5 +1,5 @@
-from . Numerics import P3toHPR
-from pythonfrp.Numerics import *
+from . Numerics import *
+#from pythonfrp.Numerics import *
 from pythonfrp.Functions import *
 
 def itime(i):

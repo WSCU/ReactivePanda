@@ -1,4 +1,5 @@
 from direct.showbase.DirectObject import DirectObject
+from . Numerics import p2
 
 direct = DirectObject()
 
@@ -12,8 +13,8 @@ nextModelId = 0
 
 lbutton = False # Left button state
 rbutton = False # Right button state
-rbuttonPull = None # "Pulled" 2-D Point for the right button
-lbuttonPull = None # "Pulled" 2-D point for the left button
+rbuttonPull = p2(0,0) # "Pulled" 2-D Point for the right button
+lbuttonPull = p2(0,0) # "Pulled" 2-D point for the left button
 
 texture = None # Used to communicate with particle effect code from particle panel
 

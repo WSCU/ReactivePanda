@@ -2,7 +2,7 @@ from ReactivePanda.Panda import *
 
 #angle = getX(lbuttonPull)*pi
 
-score = rvar(0)
+score = var(0)
 
 text(score)
 def re(m,v):
