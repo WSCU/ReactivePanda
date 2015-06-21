@@ -1,4 +1,4 @@
-
+from . Numerics import P3toHPR
 from pythonfrp.Numerics import *
 from pythonfrp.Functions import *
 

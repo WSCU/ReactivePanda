@@ -4,6 +4,7 @@ from . import PandaGlobals
 from . Numerics import hpr
 from pythonfrp.Numerics import p3
 from pythonfrp.Types import hprType, p3Type
+from pythonfrp.World import world
 
 
 def updateCamera(self):
@@ -18,6 +19,4 @@ class Camera(Proxy.Proxy):
         self.position = p3(0, -10, 0)
         self.hpr = hpr(0,0,0)
 
-
 camera = Camera()
-

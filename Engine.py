@@ -40,12 +40,12 @@ def heartBeat(ct, events):
         obj._initialize()
     if frpGlobals.resetFlag is not None:
         for m in frpGlobals.worldObjects:
-            if m is not World.world and m is not World.camera:
+            if m is not World.world and m is not Camera.camera:
                 exit(m)
         frpGlobals.nextNE2dY = .95 # Positioning for 2-D controls - old controls should be gone
         frpGlobals.nextNW2dY = .95
         Proxy.clearReactions(World.world)
-        Proxy.clearReactions(World.camera)
+        Proxy.clearReactions(Camera.camera)
         frpGlobals.resetFlag()
         frpGlobals.resetFlag = None
 #will need to check the proxy module to find the right name for this initialize method

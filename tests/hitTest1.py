@@ -1,5 +1,5 @@
-import Globals
 from ReactivePanda.Panda import *
+import pythonfrp.Globals as Globals
 # Prints a message when the two models touch
 
 b = soccerBall(position = p3(-2, 0, 0))
