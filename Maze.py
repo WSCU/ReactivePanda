@@ -150,7 +150,7 @@ def mazeCube(x,y,col = None,north=None,south=None,east=None,west=None,top=None,b
 def maze(f,m, color = springGreen):
     return Maze(f,m, color)
 def findInMaze(m,c):
-    print(getPType(m))
+    #print(getPType(m))
     if getPType(m) != "maze":
         print("Not a maze")
         exit()
