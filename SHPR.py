@@ -81,7 +81,7 @@ def subHPR(a, b):
     return SHPR(a.h-b.h, a.p-b.p, a.r-b.r)
 
 def scaleHPR(s, a):
-    return HPR(a.h * s, a.p * s, a.r * s)
+    return SHPR(a.h * s, a.p * s, a.r * s)
 
 def getUpHPR(hpr):
     q = Quat()
