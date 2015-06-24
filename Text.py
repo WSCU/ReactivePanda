@@ -50,11 +50,11 @@ class Text(Proxy):
         else:
             self.color = color
         if background is None:
-            self.bg = Color(0,0,0,1)
+            self.bg = Color(0,0,0,0)
         else:
             self.bg = background
         if frame is None:
-            self.frame = Color(0,0,0,1)
+            self.frame = Color(0,0,0,0)
         else:
             self.frame = frame
         if position is None:
