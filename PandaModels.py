@@ -13,16 +13,29 @@ def boy(**a):
     return pandaModel("jack.egg.pz", name = "Boy", **a)
 
 def girl(**a):
-    return pandaModel("eve/eve.egg", name = "Girl", **a)
+    return pandaModel("eve/eve.egg", name = "Girl",
+            #animation={"walk":"eve/eve-walk.egg","run":"eve/eve-run.egg","jump":"eve/eve-jump.egg",
+            #"offbalance":"eve/eve-offbalance.egg","tireroll":"eve/eve-tireroll"},
+            **a)
+
+def firefighter(**a):
+    return pandaModel("firefighter/firefighter-base.egg", name = "firefighter",
+            #animation={"pointup":"firefighter/firefighter-point-up.egg","run":"firefighter/firefighter-run.egg",
+            #"stand":"firefighter/firefighter-stand.egg"},
+            **a)
 
 def gorilla(**a):
-    return pandaModel("gorilla/gorilla.egg", name = "Gorilla", **a)
+    return pandaModel("gorilla/gorilla.egg", name = "Gorilla",
+            #animation={"walk":"gorilla/gorillawalking.egg"},
+            **a)
 
 def bunny(**a):
     return pandaModel("bunny/bunny.egg", name = "Bunny", **a)
 
 def boyBalloon(**a):
-    return pandaModel("boyballoon/boymodel.egg", name = "BoyBalloon", **a)
+    return pandaModel("boyballoon/boymodel.egg", name = "BoyBalloon",
+            #animation={"act":"boyballon/boyanimation.egg"},
+            **a)
 
 def r2d2(**a):
     return pandaModel("r2d2/r2d2.egg", name = "R2D2", **a)
@@ -39,7 +52,8 @@ def ralph(**a):
 #                                 ('rightWrist', 'RightWrist'),
 #                                 ('jaw', 'Jaw'), ('leftElbow', 'LeftElbow'),
 #                                 ('rightShoulder', 'RightShoulder'), ('leftShoulder', 'LeftShoulder'), ('leftKnee', 'LeftKnee'),('rightKnee', 'RightKnee')],
-                                 animation = {"walk" : Globals.pandaPath + "/models/Ralph/ralph-walk.egg","run" : Globals.pandaPath + "/models/Ralph/ralph-run.egg"}, frame = 4, **a )
+                                 animation = {"walk" : Globals.pandaPath + "/models/Ralph/ralph-walk.egg","run" : Globals.pandaPath + "/models/Ralph/ralph-run.egg",
+                                 "jump": Globals.pandaPath + "/models/Ralph/ralph-jump.egg","offbalance":Globals.pandaPath + "/models/Ralph/ralph-offbalance.egg"}, frame = 4, **a )
 
 def bee (**a):
     return pandaModel("Bee/Bee.egg", name = "Bee", **a)
