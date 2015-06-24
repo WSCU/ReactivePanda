@@ -42,9 +42,11 @@ def keyUp(kname, val = True):
     return getEventSignal(kname + "-up", val)
 
 def leftClick(model, val = True):
+    val = model._alive
     return getEventSignal(model._pandaModel.getTag('rpandaid') + "-leftclick", val)
 
 def rightClick(model, val = True):
+    val = model._alive
     return getEventSignal(model._pandaModel.getTag('rpandaid') + "-rightclick", val)
 
 allKeyNames = ["escape", "f1","f2","f3","f4","f5","f6","f7","f8","f9","f10","f11","f12", "space"]
