@@ -1,5 +1,5 @@
-
 from . PandaModel import *
+import PandaGlobals as Globals
 
 # Characters/Creatures
 
@@ -34,12 +34,12 @@ def penguin(**a):
     return pandaModel("Penguin/Penguin.egg", name = "Penguin", **a)
 
 def ralph(**a):
-    return pandaModel("Ralph/ralph.egg", name = "Ralph", **a)
+    return pandaModel(Globals.pandaPath + "/models/Ralph/ralph.egg", name = "Ralph",
 #                        joints = [('neck', 'Neck'), ('leftWrist', 'LeftWrist'),
 #                                 ('rightWrist', 'RightWrist'),
 #                                 ('jaw', 'Jaw'), ('leftElbow', 'LeftElbow'),
-#                                 ('rightShoulder', 'RightShoulder'), ('leftShoulder', 'LeftShoulder'), ('leftKnee', 'LeftKnee'),
-#                                 ('rightKnee', 'RightKnee')], animations = {"walk" : g.pandaPath + "/models/Ralph/ralph-walk.egg"}, frame = 4, **a )
+#                                 ('rightShoulder', 'RightShoulder'), ('leftShoulder', 'LeftShoulder'), ('leftKnee', 'LeftKnee'),('rightKnee', 'RightKnee')],
+                                 animation = {"walk" : Globals.pandaPath + "/models/Ralph/ralph-walk.egg","run" : Globals.pandaPath + "/models/Ralph/ralph-run.egg"}, frame = 4, **a )
 
 def bee (**a):
     return pandaModel("Bee/Bee.egg", name = "Bee", **a)
@@ -82,19 +82,19 @@ def bowlingPins(**a):
     return pandaModel ("bowlingpins/bowlingpins.egg", name = "BowlingPins", **a)
 
 def sonic(**a):#Works as of 6-23-08 ~ Kendric
-    return pandaModel("sonic/sonic.egg", name = "Sonic", **a)
-#                       joints = [('neck', 'Neck'), ('leftEyeBrow', 'LeftEyeBrow'), ('rightEyeBrow', 'RightEyeBrow'),
-#                                 ('leftLowerSpike', 'LeftLowerSpike'), ('lowerRightSpike', 'LowerRightSpike'),
-#                                 ('topSpike', 'TopSpike'), ('leftMiddleSpike', 'LeftMiddleSpike'),
-#                                 ('rightMiddleSpike', 'RightMiddleSpike'), ('lowerSpike', 'LowerSpike'),
-#                                 ('jaw', 'Jaw'),
-#                                 ('leftShoulder', 'LeftShoulder'), ('rightShoulder', 'LeftShoulder1'),
-#                                 ('leftElbow', 'LeftElbow'), ('rightElbow', 'LeftElbow1'),
-#                                 ('leftWrist', 'LeftWrist'), ('rightWrist', 'LeftWrist1'),
-#                                 ('leftHip', 'LeftHip'), ('rightHip', 'RightHip'),
-#                                 ('leftKnee', 'LeftKnee'), ('rightKnee', 'RightKnee'),
-#                                 ('leftAnkle', 'LeftAnkle'), ('rightAnkle', 'RightAnkle'), ], animations = {"walk" : g.pandaPath + "/models/sonic/sonic-run.egg"},
-#                                 defaultAnimation = "walk", frame = 11, **a)
+    return pandaModel("sonic/sonic.egg", name = "Sonic",
+                       joints = [('neck', 'Neck'), ('leftEyeBrow', 'LeftEyeBrow'), ('rightEyeBrow', 'RightEyeBrow'),
+                                 ('leftLowerSpike', 'LeftLowerSpike'), ('lowerRightSpike', 'LowerRightSpike'),
+                                 ('topSpike', 'TopSpike'), ('leftMiddleSpike', 'LeftMiddleSpike'),
+                                 ('rightMiddleSpike', 'RightMiddleSpike'), ('lowerSpike', 'LowerSpike'),
+                                 ('jaw', 'Jaw'),
+                                 ('leftShoulder', 'LeftShoulder'), ('rightShoulder', 'LeftShoulder1'),
+                                 ('leftElbow', 'LeftElbow'), ('rightElbow', 'LeftElbow1'),
+                                 ('leftWrist', 'LeftWrist'), ('rightWrist', 'LeftWrist1'),
+                                 ('leftHip', 'LeftHip'), ('rightHip', 'RightHip'),
+                                 ('leftKnee', 'LeftKnee'), ('rightKnee', 'RightKnee'),
+                                 ('leftAnkle', 'LeftAnkle'), ('rightAnkle', 'RightAnkle'), ], animation = {"walk" : Globals.pandaPath + "/models/sonic/sonic-run.egg"},
+                                  frame = 11, **a)
 
 # Jointed Models
 

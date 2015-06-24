@@ -26,7 +26,7 @@ defaultModelParameters = {"localPosition" : SP3(0,0,0),
                           "localSize" : 1,
                           "localOrientation" : SHPR(0,0,0),
                           "joints" : [], # jointed models not currently supported
-                          "animations" : None,
+                          "animation" : None,
                           "defaultAnimation" : None,
                           "frame" : None,
                           "cRadius" : 1,
@@ -39,11 +39,11 @@ def getModel(x):
         x = x._pandaModel
     return x
 
-def pandaModel(fileName = None, name = "PandaModel", size = None, hpr = None, position = None, tag = [], color = None, texture = None, parent = render, duration = 0):
-    return PandaModel(  fileName, size, hpr, position, tag, color, texture, name, parent, duration)
+def pandaModel(fileName = None, name = "PandaModel", size = None, hpr = None, position = None, tag = [], color = None, texture = None, parent = render, duration = 0, frame = None, joints = [], animation = None):
+    return PandaModel(  fileName, size, hpr, position, tag, color, texture, name, parent, duration, frame, joints, animation)
 
 class PandaModel(Proxy.Proxy):
-    def __init__(self, fileName, size, hpr, position, tag, color, texture, name, parent, duration):
+    def __init__(self, fileName, size, hpr, position, tag, color, texture, name, parent, duration, frame, joints, animation):
         Proxy.Proxy.__init__(self, name = str(name) + ":" + str(PandaGlobals.nextModelId), updater = modelUpdater,
                              types = {"position": p3Type, "hpr": hprType , "size": numType,
                                       "color": colorType, "texture": stringType})
@@ -75,9 +75,28 @@ class PandaModel(Proxy.Proxy):
                 print("No .model for " + str(fileName))
                 self._mParams = defaultModelParameters
             parameterCache[fileName] = self._mParams
-        self._pandaModel = loader.loadModel(self._mFile)
+        self._hasJoints = len(joints) != 0
+        self._joints = joints
+        self._jointNodes = {}
+        
+        if animation != None:
+            self._pandaModel = Actor.Actor(fileName, animation)
+            if frame != None:
+                self._frame = frame
+        else:   #  Not animated
+            self._pandaModel = loader.loadModel(self._mFile)
+            if self._pandaModel == None:
+                print 'Model not found: ' + fileName
+                exit()
+        if self._hasJoints:
+            for j,pj in joints:
+                self._jointNodes[j] = self._pandaModel.controlJoint(None, "modelRoot", pj)
+                if self._jointNodes[j] == None:
+                    print 'joint not found: ' + j
+                    exit()
         self._pandaModel.setTag('rpandaid', str(self._name))
         self._onScreen = False
+        self._animPlaying = False
         self._size=self._mParams['localSize']
         self._hpr=self._mParams['localOrientation']
         self._position=self._mParams['localPosition']
@@ -132,6 +151,13 @@ class PandaModel(Proxy.Proxy):
     def _reparent(self, m):
 #        print "reparent " + repr(self) + " to " + repr(m)
         self._pandaModel.reparentTo(m)
+    def play(self,anim):
+        if not self._animPlaying:
+            self._pandaModel.loop(anim)
+            self._animPlaying = True
+    def stop(self):
+        if self._animPlaying:
+            self._animPlaying = False
     def _touches(self, handle, trace = False):
         if trace:
            print("Touch: " + repr(self) + " (" + self._cType + ") " + repr(handle) + " (" + handle._cType + ")")
@@ -187,6 +213,7 @@ class PandaModel(Proxy.Proxy):
                     #print ("*****"+repr(res))
                     return res
 
+
 def modelUpdater(self):
     #These parameters find the static offset which was created during initialization and the current position which is returned by the self._get() method
     positionOffset = self._position
@@ -222,6 +249,19 @@ def modelUpdater(self):
     color = self._get("color")
     if color.a != 0:
         self._pandaModel.setColor(color.toVBase4())
+
+    #animations
+    #if self._hasJoints:
+    #    if self._animPlaying:
+    #        for j,pj in self._joints:
+    #            sig = self.j
+    #            print sig
+    #            hpr = sig.now()
+    #            print hpr
+    #            self._jointNodes[j].setH(degrees(hpr.h))
+    #            self._jointNodes[j].setP(degrees(hpr.p))
+    #            self._jointNodes[j].setR(degrees(hpr.r))
+    #        self._pandaModel.loop('walk', fromFrame = self._frame, toFrame = self._frame)
     # This is used to keep the model off the screen until the first update happens
     if not self._onScreen:
            self._reparent(self._parent)
