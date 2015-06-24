@@ -8,7 +8,7 @@ import StaticNumerics
 from direct.gui.DirectGui import *
 from . Externals import postEvent
 from pythonfrp.Factory import maybeLift
-from . Color import yellow
+from . Color import *
 
 class TextBox(Proxy): #Creates the text box object that users can enter in values to
     def __init__(self, position = None, size = 1, name = 'TextBox', width = 15):
@@ -39,7 +39,7 @@ def textBox(*p, **k):
     return TextBox(*p, **k).enter
 
 class Text(Proxy):
-    def __init__(self, text = None, name = 'Text', position = None, size = 1, color = None, duration=0):
+    def __init__(self, text = None, name = 'Text', position = None, size = 1, color = None, duration=0, background = None, frame = None):
         Proxy.__init__(self, name, updater=textUpdater, types = {"text": anyType, "color": colorType})
         if text is None:
             self.text = ""
@@ -49,6 +49,14 @@ class Text(Proxy):
             self.color = yellow
         else:
             self.color = color
+        if background is None:
+            self.bg = Color(0,0,0,1)
+        else:
+            self.bg = background
+        if frame is None:
+            self.frame = Color(0,0,0,1)
+        else:
+            self.frame = frame
         if position is None:
             position = StaticNumerics.SP2(-.95, PandaGlobals.nextNW2dY)
             PandaGlobals.nextNW2dY = PandaGlobals.nextNW2dY -.1
@@ -63,8 +71,12 @@ class Text(Proxy):
 def textUpdater(self):
     text = self._get("text")
     color = self._get("color")
+    bg = self._get("bg")
+    frame = self._get("frame")
     self._textObject.setText(str(text))
     self._textObject.setFg(color.toVBase4())
+    self._textObject.setBg(bg.toVBase4())
+    self._textObject.setFrame(frame.toVBase4())
 
 def text(*p, **k):
     return Text(*p, **k)

@@ -10,9 +10,9 @@ panda(position = p3(0,0,-1), hpr = hpr(integral(time, 0),10,0), color=pink)
 fireish(position = p3(0,0,-1.5), size = .15)
 #launchCamera("medevil")
 
-def reset(m,v):
-    b.play("jump")
-react(b, leftClick(b), reset)
+#def reset(m,v):
+b.play("jump")
+#react(b, leftClick(b), reset)
 
 t = text("feckin feck feck", duration=2)
 
