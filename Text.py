@@ -1,7 +1,9 @@
 from . import PandaGlobals
+import pythonfrp.Globals as frpGlobals
 from pythonfrp.Proxy import *
 from direct.gui.OnscreenText import OnscreenText
 from pythonfrp.Types import *
+from pythonfrp.Functions import react,delay,exitScene
 import StaticNumerics
 from direct.gui.DirectGui import *
 from . Externals import postEvent
@@ -20,6 +22,7 @@ class TextBox(Proxy): #Creates the text box object that users can enter in value
             PandaGlobals.nextNE2dY = PandaGlobals.nextNE2dY - .1
         self.text = var("")
         self.enter = eventObserver("enter")
+        
 
 def textboxUpdater(self):
     p1 = self.get("position")
@@ -36,7 +39,7 @@ def textBox(*p, **k):
     return TextBox(*p, **k).enter
 
 class Text(Proxy):
-    def __init__(self, text = None, name = 'Text', position = None, size = 1, color = None):
+    def __init__(self, text = None, name = 'Text', position = None, size = 1, color = None, duration=0):
         Proxy.__init__(self, name, updater=textUpdater, types = {"text": anyType, "color": colorType})
         if text is None:
             self.text = ""
@@ -50,8 +53,12 @@ class Text(Proxy):
             position = StaticNumerics.SP2(-.95, PandaGlobals.nextNW2dY)
             PandaGlobals.nextNW2dY = PandaGlobals.nextNW2dY -.1
         self._textObject = OnscreenText(pos = (position.x, position.y), scale = size*0.05, mayChange = True)
+        if duration > 0:
+            react(self, delay(duration), exitScene)
         #self._text = OnscreenText(pos = (position.x, position.y), scale = size*0.05, fg = color.toVBase4(), mayChange = True)
-
+    def _remove(self):
+        self.text =""
+        self._textObject.setText("")
 
 def textUpdater(self):
     text = self._get("text")
