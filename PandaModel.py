@@ -151,29 +151,6 @@ class PandaModel(Proxy.Proxy):
     def _reparent(self, m):
 #        print "reparent " + repr(self) + " to " + repr(m)
         self._pandaModel.reparentTo(m)
-    def play(self,anim,fromFrame=None,toFrame=None):
-        if not self._animPlaying:
-            self._animPlaying = True        
-        if toFrame is None and fromFrame is None:
-            self._pandaModel.play(anim)
-        else:
-            self._pandaModel.play(anim, fromFrame = fromFrame, toFrame = toFrame)
-    def loop(self,anim,fromFrame=None):
-        if not self._animPlaying:
-            self._animPlaying = True
-        if fromFrame is None:
-            self._pandaModel.play(anim)
-        else:
-            self._pandaModel.play(anim, fromFrame = fromFrame)
-    def pose(self, anim, frame=None):
-        if frame is not None:
-            self._pandaModel.pose(anim, frame)
-        else:
-            self._pandaModel.pose(anim, self.frame)
-    def stop(self):
-        if self._animPlaying:
-            self._animPlaying = False
-            self._pandaModel.stop()
     def _touches(self, handle, trace = False):
         if trace:
            print("Touch: " + repr(self) + " (" + self._cType + ") " + repr(handle) + " (" + handle._cType + ")")
@@ -229,6 +206,29 @@ class PandaModel(Proxy.Proxy):
                     #print ("*****"+repr(res))
                     return res
 
+def play(self,anim,fromFrame=None,toFrame=None):
+    if not self._animPlaying:
+        self._animPlaying = True        
+    if toFrame is None and fromFrame is None:
+        self._pandaModel.play(anim)
+    else:
+        self._pandaModel.play(anim, fromFrame = fromFrame, toFrame = toFrame)
+def loop(self,anim,fromFrame=None,toFrame=None):
+    if not self._animPlaying:
+        self._animPlaying = True
+    if toFrame is None and fromFrame is None:
+        self._pandaModel.play(anim)
+    else:
+        self._pandaModel.play(anim, fromFrame = fromFrame, toFrame= toFrame)
+def pose(self, anim, frame=None):
+    if frame is not None:
+        self._pandaModel.pose(anim, frame)
+    else:
+        self._pandaModel.pose(anim, self.frame)
+def stop(self):
+    if self._animPlaying:
+        self._animPlaying = False
+        self._pandaModel.stop()
 
 def modelUpdater(self):
     #These parameters find the static offset which was created during initialization and the current position which is returned by the self._get() method

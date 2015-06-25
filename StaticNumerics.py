@@ -1,6 +1,6 @@
 import math
 from pythonfrp.StaticNumerics import pi, SP2, SP3
-from . SHPR import SHPR
+from SHPR import SHPR
 
 def sP3toHPR(p):
     return SHPR(math.atan2(p.y, p.x) + pi / 2,

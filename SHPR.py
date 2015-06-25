@@ -73,6 +73,13 @@ class SHPR:
         return SHPR(staticLerpA(t, self.h, p2.h),
                     staticLerpA(t, self.p, p2.p),
                     staticLerpA(t, self.r, p2.r))
+    def encode(self, *n):
+        s = ""
+        r = ""
+        for num in n:
+            r = r + s + str(num)
+            s = ","
+        return r
 
 def addHPR(a, b):
     return SHPR(a.h + b.h, a.p + b.p, a.r + b.r)

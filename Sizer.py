@@ -1,4 +1,6 @@
 from ReactivePanda.Panda import *
+from FileIO import saveDict
+
 
 modelObject = [0]
 modelFile = [""]
@@ -61,7 +63,7 @@ targetRect = rectangle(P3(ts* wallLeft,-ts* wallDepth,floor+1.001),P3(ts*wallRig
 
 rightRect = rectangle(lowerRight,frontRight,backRight,green)
 noseRect = rectangle(P3(-0.05, -1, 0.001), P3(0.05, -1, 0.001), P3(-0.05, -1, 0.1), yellow)
-modelObject[0] = pandaModel(fileName = "C:/Users/Camp/Desktop/Dropbox/car.egg", position = e.position, hpr = e.hpr, size=size*e.size)
+modelObject[0] = pandaModel(fileName = "C:\Users\Camp\Desktop\grahamcode\src\MineCraftGuy.egg", position = e.position, hpr = e.hpr, size=size*e.size)
 def setModel(x, mname):
     modelFile[0] = mname
     if modelObject[0] is not 0:
@@ -89,7 +91,7 @@ def printer(w, x):
             "cType": collisionType[0]}
     file = Filename(modelFile[0])
     file.setExtension("model")
-    saveDict(file.toOsSpecific(), dict, modelParameters)
+    saveDict(file.toOsSpecific(), dict, defaultModelParameters)
     print "localSize = " + str(modelObject[0].size.now()) + ", localPosition = " + \
         str(modelObject[0].position.now()) + ", localOrientation = " + str(modelObject[0].hpr.now()) + \
         ", cRadius = " + str(cRadius.now()) + ", cFloor = " + str(cBottom.now()) + \
