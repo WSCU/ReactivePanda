@@ -95,6 +95,12 @@ def slipperyRoadSign(**a):
 def bowlingPins(**a):
     return pandaModel ("bowlingpins/bowlingpins.egg", name = "BowlingPins", **a)
 
+def spiderman(**a):
+    return pandaModel(Globals.pandaPath + "/models/Spiderman/SpiderMan.egg", name = "Spiderman",
+            animation={"DOIT!":Globals.pandaPath + "/models/Spiderman/SpiderMan-DOIT.egg","pose":Globals.pandaPath + "/models/Spiderman/SpiderMan-Pose.egg"},
+            texture=Globals.pandaPath + "/models/Spiderman/spiderman_s.tga",
+            **a )
+
 def sonic(**a):#Works as of 6-23-08 ~ Kendric
     return pandaModel("sonic/sonic.egg", name = "Sonic",
                        joints = [('neck', 'Neck'), ('leftEyeBrow', 'LeftEyeBrow'), ('rightEyeBrow', 'RightEyeBrow'),
