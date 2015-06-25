@@ -3,7 +3,7 @@ import pythonfrp.Globals as frpGlobals
 from pythonfrp.Proxy import *
 from direct.gui.OnscreenText import OnscreenText
 from pythonfrp.Types import *
-from pythonfrp.Functions import react,delay,exitScene,timeIs,now,time
+from pythonfrp.Functions import react,delay,exitScene,atTime
 import StaticNumerics
 from direct.gui.DirectGui import *
 from . Externals import postEvent
@@ -77,6 +77,9 @@ def textUpdater(self):
     self._textObject.setFg(color.toVBase4())
     self._textObject.setBg(bg.toVBase4())
     self._textObject.setFrame(frame.toVBase4())
+
+def _delay(*p, **k):
+    return Text(*p, **k)
 
 def text(*p, **k):
     return Text(*p, **k)

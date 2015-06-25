@@ -95,6 +95,9 @@ def slipperyRoadSign(**a):
 def bowlingPins(**a):
     return pandaModel ("bowlingpins/bowlingpins.egg", name = "BowlingPins", **a)
 
+def tardis(**a):
+    return pandaModel ("TARDIS/tardis.egg", name = "TARDIS/TARDIS_S.tga", **a)
+
 def spiderman(**a):
     return pandaModel(Globals.pandaPath + "/models/Spiderman/SpiderMan.egg", name = "Spiderman",
             animation={"DOIT!":Globals.pandaPath + "/models/Spiderman/SpiderMan-DOIT.egg","pose":Globals.pandaPath + "/models/Spiderman/SpiderMan-Pose.egg"},
