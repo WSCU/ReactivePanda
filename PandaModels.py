@@ -98,7 +98,7 @@ def bowlingPins(**a):
 def spiderman(**a):
     return pandaModel(Globals.pandaPath + "/models/Spiderman/SpiderMan.egg", name = "Spiderman",
             animation={"DOIT!":Globals.pandaPath + "/models/Spiderman/SpiderMan-DOIT.egg","pose":Globals.pandaPath + "/models/Spiderman/SpiderMan-Pose.egg"},
-            texture=Globals.pandaPath + "/models/Spiderman/spiderman_s.tga",
+            texture=Globals.pandaPath + "/models/Spiderman/spiderman_d.tga",
             **a )
 
 def sonic(**a):#Works as of 6-23-08 ~ Kendric
