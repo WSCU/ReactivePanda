@@ -96,7 +96,7 @@ def bowlingPins(**a):
     return pandaModel ("bowlingpins/bowlingpins.egg", name = "BowlingPins", **a)
 
 def tardis(**a):
-    return pandaModel ("TARDIS/tardis.egg", name = "TARDIS/TARDIS_S.tga", **a)
+    return pandaModel ("TARDIS/tardis.egg", name = "Tardis", **a)
 
 def spiderman(**a):
     return pandaModel(Globals.pandaPath + "/models/Spiderman/SpiderMan.egg", name = "Spiderman",

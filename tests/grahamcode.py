@@ -13,8 +13,6 @@ def timeToStart(m,v):
     atTime(now(time)+3.5, s.play)
     atTime(now(time)+6,resetPose)
 
-
-
 react(lbp(),timeToStart)
 
 start()
