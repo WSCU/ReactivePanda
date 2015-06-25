@@ -79,4 +79,4 @@ def textUpdater(self):
     self._textObject.setFrame(frame.toVBase4())
 
 def text(*p, **k):
-    return Text(*m[0], **m[1])
+    return Text(*p, **k)
