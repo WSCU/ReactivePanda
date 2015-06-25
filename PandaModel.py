@@ -19,6 +19,7 @@ import pythonfrp.Proxy as Proxy
 from . import FileSearch
 from pythonfrp.Functions import *
 from . Color import *
+import os
 
 # This fills in all of the defaults
 parameterCache = {}
@@ -78,6 +79,7 @@ class PandaModel(Proxy.Proxy):
         self._hasJoints = len(joints) != 0
         self._joints = joints
         self._jointNodes = {}
+        self._animation = animation
         
         if animation != None:
             self._pandaModel = Actor.Actor(fileName, animation)
@@ -95,6 +97,7 @@ class PandaModel(Proxy.Proxy):
                     print 'joint not found: ' + j
                     exit()
         self._pandaModel.setTag('rpandaid', str(self._name))
+        self._fileName = fileName
         self._onScreen = False
         self._animPlaying = False
         self._size=self._mParams['localSize']
@@ -206,16 +209,40 @@ class PandaModel(Proxy.Proxy):
                     #print ("*****"+repr(res))
                     return res
 
-def play(self,anim,fromFrame=None,toFrame=None):
+def _findAnimations(self):
+    files = [f for f in os.listdir('.') if os.path.isfile(f)]
+    for f in files:
+        if ".egg" in f and f is not self.filename:
+            self._animation = {"default":f}
+            self._pandaModel = Actor.Actor(self._fileName, self._animation)
+            return "default"
+
+def playAnim(self,anim=None,fromFrame=None,toFrame=None):
     if not self._animPlaying:
-        self._animPlaying = True        
+        self._animPlaying = True
+    if anim is None:
+        if self._animation is not None:
+            k,v = dict.itervalues().next()
+            anim = k
+        else:
+            anim = _findAnimations(self)
+            if anim is None:
+                print "Error: no animation found"
     if toFrame is None and fromFrame is None:
         self._pandaModel.play(anim)
     else:
         self._pandaModel.play(anim, fromFrame = fromFrame, toFrame = toFrame)
-def loop(self,anim,fromFrame=None,toFrame=None):
+def loopAnim(self,anim=None,fromFrame=None,toFrame=None):
     if not self._animPlaying:
         self._animPlaying = True
+    if anim is None:
+        if self._animation is not None:
+            keys = self._animation.keys()
+            anim = keys[0]
+        else:
+            anim = _findAnimations(self)
+            if anim is None:
+                print "Error: no animation found"
     if toFrame is None and fromFrame is None:
         self._pandaModel.play(anim)
     else:
