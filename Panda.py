@@ -11,7 +11,7 @@ from . Text import text, textBox
 from . Color import *
 from . Light import *
 from . Slider import slider, sliderHpr, sliderColor, sliderP3
-from pythonfrp.World import world, resetWorld
+from . World import world, resetWorld
 from . Camera import camera
 from . DynamicGeometry import triangle, rectangle, emptyModel, photoWheel, cube, tetra, blastPicture, slicePicture
 from . Engine import engine as _engine
