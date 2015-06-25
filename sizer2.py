@@ -1,4 +1,5 @@
 from ReactivePanda.Panda import *
+from PandaGlobals import pandaPath
 
 # Problems with the photo - need to use a rectangle instead.
 # No way to see which way is forward
@@ -68,8 +69,12 @@ text(model.size, position=P2(1,.3))
 #directionallight(color = white, hpr = HPR(lightangle, 0 ,0))
 #ambientlight(color = color(.5, .5, .5))
 def printer(w, x):
+    f = open(pandaPath + '/models/Spiderman/SpiderMan.model','w+')
     print "localSize, " + str(now(model.size)) + "\nlocalPosition, " + \
         str(now(model.position)) + "\nlocalOrientation, " + str(now(model.hpr))
+    f.write("localSize, " + str(now(model.size)) + "\nlocalPosition, " + \
+        str(now(model.position)) + "\nlocalOrientation, " + str(now(model.hpr)))
+    f.close()
 
 printButton = button("Print to Console", position = P2(1, -.8), size = 1)
 react(printButton, printer)
