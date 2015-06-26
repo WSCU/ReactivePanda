@@ -222,8 +222,8 @@ def playAnim(self,anim=None,fromFrame=None,toFrame=None):
         self._animPlaying = True
     if anim is None:
         if self._animation is not None:
-            k,v = dict.itervalues().next()
-            anim = k
+            k = self._animation.keys()
+            anim = k[0]
         else:
             anim = _findAnimations(self)
             if anim is None:
@@ -244,9 +244,9 @@ def loopAnim(self,anim=None,fromFrame=None,toFrame=None):
             if anim is None:
                 print "Error: no animation found"
     if toFrame is None and fromFrame is None:
-        self._pandaModel.play(anim)
+        self._pandaModel.loop(anim)
     else:
-        self._pandaModel.play(anim, fromFrame = fromFrame, toFrame= toFrame)
+        self._pandaModel.loop(anim, fromFrame = fromFrame, toFrame= toFrame)
 def pose(self, anim, frame=None):
     if frame is not None:
         self._pandaModel.pose(anim, frame)
