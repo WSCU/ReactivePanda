@@ -98,6 +98,9 @@ def bowlingPins(**a):
 def tardis(**a):
     return pandaModel ("TARDIS/tardis.egg", name = "Tardis", **a)
 
+def crow(**a):
+    return pandaModel ("crow/crow.egg", name = "crow", **a)
+
 def spiderman(**a):
     return pandaModel(Globals.pandaPath + "/models/Spiderman/SpiderMan.egg", name = "Spiderman",
             animation={"DOIT!":Globals.pandaPath + "/models/Spiderman/SpiderMan-DOIT.egg","pose":Globals.pandaPath + "/models/Spiderman/SpiderMan-Pose.egg"},
