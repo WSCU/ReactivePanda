@@ -101,6 +101,9 @@ def tardis(**a):
 def crow(**a):
     return pandaModel ("crow/crow.egg", name = "crow", **a)
 
+def flower(**a):
+    return pandaModel ("Flower/flower#3", name = "Flower", texture=Globals.pandaPath+"/models/Flower/flowerPurple.png", **a)
+
 def spiderman(**a):
     return pandaModel(Globals.pandaPath + "/models/Spiderman/SpiderMan.egg", name = "Spiderman",
             animation={"DOIT!":Globals.pandaPath + "/models/Spiderman/SpiderMan-DOIT.egg","pose":Globals.pandaPath + "/models/Spiderman/SpiderMan-Pose.egg"},
@@ -143,6 +146,9 @@ def hangGlider(**a):
 
 
 #Scenary
+def volcano(**a):
+    return pandaModel("Volcano/volcanoModel.egg", name = "Volcano", **a)
+
 def discoHall(**a):  # Seems broken - no local size?
     return pandaModel("discohall/disco_hall.egg", name = "DiscoHall", **a)
 
