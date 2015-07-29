@@ -2,9 +2,9 @@ from pythonfrp.StaticNumerics import *
 from pythonfrp.Factory import *
 from pythonfrp.Types import *
 from pythonfrp.Numerics import *
-from . StaticNumerics import *
-from . SHPR import *
-from . Color import Color, colorHSL
+from StaticNumerics import *
+from SHPR import *
+from Color import Color, colorHSL
 
 
 

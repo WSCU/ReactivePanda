@@ -3,7 +3,7 @@ import pythonfrp.Globals as frpGlobals
 from pythonfrp.Proxy import *
 from direct.gui.OnscreenText import OnscreenText
 from pythonfrp.Types import *
-from pythonfrp.Functions import react,delay,exitScene
+from pythonfrp.Functions import react,delay,exitScene,atTime
 import StaticNumerics
 from direct.gui.DirectGui import *
 from . Externals import postEvent
@@ -39,7 +39,7 @@ def textBox(*p, **k):
     return TextBox(*p, **k).enter
 
 class Text(Proxy):
-    def __init__(self, text = None, name = 'Text', position = None, size = 1, color = None, duration=0, background = None, frame = None):
+    def __init__(self, text = None, name = 'Text', position = None, size = 1, color = None, duration=0, background = None, frame = None, start = 0):
         Proxy.__init__(self, name, updater=textUpdater, types = {"text": anyType, "color": colorType})
         if text is None:
             self.text = ""
@@ -77,6 +77,9 @@ def textUpdater(self):
     self._textObject.setFg(color.toVBase4())
     self._textObject.setBg(bg.toVBase4())
     self._textObject.setFrame(frame.toVBase4())
+
+def _delay(*p, **k):
+    return Text(*p, **k)
 
 def text(*p, **k):
     return Text(*p, **k)
