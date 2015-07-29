@@ -179,6 +179,8 @@ class PandaModel(Proxy.Proxy):
            print("Touch: " + repr(self) + " (" + self._cType + ") " + repr(handle) + " (" + handle._cType + ")")
         #print (repr(self._cRadius))
         #print (repr(self.get("size")))
+        if not self._alive or not handle._alive:
+            return False
         mr = self._cRadius * self._get("size")
         mp = self._get("position") + p3(0,0,0)
         yr = handle._cRadius*handle._get("size")
