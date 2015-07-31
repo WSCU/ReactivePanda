@@ -1,10 +1,13 @@
 """
     This is temporary, quick hack to get everything working.
+
+    jp is not pleased!  This should all be in pythonfrp
 """
 from pythonfrp.Signal import *
 from pythonfrp.Functions import *
 import pythonfrp.Globals as frpGlobals
 from . import Camera
+from . import World
 from . Externals import initEvents, pollGUI
 from direct.task import Task
 
@@ -46,7 +49,10 @@ def heartBeat(ct, events):
         frpGlobals.nextNW2dY = .95
         Proxy.clearReactions(World.world)
         Proxy.clearReactions(Camera.camera)
+        frpGlobals.worldObjects.append(World.world)
+        frpGlobals.worldObjects.append(Camera.camera) # Keep these in the update list
         frpGlobals.resetFlag()
+        frpGlobals.currentTime = 0
         frpGlobals.resetFlag = None
 #will need to check the proxy module to find the right name for this initialize method
 #make an initialize method that clears out all the variables and resets the clock

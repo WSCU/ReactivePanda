@@ -20,8 +20,10 @@ world = World()
 def doNothing():
     pass
 
+# This is completely confusing - this function is also in World in pythonfrp.  There should
+# not be two different world objects!
 # Clear out the world.  This doesn't reset the global time or camera position.
 def resetWorld(continueFn = doNothing):
     Globals.resetFlag=continueFn
     # Should make all DirectGUI stuff invisible
-    print("done")
+
