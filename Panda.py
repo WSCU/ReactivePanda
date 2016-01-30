@@ -1,5 +1,5 @@
 from pythonfrp.Numerics import *
-from . Numerics import *
+from . PandaNumerics import *
 from pythonfrp.Functions import *
 from . PandaModels import *
 
@@ -11,10 +11,10 @@ from . Text import text, textBox
 from . Color import *
 from . Light import *
 from . Slider import slider, sliderHpr, sliderColor, sliderP3
-from . World import world, resetWorld
+from . PandaWorld import world, resetWorld
 from . Camera import camera
 from . DynamicGeometry import triangle, rectangle, emptyModel, photoWheel, cube, tetra, blastPicture, slicePicture
-from . Engine import engine as _engine
+from . PandaEngine import engine as _engine
 from . PEffect import *
 from . Button import button
 from . Sound import play

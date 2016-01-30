@@ -7,7 +7,7 @@ from pythonfrp.Signal import *
 from pythonfrp.Functions import *
 import pythonfrp.Globals as frpGlobals
 from . import Camera
-from . import World
+from . import PandaWorld
 from . Externals import initEvents, pollGUI
 from direct.task import Task
 
@@ -43,13 +43,13 @@ def heartBeat(ct, events):
         obj._initialize()
     if frpGlobals.resetFlag is not None:
         for m in frpGlobals.worldObjects:
-            if m is not World.world and m is not Camera.camera:
+            if m is not PandaWorld.world and m is not Camera.camera:
                 exit(m)
         frpGlobals.nextNE2dY = .95 # Positioning for 2-D controls - old controls should be gone
         frpGlobals.nextNW2dY = .95
-        Proxy.clearReactions(World.world)
+        Proxy.clearReactions(PandaWorld.world)
         Proxy.clearReactions(Camera.camera)
-        frpGlobals.worldObjects.append(World.world)
+        frpGlobals.worldObjects.append(PandaWorld.world)
         frpGlobals.worldObjects.append(Camera.camera) # Keep these in the update list
         frpGlobals.resetFlag()
         frpGlobals.currentTime = 0

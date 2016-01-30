@@ -4,7 +4,7 @@ from pythonfrp.Proxy import *
 from direct.gui.OnscreenText import OnscreenText
 from pythonfrp.Types import *
 from pythonfrp.Functions import react,delay,exitScene,atTime
-import StaticNumerics
+import PandaStaticNumerics
 from direct.gui.DirectGui import *
 from . Externals import postEvent
 from pythonfrp.Factory import maybeLift

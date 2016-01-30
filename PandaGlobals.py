@@ -1,5 +1,5 @@
 from direct.showbase.DirectObject import DirectObject
-from Numerics import p2
+from PandaNumerics import p2
 
 direct = DirectObject()
 

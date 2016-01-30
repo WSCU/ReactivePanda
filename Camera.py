@@ -1,7 +1,7 @@
 import math
 import pythonfrp.Proxy as Proxy
 from . import PandaGlobals
-from . Numerics import hpr
+from . PandaNumerics import hpr
 from pythonfrp.Numerics import p3
 from pythonfrp.Types import hprType, p3Type
 from pythonfrp.World import world

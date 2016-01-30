@@ -1,4 +1,4 @@
-from Panda import *
+from ReactivePanda.Panda import *
 
 #cam.position=p3(0,-30, 6)
 

@@ -12,7 +12,7 @@ from panda3d.core import Filename
 from pythonfrp.Numerics import *
 import pythonfrp.Globals as frpGlobals
 from . import PandaGlobals
-from . Numerics import *
+from . PandaNumerics import *
 from pythonfrp.StaticNumerics import degrees
 from . import FileIO
 import pythonfrp.Proxy as Proxy

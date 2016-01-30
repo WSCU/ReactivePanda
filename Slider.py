@@ -4,7 +4,7 @@ from pythonfrp.Factory import *
 from pythonfrp.Types import *
 from . import Text
 from pythonfrp.StaticNumerics import SP2
-from . Numerics import *
+from . PandaNumerics import *
 from . Color import *
 
 class Slider:

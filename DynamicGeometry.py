@@ -6,7 +6,7 @@ from . import PandaGlobals
 from pythonfrp.Types import *
 from . import PandaModel
 import pythonfrp.Proxy as Proxy
-from . Numerics import *
+from . PandaNumerics import *
 from . Color import *
 from panda3d.core import *
 from . import FileSearch

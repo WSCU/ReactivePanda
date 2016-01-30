@@ -1,8 +1,8 @@
 from . import PandaGlobals as PandaGlobals
 from direct.actor import Actor
 import direct.directbase.DirectStart
-from . Engine import *
-from . Numerics import *
+from . PandaEngine import *
+from . PandaNumerics import *
 from pythonfrp.Signal import *
 from pythonfrp.Proxy import *
 from pythonfrp.Numerics import *

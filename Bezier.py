@@ -7,7 +7,7 @@ from . Color import *
 from . PandaModels import *
 from pythonfrp.Proxy import *
 from pythonfrp.Numerics import *
-from . Numerics import *
+from . PandaNumerics import *
 from . Slider import *
 from . Text import *
 #from Signal import time, static
