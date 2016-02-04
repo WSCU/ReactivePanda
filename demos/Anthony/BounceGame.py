@@ -1,4 +1,4 @@
-from ReactivePanda.Panda import *
+from ReactivePanda .Panda import *
 
 #cam.position=p3(0,-30, 6)
 
@@ -34,6 +34,7 @@ def bounceWall(m, v):
     launch(m, p, v1)
 
 def die(m,v):
+    resetWorld()
     text(("You Lose"), position = P2(-.3,.3),size = 10)
 
 p = r2d2(size = 2)

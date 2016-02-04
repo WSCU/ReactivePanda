@@ -4,26 +4,24 @@ from pythonfrp.Types import *
 from pythonfrp import Numerics
 from . Color import gray
 
-def updateWorld(self):
+def updateColor(self):
     c = self._get("color")
     base.setBackgroundColor(c.r, c.g, c.b) # What is base?
 
 
-class World(Proxy.Proxy):
-    def __init__(self):
-        Proxy.Proxy.__init__(self, "world", updateWorld, {"color": colorType, "gravity": p3Type})
-        self.color = gray # Set this in panda specific area
-        self.gravity = Numerics.p3(0,0,-1)
+#class World(Proxy.Proxy):
+#    def __init__(self):
+#        Proxy.Proxy.__init__(self, "world", updateWorld, {"color": colorType, "gravity": p3Type})
+#        self.color = gray # Set this in panda specific area
+#        self.gravity = Numerics.p3(0,0,-1)
+        
+#world = World()
+pWorld = World.world
 
-world = World()
+pWorld.addSignal("color",gray,colorType,updateColor)
+pWorld.addSignal("gravity",Numerics.p3(0,0,-1),p3Type,lambda: None)
 
-def doNothing():
-    pass
-
-# This is completely confusing - this function is also in World in pythonfrp.  There should
-# not be two different world objects!
-# Clear out the world.  This doesn't reset the global time or camera position.
-def resetWorld(continueFn = doNothing):
+def resetWorld(continueFn = lambda: None):
     Globals.resetFlag=continueFn
     # Should make all DirectGUI stuff invisible
 
