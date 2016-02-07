@@ -6,7 +6,7 @@ from . PandaNumerics import *
 from pythonfrp.Signal import *
 from pythonfrp.Proxy import *
 from pythonfrp.Numerics import *
-from . Color import *
+from . PandaColor import *
 from pandac.PandaModules import *
 
 def updateALight(self):

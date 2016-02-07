@@ -3,7 +3,7 @@ from direct.gui.DirectGui import * # 2D GUI elements
 from . Maze import *
 #from Racetrack import *
 #from Time import *
-from . Color import *
+from . PandaColor import *
 from . PandaModels import *
 from pythonfrp.Proxy import *
 from pythonfrp.Numerics import *

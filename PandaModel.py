@@ -18,7 +18,7 @@ from . import FileIO
 import pythonfrp.Proxy as Proxy
 from . import FileSearch
 from pythonfrp.Functions import *
-from . Color import *
+from . PandaColor import *
 import os
 
 # This fills in all of the defaults

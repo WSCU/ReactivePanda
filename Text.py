@@ -8,7 +8,7 @@ import PandaStaticNumerics
 from direct.gui.DirectGui import *
 from . Externals import postEvent
 from pythonfrp.Factory import maybeLift
-from . Color import *
+from . PandaColor import *
 
 class TextBox(Proxy): #Creates the text box object that users can enter in values to
     def __init__(self, position = None, size = 1, name = 'TextBox', width = 15):

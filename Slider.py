@@ -5,7 +5,7 @@ from pythonfrp.Types import *
 from . import Text
 from pythonfrp.StaticNumerics import SP2
 from . PandaNumerics import *
-from . Color import *
+from . PandaColor import *
 
 class Slider:
     def __init__(self, size, position, min, max, pageSize, init, label):

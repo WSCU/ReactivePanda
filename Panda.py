@@ -8,7 +8,7 @@ from . Externals import lbp, lbr, rbp, rbr, lbr, key, keyUp, leftClick, rightCli
                       mouse, lbutton, rbutton, lbuttonPull, rbuttonPull
 from . Physics import *
 from . Text import text, textBox
-from . Color import *
+from . PandaColor import *
 from . Light import *
 from . Slider import slider, sliderHpr, sliderColor, sliderP3
 from . PandaWorld import world, resetWorld

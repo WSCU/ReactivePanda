@@ -4,7 +4,7 @@ from pythonfrp.Types import *
 from pythonfrp.Numerics import *
 from PandaStaticNumerics import *
 from SHPR import *
-from Color import Color, colorHSL
+from PandaColor import Color, colorHSL
 
 
 

@@ -7,7 +7,7 @@ from pythonfrp.Types import *
 from . import PandaModel
 import pythonfrp.Proxy as Proxy
 from . PandaNumerics import *
-from . Color import *
+from . PandaColor import *
 from panda3d.core import *
 from . import FileSearch
 import pythonfrp.Types as Types
