@@ -11,8 +11,9 @@ Usage
 A simple hello world:
 
     from ReactivePanda.Panda import *
-    panda(hpr = (time, 0 , 0))
+    panda(hpr = hpr(time,1,0))
     start()
+
 
 This produces a pandamodel that rotates based on the current time.
 
