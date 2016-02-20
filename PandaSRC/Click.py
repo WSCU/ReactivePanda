@@ -1,5 +1,7 @@
-from . import PandaGlobals
 from panda3d.core import *
+
+from PandaFRP import PandaGlobals
+
 
 def findClickedModels():
     pickerNode = CollisionNode('mouseRay')

@@ -1,4 +1,4 @@
-from ReactivePanda.Panda import *
+from PandaSRC.Panda import *
 # Background color didn't use to change
 world.color = blue
 jeep()

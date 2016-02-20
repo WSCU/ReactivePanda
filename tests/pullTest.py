@@ -1,4 +1,4 @@
-from ReactivePanda.Panda import *
+from PandaSRC.Panda import *
 
 panda(position = p3(getX(lbuttonPull),0,0), size = getY(lbuttonPull))
 

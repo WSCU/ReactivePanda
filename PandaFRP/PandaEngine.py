@@ -3,13 +3,13 @@
 
     jp is not pleased!  This should all be in pythonfrp
 """
-from pythonfrp.Signal import *
-from pythonfrp.Functions import *
-import pythonfrp.Globals as frpGlobals
-from . import Camera
-from . import PandaWorld
-from . Externals import initEvents, pollGUI
 from direct.task import Task
+
+import pythonfrp.Globals as frpGlobals
+from PandaFRP import PandaWorld
+from PandaSRC.Externals import initEvents, pollGUI
+from ReactivePanda.PandaSRC import Camera
+from pythonfrp.Functions import *
 
 
 def heartBeat(ct, events):

@@ -1,4 +1,4 @@
-from ReactivePanda.Panda import *
+from PandaSRC.Panda import *
 #frags = blastPicture("realpanda", rows = 5, columns = 5)
 #for f in frags:
 #    f.position = itime(at(p3(random11(), random11(), random11()))+to(2,f._location))

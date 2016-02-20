@@ -1,4 +1,4 @@
-from Panda import *
+from PandaSRC.Panda import *
 
 rectangle(p3(-4,0,-3), p3(4,0,-3), p3(-4,0,3), texture = "Clouds2.jpg")
 text(time, size = 1.7, color = white)

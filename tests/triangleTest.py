@@ -1,4 +1,4 @@
-from ReactivePanda.Panda import *
+from PandaSRC.Panda import *
 # Test with both triangle and rectangle
 
 #rectangle(p3(-2,0,0), p3(-2,0,1), p3(-1,0,0),color = red)

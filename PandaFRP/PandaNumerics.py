@@ -1,12 +1,7 @@
-from pythonfrp.StaticNumerics import *
-from pythonfrp.Factory import *
-from pythonfrp.Types import *
-from pythonfrp.Numerics import *
-from PandaStaticNumerics import *
-from SHPR import *
 from PandaColor import Color, colorHSL
-
-
+from PandaSRC.SHPR import *
+from PandaStaticNumerics import *
+from pythonfrp.Numerics import *
 
 hpr = lift("hpr", SHPR, types=[numType, numType, numType], outType=hprType)
 HPR = hpr

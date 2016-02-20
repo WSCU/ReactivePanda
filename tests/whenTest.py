@@ -1,4 +1,4 @@
-from ReactivePanda.Panda import *
+from PandaSRC.Panda import *
 
 # Test the when1 function.  The panda should move left / right
 p = panda(position = p3(time, 0, 0))

@@ -1,4 +1,4 @@
-from ReactivePanda.Panda import *
+from PandaSRC.Panda import *
 
 # Should just increment once.  Fixed error had the object continue to hit after exit
 v1 = var(0)

@@ -2,12 +2,13 @@
 
 # A reactive button
 
-from pythonfrp.Types import *
 from direct.gui.DirectGui import DirectButton
-import pythonfrp.StaticNumerics as StaticNumerics
+
 import pythonfrp.Factory as Factory
-from . import Externals
-from . import PandaGlobals as Globals
+import pythonfrp.StaticNumerics as StaticNumerics
+from PandaFRP import PandaGlobals as Globals
+from PandaSRC import Externals
+
 
 # Arguments to the button constructor:
 #   text            String        Normal text (required)

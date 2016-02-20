@@ -1,5 +1,5 @@
+from PandaFRP.PandaWorld import world
 from pythonfrp.Functions import integral
-from . PandaWorld import world
 
 
 # For whatever reason, the world object imported above is always None.  Thus we

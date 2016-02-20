@@ -1,6 +1,5 @@
-from ReactivePanda.Panda import *
 from FileIO import saveDict
-
+from PandaSRC.Panda import *
 
 modelObject = [0]
 modelFile = [""]

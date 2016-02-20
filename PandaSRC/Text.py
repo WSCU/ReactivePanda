@@ -1,14 +1,13 @@
-from . import PandaGlobals
-import pythonfrp.Globals as frpGlobals
-from pythonfrp.Proxy import *
-from direct.gui.OnscreenText import OnscreenText
-from pythonfrp.Types import *
-from pythonfrp.Functions import react,delay,exitScene,atTime
-import PandaStaticNumerics
 from direct.gui.DirectGui import *
-from . Externals import postEvent
+from PandaFRP.PandaColor import *
+
+from PandaFRP import PandaGlobals
 from pythonfrp.Factory import maybeLift
-from . PandaColor import *
+from pythonfrp.Functions import react,delay,exitScene
+from pythonfrp.Proxy import *
+from pythonfrp.Types import *
+from . Externals import postEvent
+
 
 class TextBox(Proxy): #Creates the text box object that users can enter in values to
     def __init__(self, position = None, size = 1, name = 'TextBox', width = 15):
@@ -59,7 +58,7 @@ class Text(Proxy):
             self.frame = frame
         if position is None:
             position = StaticNumerics.SP2(-.95, PandaGlobals.nextNW2dY)
-            PandaGlobals.nextNW2dY = PandaGlobals.nextNW2dY -.1
+            PandaGlobals.nextNW2dY = PandaGlobals.nextNW2dY - .1
         self._textObject = OnscreenText(pos = (position.x, position.y), scale = size*0.05, mayChange = True)
         if duration > 0:
             react(self, delay(duration), exitScene)

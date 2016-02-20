@@ -1,4 +1,4 @@
-from ReactivePanda.Panda import *
+from PandaSRC.Panda import *
 # Each panda should be bigger if now works on reactive variables.
 va = var(1)
 def makeB(m, v):

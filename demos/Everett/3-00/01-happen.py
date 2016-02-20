@@ -1,4 +1,4 @@
-from Panda import *
+from PandaSRC.Panda import *
 
 # Use "happen" to make an event from a boolean
 

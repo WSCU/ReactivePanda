@@ -1,4 +1,4 @@
-from Panda import*
+from PandaSRC.Panda import*
 sphere(size=-10,texture="plutomap",position=p3(0,0,0))
 fireish(position=p3(-2.1,0,-.003),texture="fire7",hpr=hpr(0,3,0),size=.4)
 fireish(position=p3(2.1,0,1.003),texture="fire4",hpr=hpr(0,0,0),size=.4)

@@ -1,30 +1,24 @@
 # allow use of actor
-from direct.gui.DirectGui import * # 2D GUI elements
-from . Maze import *
 #from Racetrack import *
 #from Time import *
-from . PandaColor import *
+from PandaFRP.PandaColor import *
+from PandaFRP.PandaNumerics import *
+
 from . PandaModels import *
-from pythonfrp.Proxy import *
-from pythonfrp.Numerics import *
-from . PandaNumerics import *
 from . Slider import *
 from . Text import *
+
 #from Signal import time, static
 #from FRP import *
 # from Switch import *
 from . Light import *
-from . Sound import *
 from . Button import *
-from . Menu import *
-from . PEffect import *
-from . DynamicGeometry import *
 #from Interp import *
 #from TextBox import *
 #from PoseAndScriptFiles import *
 #from Utils import *
 #from Roll import *
-from . PandaGlobals import *
+from PandaFRP.PandaGlobals import *
 from . Camera import camera
 from pythonfrp.Functions import *
 

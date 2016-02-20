@@ -1,4 +1,4 @@
-from Panda import *
+from PandaSRC.Panda import *
 
 camera.position = p3(0,-100, 0)
 

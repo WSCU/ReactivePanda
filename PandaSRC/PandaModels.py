@@ -1,5 +1,6 @@
-from . PandaModel import *
-import PandaGlobals as Globals
+from PandaFRP import PandaGlobals as Globals
+from PandaSRC.PandaModel import *
+
 
 # Characters/Creatures
 

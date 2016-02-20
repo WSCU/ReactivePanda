@@ -1,4 +1,4 @@
-from Panda import *
+from PandaSRC.Panda import *
 # You can add more photos to your nametag by placing some geometric solids in your animation
 
 # You can put an arbitrary number of photos in a wheel, 6 photos on a cube, or 4 on a tetrahedron

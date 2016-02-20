@@ -1,4 +1,4 @@
-from Panda import *
+from PandaSRC.Panda import *
 def man(**a):
     return model("man.egg",**a)
 car = jeep(size = 0.25,kind="bullet")

@@ -5,7 +5,9 @@ Non-reactive
 """
 
 from panda3d.core import Filename
-from PandaGlobals import pandaPath
+
+from PandaFRP.PandaGlobals import pandaPath
+
 
 def fileSearch(file, libDir = None, exts = []):
     """

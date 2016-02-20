@@ -1,9 +1,11 @@
 # A reactive menu
 
 from direct.gui.DirectGui import *
+
 import pythonfrp.Factory as Factory
+from PandaFRP import PandaGlobals as Globals
 from pythonfrp.Types import checkType, p2Type, numType
-from . import PandaGlobals as Globals
+
 
 # Arguments to the button constructor:
 #   text            String        Normal text (required)

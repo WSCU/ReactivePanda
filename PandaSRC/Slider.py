@@ -1,11 +1,13 @@
 from direct.gui.DirectGui import *
-from . import PandaGlobals
+from  PandaFRP.PandaColor import *
+from PandaFRP.PandaNumerics import *
+
+from PandaFRP import PandaGlobals
+from PandaSRC import Text
 from pythonfrp.Factory import *
-from pythonfrp.Types import *
-from . import Text
 from pythonfrp.StaticNumerics import SP2
-from . PandaNumerics import *
-from . PandaColor import *
+from pythonfrp.Types import *
+
 
 class Slider:
     def __init__(self, size, position, min, max, pageSize, init, label):
@@ -24,7 +26,7 @@ class Slider:
         else:
             pos = (position.x, 0, position.y)
         if label is not None:
-            Text.text(text = label, position = SP2(pos[0]-.3, pos[2]))
+            Text.text(text = label, position = SP2(pos[0] - .3, pos[2]))
         self._name = name
         self._pandaModel = DirectSlider(scale=.2 * size, pos=pos, range=(min, max), pageSize=pageSize, value=init, command=self.setValue)
         self.value = init

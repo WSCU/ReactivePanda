@@ -1,4 +1,4 @@
-from Panda import *
+from PandaSRC.Panda import *
 sphere(size=-500,texture='nebula.jpg', hpr=hpr(time-2,time-2,time-2))
 
 pandaX = 0

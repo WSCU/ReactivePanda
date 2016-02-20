@@ -1,4 +1,4 @@
-from Panda import*
+from PandaSRC.Panda import*
 
 
 

@@ -1,13 +1,5 @@
-import PandaEngine
-import Globals as g
-from Functions import time
-from PandaModels import *
 from Light import *
-from Functions import *
-from PandaStaticNumerics import cos, sin, pi
-from direct.actor import Actor
-import direct.directbase.DirectStart
-from panda3d.core import Filename
+from PandaFRP import PandaEngine
 
 #"Sanity check" testing scenarios will go here
 

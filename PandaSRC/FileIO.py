@@ -8,8 +8,6 @@ Non-Reactive
 #import g
 import csv
 #from panda3d.core import Filename
-from pythonfrp.Types import *
-from PandaGlobals import pandaPath
 #from StaticNumerics import *
 from FileSearch import *
 

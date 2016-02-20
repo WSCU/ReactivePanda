@@ -1,13 +1,10 @@
-from . import PandaGlobals as PandaGlobals
-from direct.actor import Actor
-import direct.directbase.DirectStart
-from . PandaEngine import *
-from . PandaNumerics import *
-from pythonfrp.Signal import *
-from pythonfrp.Proxy import *
+from PandaFRP.PandaColor import *
+from PandaFRP.PandaNumerics import *
+
 from pythonfrp.Numerics import *
-from . PandaColor import *
-from pandac.PandaModules import *
+from pythonfrp.Proxy import *
+from ReactivePanda.PandaFRP import PandaGlobals as PandaGlobals
+
 
 def updateALight(self):
         c = self._get("color")

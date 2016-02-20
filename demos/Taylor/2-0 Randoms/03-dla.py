@@ -1,4 +1,4 @@
-from Panda import *
+from PandaSRC.Panda import *
 d=55*(sin(time*4)+2)
 h=2*time+5
 p=time*time/(20+time)

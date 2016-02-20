@@ -1,4 +1,4 @@
-from . PandaNumerics import *
+from PandaFRP.PandaNumerics import *
 #from pythonfrp.Numerics import *
 from pythonfrp.Functions import *
 

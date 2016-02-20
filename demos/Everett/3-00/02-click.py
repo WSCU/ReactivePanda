@@ -1,6 +1,6 @@
 # Create a simple game using click detection.  Use clock to generate objects
 
-from Panda import *
+from PandaSRC.Panda import *
 
 # Place a random panda on the screen.  If clicked, it goes away.
 # leftClick is an event that happens when a particular model is clicked on

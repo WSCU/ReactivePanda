@@ -1,4 +1,4 @@
-from ReactivePanda.Panda import *
+from PandaSRC.Panda import *
 
 # Note that some of the other models are not oriented correctly for this
 

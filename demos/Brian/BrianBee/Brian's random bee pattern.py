@@ -1,4 +1,4 @@
-from Panda import *
+from PandaSRC.Panda import *
 
 volleyBall(position=p3(0,3,0),size=.6)
 

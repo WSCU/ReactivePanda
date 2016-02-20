@@ -1,6 +1,6 @@
 from direct.showbase.DirectObject import DirectObject
 from PandaNumerics import p2
-
+from PandaSRC.Camera import camera
 direct = DirectObject()
 
 nextNE2dY = .95 # Positioning for 2-D controls
@@ -21,5 +21,6 @@ texture = None # Used to communicate with particle effect code from particle pan
 
 # Temporary for testing, this needs to be automatically set
 pandaPath = "/c/Panda/ReactivePanda/lib"
+
 
 panda3dCamera = camera

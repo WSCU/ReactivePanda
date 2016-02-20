@@ -1,4 +1,4 @@
-from ReactivePanda.Panda import *
+from PandaSRC.Panda import *
 
 # panda disappears on lbp, bunny at 2 seconds
 

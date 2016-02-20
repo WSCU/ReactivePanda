@@ -1,5 +1,4 @@
-from ReactivePanda.Panda import *
-from ReactivePanda.PandaGlobals import pandaPath
+from PandaSRC.Panda import *
 
 # Problems with the photo - need to use a rectangle instead.
 # No way to see which way is forward

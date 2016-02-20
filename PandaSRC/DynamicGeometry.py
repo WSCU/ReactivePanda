@@ -1,17 +1,16 @@
 
 # Todo: add code for surface normals
 
-from . import PandaGlobals
-
-from pythonfrp.Types import *
-from . import PandaModel
-import pythonfrp.Proxy as Proxy
-from . PandaNumerics import *
-from . PandaColor import *
 from panda3d.core import *
-from . import FileSearch
-import pythonfrp.Types as Types
+from PandaFRP.PandaColor import *
+from PandaFRP.PandaNumerics import *
+
 import pythonfrp.Functions as Functions
+import pythonfrp.Proxy as Proxy
+from PandaFRP import PandaGlobals
+from PandaSRC import FileSearch
+from ReactivePanda.PandaSRC import PandaModel
+from pythonfrp.Types import *
 
 
 # This has a lot in common with PandaModel - there should be a super class

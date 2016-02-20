@@ -1,4 +1,4 @@
-from ReactivePanda.Panda import *
+from PandaSRC.Panda import *
 
 world.color = green
 b = spiderman(position = p3(0,30,-1))

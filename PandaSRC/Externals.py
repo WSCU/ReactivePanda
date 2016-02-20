@@ -1,13 +1,11 @@
-import pythonfrp.Globals
-from . import PandaGlobals
-from pythonfrp.Factory import *
-from pythonfrp.Signal import *
-from pythonfrp.Types import *
-import pythonfrp.StaticNumerics as StaticNumerics
-from direct.actor import Actor
-import pythonfrp.Errors as Errors
 import pythonfrp.Functions as Functions
-from . import Click
+import pythonfrp.Globals
+import pythonfrp.StaticNumerics as StaticNumerics
+from PandaFRP import PandaGlobals
+from PandaSRC import Click
+from pythonfrp.Factory import *
+from pythonfrp.Types import *
+
 
 def lbp(e = True):
     return eventObserver("mouse1", e)
@@ -83,11 +81,11 @@ def initEvents():
     directObj.accept("mouse3", lambda: postEvent("mouse3"))
     directObj.accept("mouse1-up", lambda: postEvent("mouse1-up"))
     directObj.accept("mouse3-up", lambda: postEvent("mouse3-up"))
-    PandaGlobals.mousePos = StaticNumerics.SP2(0,0)
+    PandaGlobals.mousePos = StaticNumerics.SP2(0, 0)
     PandaGlobals.lbutton = False
     PandaGlobals.rbutton = False
-    PandaGlobals.lbuttonPull = StaticNumerics.SP2(0,0)
-    PandaGlobals.rbuttonPull = StaticNumerics.SP2(0,0)
+    PandaGlobals.lbuttonPull = StaticNumerics.SP2(0, 0)
+    PandaGlobals.rbuttonPull = StaticNumerics.SP2(0, 0)
 
 
 def pollGUI():
@@ -125,5 +123,5 @@ mouse = ObserverF(lambda x: PandaGlobals.mousePos)
 
 lbutton = ObserverF(lambda x: PandaGlobals.lbutton, boolType)
 rbutton = ObserverF(lambda x: PandaGlobals.rbutton, boolType)
-rbuttonPull = ObserverF(lambda x:PandaGlobals.rbuttonPull, p2Type)
-lbuttonPull = ObserverF(lambda x:PandaGlobals.lbuttonPull, p2Type)
+rbuttonPull = ObserverF(lambda x: PandaGlobals.rbuttonPull, p2Type)
+lbuttonPull = ObserverF(lambda x: PandaGlobals.lbuttonPull, p2Type)
