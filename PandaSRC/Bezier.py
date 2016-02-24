@@ -19,7 +19,7 @@ from . Button import *
 #from Utils import *
 #from Roll import *
 from PandaFRP.PandaGlobals import *
-from . Camera import camera
+from PandaSRC.Camera import camera
 from pythonfrp.Functions import *
 
 class Bezier:

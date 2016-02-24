@@ -2,7 +2,7 @@ import math
 
 from PandaFRP.PandaNumerics import hpr
 import pythonfrp.Proxy as Proxy
-#from PandaFRP import PandaGlobals
+from PandaFRP import PandaGlobals
 from pythonfrp.Numerics import p3
 from pythonfrp.Types import hprType, p3Type
 
@@ -10,7 +10,6 @@ from pythonfrp.Types import hprType, p3Type
 def updateCamera(self):
     pos = self._get("position")
     hpr = self._get("hpr")
-    from PandaFRP import PandaGlobals
     PandaGlobals.panda3dCamera.setPos(pos.x, pos.y, pos.z)
     PandaGlobals.panda3dCamera.setHpr(math.degrees(hpr.h), math.degrees(hpr.p), math.degrees(hpr.r))
 
