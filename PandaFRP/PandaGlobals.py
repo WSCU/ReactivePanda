@@ -1,3 +1,4 @@
+from direct.directbase import DirectStart
 from direct.showbase.DirectObject import DirectObject
 from PandaNumerics import p2
 
@@ -23,4 +24,4 @@ texture = None  # Used to communicate with particle effect code from particle pa
 pandaPath = "/c/Panda/ReactivePanda/lib"
 
 
-panda3dCamera = camera
+panda3dCamera = base.camera
