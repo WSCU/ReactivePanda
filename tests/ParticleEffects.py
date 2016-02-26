@@ -2,10 +2,10 @@ from PandaSRC.Panda import *
 
 world.color = black
 
-#fireish()
+fireish()
 #fire() #same as above
 #fire1()
-explosions()
+#explosions()
 #fireWorks()
 #fireWork()
 #intervalRings()

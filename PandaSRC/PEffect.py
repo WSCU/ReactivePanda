@@ -3,13 +3,12 @@
 # and open the template in the editor.
 
 from direct.particles.ParticleEffect import *
-from PandaFRP.PandaNumerics import p3
-from PandaSRC import *
+from PandaFRP.PandaNumerics import *
+from PandaSRC.PandaModel import *
 from PandaFRP.PandaColor import *
 from PandaFRP import PandaGlobals
 from pythonfrp.Proxy import *
 from PandaSRC.FileSearch import *
-
 
 def peffectUpdater(self):
     #These parameters find the static offset which was created during initialization and the current position which is returned by the self._get() method

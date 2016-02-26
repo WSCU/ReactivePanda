@@ -8,7 +8,8 @@ from direct.task import Task
 import pythonfrp.Globals as frpGlobals
 from PandaFRP import PandaWorld
 from PandaSRC.Externals import initEvents, pollGUI
-from ReactivePanda.PandaSRC.Camera import *
+from ReactivePanda.PandaSRC import Camera
+
 from pythonfrp.Functions import *
 
 

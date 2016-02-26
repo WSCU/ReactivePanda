@@ -1,9 +1,10 @@
 from PandaFRP.PandaColor import *
 from PandaFRP.PandaNumerics import *
-
 from pythonfrp.Numerics import *
 from pythonfrp.Proxy import *
 from ReactivePanda.PandaFRP import PandaGlobals as PandaGlobals
+from panda3d.core import PointLight,Spotlight,AmbientLight,DirectionalLight
+
 
 
 def updateALight(self):

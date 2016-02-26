@@ -1,4 +1,4 @@
-from direct.directbase import DirectStart
+from direct.directbase import DirectStart # Import for Camera ('base.camera')
 from direct.showbase.DirectObject import DirectObject
 from PandaNumerics import p2
 
