@@ -5,6 +5,7 @@ import pythonfrp.Proxy as Proxy
 from PandaFRP import PandaGlobals
 from pythonfrp.Numerics import p3
 from pythonfrp.Types import hprType, p3Type
+import pythonfrp.Globals as frpGlobals
 
 
 def updateCamera(self):
@@ -15,6 +16,7 @@ def updateCamera(self):
 
 class Camera(Proxy.Proxy):
     def __init__(self):
+        print "Init"
         Proxy.Proxy.__init__(self, "camera", updateCamera, {"position": p3Type, "hpr": hprType})
         self.position = p3(0, -10, 0)
         self.hpr = hpr(0,0,0)

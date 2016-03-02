@@ -23,5 +23,7 @@ texture = None  # Used to communicate with particle effect code from particle pa
 # Temporary for testing, this needs to be automatically set
 pandaPath = "/c/Panda/ReactivePanda/lib"
 
+hasCam = False
+
 
 panda3dCamera = base.camera

@@ -19,9 +19,10 @@ from . Button import *
 #from Utils import *
 #from Roll import *
 from PandaFRP.PandaGlobals import *
-from PandaSRC.Camera import camera
+from PandaSRC import Camera
 from pythonfrp.Functions import *
 
+cam = Camera.Camera()
 class Bezier:
     def __init__ (self, p00, p01, p02, p03):
         self.p00 = p00
@@ -164,7 +165,7 @@ def saveCamera(name):
 
     text(status, position = P2(0, .95))
     text(" ")
-    text(format("Camera: %s", camera.position))
+    text(format("Camera: %s", Camera.camera.position))
     models = [[]]
     sTime = slider(min = 0 , max = 1, label = "t", position = P2(.8, .8))
     speed = slider(max = 100, min = 1, label = "Speed", position = P2(.8, .72))
@@ -179,8 +180,8 @@ def saveCamera(name):
     previewing = var(0)
     rp = rbuttonPull
     def addPoint(m, v):
-        cp = now(camera.position)
-        chpr = now(camera.hpr)
+        cp = now(Camera.camera.position)
+        chpr = now(Camera.camera.hpr)
         spline.add( cp, chpr, now(speed))
         status.set("Added a point at " + str(cp) + " hpr = " + str(chpr))  # Should say where and how many
         #bunny(position = cp, hpr = chpr)
@@ -191,26 +192,26 @@ def saveCamera(name):
             m.exit()
         models[0] = []
         if now(previewing) == 0:
-            camera.position = spline.getPos(sTime * spline.duration())
-            camera.hpr = spline.getHPR(sTime*spline.duration())
+            Camera.camera.position = spline.getPos(sTime * spline.duration())
+            Camera.camera.hpr = spline.getHPR(sTime * spline.duration())
             status.set("Preview mode - move camera with time slider")
             len.set(spline.duration())
         else:
             world1.t = 0
-            camera.hpr = HPR(getX(rp), getY(rp), roll)  # Control the camera hpr with the
+            Camera.camera.hpr = HPR(getX(rp), getY(rp), roll)  # Control the camera hpr with the
             v = choose(lbutton, -speed, 0)  # left button to move
-            pos = now(camera.position) + integral(v*HPRtoP3(camera.hpr))
-            camera.position = pos
+            pos = now(Camera.camera.position) + integral(v * HPRtoP3(Camera.camera.hpr))
+            Camera.camera.position = pos
             status.set("Exiting preview mode")
         previewing.set(1-now(previewing))
     react(pvb, camerapreview)
     def delPoint(m, v):
         oldpos, oldhpr = spline.delPoint()
         rp1 = now(rp)
-        camera.hpr = oldhpr + HPR(getX(rp)-getX(rp1), getY(rp) - getY(rp1), roll)  # Control the camera hpr with the
+        PandaSRC.Camera.camera.hpr = oldhpr + HPR(getX(rp) - getX(rp1), getY(rp) - getY(rp1), roll)  # Control the camera hpr with the
         v = choose(lbutton, -speed, 0)  # left button to move
-        pos = oldpos + integral(v*HPRtoP3(camera.hpr))
-        camera.position = pos
+        pos = oldpos + integral(v * HPRtoP3(PandaSRC.Camera.camera.hpr))
+        Camera.camera.position = pos
         status.set("Deleted last point")
     react(delp, delPoint)
     def preview(m, v):
@@ -229,10 +230,10 @@ def saveCamera(name):
         status.set("Saved to file")
     react(sfb, saveFile)
     #text(format("Camera is at %f", camera.position))
-    camera.hpr = HPR(getX(rp), getY(rp), roll)  # Control the camera hpr with the
+    PandaSRC.Camera.camera.hpr = HPR(getX(rp), getY(rp), roll)  # Control the camera hpr with the
     v = choose(lbutton, -speed, 0)  # left button to move
-    pos = integral(v*HPRtoP3(camera.hpr))
-    camera.position = pos
+    pos = integral(v * HPRtoP3(Camera.camera.hpr))
+    Camera.camera.position = pos
 
 
 def launchCamera(fileName):
@@ -254,6 +255,6 @@ def launchCamera(fileName):
 
                 spline.add(point, hpr, speed)
     fileLoader.close()
-    camera.position = spline.getPos(time)
-    camera.hpr = spline.getHPR(time)
+    Camera.camera.position = spline.getPos(time)
+    Camera.camera.hpr = spline.getHPR(time)
 

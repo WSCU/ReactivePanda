@@ -63,7 +63,7 @@ def initialize(ct):
     frpGlobals.newModels = []
     frpGlobals.worldObjects = {}
     frpGlobals.events = []
-    Camera.panda3dCamera = Camera.camera #Panda3-D built in camera
+    #Camera.panda3dCamera = Camera.camera #Panda3-D built in camera
     frpGlobals.world = world
 
 def engine(ct):
