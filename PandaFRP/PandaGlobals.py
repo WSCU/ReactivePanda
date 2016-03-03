@@ -1,6 +1,8 @@
 from direct.directbase import DirectStart # Import for Camera ('base.camera')
 from direct.showbase.DirectObject import DirectObject
 from PandaNumerics import p2
+import os
+
 
 direct = DirectObject()
 
@@ -21,9 +23,14 @@ texture = None  # Used to communicate with particle effect code from particle pa
 
 
 # Temporary for testing, this needs to be automatically set
+def find_dir():
+    for root,dirs,files in os.walk('/'):
+        for d in dirs:
+            if d == 'Wallbabe':
+                return os.path.join(root,d)
+
+print find_dir()
+
 pandaPath = "/c/Panda/ReactivePanda/lib"
-
-hasCam = False
-
 
 panda3dCamera = base.camera

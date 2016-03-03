@@ -19,10 +19,9 @@ from . Button import *
 #from Utils import *
 #from Roll import *
 from PandaFRP.PandaGlobals import *
-from PandaSRC import Camera
+from PandaSRC.Camera import camera
 from pythonfrp.Functions import *
 
-cam = Camera.Camera()
 class Bezier:
     def __init__ (self, p00, p01, p02, p03):
         self.p00 = p00
