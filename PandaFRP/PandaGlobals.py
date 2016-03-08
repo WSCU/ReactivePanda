@@ -21,8 +21,8 @@ lbuttonPull = p2(0,0) # "Pulled" 2-D point for the left button
 
 texture = None  # Used to communicate with particle effect code from particle panel
 
-with open('__init__.py', 'r') as myfile:
-    data = myfile.readlines()
+#with open('__init__.py', 'r') as myfile:
+#    data = myfile.readlines()
 
 pandaPath = "/c/Panda/ReactivePanda/lib"
 # pandaPath = data

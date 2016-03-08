@@ -4,7 +4,7 @@ s = slider(min = .1, max = 2, init = .5)
 text(s)
 
 def shoot(m,v):
-    panda(position = integral(p3(1,0,0), p3(-2,0,0)))
+    panda(position = integral(p3(-1,sin(time),0), p3(cos(time),0,sin(time))),hpr=hpr(1,sin(time),-2))
 
 react(clock(s), shoot)
 start()
