@@ -24,6 +24,7 @@ texture = None  # Used to communicate with particle effect code from particle pa
 with open('__init__.py', 'r') as myfile:
     data = myfile.readlines()
 
-pandaPath = data
+pandaPath = "/c/Panda/ReactivePanda/lib"
+# pandaPath = data
 
 panda3dCamera = base.camera
