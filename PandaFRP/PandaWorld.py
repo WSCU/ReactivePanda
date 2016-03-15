@@ -20,6 +20,6 @@ World.addSignal("color", gray, colorType, updateColor)
 World.addSignal("gravity", Numerics.p3(0, 0, -1), p3Type, lambda x: None)
 
 
-def resetWorld():
-    World.resetWorld()
+def resetWorld(continueFn=lambda: None):
+    World.resetWorld(continueFn)
     # Should we export this through engine somehow?

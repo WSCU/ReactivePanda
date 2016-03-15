@@ -35,7 +35,6 @@ def bounceWall(m, v):
 
 def die(m,v):
     resetWorld()
-    text(("You Lose"), position = P2(-.3,.3),size = 10)
 
 p = r2d2(size = 2)
 launch(p, p3(0,0,10), p3(5, 0, 5))

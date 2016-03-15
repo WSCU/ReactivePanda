@@ -1,5 +1,5 @@
 from Light import *
-from PandaFRP import PandaEngine
+from PandaFRP import PandaHeartbeat
 
 #"Sanity check" testing scenarios will go here
 
@@ -10,4 +10,4 @@ from PandaFRP import PandaEngine
 #p = panda(position = P3(integral(1), integral(1), integral(1)))
 #a = ambientLight(color24(100,100,100))
 p = pointLight(color24(100,100,100))
-PandaEngine.engine(0)
+PandaHeartbeat.engine(0)
