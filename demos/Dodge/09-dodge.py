@@ -10,7 +10,7 @@ p = panda(hpr = hpr(pi*.5,0,0), size = .4, color = color(.5,.5,sin(time)))
 
 v = hold(p3(0,0,0), key("upArrow", p3(0,0,1.5))+key("downArrow", p3(0,0,-1.5))+key("leftArrow", p3(-1.5,0,0))+key("rightArrow", p3(1.5,0,0)) +
                     happen(getX(p.position) < -3, p3(1,0, 0))  + happen(getX(p.position) > 3, p3(-1, 0, 0))+ happen(getZ(p.position)> 2.4, p3(0,0,-1))+ happen(getZ(p.position)<-2.4, p3(0,0,1)))
-p.position = p3(0,-.8,0)+integral(v)
+p.position = p3(0,-.8,0)+integral(v,p3(0,0,0))
 
 
 
