@@ -21,5 +21,3 @@ lbuttonPull = p2(0,0) # "Pulled" 2-D point for the left button
 
 texture = None  # Used to communicate with particle effect code from particle panel
 panda3dCamera = base.camera
-
-pandaPath = '/Panda\ReactivePanda/lib'  #Created by setup
