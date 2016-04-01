@@ -9,7 +9,7 @@ import pythonfrp.Functions as Functions
 import pythonfrp.Proxy as Proxy
 from PandaFRP import PandaGlobals
 from PandaSRC import FileSearch
-from ReactivePanda.PandaSRC import PandaModel
+from PandaSRC import PandaModel
 from pythonfrp.Types import *
 
 

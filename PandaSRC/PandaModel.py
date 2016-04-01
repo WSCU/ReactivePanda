@@ -17,7 +17,7 @@ from PandaFRP.PandaNumerics import *
 import pythonfrp.Globals as frpGlobals
 from PandaFRP import PandaGlobals
 from PandaSRC import FileSearch
-from ReactivePanda.PandaSRC import FileIO
+from PandaSRC import FileIO
 from pythonfrp.Functions import *
 from pythonfrp.Numerics import *
 from pythonfrp.StaticNumerics import degrees
