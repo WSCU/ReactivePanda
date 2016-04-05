@@ -1,6 +1,6 @@
 ReactivePanda
 ===============
-ReactivePanda is a library that aims to make it easier to teach programming to middle school / high school aged students.
+ReactivePanda is a library that aims to make it easier to teach programming to middle school / high school students.
 
 Our philosophy is that using a non-domain specific langague such as python with the addition of reactive programming elements allows for an easier introduction and transition to more advanced programming.
 
@@ -15,8 +15,8 @@ A simple hello world:
     start()
 
 
-This produces a pandamodel that rotates based on the current time.
+This produces a panda model that rotates based on the current time.
 
 Documentation and website
 ---
-All documentation and other information can be found at our webstie, [reactive-engine.org](http://www.reactive-engine.org)
+All documentation and other information can be found at our website, [reactive-engine.org](http://www.reactive-engine.org)
