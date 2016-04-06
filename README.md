@@ -10,7 +10,7 @@ Usage
 ---
 A simple hello world:
 
-    from ReactivePanda.Panda import *
+    from PandaSRC.Panda import *
     panda(hpr = hpr(time,1,0))
     start()
 
