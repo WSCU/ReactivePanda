@@ -6,10 +6,6 @@ world.gravity = p3(0,0,-5)
 
 paddle = panda()
 
-def col(t):
-    return interpolate(t, forever(at(red) + to(.5, purple) + to(.5, blue) + to(.5, green) + to(.5, yellow) + to(.5, orange) + to(.5, red)))
-world.color = col(localTime/2)
-
 def moveLeft(m,p):
     p = now(m.position)
     paddle.position=  p + p3(-localTime*3, 0, 0)
