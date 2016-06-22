@@ -1,4 +1,4 @@
-from PandaFRP import PandaGlobals as Globals
+from PandaFRP.PandaGlobals import *
 from PandaSRC.PandaModel import *
 
 
@@ -106,9 +106,9 @@ def flower(**a):
     return pandaModel ("Flower/flower#3", name = "Flower", texture=Globals.pandaPath+"/models/Flower/flowerPurple.png", **a)
 
 def spiderman(**a):
-    return pandaModel(Globals.pandaPath + "/models/Spiderman/SpiderMan.egg", name = "Spiderman",
-            animation={"DOIT!":Globals.pandaPath + "/models/Spiderman/SpiderMan-DOIT.egg","pose":Globals.pandaPath + "/models/Spiderman/SpiderMan-Pose.egg"},
-            texture=Globals.pandaPath + "/models/Spiderman/spiderman_d.tga",
+    return pandaModel(PandaGlobals.pandaPath + "/models/Spiderman/SpiderMan.egg", name = "Spiderman",
+            animation={"DOIT!":PandaGlobals.pandaPath + "/models/Spiderman/SpiderMan-DOIT.egg","pose":PandaGlobals.pandaPath + "/models/Spiderman/SpiderMan-Pose.egg"},
+            texture=PandaGlobals.pandaPath + "/models/Spiderman/spiderman_d.tga",
             **a )
 
 def sonic(**a):#Works as of 6-23-08 ~ Kendric
