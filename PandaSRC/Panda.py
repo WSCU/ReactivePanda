@@ -16,7 +16,7 @@ from PandaSRC. DynamicGeometry import triangle, rectangle, emptyModel, photoWhee
 from PandaFRP.PandaHeartbeat import engine as _engine
 from  PandaSRC.PEffect import *
 from  PandaSRC.Button import button
-from PandaSRC. Sound import play
+from PandaSRC. Sound import play, stopSound
 from PandaSRC. Menu import menu
 from PandaSRC. Bezier import *
 from PandaSRC. Utils import itime, pointForward, flatRod

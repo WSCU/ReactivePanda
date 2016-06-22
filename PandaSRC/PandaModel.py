@@ -19,6 +19,7 @@ from PandaFRP import PandaGlobals
 from PandaSRC import FileSearch
 from PandaSRC import FileIO
 from pythonfrp import Functions
+from pythonfrp.Functions import *
 from pythonfrp import Proxy
 from pythonfrp.Numerics import *
 from pythonfrp.StaticNumerics import degrees

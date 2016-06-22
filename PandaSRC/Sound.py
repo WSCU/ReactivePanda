@@ -2,6 +2,7 @@ from FileSearch import findSound
 from pythonfrp.Types import soundType
 from panda3d.core import Filename
 
+global globSound
 
 class Sound:
     def __init__(self, file, loopCount = 1, volume = 0.5):
@@ -29,6 +30,9 @@ class Sound:
                 self.sound.setLoopCount(self.loopCount)
             self.sound.play()
             return self.sound
+    def stop(self):
+        if self.foundSound:
+            self.sound.stop()
     def setRate(self, n):
         if self.foundSound:
             self.sound.setPlayRate(n)
@@ -37,6 +41,13 @@ def sound(*p, **k):
     return Sound(*p, **k)
 
 
-# Add a loop parameter
+#Start/stop a sound; uses globSound to refer to same sound object
 def play(s, loopCount = 1, volume = 0.5):
-    sound(s, loopCount = loopCount, volume = volume).play()
+    global globSound
+    globSound = sound(s, loopCount = loopCount, volume = volume)
+    globSound.play()
+
+def stopSound():
+    global globSound
+    globSound.stop()
+    
