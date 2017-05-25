@@ -9,13 +9,13 @@ Non-Reactive
 import csv
 #from panda3d.core import Filename
 #from StaticNumerics import *
-from FileSearch import *
+from PandaSRC.FileSearch import *
 
 def loadCSV(file):
     """
     Reads the contents of a csv file and returns an array of each row.
     """
-    #print "File name string?" + str(file)
+    #print("File name string?" + str(file))
     fileReader = csv.reader(open(file.toOsSpecific(), "r"),dialect = 'excel', delimiter = ",", quotechar='"', quoting= csv.QUOTE_MINIMAL )
 
     arr = []
@@ -43,12 +43,13 @@ def loadDict(file, types={}, defaults = {}):
         if len(l) == 2:
             key = l[0]
             val = l[1]
-            #print "*****************"+ str(key) + " " + str(val)
+            #print("*****************"+ str(key) + " " + str(val))
             if key in types:
                 val = types[key].decode(val)
-                #print str(val)
+                #print(str(val))
             res[key] = val
-    for k,v in defaults.iteritems():
+    print(str(defaults))
+    for k,v in defaults.items():
         if not (k in res):
             res[k] = v
     return res
@@ -58,11 +59,11 @@ def saveDict(file, dict, types = {}):
     Writes a csv file from the given dictionary
     """
     lines = []
-    for k,v in dict.iteritems():
+    for k,v in dict.items():
         if k in types:
             v = types[k].encode(v)
         else:
-            print "No type for " + k
+            print("No type for " + k)
         lines.append([k, v])
     saveCSV(file, lines)
 

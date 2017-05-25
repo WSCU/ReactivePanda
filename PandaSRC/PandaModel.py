@@ -57,7 +57,7 @@ class PandaModel(Proxy.Proxy):
         PandaGlobals.nextModelId = PandaGlobals.nextModelId + 1
         self._parent = getModel(parent)
         self._mFile = FileSearch.fileSearch(fileName, "models", ["egg"])
-        #print "Object Name: "+ str(fileName)+"-gID: "+str(PandaGlobals.nextModelId);
+        #print("Object Name: "+ str(fileName)+"-gID: "+str(PandaGlobals.nextModelId))
         if type(tag) == type("s"):
             collections = [tag]
         else:
@@ -68,10 +68,10 @@ class PandaModel(Proxy.Proxy):
         elif self._mFile is None:
             print("Can't find model " + repr(fileName)) #should substitute pandafor unknown models
         #self._mFile = Filename("/c/Panda3D-1.8.1/models/"+fileName)
-        #print "File Path: " + repr(mFile)
+        #print("File Path: " + repr(mFile))
         else:
             mParamFile = Filename(self._mFile)
-            #print repr(mParamFile)
+            #print(repr(mParamFile))
             mParamFile.setExtension("model")
             if mParamFile.exists():
                 self._mParams = FileIO.loadDict(mParamFile, types = modelTypes, defaults = defaultModelParameters)
@@ -91,13 +91,13 @@ class PandaModel(Proxy.Proxy):
         else:   #  Not animated
             self._pandaModel = loader.loadModel(self._mFile)
             if self._pandaModel == None:
-                print 'Model not found: ' + fileName
+                print('Model not found: ' + fileName)
                 exit()
         if self._hasJoints:
             for j,pj in joints:
                 self._jointNodes[j] = self._pandaModel.controlJoint(None, "modelRoot", pj)
                 if self._jointNodes[j] == None:
-                    print 'joint not found: ' + j
+                    print('joint not found: ' + j)
                     exit()
         self._pandaModel.setTag('rpandaid', str(self._name))
         self._fileName = fileName
@@ -155,13 +155,13 @@ class PandaModel(Proxy.Proxy):
                 frpGlobals.collections[c] = [x for x in old if x is not self]
 
     def _reparent(self, m):
-#        print "reparent " + repr(self) + " to " + repr(m)
+#        print("reparent " + repr(self) + " to " + repr(m))
         self._pandaModel.reparentTo(m)
     def _touches(self, handle, trace = False):
         if trace:
            print("Touch: " + repr(self) + " (" + self._cType + ") " + repr(handle) + " (" + handle._cType + ")")
-        #print (repr(self._cRadius))
-        #print (repr(self.get("size")))
+        #print(repr(self._cRadius))
+        #print(repr(self.get("size")))
         if not self._alive or not handle._alive:
             return False
         mr = self._cRadius * self._get("size")
@@ -169,7 +169,7 @@ class PandaModel(Proxy.Proxy):
         yr = handle._cRadius*handle._get("size")
         yp = handle._get("position") + p3(0,0,0)
         if trace:
-            print (repr(mp) + " [" + repr(mr) + "] " + repr(yp) + " [" + repr(yr) + "]")
+            print(repr(mp) + " [" + repr(mr) + "] " + repr(yp) + " [" + repr(yr) + "]")
         if self._cType == "sphere":
             if handle._cType == "sphere":
                 return absP3(subP3(mp, yp)) < mr + yr
@@ -182,7 +182,7 @@ class PandaModel(Proxy.Proxy):
                     ct = yp.z + handle._get("size")*handle._cTop
                     sb = mp.z-mr
                     st = mp.z+mr
-                    # print str(cb) + " " + str(ct) + " " + str(sb) + " " + str(st)
+                    # print(str(cb) + " " + str(ct) + " " + str(sb) + " " + str(st))
                     if ct > sb and cb < st:
                         return True
                     else:
@@ -190,7 +190,7 @@ class PandaModel(Proxy.Proxy):
         elif self._cType == "cyl":
             if handle._cType == "sphere":
                 d = absP2(subP2(P2(mp.x, mp.y), P2(yp.x, yp.y)))
-                # print "c to s (dist = " + str(d) + ")"
+                # print("c to s (dist = " + str(d) + ")")
                 if d > mr + yr:
                     return False
                 else:
@@ -198,20 +198,20 @@ class PandaModel(Proxy.Proxy):
                     ct = mp.z + self._get("size")*self._cTop
                     sb = yp.z-yr
                     st = yp.z+yr
-                    # print str(cb) + " " + str(ct) + " " + str(sb) + " " + str(st)
+                    # print(str(cb) + " " + str(ct) + " " + str(sb) + " " + str(st))
                     return ct > sb and cb < st
             elif handle._cType == "cyl":
-                # print str(mp.x) + " , " + str(mp.y)
+                # print(str(mp.x) + " , " + str(mp.y))
                 d = absP2(subP2(P2(mp.x, mp.y), P2(yp.x, yp.y)))
                 if trace:
-                    print ("c to c (dist = " + str(d) + ") " + str(mr+yr))
+                    print(("c to c (dist = " + str(d) + ") " + str(mr+yr)))
                 if d > mr + yr:
                     return False
                 else:
                     res = self._cTop + mp.z > handle._cFloor + yp.z and self._cFloor + mp.z < handle._cTop + yp.z
                     if trace:
                         print( "Result: " + str(res) + " " + str((self._cTop, mp.z, handle._cFloor, yp.z, self._cFloor, handle._cTop)))
-                    #print ("*****"+repr(res))
+                    #print("*****"+repr(res))
                     return res
 
 def _findAnimations(self):
@@ -232,7 +232,7 @@ def playAnim(self,anim=None,fromFrame=None,toFrame=None):
         else:
             anim = _findAnimations(self)
             if anim is None:
-                print "Error: no animation found"
+                print("Error: no animation found")
     if toFrame is None and fromFrame is None:
         self._pandaModel.play(anim)
     else:
@@ -247,7 +247,7 @@ def loopAnim(self,anim=None,fromFrame=None,toFrame=None):
         else:
             anim = _findAnimations(self)
             if anim is None:
-                print "Error: no animation found"
+                print("Error: no animation found")
     if toFrame is None and fromFrame is None:
         self._pandaModel.loop(anim)
     else:
@@ -272,14 +272,14 @@ def modelUpdater(self):
 
     hprNow = self._get( "hpr")
 
-    #print str(positionNow) + " " + str(positionOffset) + " " + str(hprNow)
+    #print(str(positionNow) + " " + str(positionOffset) + " " + str(hprNow))
     #This is the actual updates to position/size/hpr etc.
     #if PandaGlobals.eventSignals is not None:
     #        for signal in PandaGlobals.events:
-    #            print repr(signal)
+    #            print(repr(signal))
 
 
-    #print "size signal: "+repr(sizeScalar)+"  offset size: "+repr(sizeOffset)
+    #print("size signal: "+repr(sizeScalar)+"  offset size: "+repr(sizeOffset))
     self._pandaModel.setScale(sizeScalar*sizeOffset)
     self._pandaModel.setPos(positionNow.x + positionOffset.x*sizeScalar,
                             positionNow.y + positionOffset.y*sizeScalar,
@@ -292,7 +292,7 @@ def modelUpdater(self):
     if texture != "" and texture != self._currentTexture:
         texf = FileSearch.findTexture(texture)
         self._currentTexture = texture
-        #print "The texture is: "+repr(texf)
+        #print("The texture is: "+repr(texf))
         self._pandaModel.setTexture(texf, 1)
     color = self._get("color")
     if color.a != 0:
@@ -303,9 +303,9 @@ def modelUpdater(self):
     #    if self._animPlaying:
     #        for j,pj in self._joints:
     #            sig = self.j
-    #            print sig
+    #            print(sig)
     #            hpr = sig.now()
-    #            print hpr
+    #            print(hpr)
     #            self._jointNodes[j].setH(degrees(hpr.h))
     #            self._jointNodes[j].setP(degrees(hpr.p))
     #            self._jointNodes[j].setR(degrees(hpr.r))

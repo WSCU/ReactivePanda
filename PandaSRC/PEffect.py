@@ -16,14 +16,14 @@ def peffectUpdater(self):
     sizeNow = self._get("size") + 0
     hprNow = self._get( "hpr") + hpr(0,0,0)
 
-    #print "size signal: "+repr(sizeScalar)+"  offset size: "+repr(sizeOffset)
+    #print("size signal: "+repr(sizeScalar)+"  offset size: "+repr(sizeOffset))
     self._pandaModel.setScale(sizeNow)
     self._pandaModel.setPos(positionNow.x, positionNow.y, positionNow.z)
     self._pandaModel.setHpr(degrees(hprNow.h),
                             degrees(hprNow.p),
                             degrees(hprNow.r))
     if not self._onScreen:
-#           print "Reparenting " + repr(self) + " to " + repr(self._parent)
+#           print("Reparenting " + repr(self) + " to " + repr(self._parent))
            self._pandaModel.reparentTo(self._parent)
            self._onScreen = True
 
@@ -94,7 +94,7 @@ def fireishFn(self, dict):
     p0.renderer.setAlphaMode(BaseParticleRenderer.PRALPHAOUT)
     p0.renderer.setUserAlpha(0.22)
     # Sprite parameters
-    #print __import__("g").texture
+    #print(__import__("g").texture)
     p0.renderer.setTexture(findTexture(dict["texture"]))
     p0.renderer.setColor(Vec4(1.00, 1.00, 1.00, 1.00))
     p0.renderer.setXScaleFlag(1)
@@ -163,7 +163,7 @@ def fireFn(self, dict):
     p0.renderer.setAlphaMode(BaseParticleRenderer.PRALPHAOUT)
     p0.renderer.setUserAlpha(0.22)
     # Sprite parameters
-    #print __import__("g").texture
+    #print(__import__("g").texture)
     p0.renderer.setTexture(findTexture(dict["texture"]))
     p0.renderer.setColor(Vec4(1.00, 1.00, 1.00, 1.00))
     p0.renderer.setXScaleFlag(1)
@@ -656,7 +656,7 @@ def warpFaceFn(self, dict):
     p0.renderer.setAlphaMode(BaseParticleRenderer.PRALPHAOUT)
     p0.renderer.setUserAlpha(0.22)
     # Sprite parameters
-    #print __import__("g").texture
+    #print(__import__("g").texture)
     p0.renderer.setTexture(findTexture(dict["texture"]))
     p0.renderer.setColor(Vec4(1.00, 1.00, 1.00, 1.00))
     p0.renderer.setXScaleFlag(1)

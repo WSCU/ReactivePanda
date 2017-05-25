@@ -1,4 +1,4 @@
-from FileIO import saveDict
+from PandaSRC.FileIO import saveDict
 from PandaSRC.Panda import *
 
 modelObject = [0]
@@ -91,11 +91,11 @@ def printer(w, x):
     file = Filename(modelFile[0])
     file.setExtension("model")
     saveDict(file.toOsSpecific(), dict, defaultModelParameters)
-    print "localSize = " + str(modelObject[0].size.now()) + ", localPosition = " + \
+    print("localSize = " + str(modelObject[0].size.now()) + ", localPosition = " + \
         str(modelObject[0].position.now()) + ", localOrientation = " + str(modelObject[0].hpr.now()) + \
         ", cRadius = " + str(cRadius.now()) + ", cFloor = " + str(cBottom.now()) + \
-        ", cTop = " + str(cTop.now()) + ", cType = '" + str(collisionType[0]) + "'"
-    print "Wrote settings to " + str(file)
+        ", cTop = " + str(cTop.now()) + ", cType = '" + str(collisionType[0]) + "'")
+    print("Wrote settings to " + str(file))
 
 printButton = button("Save", position = P2(.0, -.9), size = .5)
 react(printButton, printer)

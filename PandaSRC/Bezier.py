@@ -4,15 +4,15 @@
 from PandaFRP.PandaColor import *
 from PandaFRP.PandaNumerics import *
 
-from . PandaModels import *
-from . Slider import *
-from . Text import *
+from PandaSRC.PandaModels import *
+from PandaSRC.Slider import *
+from PandaSRC.Text import *
 
 #from Signal import time, static
 #from FRP import *
 # from Switch import *
-from . Light import *
-from . Button import *
+from PandaSRC.Light import *
+from PandaSRC.Button import *
 #from Interp import *
 #from TextBox import *
 #from PoseAndScriptFiles import *
@@ -44,12 +44,12 @@ class Bezier:
         p20 = staticLerp(time, p10, p11)
         p21 = staticLerp(time, p11, p12)
         p30 = staticLerp(time, p20, p21)
-        #print "p10 "+ str(p10)
-        #print "p11 "+ str(p11)
-        #print "p12 "+ str(p12)
-        #print "p20 "+ str(p20)
-        #print "p21 "+ str(p21)
-        #print "p30 "+ str(p30)
+        #print("p10 "+ str(p10))
+        #print("p11 "+ str(p11))
+        #print("p12 "+ str(p12))
+        #print("p20 "+ str(p20))
+        #print("p21 "+ str(p21))
+        #print("p30 "+ str(p30))
         return (p30, p21-p20)
 
 class PatchElement:
@@ -111,14 +111,14 @@ class Patch:
                    high = i - 1
                    if high < 0:
                        break
-        #print str(pe.duration)
+        #print(str(pe.duration))
         localT = (time - pe.start)/pe.duration
         print("Time " + str(time) + " Local t " + str(localT) + " # " + str(i))
         roll = staticLerpA(localT, pe.roll, pe.rollFinal)
         pos, v = pe.bezier.interp(localT)
-        #print "velocity "+str(v)
+        #print("velocity "+str(v))
         hpr = sP3toHPR(v)
-        #print "hpr "+ str(hpr)
+        #print("hpr "+ str(hpr))
         return (pos, SHPR(pi+hpr.h, hpr.p, roll))
 
     def getPos(self, s):

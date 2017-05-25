@@ -16,16 +16,16 @@ def findClickedModels():
     myTraverser.addCollider(pickerNP, myHandler)
     myTraverser.traverse(render)
     # Assume for simplicity's sake that myHandler is a CollisionHandlerQueue.
-    # print "Found " + str(myHandler.getNumEntries()) + " Collisions"
+    # print("Found " + str(myHandler.getNumEntries()) + " Collisions")
     if myHandler.getNumEntries() > 0:
        # This is so we get the closest object.
         myHandler.sortEntries()
         pickedObj = myHandler.getEntry(0).getIntoNodePath()
-        # print "Closest = " + str(pickedObj)
+        # print("Closest = " + str(pickedObj))
         pickedObj = pickedObj.findNetTag('rpandaid')
-        # print "tag: " + str(pickedObj)
+        # print("tag: " + str(pickedObj))
         if not pickedObj.isEmpty():
             t = pickedObj.getTag('rpandaid')
-            # print "Clicked on " + str(t)
+            # print("Clicked on " + str(t))
             return t
         return None

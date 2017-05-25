@@ -1,6 +1,6 @@
 from direct.directbase import DirectStart # Import for Camera ('base.camera')
 from direct.showbase.DirectObject import DirectObject
-from PandaNumerics import p2
+from PandaFRP.PandaNumerics import p2
 import os
 
 
@@ -23,5 +23,5 @@ texture = None  # Used to communicate with particle effect code from particle pa
 panda3dCamera = base.camera
 #pandaPath variable MUST go here; the setup will find this for you,
 #but if you are pulling from git, you'll need to add it manually
-pandaPath = '/Panda/ReactivePanda/lib'
+pandaPath = '/home/gmontgomery/Projects/ReactivePanda/lib'
 

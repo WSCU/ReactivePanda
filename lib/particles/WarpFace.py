@@ -28,7 +28,7 @@ p0.factory.setTerminalVelocitySpread(0.0000)
 p0.renderer.setAlphaMode(BaseParticleRenderer.PRALPHAOUT)
 p0.renderer.setUserAlpha(0.22)
 # Sprite parameters
-#print __import__("g").texture
+#print(__import__("g").texture)
 p0.renderer.setTexture(__import__("g").texture)
 p0.renderer.setColor(Vec4(1.00, 1.00, 1.00, 1.00))
 p0.renderer.setXScaleFlag(1)

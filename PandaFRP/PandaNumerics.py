@@ -1,6 +1,6 @@
-from PandaColor import Color, colorHSL
+from PandaFRP.PandaColor import Color, colorHSL
 from PandaSRC.SHPR import *
-from PandaStaticNumerics import *
+from PandaFRP.PandaStaticNumerics import *
 from pythonfrp.Numerics import *
 
 hpr = lift("hpr", SHPR, types=[numType, numType, numType], outType=hprType)

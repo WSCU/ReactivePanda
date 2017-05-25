@@ -6,7 +6,7 @@ from pythonfrp.Factory import maybeLift
 from pythonfrp.Functions import react,delay,exitScene
 from pythonfrp.Proxy import *
 from pythonfrp.Types import *
-from . Externals import postEvent
+from PandaSRC.Externals import postEvent
 
 
 class TextBox(Proxy): #Creates the text box object that users can enter in values to

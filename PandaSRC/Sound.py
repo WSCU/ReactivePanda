@@ -1,4 +1,4 @@
-from FileSearch import findSound
+from PandaSRC.FileSearch import findSound
 from pythonfrp.Types import soundType
 from panda3d.core import Filename
 
@@ -20,7 +20,7 @@ class Sound:
             self.sound = loader.loadSfx(fn1)
             self.sound.setVolume(self.volume)
         else:
-            print "Sound " + file + " not found"
+            print("Sound " + file + " not found")
     def __str__(self):
         "Sound: " + self.filePath
     def play(self):

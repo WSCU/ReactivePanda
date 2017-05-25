@@ -16,7 +16,7 @@ def updateCamera(self):
 
 class Camera(Proxy.Proxy):
     def __init__(self):
-        print "Init"
+        print("Init")
         Proxy.Proxy.__init__(self, "camera", updateCamera, {"position": p3Type, "hpr": hprType})
         self.position = p3(0, -10, 0)
         self.hpr = hpr(0,0,0)

@@ -1,5 +1,5 @@
 from direct.gui.DirectGui import *
-from  PandaFRP.PandaColor import *
+from PandaFRP.PandaColor import *
 from PandaFRP.PandaNumerics import *
 
 from PandaFRP import PandaGlobals

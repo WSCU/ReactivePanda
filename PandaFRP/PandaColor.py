@@ -5,7 +5,7 @@ This has the type field but doesn't check args
 Many predefined colors (stolen from Clastic)
 """
 
-from pandac.PandaModules import VBase4
+from panda3d.core import VBase4
 from pythonfrp.Types import colorType
 import pythonfrp.StaticNumerics as StaticNumerics
 from colorsys import rgb_to_hls, hls_to_rgb

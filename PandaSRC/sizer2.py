@@ -69,11 +69,11 @@ text(model.size, position=P2(1,.3))
 #ambientlight(color = color(.5, .5, .5))
 def printer(w, x):
     f = open("",'r+')
-    print "localSize, " + str(now(model.size)) + "\nlocalPosition, " + \
+    print("localSize, " + str(now(model.size)) + "\nlocalPosition, " + \
         str(now(model.position)) + "\nlocalOrientation, " + str(now(model.hpr))
     f.write("localSize, " + str(now(model.size)) + "\nlocalPosition, " + \
         str(now(model.position)) + "\nlocalOrientation, " + str(now(model.hpr)))
-    f.close()
+    f.close())
 
 printButton = button("Print to Console", position = P2(1, -.8), size = 1)
 react(printButton, printer)

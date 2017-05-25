@@ -3,13 +3,13 @@ from PandaSRC.Panda import *
 world.color = blue
 jeep()
 def newWorld():
-    print "Setting to red"
+    print("Setting to red")
     world.color = red
     panda()
 def doReset():
-    print "Doing reset"
+    print("Doing reset")
     resetWorld(newWorld)
-    print "Done with reset"
+    print("Done with reset")
 atTime(1, doReset)
 
 start()

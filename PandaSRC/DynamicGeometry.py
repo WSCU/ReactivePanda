@@ -24,7 +24,7 @@ def geometryUpdater(self):
     textureNow = self._get("texture")
     colorNow = self._get("color")
 
-    #print "size signal: "+repr(sizeScalar)+"  offset size: "+repr(sizeOffset)
+    #print("size signal: "+repr(sizeScalar)+"  offset size: "+repr(sizeOffset))
     self._pandaModel.setScale(sizeNow)
     self._pandaModel.setPos(positionNow.x, positionNow.y, positionNow.z)
     self._pandaModel.setHpr(degrees(hprNow.h),
@@ -33,7 +33,7 @@ def geometryUpdater(self):
     if textureNow != "" and textureNow != self._currentTexture:
         texf = FileSearch.findTexture(textureNow)
         self._currentTexture = textureNow
-        #print "The texture is: "+repr(texf)
+        #print("The texture is: "+repr(texf))
         self._pandaModel.setTexture(texf, 1)
 
     if colorNow.a != 0:
@@ -43,7 +43,7 @@ def geometryUpdater(self):
         if sideTwoNow != "" and sideTwoNow != self._currentsideTwo:
             tex = FileSearch.findTexture(sideTwoNow)
             self._currentsideTwo = sideTwoNow
-            #print "The texture is: "+repr(texf)
+            #print("The texture is: "+repr(texf))
             self._sideTwo._pandaModel.setTexture(tex, 1)
     # This is used to keep the model off the screen until the first update happens
     if not self._onScreen:

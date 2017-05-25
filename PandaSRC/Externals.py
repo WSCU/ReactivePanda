@@ -26,7 +26,7 @@ def rbr(e = True):
 
 # This saves event occurances in g.newEvents
 def postEvent(ename, val = True):
-    #print "posting " + ename
+    #print("posting " + ename)
     pythonfrp.Globals.newEvents[ename] = val
 
 

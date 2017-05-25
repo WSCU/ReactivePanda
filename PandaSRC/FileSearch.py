@@ -13,6 +13,7 @@ def fileSearch(file, libDir = None, exts = []):
     """
     Searches for given file in path
     """
+    print(pandaPath)
     f1 = Filename.expandFrom(file)
     if f1.exists():
         return f1

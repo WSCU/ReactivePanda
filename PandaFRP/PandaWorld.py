@@ -2,7 +2,7 @@ from pythonfrp import Globals
 from pythonfrp.Types import *
 from pythonfrp import Numerics
 from pythonfrp import World
-from PandaColor import gray
+from PandaFRP.PandaColor import gray
 
 
 def updateColor(self):

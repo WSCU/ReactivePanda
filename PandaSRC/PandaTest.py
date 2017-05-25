@@ -4,7 +4,7 @@ from PEffect import *
 
 # Should delete this file - not in use
 #mFile = Filename("/c/Panda3D-1.8.1/models/panda-model.egg.pz")
-#print "File Path: " + repr(mFile)
+#print("File Path: " + repr(mFile))
 """
 pandaObject = loader.loadModel(mFile)
 pandaObject.setScale(0.05)

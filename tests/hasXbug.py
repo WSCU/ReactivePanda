@@ -6,8 +6,8 @@ score = var(0)
 
 text(score)
 def re(m,v):
-    print repr(score)
-    print now(score)
+    print(repr(score))
+    print(now(score))
 
 react(lbp(), re)
 

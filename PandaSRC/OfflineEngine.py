@@ -2,12 +2,12 @@ import unittest
 import time
 import Globals
 import sys
-from Signal import *
-from Functions import *
-from Proxy import *
+from pythonfrp.Signal import *
+from pythonfrp.Functions import *
+from pythonfrp.Proxy import *
 
 def heartBeat(ct, events, verbose = False, test = False):
-    #print "objects " + str(len(Globals.worldObjects))
+    #print("objects " + str(len(Globals.worldObjects)))
     Globals.dt = ct - Globals.currentTime
     Globals.currentTime = ct
     Globals.events = events
