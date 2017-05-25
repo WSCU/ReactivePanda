@@ -66,7 +66,7 @@ def checkValidKey(s):
 
 
 def getEventSignal(ename, val):
-        if pythonfrp.Globals.eventSignals.has_key(ename):
+        if ename in pythonfrp.Globals.eventSignals:
             return Functions.tag(val, pythonfrp.Globals.eventSignals[ename])
         e = eventObserver(ename)
         pythonfrp.Globals.eventSignals[ename] = e
@@ -90,10 +90,10 @@ def initEvents():
 
 def pollGUI():
     if base.mouseWatcherNode.hasMouse():
-       lbp = pythonfrp.Globals.events.has_key("mouse1")
-       rbp = pythonfrp.Globals.events.has_key("mouse3")
-       lbr = pythonfrp.Globals.events.has_key("mouse1-up")
-       rbr = pythonfrp.Globals.events.has_key("mouse3-up")
+       lbp = "mouse1" in pythonfrp.Globals.events
+       rbp = "mouse3" in pythonfrp.Globals.events
+       lbr = "mouse1-up" in pythonfrp.Globals.events
+       rbr = "mouse3-up" in pythonfrp.Globals.events
        if lbp:
            PandaGlobals.lbutton = True
        if rbp:
@@ -114,7 +114,7 @@ def pollGUI():
        if lbp or rbp:
            m = Click.findClickedModels()
            if m is not None:
-               if pythonfrp.Globals.events.has_key("mouse1"):
+               if "mouse1" in pythonfrp.Globals.events:
                     pythonfrp.Globals.events[m + "-leftclick"] = True
                else:
                     pythonfrp.Globals.events[m + "-rightclick"] = True

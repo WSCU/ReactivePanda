@@ -533,7 +533,7 @@ def shakenSparklesFn(self, dict ):
     # Sphere Volume parameters
     p0.emitter.setRadius(1.0000)
     self.addParticles(p0)
-    if dict.has_key("force"):
+    if "force" in dict:
         # Force parameters
         f0 = ForceGroup.ForceGroup('Sink')
         force0 = LinearSinkForce(Point3(getX(dict["force"]), getY(dict["force"]),getZ(dict["force"])), LinearDistanceForce.FTONEOVERR, 1.0000, 1.0000, 1)
@@ -598,7 +598,7 @@ def warpSpeedFn(self, dict):
     # Sphere Volume parameters
     p0.emitter.setRadius(1.0000)
     self.addParticles(p0)
-    if dict.has_key("force"):
+    if "force" in dict:
         # Force parameters
         f0 = ForceGroup.ForceGroup('Sink')
         force0 = LinearSinkForce(Point3(getX(dict["force"]), getY(dict["force"]),getZ(dict["force"])), LinearDistanceForce.FTONEOVERR, 1.0000, 1.0000, 1)
