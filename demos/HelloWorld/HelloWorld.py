@@ -3,6 +3,6 @@
 
 from PandaSRC.Panda import *
 
-panda()
+ralph()
 
 start()

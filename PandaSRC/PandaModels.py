@@ -48,13 +48,13 @@ def penguin(**a):
     return pandaModel("Penguin/Penguin.egg", name = "Penguin", **a)
 
 def ralph(**a):
-    return pandaModel(Globals.pandaPath + "/models/Ralph/ralph.egg", name = "Ralph",
+    return pandaModel(PandaGlobals.pandaPath + "/models/Ralph/ralph.egg", name = "Ralph",
 #                        joints = [('neck', 'Neck'), ('leftWrist', 'LeftWrist'),
 #                                 ('rightWrist', 'RightWrist'),
 #                                 ('jaw', 'Jaw'), ('leftElbow', 'LeftElbow'),
 #                                 ('rightShoulder', 'RightShoulder'), ('leftShoulder', 'LeftShoulder'), ('leftKnee', 'LeftKnee'),('rightKnee', 'RightKnee')],
-                                 animation = {"walk" : Globals.pandaPath + "/models/Ralph/ralph-walk.egg","run" : Globals.pandaPath + "/models/Ralph/ralph-run.egg",
-                                 "jump": Globals.pandaPath + "/models/Ralph/ralph-jump.egg","offbalance":Globals.pandaPath + "/models/Ralph/ralph-offbalance.egg"}, frame = 4, **a )
+                                 animation = {"walk" : PandaGlobals.pandaPath + "/models/Ralph/ralph-walk.egg","run" : PandaGlobals.pandaPath + "/models/Ralph/ralph-run.egg",
+                                 "jump": PandaGlobals.pandaPath + "/models/Ralph/ralph-jump.egg","offbalance": PandaGlobals.pandaPath + "/models/Ralph/ralph-offbalance.egg"}, frame = 4, **a )
 
 def bee (**a):
     return pandaModel("Bee/Bee.egg", name = "Bee", **a)

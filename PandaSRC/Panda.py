@@ -12,7 +12,7 @@ from PandaFRP.PandaColor import *
 from PandaSRC.Light import *
 from PandaSRC.Slider import slider, sliderHpr, sliderColor, sliderP3
 from PandaFRP.PandaWorld import world, resetWorld
-from PandaSRC.DynamicGeometry import triangle, rectangle, emptyModel, photoWheel, cube, tetra, blastPicture, slicePicture
+from PandaSRC.DynamicGeometry import triangle, rectangle, emptyModel, photoWheel, cube, tetra, blastPicture, slicePicture, unitSquare
 from PandaFRP.PandaHeartbeat import engine as _engine
 from PandaSRC.PEffect import *
 from PandaSRC.Button import button
