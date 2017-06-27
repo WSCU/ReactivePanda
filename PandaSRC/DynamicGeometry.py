@@ -305,7 +305,7 @@ def slicePicture(p,columns = 1, rows = 1, **a):
 # This isn't smart enough to match the aspect of the picture to the generated pieces.
 # To assemble a picture send each fragment to "_location"
 
-def blastPicture(p,columns = 1, rows = 1, **a):
+def blastPicture(p,columns = 1, rows = 1, size = 1, **a):
     res = []
     xsz = 1.0/columns
     ysz = 1.0/rows
@@ -317,7 +317,7 @@ def blastPicture(p,columns = 1, rows = 1, **a):
             lr = P2((x+1)*xsz, y*ysz)
             ul = P2(x*xsz, (y+1)*ysz)
             ur = P2((x+1)*xsz, (y+1)*ysz)
-            r = rectangle(P3(-xsz, 0, -ysz), P3(xsz, 0, -ysz), P3(-xsz, 0, ysz),
+            r = rectangle(size*P3(-xsz, 0, -ysz), size*P3(xsz, 0, -ysz), size*P3(-xsz, 0, ysz),
                           texP1 = ll, texP2 = lr, texP3 = ul, texP4 = ur, texture = p)
             r._location = P3(2*(x+.5)*xsz-1, 0, 2*(y+.5)*ysz-1)
             r._x = xi
