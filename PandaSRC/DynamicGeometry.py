@@ -313,13 +313,13 @@ def blastPicture(p,columns = 1, rows = 1, size = 1, **a):
     for x in range(columns):
         yi = 0
         for y in range(rows):
-            ll = P2(x*xsz, y*ysz)
-            lr = P2((x+1)*xsz, y*ysz)
-            ul = P2(x*xsz, (y+1)*ysz)
-            ur = P2((x+1)*xsz, (y+1)*ysz)
-            r = rectangle(size*P3(-xsz, 0, -ysz), size*P3(xsz, 0, -ysz), size*P3(-xsz, 0, ysz),
+            ll =  P2(x*xsz, y*ysz)
+            lr =  P2((x+1)*xsz, y*ysz)
+            ul =  P2(x*xsz, (y+1)*ysz)
+            ur =  P2((x+1)*xsz, (y+1)*ysz)
+            r = rectangle(size * P3(-xsz, 0, -ysz), size * P3(xsz, 0, -ysz), size * P3(-xsz, 0, ysz),
                           texP1 = ll, texP2 = lr, texP3 = ul, texP4 = ur, texture = p)
-            r._location = P3(2*(x+.5)*xsz-1, 0, 2*(y+.5)*ysz-1)
+            r._location = size*P3(2*(x+.5)*xsz-1, 0, 2*(y+.5)*ysz-1)
             r._x = xi
             r._y = yi
             yi = yi + 1
