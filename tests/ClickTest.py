@@ -7,8 +7,8 @@ def bigger(m, v):
     
 def shoot(m, v):
     p = panda(position = p3(localTime-3, 0, 0), size = 0.4)
-    react1(p, leftClick(p), exitScene)
-    react(p, rightClick(p), bigger)
+    react1(p, lbp(p), exitScene)
+    react(p, rbp(p), bigger)
 
 react(clock(0.5), shoot)
 
