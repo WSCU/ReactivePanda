@@ -209,6 +209,8 @@ def rectangle(p1, p2, p3, color = None, position = None, hpr = None, size = None
 
     p4 = p3 + p2 - p1
     nodePath = mesh([p1, p2, p3, p4], [texP1, texP2, texP3, texP4], [[0, 1, 2], [2, 1, 3]], white)
+    if color is None:
+        nodePath.setTransparency(True)
     if (sideTwo is not None):
         nodePath.setTwoSided(False)
         result = GeometryHandle(nodePath, position = position, hpr = hpr, size = size,
